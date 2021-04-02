@@ -18,6 +18,7 @@ dist/
 
 # Package files
 *.jar
+*.zip
 
 # Maven
 target/
@@ -47,4 +48,59 @@ Thumbs.db
 *.flv
 *.mov
 *.wmv
+*.psd
+*.psd.meta
+*.gif
 
+####################### UNITY #######################
+
+# =============== #
+# Unity generated #
+# =============== #
+/islandtd/[Tt]emp/
+/islandtd/[Oo]bj/
+/islandtd/[Bb]uild
+/islandtd/[Bb]uilds/
+/islandtd/[Ll]ibrary/
+/islandtd/[Ll]ibrary/ArtifactDB/
+/islandtd/sysinfo.txt
+/islandtd/iosbuild/
+/islandtd/testbuild/
+*.stackdump
+/islandtd/Assets/AssetStoreTools*
+*.apk
+*.unitypackage
+ 
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+[Ee]xported[Oo]bj/
+.vs/
+/islandtd/*.userprefs
+/islandtd/*.csproj
+/islandtd/*.pidb
+*.pidb.meta
+/islandtd/*.suo
+/islandtd/*.sln*
+/islandtd/*.user
+/islandtd/*.unityproj
+/islandtd/*.booproj
+.consulo/
+/islandtd/*.tmp
+/islandtd/*.svd
+ 
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store*
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+[Tt]humbs.db
+[Dd]esktop.ini
+Corridor/Library/ShaderCache/
+Corridor/Library/metadata/
+
+/models/
