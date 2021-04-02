@@ -39,7 +39,7 @@ public class HGrid : MonoBehaviour
         Vector3 position;
         position.x = (x + z * 0.5f - z / 2) * (HexMetrics.innerRadius * 2f);
         position.y = 0f;
-        position.z = z * 1f;
+        position.z = z * 1.5f;
 
         HCell cell = cells[i] = Instantiate<HCell>(cellPrefab);
         cell.transform.SetParent(transform, false);
