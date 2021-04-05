@@ -18,6 +18,8 @@ public class HGrid : MonoBehaviour
     int input;
     HCell start;
     HCell end;
+
+    public EnemySpawn enemySpawn;
     //test für shortest path
 
     private bool cooldown;
@@ -88,19 +90,35 @@ public class HGrid : MonoBehaviour
                 start = hit.collider.gameObject.GetComponent<HCell>();
                 Debug.Log("Start" + start.coordinates.ToString());
                 spath = Solve(start);
+                
+                
 
             } else if (input == 1)
             {
                 OnCooldown();
                 end = hit.collider.gameObject.GetComponent<HCell>();
                 List<HCell> sp = RecPath(start, end, spath);
-                Debug.Log("***Ergebnis*** " + ListToString(ShortestPath(sp)) + " : "+ ShortestPath(sp).Count);
+                sp = ShortestPath(sp);
+                Debug.Log("***Ergebnis*** " + ListToString(sp) + " : "+ sp.Count);
                 input = 0;
+                if(sp.Count > 0)
+                    enemySpawn.SpawnEnemy(HCellPositions(sp));
             }
             //Neighb(hit.collider.gameObject.GetComponent<HCell>());
             
             //TouchCell(hit.point);
         }
+    }
+    // könnte auch zu enemy spawn
+    private Vector3[] HCellPositions(List<HCell> sp)
+    {
+        Vector3[] positions = new Vector3[sp.Count];
+        for (int i = 0; i < sp.Count; i++)
+        {
+            positions[i] =  sp[i].transform.position;
+        }
+
+        return positions;
     }
     private void OnCooldown()
     {
@@ -109,7 +127,7 @@ public class HGrid : MonoBehaviour
     }
 
     IEnumerator ResetCooldown(){
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1f);
         cooldown = false;
     }
 
@@ -238,7 +256,7 @@ public class HGrid : MonoBehaviour
         return false;
     }
     
-
+    // wird nicht mehr gebraucht
     public int CellsIndex(HCell hCell)
     {
         int index = 0;
