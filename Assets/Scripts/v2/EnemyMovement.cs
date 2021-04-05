@@ -29,7 +29,10 @@ public class EnemyMovement : MonoBehaviour
         //rotation funktioniert nicht
         Vector3 lookingDir = path[pathIndex] - transform.position;
         float angle = Mathf.Atan2(lookingDir.y, lookingDir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle,Vector3.forward);
+        //transform.rotation = Quaternion.AngleAxis(angle,Vector3.forward);
+        
+        //funkt. aber ist snappy
+        transform.rotation = Quaternion.LookRotation(lookingDir);
         
         transform.position = Vector3.MoveTowards(transform.position,path[pathIndex],moveSpeed *Time.deltaTime);
         
