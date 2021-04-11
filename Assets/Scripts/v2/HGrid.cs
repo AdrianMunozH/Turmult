@@ -8,21 +8,15 @@ public class HGrid : MonoBehaviour
 {
     public int width = 6;
     public int height = 6;
-    HCell[] cells;
+    public int radius;
+    public HCell[] cells;
+    private List<HCell> cellList;
     public HCell cellPrefab;
     public Text cellLabelPrefab;
     Canvas gridCanvas;
     
     //test für shortest path
-    private HCell[] spath;
-    int input;
-    HCell start;
-    HCell end;
 
-    public EnemySpawn enemySpawn;
-    //test für shortest path
-
-    private bool cooldown;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,31 +25,52 @@ public class HGrid : MonoBehaviour
     void Awake () {
         
         gridCanvas = GetComponentInChildren<Canvas>();
-        cells = new HCell[height * width];
+        
+        cellList = new List<HCell>();
 
-        for (int z = 0, i = 0; z < height; z++) {
-            for (int x = 0; x < width; x++) {
-                CreateCell(x, z, i++);
+        for (int z = -radius, i = 0; z < radius; z++) {
+            for (int x = -radius; x < radius; x++) {
+                if(hexCircle(x, z, i))
+                {
+                    i++;
+                }
             }
         }
+        cells = new HCell[cellList.Count];
+        cells = cellList.ToArray();
     }
     
-    void HexMap()
+    bool hexCircle(int x, int z, int i)
     {
-        
-    }
-
-    void CreateCell (int x, int z, int i) {
         Vector3 position;
+
         position.x = (x + z * 0.5f - z / 2) * (HexMetrics.innerRadius * 2f);
         position.y = 0f;
         position.z = z *(HexMetrics.outerRadius * 1.5f);
+        if (position.magnitude <= radius * HexMetrics.outerRadius)
+        {
+            CreateCell(x,z,i);
+            return true;
+        }
 
-        HCell cell = cells[i] = Instantiate<HCell>(cellPrefab);
+        return false;
+    }
+
+    void CreateCell (int x, int z, int i) {
+        
+        Vector3 position;
+
+        position.x = (x + z * 0.5f - z / 2) * (HexMetrics.innerRadius * 2f);
+        position.y = 0f;
+        position.z = z *(HexMetrics.outerRadius * 1.5f);
+        
+        HCell cell = Instantiate<HCell>(cellPrefab);
+        cellList.Add(cell);
         cell.transform.SetParent(transform, false);
         cell.transform.localPosition = position;
         cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, z);
         cell.GetComponent<HCell>().index = i;
+        
 
         Text label = Instantiate<Text>(cellLabelPrefab);
         label.rectTransform.SetParent(gridCanvas.transform, false);
@@ -70,47 +85,11 @@ public class HGrid : MonoBehaviour
         HighlightCell(coordinates, position);
         Debug.Log("touched at " + coordinates.ToString());
     }
-    void Update () {
-        if (Input.GetMouseButton(0) && !cooldown) {
-            HandleInput();
-        }
-    }
 
-    void HandleInput () {
-        Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        
-        if (Physics.Raycast(inputRay, out hit)) {
-            //HighlightCell2(hit.collider.gameObject.transform.position);
 
-            if (input == 0)
-            {
-                OnCooldown();
-                input++;
-                start = hit.collider.gameObject.GetComponent<HCell>();
-                Debug.Log("Start" + start.coordinates.ToString());
-                spath = Solve(start);
-                
-                
-
-            } else if (input == 1)
-            {
-                OnCooldown();
-                end = hit.collider.gameObject.GetComponent<HCell>();
-                List<HCell> sp = RecPath(start, end, spath);
-                sp = ShortestPath(sp);
-                Debug.Log("***Ergebnis*** " + ListToString(sp) + " : "+ sp.Count);
-                input = 0;
-                if(sp.Count > 0)
-                    enemySpawn.SpawnEnemy(HCellPositions(sp));
-            }
-            //Neighb(hit.collider.gameObject.GetComponent<HCell>());
-            
-            //TouchCell(hit.point);
-        }
-    }
+    
     // könnte auch zu enemy spawn
-    private Vector3[] HCellPositions(List<HCell> sp)
+    public Vector3[] HCellPositions(List<HCell> sp)
     {
         Vector3[] positions = new Vector3[sp.Count];
         for (int i = 0; i < sp.Count; i++)
@@ -120,16 +99,7 @@ public class HGrid : MonoBehaviour
 
         return positions;
     }
-    private void OnCooldown()
-    {
-        cooldown = true;
-        StartCoroutine("ResetCooldown");
-    }
 
-    IEnumerator ResetCooldown(){
-        yield return new WaitForSeconds(1f);
-        cooldown = false;
-    }
 
     public void HighlightCell(HexCoordinates hexCoordinates,Vector3 pos)
     {
@@ -156,34 +126,42 @@ public class HGrid : MonoBehaviour
         int i = 0;
         foreach (HCell cell in cells)
         {
-            if (cell.coordinates.X == h.coordinates.X - 1 && cell.coordinates.Y == h.coordinates.Y)
+            // TODO: fehlt der check ob es schon ein gebäude hat
+            if (cell.isAcquired)
             {
-                neighb[i] = cell;
-                i++;
-            } else if (cell.coordinates.X == h.coordinates.X  && cell.coordinates.Y == h.coordinates.Y-1)
-            {
-                neighb[i] = cell;
-                i++;
-            }else if (cell.coordinates.X == h.coordinates.X+1  && cell.coordinates.Y == h.coordinates.Y)
-            {
-                neighb[i] = cell;
-                i++;
-            }else if (cell.coordinates.X == h.coordinates.X  && cell.coordinates.Y == h.coordinates.Y+1)
-            {
-                neighb[i] = cell;
-                i++;
-            }else if (cell.coordinates.X == h.coordinates.X-1  && cell.coordinates.Y == h.coordinates.Y+1)
-            {
-                neighb[i] = cell;
-                i++;
-            }
-            else if (cell.coordinates.X == h.coordinates.X+1  && cell.coordinates.Y == h.coordinates.Y-1)
-            {
-                neighb[i] = cell;
-                i++;
+                if (cell.coordinates.X == h.coordinates.X - 1 && cell.coordinates.Y == h.coordinates.Y)
+                {
+                    neighb[i] = cell;
+                    i++;
+                }
+                else if (cell.coordinates.X == h.coordinates.X && cell.coordinates.Y == h.coordinates.Y - 1)
+                {
+                    neighb[i] = cell;
+                    i++;
+                }
+                else if (cell.coordinates.X == h.coordinates.X + 1 && cell.coordinates.Y == h.coordinates.Y)
+                {
+                    neighb[i] = cell;
+                    i++;
+                }
+                else if (cell.coordinates.X == h.coordinates.X && cell.coordinates.Y == h.coordinates.Y + 1)
+                {
+                    neighb[i] = cell;
+                    i++;
+                }
+                else if (cell.coordinates.X == h.coordinates.X - 1 && cell.coordinates.Y == h.coordinates.Y + 1)
+                {
+                    neighb[i] = cell;
+                    i++;
+                }
+                else if (cell.coordinates.X == h.coordinates.X + 1 && cell.coordinates.Y == h.coordinates.Y - 1)
+                {
+                    neighb[i] = cell;
+                    i++;
+                }
             }
 
-            
+
         }
         /*
         for (int j = 0; j < i; j++)
@@ -210,7 +188,7 @@ public class HGrid : MonoBehaviour
         }
         return end;
     }
-
+    /*
     public HCell[] Solve(HCell start)
     {
         Queue<HCell> queue = new Queue<HCell>();
@@ -255,7 +233,7 @@ public class HGrid : MonoBehaviour
         }
         return false;
     }
-    
+    */
     // wird nicht mehr gebraucht
     public int CellsIndex(HCell hCell)
     {
@@ -270,11 +248,13 @@ public class HGrid : MonoBehaviour
         //gibt probleme wenn Hcell nicht teil des arrays ist
         return index;
     }
+    /*
 
     public List<HCell> RecPath(HCell start,HCell end, HCell[] list)
     {
         List<HCell> path = new List<HCell>();
-        Debug.Log("sp start"+ start.spindex + " sp ende"+ end.spindex );
+        Debug.Log("sp start"+ start.spindex + " index start"+ start.index );
+        Debug.Log("sp end"+ end.spindex + " index start"+ end.index );
         Debug.Log("ende: " + end.coordinates.ToString());
 
 
@@ -298,6 +278,7 @@ public class HGrid : MonoBehaviour
         // wenn der weg nicht möglich ist kommt eine leere liste zurück // muss also gecheckt werden
         return new List<HCell>();
     }
+    */
 
     public string ArrayToString(HCell[] list)
     {
@@ -308,7 +289,7 @@ public class HGrid : MonoBehaviour
             if(h != null)
                 s += h.coordinates.ToString()+ "\n";
             else
-                s += "null \n";
+                s += "(null) \n";
         }
 
         return s;

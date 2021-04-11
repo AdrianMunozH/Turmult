@@ -8,8 +8,12 @@ public class HCell : MonoBehaviour
     int distance;
 
     public int index;
-
+    public bool isAcquired;
     public int spindex;
+    //bool ob es schon bebaut wurde 
+    
+    
+    
     // Start is called before the first frame update
     void Start()
     {

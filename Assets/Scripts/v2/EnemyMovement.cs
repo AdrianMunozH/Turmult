@@ -32,9 +32,11 @@ public class EnemyMovement : MonoBehaviour
         //transform.rotation = Quaternion.AngleAxis(angle,Vector3.forward);
         
         //funkt. aber ist snappy
-        transform.rotation = Quaternion.LookRotation(lookingDir);
+        //transform.rotation = Quaternion.LookRotation(lookingDir);
+        transform.rotation = Quaternion.Lerp(transform.rotation,Quaternion.LookRotation(lookingDir),Time.deltaTime * moveSpeed * 2);
         
         transform.position = Vector3.MoveTowards(transform.position,path[pathIndex],moveSpeed *Time.deltaTime);
         
     }
+    
 }
