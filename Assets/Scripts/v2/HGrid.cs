@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.UI;
 
-public class HGrid : MonoBehaviour
+public class HGrid : Singleton<HGrid>
 {
     public int width = 6;
     public int height = 6;
@@ -38,6 +38,7 @@ public class HGrid : MonoBehaviour
         }
         cells = new HCell[cellList.Count];
         cells = cellList.ToArray();
+        neutralCell();
     }
     
     bool hexCircle(int x, int z, int i)
@@ -71,7 +72,6 @@ public class HGrid : MonoBehaviour
         cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, z);
         cell.GetComponent<HCell>().index = i;
         
-
         Text label = Instantiate<Text>(cellLabelPrefab);
         label.rectTransform.SetParent(gridCanvas.transform, false);
         label.rectTransform.anchoredPosition =
@@ -279,6 +279,48 @@ public class HGrid : MonoBehaviour
         return new List<HCell>();
     }
     */
+    public HCell GetCellIndex(int x, int y)
+    {
+        
+        foreach (HCell cell in cells)
+        {
+            if (cell.coordinates.X == x && cell.coordinates.Y == y)
+            {
+                return cell;
+            }
+        }
+
+        return null;
+    }
+
+    private void neutralCell()
+    {
+        GetCellIndex(0,0, 0).isAcquired = true;
+        int z = 0;
+        int p = 1;
+        int m = -1;
+        for (int i = 0; i < 5; i++)
+        {
+            GetCellIndex(z, m, p).isAcquired = true;
+            GetCellIndex(p, z, m).isAcquired = true;
+            GetCellIndex(m, p, z).isAcquired = true;
+            p++;
+            m--;
+        }
+    }
+    public HCell GetCellIndex(int x, int y,int z)
+    {
+        
+        foreach (HCell cell in cells)
+        {
+            if (cell.coordinates.X == x && cell.coordinates.Y == y && cell.coordinates.Z == z)
+            {
+                return cell;
+            }
+        }
+
+        return null;
+    }
 
     public string ArrayToString(HCell[] list)
     {

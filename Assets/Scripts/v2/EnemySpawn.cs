@@ -13,14 +13,14 @@ public class EnemySpawn : MonoBehaviour
     int input;
     public HCell start;
     public HCell end;
-
-    public HGrid _hGrid;
+    
     //test für shortest path
 
     // Start is called before the first frame update
     void Start()
     {
         enemys = new GameObject[10];
+        start = HGrid.Instance.GetCellIndex(0, 0);
     }
 
     public void SpawnEnemy(Vector3[] path )
@@ -42,12 +42,12 @@ public class EnemySpawn : MonoBehaviour
         //index stellen
         List<int> visited = new List<int>();
         visited.Add(start.index);
-        HCell[] prev = new HCell[_hGrid.cells.Length];
+        HCell[] prev = new HCell[HGrid.Instance.cells.Length];
         int p = 0;
         while (queue.Count > 0)
         {
             HCell node = queue.Dequeue();
-            HCell[] neighb = _hGrid.Neighb(node);
+            HCell[] neighb = HGrid.Instance.Neighb(node);
             for (int i = 0;i<neighb.Length;i++)
             {
                 //nicht visited
@@ -64,7 +64,7 @@ public class EnemySpawn : MonoBehaviour
                 }
             }
         }
-        Debug.Log("solve list: " + _hGrid.ArrayToString(prev));
+        Debug.Log("solve list: " + HGrid.Instance.ArrayToString(prev));
         return prev;
     }
     public bool Visited(List<int> list, int i)
@@ -84,7 +84,6 @@ public class EnemySpawn : MonoBehaviour
     {
         List<HCell> path = new List<HCell>();
         Debug.Log("sp start"+ start.spindex + " index start"+ start.index );
-        Debug.Log("sp end"+ end.spindex + " index start"+ end.index );
         Debug.Log("ende: " + end.coordinates.ToString());
 
 
@@ -100,6 +99,7 @@ public class EnemySpawn : MonoBehaviour
     {
         
         path.Reverse();
+        // ich glaub ich war hier bisschen faul und es sollte mehr gecheckt werden :D
         if (path.Count > 0 && path[0].coordinates.X == start.coordinates.X)
         {
             return path;
