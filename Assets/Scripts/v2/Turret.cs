@@ -1,19 +1,17 @@
 using UnityEngine;
 public class Turret : MonoBehaviour
 {
-    public Transform target;
+    private Transform target;
     public float range = 15f;
     public string enemyTag = "Enemy";
     public Transform partToRotate;
     public float turnSpeed = 10f;
-
-    private bool _istargetNull;
+    
 
     // Start is called before the first frame update
     void Start()
-    {
-        _istargetNull = target == null;
-        InvokeRepeating("UpdateTarget",0f,0.5f);
+    { 
+        InvokeRepeating(nameof(UpdateTarget),0f,0.5f);
     }
 
 /**
@@ -36,14 +34,9 @@ public class Turret : MonoBehaviour
             }
         }
 
-        if (!_istargetNull && shortestDistance <= range)
+        if (nearestEnemy != null && shortestDistance <= range)
         {
-            _istargetNull = true;
             target = nearestEnemy.transform;
-        }
-        else
-        {
-            _istargetNull = false;
         }
     }
 
@@ -56,7 +49,7 @@ public class Turret : MonoBehaviour
     void Update()
     {
         //Wenn kein Target verhanden keine Updates
-        if (_istargetNull)
+        if (target == null)
         {
             return;
         }
