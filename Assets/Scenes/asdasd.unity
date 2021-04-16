@@ -458,7 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e96d450305656f4a824524764b57ebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraSpeed: 30
+  cameraSpeed: 80
   scrollSpeed: 5
   minScrollY: 10
   maxScrollY: 100
