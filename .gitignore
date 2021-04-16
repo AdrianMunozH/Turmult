@@ -66,6 +66,8 @@ Thumbs.db
 /sysinfo.txt
 /iosbuild/
 /testbuild/
+/Assets/ExampleAssets/
+/Logs/
 *.stackdump
 /islandtd/Assets/AssetStoreTools*
 *.apk
