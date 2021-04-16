@@ -92,6 +92,5 @@ public class Turret : MonoBehaviour
         {
             bullet.Seek(target);
         }
-        Debug.Log("Shoot!");
     }
 }
