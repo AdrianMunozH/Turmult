@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 /**
  * Buildmanger nach Singleton-Pattern
@@ -7,7 +8,10 @@ public class BuildManager : MonoBehaviour
 {
     public static BuildManager instance;
     private GameObject turretToBuild;
+    private GameObject turretToBuildPreview;
     public GameObject standardTurretPrefab;
+    public GameObject standardTurretPreviewPrefab;
+
 
     void Awake()
     {
@@ -24,10 +28,17 @@ public class BuildManager : MonoBehaviour
     {
         //Setzt den Standard Turret
         turretToBuild = standardTurretPrefab;
+        turretToBuildPreview = standardTurretPreviewPrefab;
     }
 
     public GameObject GetTurretToBuild()
     {
         return turretToBuild;
     }
+
+    public GameObject getTurretToBuildPreview()
+    {
+        return turretToBuildPreview;
+    }
+    
 }
