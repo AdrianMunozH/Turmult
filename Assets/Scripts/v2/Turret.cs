@@ -49,6 +49,10 @@ public class Turret : MonoBehaviour
         {
             target = nearestEnemy.transform;
         }
+        else
+        {
+            target = null;
+        }
     }
 
     private void OnDrawGizmosSelected()
