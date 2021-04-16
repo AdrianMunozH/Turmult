@@ -503,7 +503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 186166fd64734d049eeec1871853d0a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  standardTurretPrefab: {fileID: 919132149155446097, guid: 9909e1df3d4a5b6449485beeba5975ec,
+  standardTurretPrefab: {fileID: 5965164860795772709, guid: 05ae60da1d1e4964a8eb844353982fce,
     type: 3}
 --- !u!1 &567474929
 GameObject:
