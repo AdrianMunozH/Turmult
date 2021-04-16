@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
 {
-    
     public GameObject enemy;
     private GameObject[] enemys;
-    
+
     //test für shortest path
     private HCell[] spath;
     int input;
     public HCell start;
     public HCell end;
-    
+
     //test für shortest path
 
     // Start is called before the first frame update
@@ -23,17 +22,17 @@ public class EnemySpawn : MonoBehaviour
         start = HGrid.Instance.GetCellIndex(0, 0);
     }
 
-    public void SpawnEnemy(Vector3[] path )
+    public void SpawnEnemy(Vector3[] path)
     {
         // ich mache noch nichts mit den enemys darum 0 
-        GameObject gameObject = enemys[0]  = Instantiate(enemy);
+        GameObject gameObject = enemys[0] = Instantiate(enemy);
         gameObject.transform.SetParent(transform, false);
         gameObject.transform.position = path[0];
         EnemyMovement enemyMovement = gameObject.GetComponent<EnemyMovement>();
         enemyMovement.moveSpeed = 3f;
         enemyMovement.path = path;
-
     }
+
     //public HCell[] Solve(HCell start)
     public HCell[] Solve()
     {
@@ -48,11 +47,11 @@ public class EnemySpawn : MonoBehaviour
         {
             HCell node = queue.Dequeue();
             HCell[] neighb = HGrid.Instance.Neighb(node);
-            for (int i = 0;i<neighb.Length;i++)
+            for (int i = 0; i < neighb.Length; i++)
             {
                 //nicht visited
                 //if (!visited.Contains(CellsIndex(neighb[i])))
-                if (!Visited(visited,neighb[i].index))
+                if (!Visited(visited, neighb[i].index))
                 {
                     queue.Enqueue(neighb[i]);
                     //visited.Add(CellsIndex(neighb[i]));
@@ -64,9 +63,11 @@ public class EnemySpawn : MonoBehaviour
                 }
             }
         }
+
         Debug.Log("solve list: " + HGrid.Instance.ArrayToString(prev));
         return prev;
     }
+
     public bool Visited(List<int> list, int i)
     {
         foreach (int item in list)
@@ -76,39 +77,39 @@ public class EnemySpawn : MonoBehaviour
                 return true;
             }
         }
+
         return false;
     }
-    
+
     //public List<HCell> RecPath(HCell start,HCell end, HCell[] list)
     public List<HCell> RecPath(HCell[] list)
     {
         List<HCell> path = new List<HCell>();
-        Debug.Log("sp start"+ start.spindex + " index start"+ start.index );
+        Debug.Log("sp start" + start.spindex + " index start" + start.index);
         Debug.Log("ende: " + end.coordinates.ToString());
 
 
-        for (HCell at = end; at != null ; at = list[at.index])
+        for (HCell at = end; at != null; at = list[at.index])
         {
             path.Add(at);
         }
+
         return path;
-        
     }
 
     public List<HCell> ShortestPath(List<HCell> path)
     {
-        
         path.Reverse();
         // ich glaub ich war hier bisschen faul und es sollte mehr gecheckt werden :D
         if (path.Count > 0 && path[0].coordinates.X == start.coordinates.X)
         {
             return path;
         }
+
         Debug.Log("leer");
         // wenn der weg nicht möglich ist kommt eine leere liste zurück // muss also gecheckt werden
         return new List<HCell>();
     }
 
     // Update is called once per frame
-
 }

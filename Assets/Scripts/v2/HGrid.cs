@@ -14,72 +14,76 @@ public class HGrid : Singleton<HGrid>
     public HCell cellPrefab;
     public Text cellLabelPrefab;
     Canvas gridCanvas;
-    
+
     //test für shortest path
 
     // Start is called before the first frame update
     void Start()
     {
-        
     }
-    void Awake () {
-        
+
+    void Awake()
+    {
         gridCanvas = GetComponentInChildren<Canvas>();
-        
+
         cellList = new List<HCell>();
 
-        for (int z = -radius, i = 0; z < radius; z++) {
-            for (int x = -radius; x < radius; x++) {
-                if(hexCircle(x, z, i))
+        for (int z = -radius, i = 0; z < radius; z++)
+        {
+            for (int x = -radius; x < radius; x++)
+            {
+                if (hexCircle(x, z, i))
                 {
                     i++;
                 }
             }
         }
+
         cells = new HCell[cellList.Count];
         cells = cellList.ToArray();
         neutralCell();
     }
-    
+
     bool hexCircle(int x, int z, int i)
     {
         Vector3 position;
 
         position.x = (x + z * 0.5f - z / 2) * (HexMetrics.innerRadius * 2f);
         position.y = 0f;
-        position.z = z *(HexMetrics.outerRadius * 1.5f);
+        position.z = z * (HexMetrics.outerRadius * 1.5f);
         if (position.magnitude <= radius * HexMetrics.outerRadius)
         {
-            CreateCell(x,z,i);
+            CreateCell(x, z, i);
             return true;
         }
 
         return false;
     }
 
-    void CreateCell (int x, int z, int i) {
-        
+    void CreateCell(int x, int z, int i)
+    {
         Vector3 position;
 
         position.x = (x + z * 0.5f - z / 2) * (HexMetrics.innerRadius * 2f);
         position.y = 0f;
-        position.z = z *(HexMetrics.outerRadius * 1.5f);
-        
+        position.z = z * (HexMetrics.outerRadius * 1.5f);
+
         HCell cell = Instantiate<HCell>(cellPrefab);
         cellList.Add(cell);
         cell.transform.SetParent(transform, false);
         cell.transform.localPosition = position;
         cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, z);
         cell.GetComponent<HCell>().index = i;
-        
+
         Text label = Instantiate<Text>(cellLabelPrefab);
         label.rectTransform.SetParent(gridCanvas.transform, false);
         label.rectTransform.anchoredPosition =
             new Vector2(position.x, position.z);
         label.text = cell.coordinates.ToStringOnSeparateLines();
-        
     }
-    void TouchCell (Vector3 position) {
+
+    void TouchCell(Vector3 position)
+    {
         position = transform.InverseTransformPoint(position);
         HexCoordinates coordinates = HexCoordinates.FromPosition(position);
         HighlightCell(coordinates, position);
@@ -87,21 +91,20 @@ public class HGrid : Singleton<HGrid>
     }
 
 
-    
     // könnte auch zu enemy spawn
     public Vector3[] HCellPositions(List<HCell> sp)
     {
         Vector3[] positions = new Vector3[sp.Count];
         for (int i = 0; i < sp.Count; i++)
         {
-            positions[i] =  sp[i].transform.position;
+            positions[i] = sp[i].transform.position;
         }
 
         return positions;
     }
 
 
-    public void HighlightCell(HexCoordinates hexCoordinates,Vector3 pos)
+    public void HighlightCell(HexCoordinates hexCoordinates, Vector3 pos)
     {
         Vector3 position = pos;
         position.y = 1;
@@ -109,6 +112,7 @@ public class HGrid : Singleton<HGrid>
         cell.transform.localPosition = position;
         cell.coordinates = hexCoordinates;
     }
+
     //works
     public void HighlightCell2(Vector3 pos)
     {
@@ -160,8 +164,6 @@ public class HGrid : Singleton<HGrid>
                     i++;
                 }
             }
-
-
         }
         /*
         for (int j = 0; j < i; j++)
@@ -169,7 +171,7 @@ public class HGrid : Singleton<HGrid>
             Debug.Log(neighb[j].coordinates.ToString());
         }
         */
-        
+
         return WithoutNull(neighb);
     }
 
@@ -181,13 +183,16 @@ public class HGrid : Singleton<HGrid>
             if (h != null)
                 i++;
         }
+
         HCell[] end = new HCell[i];
         for (int j = 0; j < i; j++)
         {
             end[j] = arr[j];
         }
+
         return end;
     }
+
     /*
     public HCell[] Solve(HCell start)
     {
@@ -240,14 +245,17 @@ public class HGrid : Singleton<HGrid>
         int index = 0;
         for (int i = 0; i < cells.Length; i++)
         {
-            if (hCell.coordinates.X.Equals(cells[i].coordinates.X) && hCell.coordinates.Y.Equals(cells[i].coordinates.Y))
+            if (hCell.coordinates.X.Equals(cells[i].coordinates.X) &&
+                hCell.coordinates.Y.Equals(cells[i].coordinates.Y))
             {
                 index = i;
             }
         }
+
         //gibt probleme wenn Hcell nicht teil des arrays ist
         return index;
     }
+
     /*
 
     public List<HCell> RecPath(HCell start,HCell end, HCell[] list)
@@ -281,7 +289,6 @@ public class HGrid : Singleton<HGrid>
     */
     public HCell GetCellIndex(int x, int y)
     {
-        
         foreach (HCell cell in cells)
         {
             if (cell.coordinates.X == x && cell.coordinates.Y == y)
@@ -295,7 +302,7 @@ public class HGrid : Singleton<HGrid>
 
     private void neutralCell()
     {
-        GetCellIndex(0,0, 0).isAcquired = true;
+        GetCellIndex(0, 0, 0).isAcquired = true;
         int z = 0;
         int p = 1;
         int m = -1;
@@ -308,9 +315,9 @@ public class HGrid : Singleton<HGrid>
             m--;
         }
     }
-    public HCell GetCellIndex(int x, int y,int z)
+
+    public HCell GetCellIndex(int x, int y, int z)
     {
-        
         foreach (HCell cell in cells)
         {
             if (cell.coordinates.X == x && cell.coordinates.Y == y && cell.coordinates.Z == z)
@@ -328,21 +335,22 @@ public class HGrid : Singleton<HGrid>
         foreach (HCell h in list)
         {
             //s += h.coordinates.ToString() + "\n";
-            if(h != null)
-                s += h.coordinates.ToString()+ "\n";
+            if (h != null)
+                s += h.coordinates.ToString() + "\n";
             else
                 s += "(null) \n";
         }
 
         return s;
     }
+
     public string ListToString(List<HCell> list)
     {
         string s = "";
         foreach (HCell h in list)
         {
             //s += h.coordinates.ToString() + "\n";
-            s += h.coordinates.ToString()+ "\n";
+            s += h.coordinates.ToString() + "\n";
         }
 
         return s;

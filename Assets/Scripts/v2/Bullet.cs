@@ -14,11 +14,10 @@ public class Bullet : MonoBehaviour
         //TODO: SET EFFECTS OR SPEED
         target = _target;
     }
-    
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -40,17 +39,15 @@ public class Bullet : MonoBehaviour
             return;
         }
 
-        transform.Translate(dir.normalized*frameDistance,Space.World);
+        transform.Translate(dir.normalized * frameDistance, Space.World);
     }
 
     void HitTarget()
     {
         //Partikeleffekt
-        GameObject particleEffect = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
+        GameObject particleEffect = (GameObject) Instantiate(impactEffect, transform.position, transform.rotation);
         //TODO: Hit implementieren
         Destroy(gameObject);
-        Destroy(particleEffect,particelDestroyTime);
+        Destroy(particleEffect, particelDestroyTime);
     }
-    
-
 }

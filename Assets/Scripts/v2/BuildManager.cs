@@ -12,7 +12,7 @@ public class BuildManager : MonoBehaviour
     public GameObject standardTurretPrefab;
     public GameObject standardTurretPreviewPrefab;
     private bool _buildModeOn;
-
+    private bool _acquireModeOn;
 
     void Awake()
     {
@@ -21,8 +21,10 @@ public class BuildManager : MonoBehaviour
             Debug.LogError("Es gibt mehr als einen Buildmanager in der Szene: Bitte nur eine pro Szene!");
             return;
         }
+
         instance = this;
         _buildModeOn = false;
+        _acquireModeOn = false;
     }
 
     void Start()
@@ -47,8 +49,26 @@ public class BuildManager : MonoBehaviour
         return _buildModeOn;
     }
 
+    public bool istAcquireModeOn()
+    {
+        return _acquireModeOn;
+    }
+
     public void SetBuildMode()
     {
         _buildModeOn = !_buildModeOn;
+        if (_acquireModeOn && _buildModeOn)
+        {
+            _acquireModeOn = false;
+        }
+    }
+
+    public void SetAcquireMode()
+    {
+        _acquireModeOn = !_acquireModeOn;
+        if (_acquireModeOn && _buildModeOn)
+        {
+            _buildModeOn = false;
+        }
     }
 }
