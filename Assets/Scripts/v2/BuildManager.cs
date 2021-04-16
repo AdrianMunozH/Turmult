@@ -11,6 +11,7 @@ public class BuildManager : MonoBehaviour
     private GameObject turretToBuildPreview;
     public GameObject standardTurretPrefab;
     public GameObject standardTurretPreviewPrefab;
+    private bool _buildModeOn;
 
 
     void Awake()
@@ -20,8 +21,8 @@ public class BuildManager : MonoBehaviour
             Debug.LogError("Es gibt mehr als einen Buildmanager in der Szene: Bitte nur eine pro Szene!");
             return;
         }
-
         instance = this;
+        _buildModeOn = false;
     }
 
     void Start()
@@ -40,5 +41,14 @@ public class BuildManager : MonoBehaviour
     {
         return turretToBuildPreview;
     }
-    
+
+    public bool IsBuildModeOn()
+    {
+        return _buildModeOn;
+    }
+
+    public void SetBuildMode()
+    {
+        _buildModeOn = !_buildModeOn;
+    }
 }

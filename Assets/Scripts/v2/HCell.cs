@@ -16,43 +16,53 @@ public class HCell : MonoBehaviour
     private GameObject turret;
     private GameObject previewTurret;
 
+
     //Optimization: Cachen des Renderes auf dem Objekt
     private Renderer rend;
     //bool ob es schon bebaut wurde 
 
     private void OnMouseEnter()
     {
-        GetComponent<Renderer>().material.color = hoverColor;
-        //TODO: Setzen des Turrets im Buildmanager über die UI
-        GameObject turretToBuild = BuildManager.instance.getTurretToBuildPreview();
-        if (turretToBuild != null)
+        //Nur wenn der Buildmode eingeschaltet ist, werden previews angezeigt
+        if (BuildManager.instance.IsBuildModeOn())
         {
-            previewTurret = (GameObject)Instantiate(turretToBuild, transform.position, transform.rotation);
+            GetComponent<Renderer>().material.color = hoverColor;
+            GameObject turretToBuild = BuildManager.instance.getTurretToBuildPreview();
+            if (turretToBuild != null)
+            {
+                previewTurret = (GameObject) Instantiate(turretToBuild, transform.position, transform.rotation);
+            }
         }
     }
 
     private void OnMouseExit()
     {
         rend.material.color = startColor;
-        //Zerstören des Preview Turrets
-        if (previewTurret != null)
+        if (BuildManager.instance.IsBuildModeOn())
         {
-            Destroy(previewTurret);
+            //Zerstören des Preview Turrets
+            if (previewTurret != null)
+            {
+                Destroy(previewTurret);
+            }
         }
     }
 
     private void OnMouseDown()
     {
-        //Wenn Feld noch nicht bebaut ist
-        if (turret != null)
+        if (BuildManager.instance.IsBuildModeOn())
         {
-            //TODO: Fehlerhandling anpassen
-            Debug.Log("Hier steht schon was Brudi");
+            //Wenn Feld noch nicht bebaut ist
+            if (turret != null)
+            {
+                //TODO: Fehlerhandling anpassen
+                Debug.Log("Hier steht schon was Brudi");
+            }
+
+            //Bauen des Turms
+            GameObject turretToBuild = BuildManager.instance.GetTurretToBuild();
+            turret = (GameObject) Instantiate(turretToBuild, transform.position, transform.rotation);
         }
-        
-        //Bauen des Turms
-        GameObject turretToBuild = BuildManager.instance.GetTurretToBuild();
-        turret = (GameObject)Instantiate(turretToBuild, transform.position, transform.rotation);
     }
 
     // Start is called before the first frame update
