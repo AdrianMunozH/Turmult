@@ -649,4 +649,13 @@ MonoBehaviour:
   index: 0
   isAcquired: 0
   spindex: 0
-  hoverColor: {r: 0, g: 0.88194466, b: 1, a: 1}
+  hoverColorBuildMode: {r: 0.15659487, g: 0.32994655, b: 0.4811321, a: 0.7058824}
+  hoverColorAcquireMode: {r: 0.6886792, g: 0.35997474, b: 0.16567281, a: 0.7058824}
+  colorAcquiredNeutral: {r: 0.8207547, g: 0.66740453, b: 0.3445621, a: 100}
+  colorAcquiredMountain: {r: 0.3018868, g: 0.26541063, b: 0.14382343, a: 100}
+  colorAcquiredSwamp: {r: 0.22067462, g: 0.5377358, b: 0.3985382, a: 100}
+  colorAcquiredForest: {r: 0.083303675, g: 0.4528302, b: 0.12815948, a: 100}
+  colorUnacquiredNeutral: {r: 0.8773585, g: 0.84137475, b: 0.76561946, a: 0.5882353}
+  colorUnacquiredMountain: {r: 0.5943396, g: 0.5833413, b: 0.54668033, a: 0.5882353}
+  colorUnacquiredSwamp: {r: 0.55375576, g: 0.6415094, b: 0.6029834, a: 0.5882353}
+  colorUnacquiredForest: {r: 0.40988785, g: 0.5754717, b: 0.4290305, a: 0.5882353}
