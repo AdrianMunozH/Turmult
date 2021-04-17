@@ -499,6 +499,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 472681035787753992, guid: 66b6426e5071ebf4f9cbf63a9b52ce91,
     type: 3}
+  distanceFromSpawn: 3
 --- !u!4 &541232430
 Transform:
   m_ObjectHideFlags: 0
