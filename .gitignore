@@ -67,6 +67,8 @@ Thumbs.db
 /iosbuild/
 /testbuild/
 /Assets/ExampleAssets/
+/Assets/"TextMesh Pro"/
+/Assets/TutorialInfo/
 /Logs/
 *.stackdump
 /islandtd/Assets/AssetStoreTools*

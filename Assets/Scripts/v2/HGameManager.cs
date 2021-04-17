@@ -5,45 +5,50 @@ using UnityEngine;
 public class HGameManager : MonoBehaviour
 {
     public EnemySpawn spawnPoint;
-    
+
     private EnemySpawn[] _enemySpawns;
     private HCell[] spath;
     int input;
     HCell start;
     HCell end;
-    
-    
+
+
     //test für shortest path
 
     private bool cooldown;
 
     private bool deleteLater;
+
     // Start is called before the first frame update
     void Start()
     {
         // test erstmal nur die eine
         _enemySpawns = new EnemySpawn[3];
-        _enemySpawns[0]  = Instantiate<EnemySpawn>(spawnPoint);
-        _enemySpawns[1]  = Instantiate<EnemySpawn>(spawnPoint);
-        _enemySpawns[2]  = Instantiate<EnemySpawn>(spawnPoint);
-        
+        _enemySpawns[0] = Instantiate<EnemySpawn>(spawnPoint);
+        _enemySpawns[1] = Instantiate<EnemySpawn>(spawnPoint);
+        _enemySpawns[2] = Instantiate<EnemySpawn>(spawnPoint);
+
         _enemySpawns[0].end = HGrid.Instance.GetCellIndex(0, -5, 5);
         _enemySpawns[1].end = HGrid.Instance.GetCellIndex(5, 0, -5);
         _enemySpawns[2].end = HGrid.Instance.GetCellIndex(-5, 5, 0);
     }
 
     // Update is called once per frame
-    void Update () {
-        if (Input.GetMouseButton(0) && !cooldown) {
+    void Update()
+    {
+        if (Input.GetMouseButton(0) && !cooldown)
+        {
             HandleInput();
         }
-        
     }
-    void HandleInput () {
+
+    void HandleInput()
+    {
         Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        
-        if (Physics.Raycast(inputRay, out hit)) {
+
+        if (Physics.Raycast(inputRay, out hit))
+        {
             //HighlightCell2(hit.collider.gameObject.transform.position);
             /*
             Debug.Log(input);
@@ -68,6 +73,7 @@ public class HGameManager : MonoBehaviour
                 SpawnEnemyWave();
             }
         }
+
         /*
     void HandleInput () {
         Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -103,13 +109,15 @@ public class HGameManager : MonoBehaviour
         }
         */
     }
+
     private void OnCooldown()
     {
         cooldown = true;
         StartCoroutine("ResetCooldown");
     }
 
-    IEnumerator ResetCooldown(){
+    IEnumerator ResetCooldown()
+    {
         yield return new WaitForSeconds(1f);
         cooldown = false;
     }
@@ -119,14 +127,12 @@ public class HGameManager : MonoBehaviour
         foreach (EnemySpawn enemySpawn in _enemySpawns)
         {
             spath = enemySpawn.Solve();
-            List<HCell> sp = enemySpawn. RecPath(spath);
+            List<HCell> sp = enemySpawn.RecPath(spath);
             sp = enemySpawn.ShortestPath(sp);
-            Debug.Log("***Ergebnis*** " + HGrid.Instance.ListToString(sp) + " : "+ sp.Count);
+            Debug.Log("***Ergebnis*** " + HGrid.Instance.ListToString(sp) + " : " + sp.Count);
             // es muss gecheckt werden ob der weg länge grö0er ist als 0
-            if(sp.Count > 0)
+            if (sp.Count > 0)
                 enemySpawn.SpawnEnemy(HGrid.Instance.HCellPositions(sp));
-            
         }
-        
     }
 }
