@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HGameManager : MonoBehaviour
 {
+    public static HGameManager instance;
     public EnemySpawn spawnPoint;
 
     private EnemySpawn[] _enemySpawns;
@@ -21,6 +22,17 @@ public class HGameManager : MonoBehaviour
     private bool cooldown;
 
     private bool deleteLater;
+
+    void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogError("Es gibt mehr als einen Buildmanager in der Szene: Bitte nur eine pro Szene!");
+            return;
+        }
+
+        instance = this;
+    }
 
     void Start()
     {
