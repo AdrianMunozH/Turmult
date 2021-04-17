@@ -131,7 +131,7 @@ public class HGrid : Singleton<HGrid>
         foreach (HCell cell in cells)
         {
             // TODO: fehlt der check ob es schon ein gebäude hat
-            if (cell.isAcquired)
+            if (cell.isAcquired && !cell.hasBuilding)
             {
                 if (cell.coordinates.X == h.coordinates.X - 1 && cell.coordinates.Y == h.coordinates.Y)
                 {

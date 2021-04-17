@@ -16,6 +16,7 @@ public class HCell : MonoBehaviour
     private GameObject turret;
     private GameObject previewTurret;
     private Ressource _ressource;
+    public bool hasBuilding;
 
     [Header("Color Highlighting")]
     public Color hoverColorBuildMode = new Color(214.0f/255f, 200.0f/255f, 178.0f/255f,100.0f);
@@ -89,6 +90,7 @@ public class HCell : MonoBehaviour
             //Bauen des Turms
             GameObject turretToBuild = BuildManager.instance.GetTurretToBuild();
             turret = (GameObject) Instantiate(turretToBuild, transform.position, transform.rotation);
+            hasBuilding = true;
         }else if (BuildManager.instance.istAcquireModeOn())
         {
             if (isAcquired)
