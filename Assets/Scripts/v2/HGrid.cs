@@ -131,7 +131,7 @@ public class HGrid : Singleton<HGrid>
         foreach (HCell cell in cells)
         {
             // TODO: fehlt der check ob es schon ein gebäude hat
-            if (cell.isAcquired && !cell.hasBuilding)
+            if (cell.GetCellType() == HCell.CellType.Acquired ||cell.GetCellType() == HCell.CellType.Neutral )
             {
                 if (cell.coordinates.X == h.coordinates.X - 1 && cell.coordinates.Y == h.coordinates.Y)
                 {
@@ -302,15 +302,25 @@ public class HGrid : Singleton<HGrid>
 
     private void neutralCell()
     {
-        GetCellIndex(0, 0, 0).isAcquired = true;
+        GetCellIndex(0, 0, 0).SetCellType(HCell.CellType.Neutral);
         int z = 0;
         int p = 1;
         int m = -1;
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < HGameManager.instance.distanceFromSpawn; i++)
         {
-            GetCellIndex(z, m, p).isAcquired = true;
-            GetCellIndex(p, z, m).isAcquired = true;
-            GetCellIndex(m, p, z).isAcquired = true;
+            if (i >= 2 && i < HGameManager.instance.distanceFromSpawn-1)
+            {
+                GetCellIndex(z, m, p).SetCellType(HCell.CellType.Acquired);
+                GetCellIndex(p, z, m).SetCellType(HCell.CellType.Acquired);
+                GetCellIndex(m, p, z).SetCellType(HCell.CellType.Acquired);
+            }
+            else
+            {
+                GetCellIndex(z, m, p).SetCellType(HCell.CellType.Neutral);
+                GetCellIndex(p, z, m).SetCellType(HCell.CellType.Neutral);
+                GetCellIndex(m, p, z).SetCellType(HCell.CellType.Neutral);
+            }
+
             p++;
             m--;
         }
