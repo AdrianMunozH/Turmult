@@ -114,6 +114,10 @@ public class HCell : MonoBehaviour
             if (type == CellType.Acquired)
             {
                 Debug.Log("Das Feld wurde doch schon eingenommen ...");
+            }else if (type == CellType.Neutral)
+            {
+                Debug.Log("Das Feld ist die Schweiz, lass es in Ruhe");
+               
             }
             else
             {
