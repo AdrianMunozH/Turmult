@@ -109,7 +109,7 @@ public class HCell : MonoBehaviour
             turret = (GameObject) Instantiate(turretToBuild, transform.position, transform.rotation);
             hasBuilding = true;
             HGameManager.Instance.rerouteEnemys(this);
-        }else if (BuildManager.instance.istAcquireModeOn())
+        }else if (BuildManager.instance.isAcquireModeOn())
         {
             if (type == CellType.Acquired)
             {

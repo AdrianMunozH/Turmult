@@ -29,13 +29,12 @@ public class EnemySpawn : MonoBehaviour
         {
             Debug.Log(enemys.Count);
             EnemyMovement mov = enemys[i].GetComponent<EnemyMovement>();
-            for (int j = mov.PathIndex; j < mov.path.Length; j++)
+            for (int j = mov.pathIndex; j < mov.path.Length; j++)
             {
                 string s = "no";
                 if (mov.path[j].coordinates.CompareCoord(turretCell.coordinates))
                 {
-                    rebuildPath(i,mov.PathIndex);
-
+                    rebuildPath(i,mov.pathIndex);
                     s = "yay";
                 } 
                 Debug.Log(mov.path[j].coordinates.ToString() + " mov path , turretcell " + turretCell.coordinates.ToString() + s);   
@@ -47,11 +46,12 @@ public class EnemySpawn : MonoBehaviour
     public void rebuildPath(int enemyIndex, int startIndex)
     {
         EnemyMovement mov = enemys[enemyIndex].GetComponent<EnemyMovement>();
-        
+        Debug.Log("mov coord: " + mov.path[startIndex].coordinates.ToString());
         HCell[] newPath = Solve(mov.path[startIndex]);
         List<HCell> sp = RecPath(newPath);
         sp = ShortestPath(sp, mov.path[startIndex]);
         if (sp.Count > 0)
+            mov.pathIndex = 0;
             mov.path = sp.ToArray();
         
     }
@@ -109,7 +109,7 @@ public class EnemySpawn : MonoBehaviour
         queue.Enqueue(altStart);
         //index stellen
         List<int> visited = new List<int>();
-        visited.Add(defaultStart.index);
+        visited.Add(altStart.index);
         HCell[] prev = new HCell[HGrid.Instance.cells.Length];
         int p = 0;
         while (queue.Count > 0)

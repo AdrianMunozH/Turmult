@@ -8,11 +8,11 @@ public class EnemyMovement : MonoBehaviour
     private Vector3[] vecPath;
     public float moveSpeed;
 
-    private int pathIndex;
+    public int pathIndex;
 
     public EnemySpawn enemySpawn;
     
-    public int PathIndex => pathIndex;
+    
 
     // Start is called before the first frame update
     void Start()
