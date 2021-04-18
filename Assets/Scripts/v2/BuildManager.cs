@@ -49,7 +49,7 @@ public class BuildManager : MonoBehaviour
         return _buildModeOn;
     }
 
-    public bool istAcquireModeOn()
+    public bool isAcquireModeOn()
     {
         return _acquireModeOn;
     }

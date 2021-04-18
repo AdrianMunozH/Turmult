@@ -13,7 +13,7 @@ public class HGameManager : MonoBehaviour
     HCell start;
     HCell end;
 
-    [Header("Setup Endpoint")] public int distanceFromSpawn = 3;
+    [Header("Setup Endpoint")] public int distanceFromSpawn = 5;
 
 
 

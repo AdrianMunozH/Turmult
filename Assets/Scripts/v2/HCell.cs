@@ -1,12 +1,21 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class HCell : MonoBehaviour
 {
+    public enum CellType
+    {
+        CanBeAcquired,
+        Acquired,
+        Neutral
+    };
+
+    
     public HexCoordinates coordinates;
     int distance;
 
     public int index;
-    public bool isAcquired;
+    private CellType type;
     public int spindex;
     private Color startColor;
     private GameObject turret;
@@ -28,17 +37,29 @@ public class HCell : MonoBehaviour
     public Color colorUnacquiredMountain = new Color(158f/255f, 153f/255f, 138f/255f,100f);
     public Color colorUnacquiredSwamp = new Color(102f/255f, 110f/255f, 106f/255f,100f);
     public Color colorUnacquiredForest = new Color(160f/255f, 176f/255f, 162f/255f,100f);
-
+    
+    [Header("Cell Color Setup - Not Acquired")]
+    public Color colorNeutralField = new Color(56.0f/255f, 56.0f/255f, 56.0f/255f,100.0f);
 
     //Optimization: Cachen des Renderes auf dem Objekt
     private Renderer rend;
     //bool ob es schon bebaut wurde 
 
+    public CellType GetCellType()
+    {
+        return type;
+    }
+
+    public void SetCellType(CellType celltype)
+    {
+        type = celltype;
+    }
+    
     private void OnMouseEnter()
     {
         //Hier Turrets
         //Nur wenn der Buildmode eingeschaltet ist, werden previews angezeigt
-        if (BuildManager.instance.IsBuildModeOn() && isAcquired)
+        if (BuildManager.instance.IsBuildModeOn() && type == CellType.Acquired)
         {
             rend.material.color = hoverColorBuildMode;
             GameObject turretToBuild = BuildManager.instance.getTurretToBuildPreview();
@@ -47,9 +68,9 @@ public class HCell : MonoBehaviour
                 previewTurret = (GameObject) Instantiate(turretToBuild, transform.position, transform.rotation);
             }
         //Hier Land
-        }else if (BuildManager.instance.istAcquireModeOn())
+        }else if (BuildManager.instance.isAcquireModeOn() && type != CellType.Neutral && type != CellType.Acquired)
         {
-            rend.material.color = isAcquired?GetAcquiredColor():hoverColorAcquireMode;
+            rend.material.color = type == CellType.Acquired?GetAcquiredColor():hoverColorAcquireMode;
         }
     }
 
@@ -76,7 +97,7 @@ public class HCell : MonoBehaviour
                 //TODO: Fehlerhandling anpassen
                 Debug.Log("Hier steht schon was Brudi!");
                 return;
-            }else if (!isAcquired)
+            }else if (type != CellType.Acquired)
             {
                 Debug.Log("Bratan, Feld einnehmen!");
                 return;
@@ -85,18 +106,23 @@ public class HCell : MonoBehaviour
             //Bauen des Turms
             GameObject turretToBuild = BuildManager.instance.GetTurretToBuild();
             turret = (GameObject) Instantiate(turretToBuild, transform.position, transform.rotation);
-        }else if (BuildManager.instance.istAcquireModeOn())
+        }else if (BuildManager.instance.isAcquireModeOn())
         {
-            if (isAcquired)
+            if (type == CellType.Acquired)
             {
                 Debug.Log("Das Feld wurde doch schon eingenommen ...");
             }
             else
             {
-                isAcquired = true;
-                SetInitialColor();
+                type = CellType.Acquired;
+                SetCellColor();
             }
         }
+    }
+
+    private void Awake()
+    {
+        type = CellType.CanBeAcquired;
     }
 
     // Start is called before the first frame update
@@ -104,31 +130,79 @@ public class HCell : MonoBehaviour
     {
         _ressource = new Ressource();
         rend = GetComponent<Renderer>();
-        SetInitialColor();
+        SetCellColor();
     }
 
-    //Setzt das Initiale Material für die Zelle
-    private void SetInitialColor()
+    //Setzt und aktualisiert die Materialen bzw. Farben einer Zelle
+    private void SetCellColor()
     {
-        switch (_ressource.GetRessourceType())
+        //TODO SET COLOR VON HCELL ANSCHAUEN
+        if (type != CellType.Neutral)
+        {
+            startColor = colorUnacquiredNeutral;
+            // UND DAS MINIONSSPAWNPROBLEM FIXEN
+            switch (_ressource.GetRessourceType())
             {
                 case Ressource.RessourceType.Berg:
-                    startColor = isAcquired?colorAcquiredMountain:colorUnacquiredMountain;
+                    //Wenn  nocht nicht eignenommen
+                    if (type == CellType.CanBeAcquired)
+                    {
+                        startColor = colorUnacquiredMountain;
+                        //Wenn eingenommen
+                    }
+                    else if (type == CellType.Acquired)
+                    {
+                        startColor = colorAcquiredMountain;
+                    }
+
                     break;
                 case Ressource.RessourceType.Sumpf:
-                    startColor = isAcquired?colorAcquiredSwamp:colorUnacquiredSwamp;
+                    if (type == CellType.CanBeAcquired)
+                    {
+                        startColor = colorUnacquiredSwamp;
+                    }
+                    else if (type == CellType.Acquired)
+                    {
+                        startColor = colorAcquiredSwamp;
+                    }
+
                     break;
                 case Ressource.RessourceType.Wald:
-                    startColor = isAcquired?colorAcquiredForest:colorUnacquiredForest;
+                    if (type == CellType.CanBeAcquired)
+                    {
+                        startColor = colorUnacquiredForest;
+                    }
+                    else if (type == CellType.Acquired)
+                    {
+                        startColor = colorAcquiredForest;
+                    }
+
                     break;
-                case Ressource.RessourceType.Neutral:
-                    startColor = isAcquired?colorAcquiredNeutral:colorUnacquiredNeutral;
+                default:
+                    if (type == CellType.CanBeAcquired)
+                    {
+                        startColor = colorUnacquiredNeutral;
+                    }
+                    else if (type == CellType.Acquired)
+                    {
+                        startColor = colorAcquiredNeutral;
+                    }
+
                     break;
             }
+        }
+        else
+        {
+            //Neutrale Felder
+            startColor = colorNeutralField;
+        }
 
         rend.material.color = startColor;
     }
 
+    /**
+     * Gibt die Farbe des eingenommenen Zustands zurück
+     */
     private Color GetAcquiredColor()
     {
         switch (_ressource.GetRessourceType())
