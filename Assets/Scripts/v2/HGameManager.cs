@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HGameManager : MonoBehaviour
+public class HGameManager : Singleton<HGameManager>
 {
     public EnemySpawn spawnPoint;
 
     private EnemySpawn[] _enemySpawns;
     private HCell[] spath;
     int input;
+    
+    //sollte raus
     HCell start;
     HCell end;
 
@@ -132,7 +134,15 @@ public class HGameManager : MonoBehaviour
             Debug.Log("***Ergebnis*** " + HGrid.Instance.ListToString(sp) + " : " + sp.Count);
             // es muss gecheckt werden ob der weg länge grö0er ist als 0
             if (sp.Count > 0)
-                enemySpawn.SpawnEnemy(HGrid.Instance.HCellPositions(sp));
+                enemySpawn.SpawnEnemy(sp.ToArray());
+        }
+    }
+
+    public void rerouteEnemys(HCell turretCell)
+    {
+        foreach (EnemySpawn enemySpawn in _enemySpawns)
+        {
+            enemySpawn.recheckPath(turretCell);
         }
     }
 }

@@ -92,10 +92,10 @@ public class HGrid : Singleton<HGrid>
 
 
     // könnte auch zu enemy spawn
-    public Vector3[] HCellPositions(List<HCell> sp)
+    public Vector3[] HCellPositions(HCell[] sp)
     {
-        Vector3[] positions = new Vector3[sp.Count];
-        for (int i = 0; i < sp.Count; i++)
+        Vector3[] positions = new Vector3[sp.Length];
+        for (int i = 0; i < sp.Length; i++)
         {
             positions[i] = sp[i].transform.position;
         }

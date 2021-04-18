@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public Vector3[] path;
+    public HCell[] path;
+    private Vector3[] vecPath;
     public float moveSpeed;
 
     private int pathIndex;
+
+    public EnemySpawn enemySpawn;
+    
+    public int PathIndex => pathIndex;
 
     // Start is called before the first frame update
     void Start()
@@ -18,16 +23,22 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(transform.position, path[pathIndex]) < 0.1f)
+        // kann auch ersetzt werden durch path.gameObject.transform.position
+        vecPath = HGrid.Instance.HCellPositions(path);
+        if (Vector3.Distance(transform.position, vecPath[pathIndex]) < 0.1f)
         {
             if (pathIndex < path.Length - 1)
                 pathIndex++;
             else
+            {
+                enemySpawn.deleteEnemy(gameObject);
                 Destroy(gameObject);
+            }
+                
         }
 
         //rotation funktioniert nicht
-        Vector3 lookingDir = path[pathIndex] - transform.position;
+        Vector3 lookingDir = vecPath[pathIndex] - transform.position;
         float angle = Mathf.Atan2(lookingDir.y, lookingDir.x) * Mathf.Rad2Deg;
         //transform.rotation = Quaternion.AngleAxis(angle,Vector3.forward);
 
@@ -36,6 +47,6 @@ public class EnemyMovement : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookingDir),
             Time.deltaTime * moveSpeed * 2);
 
-        transform.position = Vector3.MoveTowards(transform.position, path[pathIndex], moveSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, vecPath[pathIndex], moveSpeed * Time.deltaTime);
     }
 }

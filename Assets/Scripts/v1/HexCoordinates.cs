@@ -29,6 +29,11 @@ public struct HexCoordinates
         this.z = z;
     }
 
+    public bool CompareCoord(HexCoordinates hexCoordinates)
+    {
+        return hexCoordinates.X == X && hexCoordinates.Y == Y && hexCoordinates.Z == Z;
+    }
+
     public static HexCoordinates FromOffsetCoordinates(int x, int z)
     {
         return new HexCoordinates(x - z / 2, z);
