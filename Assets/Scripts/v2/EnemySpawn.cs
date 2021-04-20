@@ -36,8 +36,7 @@ public class EnemySpawn : MonoBehaviour
                 {
                     rebuildPath(i,mov.pathIndex);
                     s = "yay";
-                } 
-                Debug.Log(mov.path[j].coordinates.ToString() + " mov path , turretcell " + turretCell.coordinates.ToString() + s);   
+                }
             }
             
         }

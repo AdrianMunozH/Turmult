@@ -108,6 +108,7 @@ public class HCell : MonoBehaviour
             GameObject turretToBuild = BuildManager.instance.GetTurretToBuild();
             turret = (GameObject) Instantiate(turretToBuild, transform.position, transform.rotation);
             hasBuilding = true;
+            Debug.Log("reroute turretmode");
             HGameManager.Instance.rerouteEnemys(this);
         }else if (BuildManager.instance.isAcquireModeOn())
         {
@@ -122,6 +123,8 @@ public class HCell : MonoBehaviour
             else
             {
                 type = CellType.Acquired;
+                HGameManager.Instance.rerouteEnemys(this);
+                Debug.Log("reroute acquiremode");
                 SetCellColor();
             }
         }
