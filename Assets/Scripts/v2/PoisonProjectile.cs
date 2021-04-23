@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class PoisonProjectile : Bullet
 {
     public Transform target;
     public float speed = 70f;
@@ -42,14 +42,12 @@ public class Bullet : MonoBehaviour
 
         transform.Translate(dir.normalized * frameDistance, Space.World);
     }
-
     void HitTarget()
     {
         //Partikeleffekt
         GameObject particleEffect = (GameObject) Instantiate(impactEffect, transform.position, transform.rotation);
         //TODO: Hit implementieren
-        //target.GetComponent<EnemyMovement>().TakeDamage(damage);
-        target.GetComponent<EnemyMovement>().TakeDamage(damage); 
+        target.GetComponent<EnemyMovement>().TakeDamageOvertime(damage,2f,0.2f);
         Destroy(gameObject);
         Destroy(particleEffect, particelDestroyTime);
     }

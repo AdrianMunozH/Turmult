@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class AoeProjectile : MonoBehaviour
 {
-    public Transform target;
-    public float speed = 70f;
+    private Transform target;
+    public float speed = 50f;
     public GameObject impactEffect;
     public float particelDestroyTime = 2f;
     public float damage;
@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void Update()
+    void Update()
     {
         // Falls Gegner schon tot oder Ende erreicht hat, Bullet zerstören
         if (target == null)
@@ -48,8 +48,14 @@ public class Bullet : MonoBehaviour
         //Partikeleffekt
         GameObject particleEffect = (GameObject) Instantiate(impactEffect, transform.position, transform.rotation);
         //TODO: Hit implementieren
-        //target.GetComponent<EnemyMovement>().TakeDamage(damage);
-        target.GetComponent<EnemyMovement>().TakeDamage(damage); 
+        Collider[] hit = Physics.OverlapSphere(transform.position,0.6f);
+        foreach (Collider collider in hit)
+        {
+            if (collider.gameObject.tag.Equals("Enemy"))
+            {
+                collider.GetComponent<EnemyMovement>().TakeDamage(damage);
+            }
+        }
         Destroy(gameObject);
         Destroy(particleEffect, particelDestroyTime);
     }

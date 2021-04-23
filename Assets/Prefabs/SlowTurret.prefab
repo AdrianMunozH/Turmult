@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 6450093076230669727}
   - component: {fileID: 6543870768036286139}
   m_Layer: 0
-  m_Name: Turret
+  m_Name: SlowTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -160,21 +160,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 30
-  fireRate: 5
+  fireRate: 1
   turnSpeed: 10
-  turretTypes: 03000000
-  damage: 15
-  damageOverTime: 15
-  slow: 0.5
   partToRotate: {fileID: 4933368902158128073}
   enemyTag: Enemy
   bulletPrefab: {fileID: 7927641795192460296, guid: 448ae3d7bb32a344e9348a9996ae6dfd,
     type: 3}
   firePoint: {fileID: 6629099769000624128}
-  aoePrefab: {fileID: 2460278673348978802, guid: 65e20ae8c26ceca46a488fcc8d26df1d,
-    type: 3}
-  dotPrefab: {fileID: 3106196230211176537, guid: 224bc220f05212a4587df6b85d2780e1,
-    type: 3}
 --- !u!1 &5997959140949114930
 GameObject:
   m_ObjectHideFlags: 0
