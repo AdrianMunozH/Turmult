@@ -162,11 +162,17 @@ MonoBehaviour:
   range: 30
   fireRate: 1
   turnSpeed: 10
+  turretTypes: 00000000
+  damage: 15
+  damageOverTime: 15
+  slow: 0.2
   partToRotate: {fileID: 4933368902158128073}
   enemyTag: Enemy
   bulletPrefab: {fileID: 7927641795192460296, guid: 448ae3d7bb32a344e9348a9996ae6dfd,
     type: 3}
   firePoint: {fileID: 6629099769000624128}
+  aoePrefab: {fileID: 0}
+  dotPrefab: {fileID: 0}
 --- !u!1 &5997959140949114930
 GameObject:
   m_ObjectHideFlags: 0

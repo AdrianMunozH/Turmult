@@ -14,8 +14,8 @@ public class Turret : MonoBehaviour
     private float fireCountdown = 0f;
     public float turnSpeed = 10f;
     // sollte erweitert werden 
-    //public List<TurretType> turretType;
-    public TurretType turretType;
+    public List<TurretType> turretTypes;
+    //public TurretType turretType;
     public float damage = 15f;
     public float damageOverTime = 15f;
     public float slow = 0.2f;
@@ -27,13 +27,15 @@ public class Turret : MonoBehaviour
     public GameObject aoePrefab;
     public GameObject dotPrefab;
     
+    //test 
+    public GameObject projectilePrefab;
+    
     // test
     //public TurretEffects[] turretEffects = new  TurretEffects[5];
 
     // Start is called before the first frame update
     void Start()
     {
-        //turretTypes = new List<TurretType>();
         InvokeRepeating(nameof(UpdateTarget), 0f, 0.5f);
     }
 
@@ -92,8 +94,29 @@ public class Turret : MonoBehaviour
            checkType(turretEffects[i]);
         }
         */
-        checkType();
+        //checkType();
+        if (fireCountdown <= 0f)
+        {
+            ShootProjectile();
+            fireCountdown = 1f / fireRate;
+        }
+
+        fireCountdown -= Time.deltaTime;
         
+        
+    }
+    // nur zum testen
+    void ShootProjectile()
+    {
+       
+        GameObject projectileGameObject = (GameObject) Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        Projectile projectile = projectilePrefab.GetComponent<Projectile>();
+        projectile.damage = damage;
+
+        if (projectile != null)
+        {
+            projectile.Seek(target);
+        }
     }
 
     void SlowEnemy()
@@ -113,18 +136,8 @@ public class Turret : MonoBehaviour
             bullet.Seek(target);
         }
     }
-    void DOT()
-    {
-       
-        GameObject dotGameObject = (GameObject) Instantiate(dotPrefab, firePoint.position, firePoint.rotation);
-        PoisonProjectile bullet = dotGameObject.GetComponent<PoisonProjectile>();
-        bullet.damage = damage;
 
-        if (bullet != null)
-        {
-            bullet.Seek(target);
-        }
-    }
+
     void ShootAoe()
     {
        
@@ -139,8 +152,8 @@ public class Turret : MonoBehaviour
     //void checkType(TurretEffects turretEffects)
     void checkType()
     {
-        //foreach (var turretType in turretTypes)
-        
+        foreach (var turretType in turretTypes)
+        {
             if (turretType == TurretType.DAMAGE)
             {
                 if (fireCountdown <= 0f)
@@ -173,6 +186,7 @@ public class Turret : MonoBehaviour
 
                 fireCountdown -= Time.deltaTime;
             }
+
             // tick system muss noch gemacht werden
             if (turretType == TurretType.DOT)
             {
@@ -184,7 +198,8 @@ public class Turret : MonoBehaviour
 
                 fireCountdown -= Time.deltaTime;
             }
-        
+        }
+
     }
     
     
@@ -206,6 +221,7 @@ public class Turret : MonoBehaviour
 }
 public enum TurretType
 {
+    // ersetzen durch SHOOT,CAST,PERMSHOOT
     DAMAGE,
     DAMAGEOT,
     NONDAMAGE,

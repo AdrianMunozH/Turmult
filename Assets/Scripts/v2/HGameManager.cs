@@ -38,7 +38,13 @@ public class HGameManager : Singleton<HGameManager>
 
     void Start()
     {
-        // test erstmal nur die eine
+        TimeTickSystem.OnTick += delegate(object sender, TimeTickSystem.OnTickEventArgs args)
+        {
+            
+        };
+        
+        
+        
         _enemySpawns = new EnemySpawn[3];
         _enemySpawns[0] = Instantiate<EnemySpawn>(spawnPoint);
         _enemySpawns[1] = Instantiate<EnemySpawn>(spawnPoint);

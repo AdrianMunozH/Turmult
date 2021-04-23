@@ -8,19 +8,23 @@ public class EnemyMovement : MonoBehaviour
 {    
     [HideInInspector]
     public HCell[] path;
-    [HideInInspector]
-    public float moveSpeed;
-    public float defaultSpeed;
+   
     public int pathIndex;
 
     public EnemySpawn enemySpawn;
 
-    public float life = 100;
     
+    // Stats
+    public float life = 100;
+    public bool isSlowed;
+    [HideInInspector]
+    public float moveSpeed;
+    public float defaultSpeed;
     
     //kann wahrscheinlich raus
     private Canvas _canvas;
     public TMP_Text _text;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -59,7 +63,9 @@ public class EnemyMovement : MonoBehaviour
             Time.deltaTime * moveSpeed * 2);
 
         transform.position = Vector3.MoveTowards(transform.position, position, moveSpeed * Time.deltaTime);
-        moveSpeed = defaultSpeed;
+        
+        if(!isSlowed)
+            moveSpeed = defaultSpeed;
         
     }
 
@@ -76,25 +82,11 @@ public class EnemyMovement : MonoBehaviour
         _text.SetText(life.ToString());
         //StartCoroutine("DeactivateText",5f);
     }
-    public void TakeDamageOvertime(float damage,float time,float tickrate)
-    {
-
-        int i = (int) (tickrate / time);
-        while (i < time)
-        {
-            StartCoroutine(DOT(damage,tickrate));
-            i += i;
-        }
-    }
-
-    IEnumerator DOT(float damage,float tickrate)
-    {
-        TakeDamage(damage);
-        yield return new WaitForSeconds(tickrate);
-    }
+    
 
     public void Slow(float slow)
     {
+        isSlowed = true;
         Debug.Log("isSlowed");
         moveSpeed = defaultSpeed * (1 - slow);
     }

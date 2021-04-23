@@ -27,7 +27,6 @@ public class EnemySpawn : MonoBehaviour
     {
         for (int i = 0; i < enemys.Count; i++)
         {
-            Debug.Log(enemys.Count);
             EnemyMovement mov = enemys[i].GetComponent<EnemyMovement>();
             for (int j = mov.pathIndex; j < mov.path.Length; j++)
             {
