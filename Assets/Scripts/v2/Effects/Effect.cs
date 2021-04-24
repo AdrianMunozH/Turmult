@@ -10,10 +10,6 @@ public abstract class Effect : MonoBehaviour
     
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public abstract void Hit();
 }
@@ -28,5 +24,6 @@ public enum EffectType
     AOE,
     SPREAD,
     CHAIN,
-    DEBUFF
+    DEBUFF,
+    DPS
 }

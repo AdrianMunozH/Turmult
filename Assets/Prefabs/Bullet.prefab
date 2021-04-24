@@ -138,4 +138,4 @@ MonoBehaviour:
   targetEnemy: {fileID: 0}
   ticks: 10
   tick: 0
-  damagePerTick: 0.5
+  damagePerTick: 2

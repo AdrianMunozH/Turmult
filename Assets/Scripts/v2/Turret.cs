@@ -11,21 +11,19 @@ public class Turret : MonoBehaviour
 
     [Header("Attributes")] public float range = 15f;
     public float fireRate = 1f;
-    private float fireCountdown = 0f;
     public float turnSpeed = 10f;
-    // sollte erweitert werden 
-    public List<TurretType> turretTypes;
-    //public TurretType turretType;
-    public float damage = 15f;
-    public float damageOverTime = 15f;
-    public float slow = 0.2f;
+    private float fireCountdown = 0f;
+
+    public TurretType turretType;
+
+
+    public LineRenderer lineRenderer;
+
 
     [Header("Unity Setup Fields")] public Transform partToRotate;
     public string enemyTag = "Enemy";
-    public GameObject bulletPrefab;
     public Transform firePoint;
-    public GameObject aoePrefab;
-    public GameObject dotPrefab;
+
     
     //test 
     public GameObject projectilePrefab;
@@ -82,27 +80,17 @@ public class Turret : MonoBehaviour
         //Wenn kein Target verhanden keine Updates
         if (target == null)
         {
+            if (turretType == TurretType.LASER)
+            {
+                lineRenderer.enabled = false;
+            }
             return;
         }
 
         // soll mit if statement ausgemacht werden können für statische türme
         rotate();
         
-        /* doesnt work yet
-        for (int i = 0; i < turretEffects.Length || turretEffects[i] != null; i++)
-        {
-           checkType(turretEffects[i]);
-        }
-        */
-        //checkType();
-        if (fireCountdown <= 0f)
-        {
-            ShootProjectile();
-            fireCountdown = 1f / fireRate;
-        }
-
-        fireCountdown -= Time.deltaTime;
-        
+        checkType();
         
     }
     // nur zum testen
@@ -111,103 +99,42 @@ public class Turret : MonoBehaviour
        
         GameObject projectileGameObject = (GameObject) Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
         Projectile projectile = projectilePrefab.GetComponent<Projectile>();
-        projectile.damage = damage;
 
         if (projectile != null)
         {
             projectile.Seek(target);
         }
     }
-
-    void SlowEnemy()
-    {
-        targetEnemy.Slow(slow);
-    }
-
-    void Shoot()
-    {
-       
-        GameObject bulletGameObject = (GameObject) Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        Bullet bullet = bulletGameObject.GetComponent<Bullet>();
-        bullet.damage = damage;
-
-        if (bullet != null)
-        {
-            bullet.Seek(target);
-        }
-    }
-
-
-    void ShootAoe()
-    {
-       
-        GameObject aoeGameObject = (GameObject) Instantiate(aoePrefab, firePoint.position, firePoint.rotation);
-        AoeProjectile aoe = aoeGameObject.GetComponent<AoeProjectile>();
-        aoe.damage = damage;
-        if (aoe != null)
-        {
-            aoe.Seek(target);
-        }
-    }
+    
+    
     //void checkType(TurretEffects turretEffects)
     void checkType()
     {
-        foreach (var turretType in turretTypes)
+        if (turretType == TurretType.PROJECTILE)
         {
-            if (turretType == TurretType.DAMAGE)
+            if (fireCountdown <= 0f)
             {
-                if (fireCountdown <= 0f)
-                {
-                    Shoot();
-                    fireCountdown = 1f / fireRate;
-                }
-
-                fireCountdown -= Time.deltaTime;
+                ShootProjectile();
+                fireCountdown = 1f / fireRate;
             }
 
-            if (turretType == TurretType.DAMAGEOT)
-            {
-                DamageOverTime();
-                //(DamageOvertime) turretEffects.DamageOverTime();
-            }
-
-            if (turretType == TurretType.SLOW)
-            {
-                SlowEnemy();
-            }
-
-            if (turretType == TurretType.AOE)
-            {
-                if (fireCountdown <= 0f)
-                {
-                    ShootAoe();
-                    fireCountdown = 1f / fireRate;
-                }
-
-                fireCountdown -= Time.deltaTime;
-            }
-
-            // tick system muss noch gemacht werden
-            if (turretType == TurretType.DOT)
-            {
-                if (fireCountdown <= 0f)
-                {
-                    //DOT();
-                    fireCountdown = 1f / fireRate;
-                }
-
-                fireCountdown -= Time.deltaTime;
-            }
+            fireCountdown -= Time.deltaTime;
         }
 
+        if (turretType == TurretType.LASER)
+        {
+            ShootLaser();
+        }
+        
     }
-    
-    
-    void DamageOverTime()
+
+    private void ShootLaser()
     {
-        targetEnemy.TakeDamage(damageOverTime * Time.deltaTime);
+        lineRenderer.enabled = true;
+        lineRenderer.SetPosition(0,firePoint.position);
+        lineRenderer.SetPosition(1,target.position);
+        gameObject.GetComponent<Laser>().Seek(target);
     }
-    
 
     public void rotate()
     {
@@ -222,11 +149,7 @@ public class Turret : MonoBehaviour
 public enum TurretType
 {
     // ersetzen durch SHOOT,CAST,PERMSHOOT
-    DAMAGE,
-    DAMAGEOT,
-    NONDAMAGE,
-    SLOW,
-    STUN,
-    AOE,
-    DOT
+    PROJECTILE,
+    LASER,
+    SPELL
 }

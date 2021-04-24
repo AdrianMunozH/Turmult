@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 2419951938989885148}
   - component: {fileID: 2346675180663487092}
   - component: {fileID: 5231003035889113634}
+  - component: {fileID: -3256297182158306497}
+  - component: {fileID: 7427484435042920693}
   m_Layer: 0
   m_Name: PoisonSphere
   m_TagString: Untagged
@@ -95,3 +97,38 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-3256297182158306497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3106196230211176537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f09e93ad8f20404ca466c31915c779f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 70
+  target: {fileID: 0}
+  damage: 15
+  effects:
+  - {fileID: 7427484435042920693}
+  impactEffect: {fileID: 3591840901927880627, guid: c82ebe3d58760754fae3b9828c56148a,
+    type: 3}
+  particelDestroyTime: 2
+--- !u!114 &7427484435042920693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3106196230211176537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9db2eedea01972146a6c8f472ea9bad5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 8
+  targetEnemy: {fileID: 0}
+  damagePerSecond: 2

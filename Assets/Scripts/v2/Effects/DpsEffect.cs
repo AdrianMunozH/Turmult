@@ -1,0 +1,34 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DpsEffect : Effect
+{
+    public float damagePerSecond;
+    private bool _isHitting;
+    // Start is called before the first frame update
+    void Start()
+    {
+        _type = EffectType.DPS;
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (targetEnemy != null)
+        {
+            Debug.Log("damage");
+            targetEnemy.TakeDamage(damagePerSecond * Time.deltaTime);
+        }
+        
+        _isHitting = false;
+    }
+
+    // hier sollte vllt nicht hit benutzt werden.
+    public override void Hit()
+    {
+        _isHitting = true;
+    }
+
+}
