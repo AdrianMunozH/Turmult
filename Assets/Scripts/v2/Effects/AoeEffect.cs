@@ -5,7 +5,7 @@ using UnityEngine;
 public class AoeEffect : Effect
 {
     public float damage;
-
+    public bool damageTargetOnce;
     public Collider AOE;
     // Start is called before the first frame update
     void Start()
@@ -26,7 +26,14 @@ public class AoeEffect : Effect
         {
             if (collider.gameObject.tag.Equals("Enemy"))
             {
-                collider.GetComponent<EnemyMovement>().TakeDamage(damage);
+                Debug.Log(!damageTargetOnce + " " + !collider.GetComponent<EnemyMovement>().Equals(targetEnemy));
+                
+                //  klassen zu vergleichen ist kacke darum funkt. nicht, brauche noch eine ID oder sowas
+                if (!damageTargetOnce && !collider.GetComponent<EnemyMovement>().Equals(targetEnemy))
+                {
+                    collider.GetComponent<EnemyMovement>().TakeDamage(damage);
+                }
+
             }
         }
     }

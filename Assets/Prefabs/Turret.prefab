@@ -162,16 +162,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1670edc8f9d16914e876cfeb93f3d936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 30
+  range: 5
   fireRate: 1
   turnSpeed: 10
-  turretType: 1
+  turretType: 0
   lineRenderer: {fileID: -6677271779239206385}
   partToRotate: {fileID: 4933368902158128073}
   enemyTag: Enemy
   firePoint: {fileID: 6629099769000624128}
-  projectilePrefab: {fileID: 7927641795192460296, guid: 448ae3d7bb32a344e9348a9996ae6dfd,
-    type: 3}
+  projectilePrefab: {fileID: 100002, guid: a590c04abd57be544b50a1b51a6674ac, type: 3}
 --- !u!120 &-6677271779239206385
 LineRenderer:
   m_ObjectHideFlags: 0

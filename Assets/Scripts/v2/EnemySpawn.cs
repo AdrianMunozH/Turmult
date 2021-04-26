@@ -31,7 +31,8 @@ public class EnemySpawn : MonoBehaviour
             for (int j = mov.pathIndex; j < mov.path.Length; j++)
             {
                 string s = "no";
-                if (mov.path[j].coordinates.CompareCoord(turretCell.coordinates))
+                // null check muss vllt drin bleibern
+                if (mov != null && mov.path[j].coordinates.CompareCoord(turretCell.coordinates))
                 {
                     rebuildPath(i,mov.pathIndex);
                     s = "yay";

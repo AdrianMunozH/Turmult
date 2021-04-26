@@ -5,6 +5,7 @@ using UnityEngine;
 public class DpsEffect : Effect
 {
     public float damagePerSecond;
+    //ist gerade noch sinnlos
     private bool _isHitting;
     // Start is called before the first frame update
     void Start()

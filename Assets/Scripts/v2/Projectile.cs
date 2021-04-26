@@ -7,7 +7,7 @@ public abstract class  Projectile : MonoBehaviour
 {
     public float speed = 70f;
     public Transform target;
-    public float damage;
+    //public float damage;
     // Start is called before the first frame update
     public List<Effect> effects;
     // vllt mit scriptableobject für die base stats von den effects 
@@ -25,13 +25,13 @@ public abstract class  Projectile : MonoBehaviour
             if (effect._type == EffectType.DMG)
             {
                 DmgEffect eff = (DmgEffect)effect;
-                eff.damage = damage; // brauche ich vllt gar nicht
+                //eff.damage = damage; // brauche ich vllt gar nicht
             }
 
             if (effect._type == EffectType.AOE)
             {
                 AoeEffect eff = (AoeEffect)effect;
-                eff.damage = damage;
+                //eff.damage = damage;
                 if(eff.AOE == null)
                     eff.AOE = GetComponent<SphereCollider>();
             }

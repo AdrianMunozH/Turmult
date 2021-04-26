@@ -8,8 +8,8 @@ public class Turret : MonoBehaviour
     private Transform target;
     // sehr viel perfomanter weil wir in der update sonst immer getComponent bräuchten
     private EnemyMovement targetEnemy;
-
-    [Header("Attributes")] public float range = 15f;
+    
+    [Header("Attributes")] public float range = 1f;
     public float fireRate = 1f;
     public float turnSpeed = 10f;
     private float fireCountdown = 0f;
@@ -17,6 +17,7 @@ public class Turret : MonoBehaviour
     public TurretType turretType;
 
 
+    // only laser
     public LineRenderer lineRenderer;
 
 
@@ -25,16 +26,15 @@ public class Turret : MonoBehaviour
     public Transform firePoint;
 
     
-    //test 
+     
     public GameObject projectilePrefab;
     
-    // test
-    //public TurretEffects[] turretEffects = new  TurretEffects[5];
 
     // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating(nameof(UpdateTarget), 0f, 0.5f);
+        range *= HexMetrics.outerRadius;
     }
 
     /**
