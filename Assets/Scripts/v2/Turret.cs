@@ -98,7 +98,7 @@ public class Turret : MonoBehaviour
     {
        
         GameObject projectileGameObject = (GameObject) Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-        Projectile projectile = projectilePrefab.GetComponent<Projectile>();
+        Projectile projectile = projectileGameObject.GetComponent<Projectile>();
 
         if (projectile != null)
         {

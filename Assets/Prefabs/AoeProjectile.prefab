@@ -111,7 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 4
   targetEnemy: {fileID: 0}
-  damage: 40
+  damage: 1
   damageTargetOnce: 0
   AOE: {fileID: 5173695809940754524}
 --- !u!114 &-2663082408320686015

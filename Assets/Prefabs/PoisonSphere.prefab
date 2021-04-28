@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 2346675180663487092}
   - component: {fileID: 5231003035889113634}
   - component: {fileID: -3256297182158306497}
-  - component: {fileID: 7427484435042920693}
+  - component: {fileID: 5684731685293603852}
+  - component: {fileID: 2815332906824708038}
+  - component: {fileID: 634382413695034950}
   m_Layer: 0
   m_Name: PoisonSphere
   m_TagString: Untagged
@@ -111,13 +113,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 70
   target: {fileID: 0}
-  damage: 15
   effects:
-  - {fileID: 7427484435042920693}
+  - {fileID: 5684731685293603852}
+  - {fileID: 2815332906824708038}
   impactEffect: {fileID: 3591840901927880627, guid: c82ebe3d58760754fae3b9828c56148a,
     type: 3}
   particelDestroyTime: 2
---- !u!114 &7427484435042920693
+--- !u!114 &5684731685293603852
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,9 +128,43 @@ MonoBehaviour:
   m_GameObject: {fileID: 3106196230211176537}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9db2eedea01972146a6c8f472ea9bad5, type: 3}
+  m_Script: {fileID: 11500000, guid: 3db8241762fa8a5428df1d8ebd0f8669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 8
+  _type: 3
   targetEnemy: {fileID: 0}
-  damagePerSecond: 2
+  ticks: 10
+  tick: 0
+  damagePerTick: 2
+--- !u!114 &2815332906824708038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3106196230211176537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db34c48a2f048ec459efbf58b53528ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 0
+  targetEnemy: {fileID: 0}
+  slow: 0.3
+  ticks: 5
+  tick: 0
+--- !u!114 &634382413695034950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3106196230211176537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72181d5aff3db7e4f912408f570c4ec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 2
+  targetEnemy: {fileID: 0}
+  damage: 10

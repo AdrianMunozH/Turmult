@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,10 @@ public class DOTEffect : Effect
 
     private bool _isTicking;
     // Start is called before the first frame update
+    private void Start()
+    {
+        _type = EffectType.DOT;
+    }
 
     public override void Hit()
     {

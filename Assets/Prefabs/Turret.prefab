@@ -170,7 +170,8 @@ MonoBehaviour:
   partToRotate: {fileID: 4933368902158128073}
   enemyTag: Enemy
   firePoint: {fileID: 6629099769000624128}
-  projectilePrefab: {fileID: 100002, guid: a590c04abd57be544b50a1b51a6674ac, type: 3}
+  projectilePrefab: {fileID: 2460278673348978802, guid: 65e20ae8c26ceca46a488fcc8d26df1d,
+    type: 3}
 --- !u!120 &-6677271779239206385
 LineRenderer:
   m_ObjectHideFlags: 0

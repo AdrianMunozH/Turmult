@@ -98,7 +98,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 70
   target: {fileID: 0}
-  damage: 15
   effects:
   - {fileID: -452759006257752560}
   - {fileID: -8434775513740980717}
@@ -119,7 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 0
   targetEnemy: {fileID: 0}
-  slow: 0.3
+  slow: 0
   ticks: 10
   tick: 0
 --- !u!114 &-452759006257752560
@@ -136,6 +135,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 3
   targetEnemy: {fileID: 0}
-  ticks: 10
+  ticks: 0
   tick: 0
-  damagePerTick: 2
+  damagePerTick: 0

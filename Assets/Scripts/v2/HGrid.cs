@@ -130,7 +130,7 @@ public class HGrid : Singleton<HGrid>
         int i = 0;
         foreach (HCell cell in cells)
         {
-            // TODO: fehlt der check ob es schon ein gebäude hat
+            
             if ((cell.GetCellType() == HCell.CellType.Acquired ||cell.GetCellType() == HCell.CellType.Neutral) && !cell.hasBuilding)
             {
                 if (cell.coordinates.X == h.coordinates.X - 1 && cell.coordinates.Y == h.coordinates.Y)

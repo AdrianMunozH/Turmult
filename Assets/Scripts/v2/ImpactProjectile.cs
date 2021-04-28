@@ -12,8 +12,25 @@ public class ImpactProjectile : Projectile
         
     }
 
+    private void test()
+    {
+        int index;
+        EnemyMovement targetEnemy = target.GetComponent<EnemyMovement>();
+        Vector3[] path = HGrid.Instance.HCellPositions(targetEnemy.path);
+            
+        if (targetEnemy.pathIndex < path.Length-1)
+            index = targetEnemy.pathIndex + 1;
+        else
+            index = path.Length - 1;
+
+        // die skalierung muss vllt noch überarbeitet werden 
+        Debug.Log(index + " : " + path.Length);
+        impact = (path[index] - target.position) * speed/100;
+        impact += target.position + new Vector3(0,1,0);
+    }
     private void Awake()
     {
+        // ist gerade immer null beim awaken
         if (target != null)
         {
 
@@ -31,6 +48,8 @@ public class ImpactProjectile : Projectile
             impact = (path[index] - target.position) * speed/100;
             impact += target.position + new Vector3(0,1,0);
         }
+        
+
     }
 
     // Update is called once per frame
@@ -40,6 +59,10 @@ public class ImpactProjectile : Projectile
         {
             Destroy(gameObject);
             return;
+        }
+        else
+        {
+            test();
         }
         
         Vector3 dir = impact - transform.position;
