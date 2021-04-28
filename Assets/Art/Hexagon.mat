@@ -21,7 +21,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTexture:
-        m_Texture: {fileID: 2800000, guid: ef82a3b50bce01544bac12b8c08f1fcc, type: 3}
+        m_Texture: {fileID: 2800000, guid: c692f93f58330fd409d71d6d0bed53c0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecularMap:
@@ -41,12 +41,16 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_8192cefd1cdb4c78a14a79a298d7e5a5: 1
     - _LightProbeContribution: 3.5
     - _OutlineDepthSensitivity: 0
     - _OutlineNormalsSensitivity: 0
     - _OutlineThickness: 0
     - _Smoothness: 0.9
     m_Colors:
+    - Color_0546b84a8b5a4c5b88fb37e9a4de387c: {r: 1, g: 1, b: 1, a: 0}
+    - Color_0da0074e4a1242ec80110dfb791b19fa: {r: 0.79115444, g: 0.9150943, b: 0.7827222,
+        a: 0}
     - _MainColor: {r: 1, g: 1, b: 1, a: 0}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 0}
