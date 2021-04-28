@@ -38,6 +38,7 @@ public class HCell : MonoBehaviour
     public Color colorUnacquiredMountain = new Color(158f/255f, 153f/255f, 138f/255f,100f);
     public Color colorUnacquiredSwamp = new Color(102f/255f, 110f/255f, 106f/255f,100f);
     public Color colorUnacquiredForest = new Color(160f/255f, 176f/255f, 162f/255f,100f);
+    [SerializeField] private GameObject[] unacquiredHex;
     
     [Header("Cell Color Setup - Not Acquired")]
     public Color colorNeutralField = new Color(56.0f/255f, 56.0f/255f, 56.0f/255f,100.0f);
@@ -158,6 +159,8 @@ public class HCell : MonoBehaviour
                     if (type == CellType.CanBeAcquired)
                     {
                         startColor = colorUnacquiredMountain;
+                        GameObject hexagon = Instantiate(unacquiredHex[1], transform.position, transform.rotation);
+                        hexagon.transform.SetParent(transform, true);
                         //Wenn eingenommen
                     }
                     else if (type == CellType.Acquired)
@@ -170,6 +173,9 @@ public class HCell : MonoBehaviour
                     if (type == CellType.CanBeAcquired)
                     {
                         startColor = colorUnacquiredSwamp;
+                        GameObject hexagon = Instantiate(unacquiredHex[2], transform.position, transform.rotation);
+                        hexagon.transform.SetParent(transform, true);
+                        
                     }
                     else if (type == CellType.Acquired)
                     {
@@ -181,6 +187,8 @@ public class HCell : MonoBehaviour
                     if (type == CellType.CanBeAcquired)
                     {
                         startColor = colorUnacquiredForest;
+                        GameObject hexagon = Instantiate(unacquiredHex[3], transform.position, transform.rotation);
+                        hexagon.transform.SetParent(transform, true);
                     }
                     else if (type == CellType.Acquired)
                     {
@@ -192,6 +200,8 @@ public class HCell : MonoBehaviour
                     if (type == CellType.CanBeAcquired)
                     {
                         startColor = colorUnacquiredNeutral;
+                        GameObject hexagon = Instantiate(unacquiredHex[0], transform.position, transform.rotation);
+                        hexagon.transform.SetParent(transform, true);
                     }
                     else if (type == CellType.Acquired)
                     {
@@ -205,6 +215,8 @@ public class HCell : MonoBehaviour
         {
             //Neutrale Felder
             startColor = colorNeutralField;
+            GameObject hexagon = Instantiate(unacquiredHex[0], transform.position, transform.rotation);
+            hexagon.transform.SetParent(transform, true);
         }
 
         rend.material.color = startColor;
