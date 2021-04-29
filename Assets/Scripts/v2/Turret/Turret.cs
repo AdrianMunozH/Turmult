@@ -15,7 +15,7 @@ public class Turret : MonoBehaviour
     private float fireCountdown = 0f;
 
     public TurretType turretType;
-
+    public bool canRotate;
 
     // only laser
     public LineRenderer lineRenderer;
@@ -88,7 +88,8 @@ public class Turret : MonoBehaviour
         }
 
         // soll mit if statement ausgemacht werden können für statische türme
-        rotate();
+        if(canRotate)
+            rotate();
         
         checkType();
         
