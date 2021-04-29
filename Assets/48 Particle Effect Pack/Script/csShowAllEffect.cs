@@ -1,81 +1,83 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
-public class csShowAllEffect : MonoBehaviour
+namespace _48_Particle_Effect_Pack.Script
 {
-    public string[] EffectNames;
-    public string[] Effect2Names;
-    public Transform[] Effect;
-    public Text Text1;
-    int i = 0;
-    int a = 0;
-
-
-    void Start()
+    public class csShowAllEffect : MonoBehaviour
     {
-        Instantiate(Effect[i], new Vector3(0, 5, 0), Quaternion.identity);
-    }
+        public string[] EffectNames;
+        public string[] Effect2Names;
+        public Transform[] Effect;
+        public Text Text1;
+        int i = 0;
+        int a = 0;
 
 
-    void Update()
-    {
-        Text1.text = i + 1 + ":" + EffectNames[i];
-
-        if (Input.GetKeyDown(KeyCode.Z))
+        void Start()
         {
-            if (i <= 0)
-                i = 99;
-
-            else
-                i--;
-
-            for (a = 0; a < Effect2Names.Length; a++)
-            {
-                if (EffectNames[i] == Effect2Names[a])
-                {
-                    Instantiate(Effect[i], new Vector3(0, 0.01f, 0), Quaternion.identity);
-                    break;
-                }
-            }
-            if (a++ == Effect2Names.Length)
-                Instantiate(Effect[i], new Vector3(0, 5, 0), Quaternion.identity);
+            Instantiate(Effect[i], new Vector3(0, 5, 0), Quaternion.identity);
         }
 
-        if (Input.GetKeyDown(KeyCode.X))
+
+        void Update()
         {
-            if (i < 99)
-                i++;
+            Text1.text = i + 1 + ":" + EffectNames[i];
 
-            else
-                i = 0;
-
-            for (a = 0; a < Effect2Names.Length; a++)
+            if (Input.GetKeyDown(KeyCode.Z))
             {
-                if (EffectNames[i] == Effect2Names[a])
+                if (i <= 0)
+                    i = 99;
+
+                else
+                    i--;
+
+                for (a = 0; a < Effect2Names.Length; a++)
                 {
-                    Instantiate(Effect[i], new Vector3(0, 0.01f, 0), Quaternion.identity);
-                    break;
+                    if (EffectNames[i] == Effect2Names[a])
+                    {
+                        Instantiate(Effect[i], new Vector3(0, 0.01f, 0), Quaternion.identity);
+                        break;
+                    }
                 }
+                if (a++ == Effect2Names.Length)
+                    Instantiate(Effect[i], new Vector3(0, 5, 0), Quaternion.identity);
             }
-            if (a++ == Effect2Names.Length)
-                Instantiate(Effect[i], new Vector3(0, 5, 0), Quaternion.identity);
-        }
 
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-
-            for (a = 0; a < Effect2Names.Length; a++)
+            if (Input.GetKeyDown(KeyCode.X))
             {
-                if (EffectNames[i] == Effect2Names[a])
-                {
-                    Instantiate(Effect[i], new Vector3(0, 0.01f, 0), Quaternion.identity);
-                    break;
-                }
-            }
-            if (a++ == Effect2Names.Length)
-                Instantiate(Effect[i], new Vector3(0, 5, 0), Quaternion.identity);
-        }
+                if (i < 99)
+                    i++;
 
+                else
+                    i = 0;
+
+                for (a = 0; a < Effect2Names.Length; a++)
+                {
+                    if (EffectNames[i] == Effect2Names[a])
+                    {
+                        Instantiate(Effect[i], new Vector3(0, 0.01f, 0), Quaternion.identity);
+                        break;
+                    }
+                }
+                if (a++ == Effect2Names.Length)
+                    Instantiate(Effect[i], new Vector3(0, 5, 0), Quaternion.identity);
+            }
+
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+
+                for (a = 0; a < Effect2Names.Length; a++)
+                {
+                    if (EffectNames[i] == Effect2Names[a])
+                    {
+                        Instantiate(Effect[i], new Vector3(0, 0.01f, 0), Quaternion.identity);
+                        break;
+                    }
+                }
+                if (a++ == Effect2Names.Length)
+                    Instantiate(Effect[i], new Vector3(0, 5, 0), Quaternion.identity);
+            }
+
+        }
     }
 }

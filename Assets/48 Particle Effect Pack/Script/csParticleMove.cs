@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class csParticleMove : MonoBehaviour
+namespace _48_Particle_Effect_Pack.Script
 {
-    public float speed = 0.1f;
+	public class csParticleMove : MonoBehaviour
+	{
+		public float speed = 0.1f;
 
-	void Update () {
-        transform.Translate(Vector3.back * speed);
+		void Update () {
+			transform.Translate(Vector3.back * speed);
+		}
 	}
 }

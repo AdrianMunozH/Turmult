@@ -640,7 +640,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 52612256429328339}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c76b36d1faf999419872673eb19e118, type: 3}
+  m_Script: {fileID: 11500000, guid: 52d9afc637f693b448a3b67b505bd599, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   coordinates:
@@ -649,19 +649,19 @@ MonoBehaviour:
   index: 0
   spindex: 0
   hasBuilding: 0
-  hoverColorBuildMode: {r: 0.15659487, g: 0.32994655, b: 0.4811321, a: 0.7058824}
-  hoverColorAcquireMode: {r: 0.6886792, g: 0.35997474, b: 0.16567281, a: 0.7058824}
-  colorAcquiredNeutral: {r: 0.8207547, g: 0.66740453, b: 0.3445621, a: 100}
-  colorAcquiredMountain: {r: 0.3018868, g: 0.26541063, b: 0.14382343, a: 100}
-  colorAcquiredSwamp: {r: 0.22067462, g: 0.5377358, b: 0.3985382, a: 100}
-  colorAcquiredForest: {r: 0.083303675, g: 0.4528302, b: 0.12815948, a: 100}
-  colorUnacquiredNeutral: {r: 0.8773585, g: 0.84137475, b: 0.76561946, a: 0.5882353}
-  colorUnacquiredMountain: {r: 0.5943396, g: 0.5833413, b: 0.54668033, a: 0.5882353}
-  colorUnacquiredSwamp: {r: 0.55375576, g: 0.6415094, b: 0.6029834, a: 0.5882353}
-  colorUnacquiredForest: {r: 0.40988785, g: 0.5754717, b: 0.4290305, a: 0.5882353}
+  hoverColorBuildMode: {r: 0.8392157, g: 0.78431374, b: 0.69803923, a: 100}
+  hoverColorAcquireMode: {r: 0.8392157, g: 0.78431374, b: 0.69803923, a: 100}
+  colorAcquiredNeutral: {r: 0.8392157, g: 0.78431374, b: 0.69803923, a: 100}
+  colorAcquiredMountain: {r: 0.4528302, g: 0.43322933, b: 0.36952654, a: 100}
+  colorAcquiredSwamp: {r: 0.31764707, g: 0.56078434, b: 0.45490196, a: 100}
+  colorAcquiredForest: {r: 0.43140095, g: 0.7075472, b: 0.42386082, a: 100}
+  colorUnacquiredNeutral: {r: 0.9150943, g: 0.8158152, b: 0.8158152, a: 100}
+  colorUnacquiredMountain: {r: 0.61960787, g: 0.6, b: 0.5411765, a: 100}
+  colorUnacquiredSwamp: {r: 0.43298328, g: 0.6603774, b: 0.44732076, a: 100}
+  colorUnacquiredForest: {r: 0.61089355, g: 0.9056604, b: 0.6845853, a: 100}
   unacquiredHex:
   - {fileID: 8745428545202600256, guid: 55e5ac3d00c925a44a1a60a026165879, type: 3}
+  - {fileID: 3346972762477102940, guid: 67ae0cb8b93dc584ba8d3251797f6d59, type: 3}
   - {fileID: 6035862308032081783, guid: 3fcfd97aed1656c49932b1c98928cf6c, type: 3}
   - {fileID: 2348874091485988412, guid: 3672c08628f1fe0408eb9c7677a089dc, type: 3}
-  - {fileID: 3346972762477102940, guid: 67ae0cb8b93dc584ba8d3251797f6d59, type: 3}
-  colorNeutralField: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 100}
+  colorNeutralField: {r: 0.21960784, g: 0.21960784, b: 0.21960784, a: 100}
