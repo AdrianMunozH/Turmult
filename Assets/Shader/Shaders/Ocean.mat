@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water
+  m_Name: Ocean
   m_Shader: {fileID: -6465566751694194690, guid: 1b233ad361dcb48418ade167ae67a1df,
     type: 3}
   m_ShaderKeywords: 
@@ -34,15 +34,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_29E1D101: 10
-    - Vector1_6995E020: 0.05
+    - Vector1_6995E020: 14.87
     - Vector1_6FC0F321: -0.43
     - Vector1_9BE240F: 0.69
-    - Vector1_A3C2C4BE: 200
+    - Vector1_A3C2C4BE: 400
     - Vector1_A46BDA69: 7.65
     - Vector1_B2F47345: -3.51
-    - Vector1_DC1F3E50: 1.54
+    - Vector1_DC1F3E50: 0.8
     m_Colors:
-    - Color_B73BBE24: {r: 0.34579325, g: 0.5849056, b: 0.5215791, a: 1}
-    - Color_BD43C6BF: {r: 0, g: 0.34156236, b: 0.6886792, a: 1}
-    - Color_EFCDB9B5: {r: 0.72169816, g: 0.9622642, b: 0.9622642, a: 0.7529412}
+    - Color_B73BBE24: {r: 0.3254902, g: 0.42493233, b: 0.7529412, a: 1}
+    - Color_BD43C6BF: {r: 0.047080822, g: 0.2383233, b: 0.4339623, a: 1}
+    - Color_EFCDB9B5: {r: 0.5504183, g: 0.70835555, b: 0.8773585, a: 0.7529412}
   m_BuildTextureStacks: []

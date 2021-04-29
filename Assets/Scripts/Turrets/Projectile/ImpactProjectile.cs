@@ -52,6 +52,7 @@ namespace Turrets.Projectile
                 return;
             }
             transform.Translate(dir.normalized * frameDistance, Space.World);
+            
         }
 
         public override void HitTarget()

@@ -30,8 +30,8 @@ namespace Turrets
         public string enemyTag = "Enemy";
         public Transform firePoint;
 
-    
-     
+
+        public bool canRotate;
         public GameObject projectilePrefab;
     
 
@@ -93,7 +93,8 @@ namespace Turrets
             }
 
             // soll mit if statement ausgemacht werden können für statische türme
-            rotate();
+            if(canRotate)
+                rotate();
         
             checkType();
         

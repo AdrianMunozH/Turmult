@@ -15,6 +15,9 @@ namespace Field
         public Text cellLabelPrefab;
         Canvas gridCanvas;
 
+        public Image hexImage;
+        public Image hexImageHover;
+        
         //test für shortest path
 
         // Start is called before the first frame update
@@ -68,19 +71,43 @@ namespace Field
             position.y = 0f;
             position.z = z * (HexMetrics.outerRadius * 1.5f);
 
+            Image gridImage = Instantiate(hexImage);
+            gridImage.rectTransform.SetParent(gridCanvas.transform,false);
+            gridImage.rectTransform.anchoredPosition = new Vector2(position.x,position.z);
+            Vector3 rot = gridImage.rectTransform.rotation.eulerAngles;
+            rot = new Vector3(0,0,45);
+            gridImage.rectTransform.Rotate(rot);
+            gridImage.gameObject.SetActive(true);
+
+            Image hoverImage = Instantiate(hexImageHover);
+            hoverImage.rectTransform.SetParent(gridCanvas.transform,false);
+            hoverImage.rectTransform.anchoredPosition = new Vector2(position.x,position.z);
+            rot = new Vector3(0,0,45);
+            hoverImage.rectTransform.Rotate(rot);
+            hoverImage.gameObject.SetActive(false);
+            
             HCell cell = Instantiate<HCell>(cellPrefab);
             cellList.Add(cell);
+            cell.hoverImage = hoverImage;
+            cell.gridImage = gridImage;
             cell.transform.SetParent(transform, false);
             cell.transform.localPosition = position;
             cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, z);
             cell.GetComponent<HCell>().index = i;
+            
 
+            
+            //hoverImage.enabled = false;
+
+            /*
             Text label = Instantiate<Text>(cellLabelPrefab);
             label.rectTransform.SetParent(gridCanvas.transform, false);
             label.rectTransform.anchoredPosition =
                 new Vector2(position.x, position.z);
             label.text = cell.coordinates.ToStringOnSeparateLines();
+            */
         }
+        
 
         void TouchCell(Vector3 position)
         {

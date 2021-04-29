@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace Field
 {
@@ -46,8 +47,12 @@ namespace Field
 
         //Optimization: Cachen des Renderes auf dem Objekt
         private Renderer rend;
-        //bool ob es schon bebaut wurde 
 
+        public Image gridImage;
+
+        public Image hoverImage;
+        //bool ob es schon bebaut wurde 
+        
         public CellType GetCellType()
         {
             return type;
@@ -64,7 +69,9 @@ namespace Field
             //Nur wenn der Buildmode eingeschaltet ist, werden previews angezeigt
             if (BuildManager.instance.IsBuildModeOn() && type == CellType.Acquired)
             {
-                rend.material.color = hoverColorBuildMode;
+                hoverImage.gameObject.SetActive(true);
+                Debug.Log(index);
+                gridImage.gameObject.SetActive(false);
                 GameObject turretToBuild = BuildManager.instance.getTurretToBuildPreview();
                 if (turretToBuild != null)
                 {
@@ -82,6 +89,8 @@ namespace Field
             rend.material.color = startColor;
             if (BuildManager.instance.IsBuildModeOn())
             {
+                hoverImage.gameObject.SetActive(false);
+                gridImage.gameObject.SetActive(true);
                 //Zerstören des Preview Turrets
                 if (previewTurret != null)
                 {

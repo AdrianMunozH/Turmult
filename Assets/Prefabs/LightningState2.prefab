@@ -9354,9 +9354,9 @@ GameObject:
   m_Component:
   - component: {fileID: 400004}
   - component: {fileID: 1213723822406348268}
-  - component: {fileID: -2713610772019120533}
   - component: {fileID: -1955983273490140699}
   - component: {fileID: -8327588159139940966}
+  - component: {fileID: 8474772804393656339}
   m_Layer: 0
   m_Name: LightningState2
   m_TagString: Untagged
@@ -9396,28 +9396,11 @@ MonoBehaviour:
   speed: 25
   target: {fileID: 0}
   effects:
-  - {fileID: -2713610772019120533}
+  - {fileID: 8474772804393656339}
   - {fileID: -8327588159139940966}
   impactEffect: {fileID: 3591840901927880627, guid: c82ebe3d58760754fae3b9828c56148a,
     type: 3}
   particelDestroyTime: 2
---- !u!114 &-2713610772019120533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6d592bd4c1e919429b13b6467ef0e9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _type: 4
-  targetEnemy: {fileID: 0}
-  damage: 10
-  damageTargetOnce: 0
-  AOE: {fileID: -1955983273490140699}
 --- !u!135 &-1955983273490140699
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9446,6 +9429,23 @@ MonoBehaviour:
   _type: 2
   targetEnemy: {fileID: 0}
   damage: 30
+--- !u!114 &8474772804393656339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db34c48a2f048ec459efbf58b53528ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 0
+  targetEnemy: {fileID: 0}
+  slow: 0.3
+  ticks: 5
+  tick: 0
 --- !u!1 &100006
 GameObject:
   m_ObjectHideFlags: 0
