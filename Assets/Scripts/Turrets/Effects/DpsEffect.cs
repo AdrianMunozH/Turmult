@@ -19,7 +19,6 @@ namespace Turrets.Effects
         {
             if (targetEnemy != null)
             {
-                Debug.Log("damage");
                 targetEnemy.TakeDamage(damagePerSecond * Time.deltaTime);
             }
         

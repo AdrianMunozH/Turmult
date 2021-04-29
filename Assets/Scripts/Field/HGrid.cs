@@ -16,7 +16,6 @@ namespace Field
         Canvas gridCanvas;
 
         public Image hexImage;
-        public Image hexImageHover;
         
         //test für shortest path
 
@@ -77,18 +76,10 @@ namespace Field
             Vector3 rot = gridImage.rectTransform.rotation.eulerAngles;
             rot = new Vector3(0,0,45);
             gridImage.rectTransform.Rotate(rot);
-            gridImage.gameObject.SetActive(true);
-
-            Image hoverImage = Instantiate(hexImageHover);
-            hoverImage.rectTransform.SetParent(gridCanvas.transform,false);
-            hoverImage.rectTransform.anchoredPosition = new Vector2(position.x,position.z);
-            rot = new Vector3(0,0,45);
-            hoverImage.rectTransform.Rotate(rot);
-            hoverImage.gameObject.SetActive(false);
+            
             
             HCell cell = Instantiate<HCell>(cellPrefab);
             cellList.Add(cell);
-            cell.hoverImage = hoverImage;
             cell.gridImage = gridImage;
             cell.transform.SetParent(transform, false);
             cell.transform.localPosition = position;

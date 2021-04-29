@@ -49,8 +49,7 @@ namespace Field
         private Renderer rend;
 
         public Image gridImage;
-
-        public Image hoverImage;
+        
         //bool ob es schon bebaut wurde 
         
         public CellType GetCellType()
@@ -69,9 +68,7 @@ namespace Field
             //Nur wenn der Buildmode eingeschaltet ist, werden previews angezeigt
             if (BuildManager.instance.IsBuildModeOn() && type == CellType.Acquired)
             {
-                hoverImage.gameObject.SetActive(true);
-                Debug.Log(index);
-                gridImage.gameObject.SetActive(false);
+                gridImage.color = new Color(214.0f/255f, 200.0f/255f, 178.0f/255f,1f);
                 GameObject turretToBuild = BuildManager.instance.getTurretToBuildPreview();
                 if (turretToBuild != null)
                 {
@@ -89,8 +86,7 @@ namespace Field
             rend.material.color = startColor;
             if (BuildManager.instance.IsBuildModeOn())
             {
-                hoverImage.gameObject.SetActive(false);
-                gridImage.gameObject.SetActive(true);
+                gridImage.color = new Color(160f/255f, 176f/255f, 162f/255f,40f);
                 //Zerstören des Preview Turrets
                 if (previewTurret != null)
                 {

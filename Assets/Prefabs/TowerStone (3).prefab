@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: -8953483115591099233}
   - component: {fileID: -759051356119238997}
   - component: {fileID: -4651400478213123759}
+  - component: {fileID: 1974297824326509289}
   m_Layer: 0
   m_Name: TowerStone (3)
   m_TagString: Untagged
@@ -182,8 +183,8 @@ MonoBehaviour:
   range: 5
   fireRate: 1
   turnSpeed: 10
-  turretType: 0
-  lineRenderer: {fileID: 0}
+  turretType: 1
+  lineRenderer: {fileID: -4651400478213123759}
   partToRotate: {fileID: 0}
   enemyTag: Enemy
   firePoint: {fileID: 258611305788929918}
@@ -203,7 +204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 8
   targetEnemy: {fileID: 0}
-  damagePerSecond: 0
+  damagePerSecond: 2
 --- !u!120 &-4651400478213123759
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -223,7 +224,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: ac42326c0c9fb3247a0ce2c5acdaa083, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -302,6 +303,22 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &1974297824326509289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2478300531275432869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0231ebea37eb5d1428656a7d7832c4f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  damage: 0
+  effects:
+  - {fileID: -759051356119238997}
 --- !u!1 &4312026282156361134
 GameObject:
   m_ObjectHideFlags: 0

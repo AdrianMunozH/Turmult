@@ -801,8 +801,6 @@ MonoBehaviour:
     type: 3}
   hexImage: {fileID: 2402472035106653718, guid: 820cc4a5b630fee479070fa2f41c25aa,
     type: 3}
-  hexImageHover: {fileID: 6290213645687447590, guid: 1a99f55f3bd439e4fbb0c2c0d7349743,
-    type: 3}
 --- !u!222 &646463328
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -931,7 +929,7 @@ PrefabInstance:
     - target: {fileID: 135993508945769548, guid: 05092e9e10be39241bc08cdbb2d998be,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.5
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 135993508945769548, guid: 05092e9e10be39241bc08cdbb2d998be,
         type: 3}
