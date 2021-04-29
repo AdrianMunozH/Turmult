@@ -14,13 +14,10 @@ public class HGrid : Singleton<HGrid>
     public HCell cellPrefab;
     public Text cellLabelPrefab;
     Canvas gridCanvas;
+    
 
-    //test für shortest path
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+    
 
     void Awake()
     {
@@ -69,6 +66,7 @@ public class HGrid : Singleton<HGrid>
         position.z = z * (HexMetrics.outerRadius * 1.5f);
 
         HCell cell = Instantiate<HCell>(cellPrefab);
+        cell.setColor = true;
         cellList.Add(cell);
         cell.transform.SetParent(transform, false);
         cell.transform.localPosition = position;
@@ -81,15 +79,7 @@ public class HGrid : Singleton<HGrid>
             new Vector2(position.x, position.z);
         label.text = cell.coordinates.ToStringOnSeparateLines();
     }
-
-    void TouchCell(Vector3 position)
-    {
-        position = transform.InverseTransformPoint(position);
-        HexCoordinates coordinates = HexCoordinates.FromPosition(position);
-        HighlightCell(coordinates, position);
-        Debug.Log("touched at " + coordinates.ToString());
-    }
-
+    
 
     // könnte auch zu enemy spawn
     public Vector3[] HCellPositions(HCell[] sp)
@@ -103,25 +93,7 @@ public class HGrid : Singleton<HGrid>
         return positions;
     }
 
-
-    public void HighlightCell(HexCoordinates hexCoordinates, Vector3 pos)
-    {
-        Vector3 position = pos;
-        position.y = 1;
-        HCell cell = Instantiate<HCell>(cellPrefab);
-        cell.transform.localPosition = position;
-        cell.coordinates = hexCoordinates;
-    }
-
-    //works
-    public void HighlightCell2(Vector3 pos)
-    {
-        Vector3 position = pos;
-        position.y = 1;
-        HCell cell = Instantiate<HCell>(cellPrefab);
-        cell.transform.localPosition = position;
-        //cell.coordinates = hexCoordinates;
-    }
+    
 
     public HCell[] Neighb(HCell h)
     {
