@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: -6677271779239206385}
   - component: {fileID: -3625011603129603423}
   - component: {fileID: 3279267209617862027}
+  - component: {fileID: -1392222025214393108}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -165,12 +166,15 @@ MonoBehaviour:
   range: 5
   fireRate: 1
   turnSpeed: 10
+  ressourceType: 0
   turretType: 0
   lineRenderer: {fileID: -6677271779239206385}
   partToRotate: {fileID: 4933368902158128073}
-  enemyTag: Enemy
   firePoint: {fileID: 6629099769000624128}
+  enemyTag: Enemy
+  canRotate: 0
   projectilePrefab: {fileID: 100004, guid: 7c687a4414095c349a8ec5ac5f3cccb2, type: 3}
+  turret: {fileID: 11400000, guid: 3410a57c94cd89342b01560f0adaa574, type: 2}
 --- !u!120 &-6677271779239206385
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -300,6 +304,19 @@ MonoBehaviour:
   _type: 0
   targetEnemy: {fileID: 0}
   damagePerSecond: 2
+--- !u!114 &-1392222025214393108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5965164860795772709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf95a135e40b9b446a2d7937955d727b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnManagerValues: {fileID: 11400000, guid: 3410a57c94cd89342b01560f0adaa574, type: 2}
 --- !u!1 &5997959140949114930
 GameObject:
   m_ObjectHideFlags: 0

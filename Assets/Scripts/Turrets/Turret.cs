@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Enemies;
 using Field;
+using JetBrains.Annotations;
 using Turrets.Projectile;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -19,6 +20,7 @@ namespace Turrets
         public float turnSpeed = 10f;
         private float fireCountdown = 0f;
 
+        public Ressource.RessourceType ressourceType;
         public TurretType turretType;
 
 
@@ -27,18 +29,33 @@ namespace Turrets
 
 
         [Header("Unity Setup Fields")] public Transform partToRotate;
-        public string enemyTag = "Enemy";
         public Transform firePoint;
+        public string enemyTag = "Enemy";
 
 
         public bool canRotate;
+        
         public GameObject projectilePrefab;
+        [CanBeNull] public TurretScriptableObject turret;
     
 
         // Start is called before the first frame update
         void Start()
         {
             InvokeRepeating(nameof(UpdateTarget), 0f, 0.5f);
+            
+            if (turret != null)
+            {
+                range = turret.range;
+                fireRate = turret.fireRate;
+                turnSpeed = turret.turnSpeed;
+                ressourceType = turret.ressourceType;
+                turretType = turret.turretType;
+                enemyTag = turret.enemyTag;
+                canRotate = turret.canRotate;
+            }
+
+            //Range auf Hexradius anpassen
             range *= HexMetrics.outerRadius;
         }
 
