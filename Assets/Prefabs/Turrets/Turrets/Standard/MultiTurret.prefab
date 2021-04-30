@@ -113,13 +113,15 @@ MonoBehaviour:
   range: 1
   fireRate: 20
   turnSpeed: 10
+  ressourceType: 0
   turretType: 0
-  canRotate: 0
   lineRenderer: {fileID: 0}
   partToRotate: {fileID: 0}
-  enemyTag: Enemy
   firePoint: {fileID: 1714103482444529099}
+  enemyTag: Enemy
+  canRotate: 0
   projectilePrefab: {fileID: 100000, guid: cff4c024d20095a458a66e6e0d47bf1b, type: 3}
+  turret: {fileID: 11400000, guid: 3410a57c94cd89342b01560f0adaa574, type: 2}
 --- !u!1 &4672899247204886456
 GameObject:
   m_ObjectHideFlags: 0

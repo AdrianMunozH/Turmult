@@ -284,6 +284,7 @@ GameObject:
   - component: {fileID: 2448743140702093524}
   - component: {fileID: 1609040145832873841}
   - component: {fileID: 3580504868905221051}
+  - component: {fileID: 2898319857720867651}
   m_Layer: 0
   m_Name: MountainTowerHex
   m_TagString: Untagged
@@ -359,6 +360,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2898319857720867651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3076097380530608750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf95a135e40b9b446a2d7937955d727b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnManagerValues: {fileID: 11400000, guid: 4e61b162c9ff5d14792e69f7f8284184, type: 2}
 --- !u!1 &3076097380662606949
 GameObject:
   m_ObjectHideFlags: 0
