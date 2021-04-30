@@ -61,6 +61,13 @@ namespace Field
         {
             type = celltype;
         }
+
+        private Color SetColor(float r,float g,float b, float a)
+        {
+            var tempColor = new Color(r,g,b);
+            tempColor.a = a;
+            return tempColor;
+        }
     
         private void OnMouseEnter()
         {
@@ -68,7 +75,7 @@ namespace Field
             //Nur wenn der Buildmode eingeschaltet ist, werden previews angezeigt
             if (BuildManager.instance.IsBuildModeOn() && type == CellType.Acquired)
             {
-                gridImage.color = new Color(214.0f/255f, 200.0f/255f, 178.0f/255f,1f);
+                gridImage.color = SetColor(214.0f/255f, 200.0f/255f, 178.0f/255f,30f);
                 GameObject turretToBuild = BuildManager.instance.getTurretToBuildPreview();
                 if (turretToBuild != null)
                 {
@@ -77,22 +84,25 @@ namespace Field
                 //Hier Land
             }else if (BuildManager.instance.isAcquireModeOn() && type != CellType.Neutral && type != CellType.Acquired)
             {
+                gridImage.color = SetColor(225f,225f,225f,30f);
                 rend.material.color = type == CellType.Acquired?GetAcquiredColor():hoverColorAcquireMode;
             }
         }
+        
 
         private void OnMouseExit()
         {
             rend.material.color = startColor;
             if (BuildManager.instance.IsBuildModeOn())
             {
-                gridImage.color = new Color(160f/255f, 176f/255f, 162f/255f,40f);
+               
                 //Zerstören des Preview Turrets
                 if (previewTurret != null)
                 {
                     Destroy(previewTurret);
                 }
             }
+            gridImage.color = SetColor(5f/255f, 55f/255f, 18f/255f,40f);
         }
 
         private void OnMouseDown()

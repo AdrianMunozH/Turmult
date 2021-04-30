@@ -8,7 +8,6 @@ namespace Turrets.Projectile
     public class Laser : MonoBehaviour
     {
         public Transform target;
-        public float damage;
         public List<Effect> effects;
         // Start is called before the first frame update
         void Start()
