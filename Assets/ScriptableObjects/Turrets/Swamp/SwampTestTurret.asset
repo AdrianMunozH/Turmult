@@ -20,12 +20,8 @@ MonoBehaviour:
   turnSpeed: 10
   turretType: 0
   enemyTag: Enemy
-  ressourceType: 0
-  lineRenderer: {fileID: 0}
-  firePoint: {fileID: 0}
+  ressourceType: 2
   canRotate: 0
-  name: 
-  beschreibung: 
+  name: SumpfTestTurm
+  beschreibung: Das hier ist der Erste Sumpf Testturm
   logo: {fileID: 0}
-  turretPrefab: {fileID: 0}
-  projectilePrefab: {fileID: 0}

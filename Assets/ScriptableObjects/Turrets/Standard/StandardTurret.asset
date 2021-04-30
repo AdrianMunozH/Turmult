@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 824bd182a61a4f18b31c1f1ef56c25f1, type: 3}
   m_Name: StandardTurret
   m_EditorClassIdentifier: 
-  turretPrefab: {fileID: 0}
+  cost: 0
+  health: 0
+  mana: 0
   range: 1
   fireRate: 1
   turnSpeed: 10
   turretType: 0
-  lineRenderer: {fileID: 0}
   enemyTag: Enemy
-  firePoint: {fileID: 0}
-  canRotate: 0
-  projectilePrefab: {fileID: 0}
+  ressourceType: 0
+  canRotate: 1
+  name: Der Ultimative Standardturm
+  beschreibung: Dieser Turm ist so unglaublich Standard
+  logo: {fileID: 0}
