@@ -126,7 +126,7 @@ namespace Field
                 turret = (GameObject) Instantiate(turretToBuild, transform.position, transform.rotation);
                 hasBuilding = true;
                 Debug.Log("reroute turretmode");
-                HGameManager.Instance.rerouteEnemys(this);
+                HGameManager.instance.rerouteEnemys(this);
             }else if (BuildManager.instance.isAcquireModeOn())
             {
                 if (type == CellType.Acquired)
@@ -140,7 +140,7 @@ namespace Field
                 else
                 {
                     type = CellType.Acquired;
-                    HGameManager.Instance.rerouteEnemys(this);
+                    HGameManager.instance.rerouteEnemys(this);
                     Debug.Log("reroute acquiremode");
                     SetCellColor();
                 }

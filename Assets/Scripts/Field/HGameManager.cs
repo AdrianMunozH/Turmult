@@ -6,12 +6,13 @@ using UnityEngine;
 
 namespace Field
 {
-    public class HGameManager : Singleton<HGameManager>
+    public class HGameManager : MonoBehaviour
     {
         public static HGameManager instance;
         public EnemySpawn spawnPoint;
 
-        private EnemySpawn[] _enemySpawns;
+        [HideInInspector] public EnemySpawn[] enemySpawns;
+        
         private HCell[] spath;
         int input;
     
@@ -49,14 +50,14 @@ namespace Field
         
         
         
-            _enemySpawns = new EnemySpawn[3];
-            _enemySpawns[0] = Instantiate<EnemySpawn>(spawnPoint);
-            _enemySpawns[1] = Instantiate<EnemySpawn>(spawnPoint);
-            _enemySpawns[2] = Instantiate<EnemySpawn>(spawnPoint);
+            enemySpawns = new EnemySpawn[3];
+            enemySpawns[0] = Instantiate<EnemySpawn>(spawnPoint);
+            enemySpawns[1] = Instantiate<EnemySpawn>(spawnPoint);
+            enemySpawns[2] = Instantiate<EnemySpawn>(spawnPoint);
 
-            _enemySpawns[0].end = HGrid.Instance.GetCellIndex(0, -distanceFromSpawn, distanceFromSpawn);
-            _enemySpawns[1].end = HGrid.Instance.GetCellIndex(distanceFromSpawn, 0, -distanceFromSpawn);
-            _enemySpawns[2].end = HGrid.Instance.GetCellIndex(-distanceFromSpawn, distanceFromSpawn, 0);
+            enemySpawns[0].end = HGrid.Instance.GetCellIndex(0, -distanceFromSpawn, distanceFromSpawn);
+            enemySpawns[1].end = HGrid.Instance.GetCellIndex(distanceFromSpawn, 0, -distanceFromSpawn);
+            enemySpawns[2].end = HGrid.Instance.GetCellIndex(-distanceFromSpawn, distanceFromSpawn, 0);
         }
 
         void Update()
@@ -80,7 +81,7 @@ namespace Field
 
         private void SpawnEnemyWave()
         {
-            foreach (EnemySpawn enemySpawn in _enemySpawns)
+            foreach (EnemySpawn enemySpawn in enemySpawns)
             {
                 spath = enemySpawn.Solve();
                 List<HCell> sp = enemySpawn.RecPath(spath);
@@ -94,7 +95,7 @@ namespace Field
 
         public void rerouteEnemys(HCell turretCell)
         {
-            foreach (EnemySpawn enemySpawn in _enemySpawns)
+            foreach (EnemySpawn enemySpawn in enemySpawns)
             {
                 enemySpawn.recheckPath(turretCell);
             }

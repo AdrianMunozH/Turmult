@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7927641795192460310}
   - component: {fileID: 7280441146831588744}
   - component: {fileID: -8434775513740980717}
-  - component: {fileID: -452759006257752560}
+  - component: {fileID: 2089165779626471828}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -99,7 +99,7 @@ MonoBehaviour:
   speed: 70
   target: {fileID: 0}
   effects:
-  - {fileID: -452759006257752560}
+  - {fileID: 2089165779626471828}
   - {fileID: -8434775513740980717}
   impactEffect: {fileID: 3591840901927880627, guid: c82ebe3d58760754fae3b9828c56148a,
     type: 3}
@@ -121,7 +121,7 @@ MonoBehaviour:
   slow: 0
   ticks: 10
   tick: 0
---- !u!114 &-452759006257752560
+--- !u!114 &2089165779626471828
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,11 +130,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7927641795192460296}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3db8241762fa8a5428df1d8ebd0f8669, type: 3}
+  m_Script: {fileID: 11500000, guid: 72181d5aff3db7e4f912408f570c4ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 3
+  _type: 2
   targetEnemy: {fileID: 0}
-  ticks: 0
-  tick: 0
-  damagePerTick: 0
+  damage: 10

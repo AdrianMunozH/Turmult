@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 824bd182a61a4f18b31c1f1ef56c25f1, type: 3}
-  m_Name: StandardTurret
+  m_Name: MultiTurret
   m_EditorClassIdentifier: 
   cost: 0
   health: 0
   mana: 0
   range: 3
-  fireRate: 4
+  fireRate: 1
   turnSpeed: 10
   turretType: 2
   enemyTag: Enemy
-  ressourceType: 0
+  ressourceType: 2
   canRotate: 0
-  name: Der Ultimative Standardturm
-  beschreibung: Dieser Turm ist so unglaublich Standard
+  name: 
+  beschreibung: 
   logo: {fileID: 0}

@@ -7,7 +7,7 @@ namespace Enemies
     public class EnemySpawn : MonoBehaviour
     {
         public GameObject enemyPrefab;
-        private List<GameObject> enemys;
+        [HideInInspector] public List<GameObject> enemys;
 
         //test für shortest path
         private HCell[] spath;

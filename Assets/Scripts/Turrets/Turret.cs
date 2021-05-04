@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Enemies;
 using Field;
 using JetBrains.Annotations;
+using Mono.Cecil.Cil;
 using Turrets.Projectile;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -13,7 +14,7 @@ namespace Turrets
     
         private Transform target;
         // sehr viel perfomanter weil wir in der update sonst immer getComponent bräuchten
-        private EnemyMovement targetEnemy;
+        protected EnemyMovement targetEnemy;
     
         [Header("Attributes")] public float range = 1f;
         public float fireRate = 1f;
@@ -38,11 +39,19 @@ namespace Turrets
         public GameObject projectilePrefab;
         [CanBeNull] public TurretScriptableObject turret;
     
+        // MultiTargetTurret
+        public Transform[] targets;
+        public int maxTargets;
+        public Transform[] firePoints;
+        private float[] fireCountdowns;
 
         // Start is called before the first frame update
         void Start()
         {
-            InvokeRepeating(nameof(UpdateTarget), 0f, 0.5f);
+            if(turretType == TurretType.MULTI)
+                InvokeRepeating(nameof(UpdateTargets), 0f, 0.25f);
+            else
+                InvokeRepeating(nameof(UpdateTarget), 0f, 0.5f);
             
             if (turret != null)
             {
@@ -55,6 +64,13 @@ namespace Turrets
                 canRotate = turret.canRotate;
             }
 
+            if (turretType == TurretType.MULTI)
+            {
+                targets = new Transform[maxTargets];
+                fireCountdowns = new float[maxTargets];
+            }
+                
+
             //Range auf Hexradius anpassen
             range *= HexMetrics.outerRadius;
         }
@@ -63,8 +79,12 @@ namespace Turrets
  * Methode wird 2x pro Sekunde aufgerufen und ermittelt den am wenigsten entfernten Gegner
  * und speichert dessen Transform in der KLassenvariablen target
  */
-        void UpdateTarget()
+        protected virtual void UpdateTarget()
         {
+            
+            // sollte ersetzt werden weil es bestimmt perfomance spart aber wir haben noch keine spieler klasse und wiesen deshalb nicht welchen enemy spawn wir brauchen
+            // Außerdem verhindert es das wir die enemys der gegner abschießen wenn sie in range sind.
+            // HGameManager.Instance.enemySpawns[1].enemys
             GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
             float shortestDistance = Mathf.Infinity;
             GameObject nearestEnemy = null;
@@ -72,7 +92,7 @@ namespace Turrets
             foreach (GameObject enemy in enemies)
             {
                 float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-                if (distanceToEnemy < shortestDistance)
+                if (distanceToEnemy < shortestDistance )
                 {
                     // sollte der nearest enemy wirklich geändert werden solange das target noch in range ist ?
                     shortestDistance = distanceToEnemy;
@@ -91,6 +111,78 @@ namespace Turrets
             }
         }
 
+        void UpdateTargets()
+        {
+            for (int i = 0; i < targets.Length; i++)
+            {
+                UpdateTarget(i);
+            }
+            
+        }
+
+        bool TargetIsTargeted(int index,Transform t)
+        {
+            
+            for (int i = 0; i < targets.Length; i++)
+            {
+                // Distance ist kacke weil zwei verschiedene gegner  ruhig aufeinander stehen dürfen und trotzdem beide gefocused werden sollten
+                // wenn die enemyspawns impl. werden könnte man min enemy index arbeiten
+                if (targets[i] != null && Vector3.Distance(targets[i].position ,t.position) < 0.2f && i != index)
+                {
+                    
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        protected virtual void UpdateTarget(int index)
+        {
+            
+            // sollte ersetzt werden weil es bestimmt perfomance spart aber wir haben noch keine spieler klasse und wiesen deshalb nicht welchen enemy spawn wir brauchen
+            // Außerdem verhindert es das wir die enemys der gegner abschießen wenn sie in range sind.
+            // HGameManager.Instance.enemySpawns[1].enemys
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
+            float shortestDistance = Mathf.Infinity;
+            GameObject nearestEnemy = null;
+            Debug.Log(targets.Length);
+            foreach (GameObject enemy in enemies)
+            {
+                float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+                if (distanceToEnemy < shortestDistance && !TargetIsTargeted(index,enemy.transform))
+                {    
+                    shortestDistance = distanceToEnemy;
+                    nearestEnemy = enemy;
+                    targetEnemy = enemy.GetComponent<EnemyMovement>();
+                    /*
+                    if (index == 0)
+                    {
+                        shortestDistance = distanceToEnemy;
+                        nearestEnemy = enemy;
+                        targetEnemy = enemy.GetComponent<EnemyMovement>();
+                               //enemy.transform.position != targets[index - 1].transform.position                                                                     
+                    } else if (targets[index - 1] != null && TargetIsTargeted())
+                    {
+                        shortestDistance = distanceToEnemy;
+                        nearestEnemy = enemy;
+                        targetEnemy = enemy.GetComponent<EnemyMovement>();
+                    }
+                    */
+                    // sollte der nearest enemy wirklich geändert werden solange das target noch in range ist ?
+                    
+                }
+            }
+            
+            if (nearestEnemy != null && shortestDistance <= range)
+            {
+                targets[index] = nearestEnemy.transform;
+            }
+            else
+            {
+                targets[index] = null;
+            }
+        }
+
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.cyan;
@@ -100,7 +192,7 @@ namespace Turrets
         void Update()
         {
             //Wenn kein Target verhanden keine Updates
-            if (target == null)
+            if (target == null && turretType != TurretType.MULTI)
             {
                 if (turretType == TurretType.LASER)
                 {
@@ -108,12 +200,13 @@ namespace Turrets
                 }
                 return;
             }
+            checkType();
 
             // soll mit if statement ausgemacht werden können für statische türme
             if(canRotate)
                 rotate();
         
-            checkType();
+            
         
         }
         // nur zum testen
@@ -121,7 +214,7 @@ namespace Turrets
         {
        
             GameObject projectileGameObject = (GameObject) Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-            Projectile.Projectile projectile = projectilePrefab.GetComponent<Projectile.Projectile>();
+            Projectile.Projectile projectile = projectileGameObject.GetComponent<Projectile.Projectile>();
 
             if (projectile != null)
             {
@@ -133,6 +226,7 @@ namespace Turrets
         //void checkType(TurretEffects turretEffects)
         void checkType()
         {
+            Debug.Log("check");
             if (turretType == TurretType.PROJECTILE)
             {
                 if (fireCountdown <= 0f)
@@ -148,7 +242,36 @@ namespace Turrets
             {
                 ShootLaser();
             }
+
+            if (turretType == TurretType.MULTI)
+            {
+                for (int i = 0; i < firePoints.Length; i++){
+
+                    if (fireCountdowns[i] <= 0f)
+                    {
+                        if (targets[i] != null)
+                        {
+                            ShootMulti(i);
+                            fireCountdowns[i] = 1f / fireRate;
+                        }
+                            
+                    }
+                    fireCountdowns[i] -= Time.deltaTime;
+
+                }
+            }
         
+        }
+
+        private void ShootMulti(int index)
+        {
+            GameObject projectileGameObject = (GameObject) Instantiate(projectilePrefab, firePoints[index].position, firePoints[index].rotation);
+            Projectile.Projectile projectile = projectileGameObject.GetComponent<Projectile.Projectile>();
+            
+            if (projectile != null)
+            {
+                projectile.Seek(targets[index]);
+            }
         }
 
         private void ShootLaser()
@@ -174,6 +297,6 @@ namespace Turrets
         // ersetzen durch SHOOT,CAST,PERMSHOOT
         PROJECTILE,
         LASER,
-        SPELL
+        MULTI
     }
 }
