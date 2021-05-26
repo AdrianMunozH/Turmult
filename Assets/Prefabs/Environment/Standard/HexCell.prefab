@@ -660,8 +660,9 @@ MonoBehaviour:
   colorUnacquiredSwamp: {r: 0.43298328, g: 0.6603774, b: 0.44732076, a: 100}
   colorUnacquiredForest: {r: 0.61089355, g: 0.9056604, b: 0.6845853, a: 100}
   unacquiredHex:
-  - {fileID: 8745428545202600256, guid: 55e5ac3d00c925a44a1a60a026165879, type: 3}
-  - {fileID: 3346972762477102940, guid: 67ae0cb8b93dc584ba8d3251797f6d59, type: 3}
-  - {fileID: 6035862308032081783, guid: 3fcfd97aed1656c49932b1c98928cf6c, type: 3}
-  - {fileID: 2348874091485988412, guid: 3672c08628f1fe0408eb9c7677a089dc, type: 3}
+  - {fileID: 657644200667063929, guid: e8d548154ae34fd40bcf77ca9a9994fb, type: 3}
+  - {fileID: 3807869854085485167, guid: cd5911520407c4742a4788c8acd1c14f, type: 3}
+  - {fileID: 771220004977217262, guid: 2972403bdcefb6a47a1ef5645260b8d3, type: 3}
+  - {fileID: 3594647222894756931, guid: 552e0be0f82f3214eb9d1ab9b567e811, type: 3}
   colorNeutralField: {r: 0.21960784, g: 0.21960784, b: 0.21960784, a: 100}
+  gridImage: {fileID: 0}
