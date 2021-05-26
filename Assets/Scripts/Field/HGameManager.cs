@@ -83,13 +83,28 @@ namespace Field
         {
             foreach (EnemySpawn enemySpawn in enemySpawns)
             {
+                // könnte in der methode init werden (spath)
                 spath = enemySpawn.Solve();
                 List<HCell> sp = enemySpawn.RecPath(spath);
                 sp = enemySpawn.ShortestPath(sp);
                 Debug.Log("***Ergebnis*** " + HGrid.Instance.ListToString(sp) + " : " + sp.Count);
-                // es muss gecheckt werden ob der weg länge grö0er ist als 0
+                // es muss gecheckt werden ob die weglänge grö0er als 0 ist
                 if (sp.Count > 0)
-                    enemySpawn.SpawnEnemy(sp.ToArray());
+                    enemySpawn.SpawnEnemy(sp.ToArray(),false);
+                    // normaler modus                Nicht angreifen
+                else
+                {
+                    // attacking modus
+                    spath = enemySpawn.SolveAttack(HGrid.Instance.GetCellIndex(0,0,0));
+                    // es wird erstmal der kürzeste weg zur base gesucht
+                    sp = enemySpawn.RecPath(spath);
+                    sp = enemySpawn.ShortestPath(sp);
+                    // danach wird am ersten turm gestoppt
+                    int towerIndex = (int) enemySpawn.TowerFinder(sp); // +1
+                    // von towerindex bis zum letzten element
+                    sp.RemoveRange(towerIndex,sp.Count-towerIndex);
+                    enemySpawn.SpawnEnemy(sp.ToArray(),true);
+                }
             }
         }
 

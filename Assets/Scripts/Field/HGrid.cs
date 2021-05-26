@@ -53,7 +53,7 @@ namespace Field
             position.x = (x + z * 0.5f - z / 2) * (HexMetrics.innerRadius * 2f);
             position.y = 0f;
             position.z = z * (HexMetrics.outerRadius * 1.5f);
-            if (position.magnitude <= radius * HexMetrics.outerRadius)
+            if (position.magnitude <= radius * HexMetrics.innerRadius)
             {
                 CreateCell(x, z, i);
                 return true;
@@ -150,6 +150,57 @@ namespace Field
             {
                 // TODO: fehlt der check ob es schon ein gebäude hat
                 if ((cell.GetCellType() == HCell.CellType.Acquired ||cell.GetCellType() == HCell.CellType.Neutral) && !cell.hasBuilding)
+                {
+                    if (cell.coordinates.X == h.coordinates.X - 1 && cell.coordinates.Y == h.coordinates.Y)
+                    {
+                        neighb[i] = cell;
+                        i++;
+                    }
+                    else if (cell.coordinates.X == h.coordinates.X && cell.coordinates.Y == h.coordinates.Y - 1)
+                    {
+                        neighb[i] = cell;
+                        i++;
+                    }
+                    else if (cell.coordinates.X == h.coordinates.X + 1 && cell.coordinates.Y == h.coordinates.Y)
+                    {
+                        neighb[i] = cell;
+                        i++;
+                    }
+                    else if (cell.coordinates.X == h.coordinates.X && cell.coordinates.Y == h.coordinates.Y + 1)
+                    {
+                        neighb[i] = cell;
+                        i++;
+                    }
+                    else if (cell.coordinates.X == h.coordinates.X - 1 && cell.coordinates.Y == h.coordinates.Y + 1)
+                    {
+                        neighb[i] = cell;
+                        i++;
+                    }
+                    else if (cell.coordinates.X == h.coordinates.X + 1 && cell.coordinates.Y == h.coordinates.Y - 1)
+                    {
+                        neighb[i] = cell;
+                        i++;
+                    }
+                }
+            }
+            /*
+        for (int j = 0; j < i; j++)
+        {
+            Debug.Log(neighb[j].coordinates.ToString());
+        }
+        */
+
+            return WithoutNull(neighb);
+        }
+        public HCell[] NeighbAttack(HCell h)
+        {
+            //Debug.Log(h.coordinates.ToString() + " ausgewählt");
+            HCell[] neighb = new HCell[6];
+            int i = 0;
+            foreach (HCell cell in cells)
+            {
+                // Checkt mit absicht nicht nach towern
+                if (cell.GetCellType() == HCell.CellType.Acquired ||cell.GetCellType() == HCell.CellType.Neutral)
                 {
                     if (cell.coordinates.X == h.coordinates.X - 1 && cell.coordinates.Y == h.coordinates.Y)
                     {

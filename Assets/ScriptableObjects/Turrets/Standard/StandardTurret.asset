@@ -16,9 +16,9 @@ MonoBehaviour:
   health: 0
   mana: 0
   range: 3
-  fireRate: 4
+  fireRate: 2
   turnSpeed: 10
-  turretType: 2
+  turretType: 0
   enemyTag: Enemy
   ressourceType: 0
   canRotate: 0

@@ -24,6 +24,7 @@ namespace Enemies
             defaultStart = HGrid.Instance.GetCellIndex(0, 0);
         }
 
+        // checkt ob der weg eines minions überhaupt geöndert werden muss
         public void recheckPath(HCell turretCell)
         {
             for (int i = 0; i < enemys.Count; i++)
@@ -31,15 +32,16 @@ namespace Enemies
                 EnemyMovement mov = enemys[i].GetComponent<EnemyMovement>();
                 for (int j = mov.pathIndex; j < mov.path.Length; j++)
                 {
-                    string s = "no";
                     // null check muss vllt drin bleibern
                     if (mov != null && mov.path[j].coordinates.CompareCoord(turretCell.coordinates))
                     {
                         rebuildPath(i,mov.pathIndex);
-                        s = "yay";
+                        
                     }
+                    if(mov.isAttacking)
+                        rebuildPath(i,mov.pathIndex);
                 }
-            
+                
             }
         }
 
@@ -50,21 +52,50 @@ namespace Enemies
             HCell[] newPath = Solve(mov.path[startIndex]);
             List<HCell> sp = RecPath(newPath);
             sp = ShortestPath(sp, mov.path[startIndex]);
+            
+            // muss noch der attacking modus rein
             if (sp.Count > 0)
+            {
                 mov.pathIndex = 0;
-            mov.path = sp.ToArray();
+                mov.path = sp.ToArray();
+                mov.isAttacking = false;
+
+            }
+                            
+            
+            
+            
+            
+            // test
+            
+
+          
+            else
+            {    // attacking modus
+                newPath = SolveAttack(mov.path[startIndex]);
+                sp = RecPath(newPath);
+                sp = ShortestPath(sp);
+                
+                
+                // danach wird am ersten turm gestoppt (vllt +1)
+                int towerIndex = (int) TowerFinder(sp);
+                // von towerindex bis zum letzten element
+                sp.RemoveRange(towerIndex,sp.Count-towerIndex);
+                mov.isAttacking = true;
+                mov.path = sp.ToArray();
+            }
         
         }
 
-        public void SpawnEnemy(HCell[] path)
+        public void SpawnEnemy(HCell[] path,bool isAttacking)
         {
-            // ich mache noch nichts mit den enemys darum 0 
             GameObject enemy = Instantiate(enemyPrefab);
             enemys.Add(enemy);
             enemy.transform.SetParent(transform, false);
             enemy.transform.position = path[0].gameObject.transform.position;
             EnemyMovement enemyMovement = enemy.GetComponent<EnemyMovement>();
             enemyMovement.moveSpeed = 3f;
+            enemyMovement.isAttacking = isAttacking;
             enemyMovement.path = path;
             enemyMovement.enemySpawn = this;
         }
@@ -86,13 +117,10 @@ namespace Enemies
                 for (int i = 0; i < neighb.Length; i++)
                 {
                     //nicht visited
-                    //if (!visited.Contains(CellsIndex(neighb[i])))
                     if (!Visited(visited, neighb[i].index))
                     {
                         queue.Enqueue(neighb[i]);
-                        //visited.Add(CellsIndex(neighb[i]));
                         visited.Add(neighb[i].index);
-                        //prev[i] = node;
                         prev[neighb[i].index] = node;
                         prev[neighb[i].index].spindex = p;
                         p++;
@@ -135,7 +163,41 @@ namespace Enemies
 
             Debug.Log("solve list: " + HGrid.Instance.ArrayToString(prev));
             return prev;
+        }public HCell[] SolveAttack(HCell altStart)
+        {
+            Queue<HCell> queue = new Queue<HCell>();
+            queue.Enqueue(altStart);
+            //index stellen
+            List<int> visited = new List<int>();
+            visited.Add(altStart.index);
+            HCell[] prev = new HCell[HGrid.Instance.cells.Length];
+            int p = 0;
+            while (queue.Count > 0)
+            {
+                HCell node = queue.Dequeue();
+                HCell[] neighb = HGrid.Instance.NeighbAttack(node);
+                for (int i = 0; i < neighb.Length; i++)
+                {
+                    //nicht visited
+                    //if (!visited.Contains(CellsIndex(neighb[i])))
+                    if (!Visited(visited, neighb[i].index))
+                    {
+                        queue.Enqueue(neighb[i]);
+                        //visited.Add(CellsIndex(neighb[i]));
+                        visited.Add(neighb[i].index);
+                        //prev[i] = node;
+                        prev[neighb[i].index] = node;
+                        prev[neighb[i].index].spindex = p;
+                        p++;
+                    }
+                }
+            }
+
+            Debug.Log("solve list: " + HGrid.Instance.ArrayToString(prev));
+            return prev;
         }
+        
+        
 
         public bool Visited(List<int> list, int i)
         {
@@ -164,6 +226,17 @@ namespace Enemies
             }
 
             return path;
+        }
+
+        public int? TowerFinder(List<HCell> path)
+        {
+            for (int j = 0; j < path.Count; j++)
+            {
+                if (path[j].hasBuilding)
+                    return j;
+            }
+            // wenn es kein tower gibt dann ist was falsch gelaufen
+            return null;
         }
 
         public List<HCell> ShortestPath(List<HCell> path)

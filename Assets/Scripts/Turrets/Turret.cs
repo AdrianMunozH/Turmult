@@ -82,7 +82,7 @@ namespace Turrets
         protected virtual void UpdateTarget()
         {
             
-            // sollte ersetzt werden weil es bestimmt perfomance spart aber wir haben noch keine spieler klasse und wiesen deshalb nicht welchen enemy spawn wir brauchen
+            // sollte ersetzt werden weil es bestimmt perfomance spart aber wir haben noch keine spieler klasse und wissen deshalb nicht welchen enemy spawn wir brauchen
             // Außerdem verhindert es das wir die enemys der gegner abschießen wenn sie in range sind.
             // HGameManager.Instance.enemySpawns[1].enemys
             GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
@@ -126,7 +126,7 @@ namespace Turrets
             for (int i = 0; i < targets.Length; i++)
             {
                 // Distance ist kacke weil zwei verschiedene gegner  ruhig aufeinander stehen dürfen und trotzdem beide gefocused werden sollten
-                // wenn die enemyspawns impl. werden könnte man min enemy index arbeiten
+                // wenn die enemyspawns mit spieler zuweis impl. werden könnte man min enemy index arbeiten
                 if (targets[i] != null && Vector3.Distance(targets[i].position ,t.position) < 0.2f && i != index)
                 {
                     
@@ -213,12 +213,18 @@ namespace Turrets
         void ShootProjectile()
         {
        
-            GameObject projectileGameObject = (GameObject) Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+            GameObject projectileGameObject = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
             Projectile.Projectile projectile = projectileGameObject.GetComponent<Projectile.Projectile>();
-
+    
+            
             if (projectile != null)
             {
+                Debug.Log("projectile nicht null");
                 projectile.Seek(target);
+            }
+            else
+            {
+                Debug.Log("null projectile");
             }
         }
     
@@ -226,7 +232,6 @@ namespace Turrets
         //void checkType(TurretEffects turretEffects)
         void checkType()
         {
-            Debug.Log("check");
             if (turretType == TurretType.PROJECTILE)
             {
                 if (fireCountdown <= 0f)

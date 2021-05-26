@@ -192,8 +192,9 @@ MonoBehaviour:
   enemyTag: Enemy
   canRotate: 0
   projectilePrefab: {fileID: 100000, guid: cff4c024d20095a458a66e6e0d47bf1b, type: 3}
-  turret: {fileID: 0}
-  maxTargets: 0
+  turret: {fileID: 11400000, guid: c341defec2ec37d4e86df642150478b4, type: 2}
+  targets: []
+  maxTargets: 3
   firePoints: []
 --- !u!114 &-759051356119238997
 MonoBehaviour:

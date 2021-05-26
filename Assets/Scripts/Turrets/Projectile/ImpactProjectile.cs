@@ -17,7 +17,7 @@ namespace Turrets.Projectile
         {
             if (target != null)
             {
-
+                Debug.Log("nicht null");
                 int index;
                 EnemyMovement targetEnemy = target.GetComponent<EnemyMovement>();
                 Vector3[] path = HGrid.Instance.HCellPositions(targetEnemy.path);
@@ -32,6 +32,10 @@ namespace Turrets.Projectile
                 impact = (path[index] - target.position) * speed/100;
                 impact += target.position + new Vector3(0,1,0);
             }
+            else
+            {
+                Debug.Log("null");
+            }
         }
 
         // Update is called once per frame
@@ -42,16 +46,20 @@ namespace Turrets.Projectile
                 Destroy(gameObject);
                 return;
             }
-        
-            Vector3 dir = impact - transform.position;
+
+            var position = transform.position;
+            Vector3 dir = impact - position;
             float frameDistance = speed * Time.deltaTime;
-        
+
+            float curve = position.x * Mathf.PI / dir.magnitude;
+            curve = Mathf.Sin(curve) - impact.y * position.y/ dir.magnitude;
+            
             if (dir.magnitude <= frameDistance)
             {
                 HitTarget();
                 return;
             }
-            transform.Translate(dir.normalized * frameDistance, Space.World);
+            transform.Translate(dir.normalized * frameDistance + new Vector3(0,curve,0), Space.World);
             
         }
 

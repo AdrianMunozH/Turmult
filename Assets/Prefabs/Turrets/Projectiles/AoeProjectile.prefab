@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5173695809940754524}
   - component: {fileID: -3184766205739595522}
   - component: {fileID: -2663082408320686015}
+  - component: {fileID: 6816482229912092172}
   m_Layer: 0
   m_Name: AoeProjectile
   m_TagString: Untagged
@@ -130,3 +131,21 @@ MonoBehaviour:
   target: {fileID: 0}
   effects:
   - {fileID: -3184766205739595522}
+  - {fileID: 6816482229912092172}
+--- !u!114 &6816482229912092172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2460278673348978802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db34c48a2f048ec459efbf58b53528ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 0
+  targetEnemy: {fileID: 0}
+  slow: 0.3
+  ticks: 5
+  tick: 0

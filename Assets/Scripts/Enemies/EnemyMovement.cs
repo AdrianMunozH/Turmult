@@ -24,7 +24,9 @@ namespace Enemies
         //kann wahrscheinlich raus
         private Canvas _canvas;
         public TMP_Text _text;
-
+        public bool isAttacking;
+        private double _attackCountdown = 0f;
+        private double attackRate = 1f;
 
         // Start is called before the first frame update
         void Start()
@@ -41,14 +43,22 @@ namespace Enemies
             // kann auch ersetzt werden durch path[].gameObject.transform.position
             //vecPath = HGrid.Instance.HCellPositions(path);
             Vector3 position = path[pathIndex].gameObject.transform.position;
-            if (Vector3.Distance(transform.position, position) < 0.1f)
+            if (Vector3.Distance(transform.position, position) < 0.01f)
             {
                 if (pathIndex < path.Length - 1)
                     pathIndex++;
                 else
                 {
-                    enemySpawn.deleteEnemy(gameObject);
-                    Destroy(gameObject);
+                    if (isAttacking)
+                    {
+                        Attacking();
+                        _text.SetText("Attack!");
+                    }
+                    else
+                    {
+                        enemySpawn.deleteEnemy(gameObject);
+                        Destroy(gameObject);
+                    }
                 }
 
             }
@@ -71,6 +81,17 @@ namespace Enemies
 
         }
 
+        private void Attacking()
+        {
+            if (_attackCountdown <= 0f)
+            {
+                _text.SetText("Hit!");
+                _attackCountdown = 1f / attackRate;
+            }
+
+            _attackCountdown -= Time.deltaTime;
+        }
+
         public void TakeDamage(float damage)
         {
             if (damage < life)
@@ -83,7 +104,7 @@ namespace Enemies
 
             _text.enabled = true;
             _text.SetText(life.ToString());
-            //StartCoroutine("DeactivateText",5f);
+            //StartCoroutine("DeactivateText");
         }
 
 

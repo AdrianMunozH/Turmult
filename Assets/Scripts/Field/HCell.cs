@@ -102,7 +102,7 @@ namespace Field
                     Destroy(previewTurret);
                 }
             }
-            gridImage.color = SetColor(5f/255f, 55f/255f, 18f/255f,40f);
+            gridImage.color = SetColor(5f/255f, 55f/255f, 18f/255f,40f/255f);
         }
 
         private void OnMouseDown()
