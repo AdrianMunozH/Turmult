@@ -8,10 +8,10 @@ namespace Field
 
         public enum RessourceType
         {
-            Berg,
-            Sumpf,
-            Wald,
-            Neutral
+            Berg = 0,
+            Sumpf = 5,
+            Wald = 10,
+            Neutral = 15
         };
 
 

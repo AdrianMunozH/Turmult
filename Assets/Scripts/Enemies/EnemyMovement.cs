@@ -70,8 +70,8 @@ namespace Enemies
 
             //funkt. aber ist snappy
             //transform.rotation = Quaternion.LookRotation(lookingDir);
-            
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookingDir),
+            if(lookingDir != Vector3.zero)
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookingDir),
                 Time.deltaTime * moveSpeed * 2);
 
             transform.position = Vector3.MoveTowards(transform.position, position, moveSpeed * Time.deltaTime);

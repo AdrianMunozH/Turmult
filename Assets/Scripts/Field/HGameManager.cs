@@ -87,6 +87,7 @@ namespace Field
                 spath = enemySpawn.Solve();
                 List<HCell> sp = enemySpawn.RecPath(spath);
                 sp = enemySpawn.ShortestPath(sp);
+                
                 Debug.Log("***Ergebnis*** " + HGrid.Instance.ListToString(sp) + " : " + sp.Count);
                 // es muss gecheckt werden ob die weglänge grö0er als 0 ist
                 if (sp.Count > 0)
@@ -105,6 +106,7 @@ namespace Field
                     sp.RemoveRange(towerIndex,sp.Count-towerIndex);
                     enemySpawn.SpawnEnemy(sp.ToArray(),true);
                 }
+                HGrid.Instance.ShortestPathPrefabs(sp.ToArray());
             }
         }
 

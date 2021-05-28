@@ -145,7 +145,6 @@ namespace Turrets
             GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
             float shortestDistance = Mathf.Infinity;
             GameObject nearestEnemy = null;
-            Debug.Log(targets.Length);
             foreach (GameObject enemy in enemies)
             {
                 float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);

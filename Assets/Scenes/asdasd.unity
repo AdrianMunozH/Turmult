@@ -624,7 +624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 186166fd64734d049eeec1871853d0a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  standardTurretPrefab: {fileID: 2478300531275432869, guid: d92d5e8ba4295ba49baf95a2aa7808f6,
+  standardTurretPrefab: {fileID: 672762153369891017, guid: 05e16edd2929fae4da9f906f302450bf,
     type: 3}
   standardTurretPreviewPrefab: {fileID: 7957921693648539177, guid: 8f307c2d33b54124e831ece6c7c12a7b,
     type: 3}
@@ -792,8 +792,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11c7de629bde5e04d81fcb979bde093e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 4
-  height: 4
   radius: 25
   cells: []
   cellPrefab: {fileID: 8695769874674735302, guid: 3440896b5e0b97240913c787ea30732d,
@@ -802,6 +800,9 @@ MonoBehaviour:
     type: 3}
   hexImage: {fileID: 2402472035106653718, guid: 820cc4a5b630fee479070fa2f41c25aa,
     type: 3}
+  pathTest: []
+  go: 0
+  once: 1
 --- !u!222 &646463328
 CanvasRenderer:
   m_ObjectHideFlags: 0

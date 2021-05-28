@@ -84,6 +84,7 @@ namespace Enemies
                 mov.isAttacking = true;
                 mov.path = sp.ToArray();
             }
+            HGrid.Instance.ShortestPathPrefabs(sp.ToArray());
         
         }
 
@@ -228,7 +229,7 @@ namespace Enemies
             return path;
         }
 
-        public int? TowerFinder(List<HCell> path)
+        public int TowerFinder(List<HCell> path)
         {
             for (int j = 0; j < path.Count; j++)
             {
@@ -236,7 +237,7 @@ namespace Enemies
                     return j;
             }
             // wenn es kein tower gibt dann ist was falsch gelaufen
-            return null;
+            return 0;
         }
 
         public List<HCell> ShortestPath(List<HCell> path)

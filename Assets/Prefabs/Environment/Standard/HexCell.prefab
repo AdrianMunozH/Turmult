@@ -649,20 +649,28 @@ MonoBehaviour:
   index: 0
   spindex: 0
   hasBuilding: 0
-  hoverColorBuildMode: {r: 0.8392157, g: 0.78431374, b: 0.69803923, a: 100}
-  hoverColorAcquireMode: {r: 0.8392157, g: 0.78431374, b: 0.69803923, a: 100}
-  colorAcquiredNeutral: {r: 0.8392157, g: 0.78431374, b: 0.69803923, a: 100}
-  colorAcquiredMountain: {r: 0.4528302, g: 0.43322933, b: 0.36952654, a: 100}
-  colorAcquiredSwamp: {r: 0.31764707, g: 0.56078434, b: 0.45490196, a: 100}
-  colorAcquiredForest: {r: 0.43140095, g: 0.7075472, b: 0.42386082, a: 100}
-  colorUnacquiredNeutral: {r: 0.9150943, g: 0.8158152, b: 0.8158152, a: 100}
-  colorUnacquiredMountain: {r: 0.61960787, g: 0.6, b: 0.5411765, a: 100}
-  colorUnacquiredSwamp: {r: 0.43298328, g: 0.6603774, b: 0.44732076, a: 100}
-  colorUnacquiredForest: {r: 0.61089355, g: 0.9056604, b: 0.6845853, a: 100}
-  unacquiredHex:
-  - {fileID: 657644200667063929, guid: e8d548154ae34fd40bcf77ca9a9994fb, type: 3}
-  - {fileID: 3807869854085485167, guid: cd5911520407c4742a4788c8acd1c14f, type: 3}
+  hexPrefabs:
   - {fileID: 771220004977217262, guid: 2972403bdcefb6a47a1ef5645260b8d3, type: 3}
+  - {fileID: 8356353998363670736, guid: 0d55b5b542bacf64a8b1912bc448a66f, type: 3}
+  - {fileID: 2718442229973274016, guid: de49d4bf03d9b9f4d9f0dc3083be0ae1, type: 3}
+  - {fileID: 4408696854324906747, guid: 8bc07c4482e0eb747bd15e74ee018196, type: 3}
+  - {fileID: 2044152903614745321, guid: 10eda92f94265cc449029c8ce954715c, type: 3}
   - {fileID: 3594647222894756931, guid: 552e0be0f82f3214eb9d1ab9b567e811, type: 3}
-  colorNeutralField: {r: 0.21960784, g: 0.21960784, b: 0.21960784, a: 100}
+  - {fileID: 506959678448874979, guid: d002f38d75041424ea241389870a3758, type: 3}
+  - {fileID: 7794076206577424308, guid: 5504201351e303d4eb150d4887a204d8, type: 3}
+  - {fileID: 599491280555121885, guid: 7b42b5ec8683da8449db1c5175ab8c84, type: 3}
+  - {fileID: 1381787623612692903, guid: 349ed066cd20e7a4ebb3fb34681c9d37, type: 3}
+  - {fileID: 3807869854085485167, guid: cd5911520407c4742a4788c8acd1c14f, type: 3}
+  - {fileID: 6672830287229833390, guid: ef59fcfdedf54aa42b0097d3051825e2, type: 3}
+  - {fileID: 7655556425212797121, guid: 3b65de43dde860f4892a12aba883acab, type: 3}
+  - {fileID: 6763611451001946636, guid: 0662dc888428d9348b53cb6b89888257, type: 3}
+  - {fileID: 1023656607210297681, guid: c7141b50366a55b4eadc26f1b1b835c9, type: 3}
+  - {fileID: 657644200667063929, guid: e8d548154ae34fd40bcf77ca9a9994fb, type: 3}
+  - {fileID: 657644200667063929, guid: e8d548154ae34fd40bcf77ca9a9994fb, type: 3}
+  - {fileID: 3640900618232963074, guid: 76199f7641ac9754f87415a3e7592038, type: 3}
+  - {fileID: 7879624188255872065, guid: d33d574e95d48f040be87d24fdff8ec8, type: 3}
+  - {fileID: 8202913589886762775, guid: dede66323f738874baefc27fb4202ea9, type: 3}
+  - {fileID: 624799385870921010, guid: 987f2534a82e98f47b942ce2fe9db934, type: 3}
+  - {fileID: 2998554048133317497, guid: c0e70f0d0f97b584093c608026966b26, type: 3}
+  - {fileID: 716177578610971882, guid: b747ad00347423a4eb4cfaed495bddc0, type: 3}
   gridImage: {fileID: 0}

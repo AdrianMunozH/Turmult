@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Mono.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Field
@@ -7,9 +10,10 @@ namespace Field
     {
         public enum CellType
         {
-            CanBeAcquired,
-            Acquired,
-            Neutral
+            CanBeAcquired = 0,
+            Acquired = 1,
+            Neutral = 4,
+            Base
         };
 
     
@@ -23,8 +27,39 @@ namespace Field
         private GameObject turret;
         private GameObject previewTurret;
         private Ressource _ressource;
-        public bool hasBuilding;
 
+        public Ressource Ressource => _ressource;
+
+
+        public bool hasBuilding;
+        
+        // maps gehen nciht wegen unity :((
+        [SerializeField] private GameObject[] hexPrefabs;
+        /*
+        berg    unacq      :0
+                acq        :1
+                towerbase  :2
+                straight   :3
+                corner     :4
+        sumpf   unacq      :5
+                acq        :6
+                towerbase  :7
+                straight   :8
+                corner     :9
+        wald   unacq       :10
+                acq        :11
+                towerbase  :12
+                straight   :13
+                corner     :14
+        neutral acq/unacq  :15
+                straight   :16
+                corner     :17
+        portal  mid        :18
+                site       :19
+                path       :20
+        base               :21
+                
+        /*
         [Header("Color Highlighting")]
         public Color hoverColorBuildMode = new Color(214.0f/255f, 200.0f/255f, 178.0f/255f,100.0f);
         public Color hoverColorAcquireMode = new Color(214.0f/255f, 200.0f/255f, 178.0f/255f,100.0f);
@@ -40,11 +75,11 @@ namespace Field
         public Color colorUnacquiredMountain = new Color(158f/255f, 153f/255f, 138f/255f,100f);
         public Color colorUnacquiredSwamp = new Color(102f/255f, 110f/255f, 106f/255f,100f);
         public Color colorUnacquiredForest = new Color(160f/255f, 176f/255f, 162f/255f,100f);
-        [SerializeField] private GameObject[] unacquiredHex;
+        
     
         [Header("Cell Color Setup - Not Acquired")]
         public Color colorNeutralField = new Color(56.0f/255f, 56.0f/255f, 56.0f/255f,100.0f);
-
+        */
         //Optimization: Cachen des Renderes auf dem Objekt
         private Renderer rend;
 
@@ -75,7 +110,7 @@ namespace Field
             //Nur wenn der Buildmode eingeschaltet ist, werden previews angezeigt
             if (BuildManager.instance.IsBuildModeOn() && type == CellType.Acquired)
             {
-                gridImage.color = SetColor(214.0f/255f, 200.0f/255f, 178.0f/255f,30f);
+                gridImage.color = SetColor(214.0f/255f, 200.0f/255f, 178.0f/255f,70f/255f);
                 GameObject turretToBuild = BuildManager.instance.getTurretToBuildPreview();
                 if (turretToBuild != null)
                 {
@@ -84,8 +119,8 @@ namespace Field
                 //Hier Land
             }else if (BuildManager.instance.isAcquireModeOn() && type != CellType.Neutral && type != CellType.Acquired)
             {
-                gridImage.color = SetColor(225f,225f,225f,30f);
-                rend.material.color = type == CellType.Acquired?GetAcquiredColor():hoverColorAcquireMode;
+                gridImage.color = SetColor(225f,225f,225f,70f/255f);
+                //rend.material.color = type == CellType.Acquired?GetAcquiredColor():hoverColorAcquireMode;
             }
         }
         
@@ -101,8 +136,12 @@ namespace Field
                 {
                     Destroy(previewTurret);
                 }
+
+                
             }
-            gridImage.color = SetColor(5f/255f, 55f/255f, 18f/255f,40f/255f);
+            if(type == CellType.Acquired)
+                gridImage.color = SetColor(5f/255f, 55f/255f, 18f/255f,40f/255f);
+            gridImage.color = SetColor(0f, 0f, 0f, 0f);
         }
 
         private void OnMouseDown()
@@ -132,7 +171,7 @@ namespace Field
                 if (type == CellType.Acquired)
                 {
                     Debug.Log("Das Feld wurde doch schon eingenommen ...");
-                }else if (type == CellType.Neutral)
+                }else if (type == CellType.Neutral || type == CellType.Base)
                 {
                     Debug.Log("Das Feld ist die Schweiz, lass es in Ruhe");
                
@@ -142,7 +181,8 @@ namespace Field
                     type = CellType.Acquired;
                     HGameManager.instance.rerouteEnemys(this);
                     Debug.Log("reroute acquiremode");
-                    SetCellColor();
+                    //SetCellColor();
+                    SetPrefab(type,_ressource.GetRessourceType());
                 }
             }
         }
@@ -157,7 +197,45 @@ namespace Field
         {
             _ressource = new Ressource();
             rend = GetComponent<Renderer>();
-            SetCellColor();
+            rend.enabled = false;
+
+            gridImage.color = SetColor(0f, 0f, 0f, 0f);
+            
+            //SetCellColor();
+            if (type != CellType.Base) ;
+                //SetPrefab(type,_ressource.GetRessourceType());
+        }
+
+        public void SetPrefab(int prefabIndex, Vector3? rotation = null)
+        {
+            
+            
+            if(transform.childCount > 0)
+                GameObject.Destroy(transform.GetChild(0).gameObject);
+            
+            GameObject hexagon = Instantiate(hexPrefabs[prefabIndex], transform.position, transform.rotation);
+            
+            if(rotation != null)
+                hexagon.transform.eulerAngles = new Vector3(hexagon.transform.eulerAngles.x + rotation.Value.x,
+                    hexagon.transform.eulerAngles.y + rotation.Value.y,
+                    hexagon.transform.eulerAngles.z + rotation.Value.z);
+            
+            hexagon.transform.SetParent(transform, true);
+        }
+        public void SetPrefab(CellType cellType, Ressource.RessourceType ressource, Vector3? rotation = null,int path = 0)
+        {
+            int index = (int) cellType + (int) ressource + path;
+            if(transform.childCount > 0)
+                GameObject.Destroy(transform.GetChild(0).gameObject);
+            
+            GameObject hexagon = Instantiate(hexPrefabs[index], transform.position, transform.rotation);
+
+            if(rotation != null)
+                hexagon.transform.eulerAngles = new Vector3(hexagon.transform.eulerAngles.x + rotation.Value.x,
+                    hexagon.transform.eulerAngles.y + rotation.Value.y,
+                    hexagon.transform.eulerAngles.z + rotation.Value.z);
+            
+            hexagon.transform.SetParent(transform, true);
         }
 
         //Setzt und aktualisiert die Materialen bzw. Farben einer Zelle
@@ -166,7 +244,7 @@ namespace Field
             //TODO SET COLOR VON HCELL ANSCHAUEN
             if (type != CellType.Neutral)
             {
-                startColor = colorUnacquiredNeutral;
+                //startColor = colorUnacquiredNeutral;
                 // UND DAS MINIONSSPAWNPROBLEM FIXEN
                 switch (_ressource.GetRessourceType())
                 {
@@ -174,53 +252,52 @@ namespace Field
                         //Wenn  nocht nicht eignenommen
                         if (type == CellType.CanBeAcquired)
                         {
-                            startColor = colorUnacquiredMountain;
-                            GameObject hexagon = Instantiate(unacquiredHex[1], transform.position, transform.rotation);
-                            hexagon.transform.SetParent(transform, true);
+                            //startColor = colorUnacquiredMountain;
+                            SetPrefab(0);
                             //Wenn eingenommen
                         }
                         else if (type == CellType.Acquired)
                         {
-                            startColor = colorAcquiredMountain;
+                            SetPrefab(1);
+                            //startColor = colorAcquiredMountain;
                         }
 
                         break;
                     case Ressource.RessourceType.Sumpf:
                         if (type == CellType.CanBeAcquired)
                         {
-                            startColor = colorUnacquiredSwamp;
-                            GameObject hexagon = Instantiate(unacquiredHex[2], transform.position, transform.rotation);
-                            hexagon.transform.SetParent(transform, true);
+                            //startColor = colorUnacquiredSwamp;
+                            SetPrefab(2);
                         }
                         else if (type == CellType.Acquired)
                         {
-                            startColor = colorAcquiredSwamp;
+                            SetPrefab(3);
+                            //startColor = colorAcquiredSwamp;
                         }
 
                         break;
                     case Ressource.RessourceType.Wald:
                         if (type == CellType.CanBeAcquired)
                         {
-                            startColor = colorUnacquiredForest;
-                            GameObject hexagon = Instantiate(unacquiredHex[3], transform.position, transform.rotation);
-                            hexagon.transform.SetParent(transform, true);
+                            //startColor = colorUnacquiredForest;
+                            SetPrefab(4);
                         }
                         else if (type == CellType.Acquired)
                         {
-                            startColor = colorAcquiredForest;
+                            SetPrefab(5);
+                            //startColor = colorAcquiredForest;
                         }
 
                         break;
                     default:
                         if (type == CellType.CanBeAcquired)
                         {
-                            startColor = colorUnacquiredNeutral;
-                            GameObject hexagon = Instantiate(unacquiredHex[0], transform.position, transform.rotation);
-                            hexagon.transform.SetParent(transform, true);
+                            //startColor = colorUnacquiredNeutral;
+                            SetPrefab(7);
                         }
                         else if (type == CellType.Acquired)
                         {
-                            startColor = colorAcquiredNeutral;
+                            SetPrefab(6);
                         }
 
                         break;
@@ -229,9 +306,8 @@ namespace Field
             else
             {
                 //Neutrale Felder
-                startColor = colorNeutralField;
-                GameObject hexagon = Instantiate(unacquiredHex[0], transform.position, transform.rotation);
-                hexagon.transform.SetParent(transform, true);
+                //startColor = colorNeutralField;
+                SetPrefab(8);
             }
 
             rend.material.color = startColor;
@@ -239,7 +315,7 @@ namespace Field
 
         /**
      * Gibt die Farbe des eingenommenen Zustands zurück
-     */
+     
         private Color GetAcquiredColor()
         {
             switch (_ressource.GetRessourceType())
@@ -254,10 +330,12 @@ namespace Field
                     return colorAcquiredNeutral;
             }
         }
+        */
 
         // Update is called once per frame
         void Update()
         {
+            
         }
     }
 }

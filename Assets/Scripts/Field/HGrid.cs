@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,8 +7,6 @@ namespace Field
 {
     public class HGrid : Singleton<HGrid>
     {
-        public int width = 6;
-        public int height = 6;
         public int radius;
         public HCell[] cells;
         private List<HCell> cellList;
@@ -17,7 +16,19 @@ namespace Field
 
         public Image hexImage;
         
-        //test für shortest path
+        //test delete later
+        public List<HCell> pathTest = new List<HCell>();
+        public bool go;
+        public bool once = true;
+
+        private void Update()
+        {
+            if (go && once)
+            {
+                ShortestPathPrefabs(pathTest.ToArray());
+                once = false;
+            }
+        }
 
         // Start is called before the first frame update
         void Start()
@@ -44,6 +55,23 @@ namespace Field
             cells = new HCell[cellList.Count];
             cells = cellList.ToArray();
             neutralCell();
+            /*
+            setze neutral 7 felder  x 
+            setze weg
+            setze base
+            setze array mit den vorher mit index
+            setze ressource
+
+             
+            foreach (var cell in cells)
+            {
+                if (cell.GetCellType() != HCell.CellType.Acquired || cell.GetCellType() != HCell.CellType.Neutral)
+                {
+                    cell.gameObject.SetActive(false);
+                }
+                
+            }
+            */
         }
 
         bool hexCircle(int x, int z, int i)
@@ -85,9 +113,8 @@ namespace Field
             cell.transform.localPosition = position;
             cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, z);
             cell.GetComponent<HCell>().index = i;
-            
 
-            
+
             //hoverImage.enabled = false;
 
             /*
@@ -149,7 +176,7 @@ namespace Field
             foreach (HCell cell in cells)
             {
                 // TODO: fehlt der check ob es schon ein gebäude hat
-                if ((cell.GetCellType() == HCell.CellType.Acquired ||cell.GetCellType() == HCell.CellType.Neutral) && !cell.hasBuilding)
+                if ((cell.GetCellType() == HCell.CellType.Acquired ||cell.GetCellType() == HCell.CellType.Neutral||cell.GetCellType() == HCell.CellType.Base) && !cell.hasBuilding)
                 {
                     if (cell.coordinates.X == h.coordinates.X - 1 && cell.coordinates.Y == h.coordinates.Y)
                     {
@@ -294,28 +321,134 @@ namespace Field
 
         private void neutralCell()
         {
-            GetCellIndex(0, 0, 0).SetCellType(HCell.CellType.Neutral);
+            GetCellIndex(0, 0, 0).SetCellType(HCell.CellType.Base); // portal
+            GetCellIndex(0,0,0).SetPrefab(19,new Vector3(0,60,0));
+            
+            GetCellIndex(0, 1,-1).SetCellType(HCell.CellType.Base);// arch1
+            GetCellIndex(0, 1,-1).SetPrefab(20,new Vector3(0,-120,0)); //-30
+            
+            GetCellIndex(1, -1,0).SetCellType(HCell.CellType.Base); // arch2
+            GetCellIndex(1, -1,0).SetPrefab(20,new Vector3(0,-240,0)); //-150
+            
+            GetCellIndex(-1, 0,1).SetCellType(HCell.CellType.Base); // arch3
+            GetCellIndex(-1, 0,1).SetPrefab(20);
+            
             int z = 0;
             int p = 1;
             int m = -1;
             for (int i = 0; i < HGameManager.instance.distanceFromSpawn; i++)
             {
-                if (i >= 2 && i < HGameManager.instance.distanceFromSpawn-1)
+                if (i >= 1 && i < HGameManager.instance.distanceFromSpawn-1)
                 {
+                    pathTest.Add(GetCellIndex(z, m, p));
                     GetCellIndex(z, m, p).SetCellType(HCell.CellType.Acquired);
                     GetCellIndex(p, z, m).SetCellType(HCell.CellType.Acquired);
                     GetCellIndex(m, p, z).SetCellType(HCell.CellType.Acquired);
                 }
                 else
                 {
-                    GetCellIndex(z, m, p).SetCellType(HCell.CellType.Neutral);
-                    GetCellIndex(p, z, m).SetCellType(HCell.CellType.Neutral);
-                    GetCellIndex(m, p, z).SetCellType(HCell.CellType.Neutral);
+                    if (i == HGameManager.instance.distanceFromSpawn - 1)
+                    {
+                        GetCellIndex(z, m,p).SetPrefab(22); // base
+                        GetCellIndex(p, z,m).SetPrefab(22);
+                        GetCellIndex(m, p,z).SetPrefab(22);
+                    }
+                    else
+                    {
+                        GetCellIndex(z, m,p).SetPrefab(21,new Vector3(0,-300,0));
+                        GetCellIndex(p, z,m).SetPrefab(21,new Vector3(0,180,0));
+                        GetCellIndex(m, p,z).SetPrefab(21,new Vector3(0,-60,0));
+                    }
+                        
+                    GetCellIndex(z, m, p).SetCellType(HCell.CellType.Base); // base ?
+                    
+                    GetCellIndex(p, z, m).SetCellType(HCell.CellType.Base);
+                    
+                    GetCellIndex(m, p, z).SetCellType(HCell.CellType.Base);
+                    
                 }
 
                 p++;
                 m--;
             }
+            
+        }
+
+        public void ShortestPathPrefabs(HCell[] path)
+        {
+            int x;
+            int y;
+            int z;
+            if(path == null)
+                return;
+            for (int i = 2; i < path.Length - 1; i++)
+            {
+
+                x = Math.Abs(path[i - 1].coordinates.X) - Math.Abs(path[i + 1].coordinates.X);
+                y = Math.Abs(path[i - 1].coordinates.Y) - Math.Abs(path[i + 1].coordinates.Y);
+                z = Math.Abs(path[i - 1].coordinates.Z) - Math.Abs(path[i + 1].coordinates.Z);
+
+                // wenn x+z+y = 4  dann ist es gerade, wenn x+z+y = 3  ecke
+                Debug.Log(x + " : " +y + " : " +z);
+                if (Math.Abs(x + z + y) == 4)
+                {
+                    Straight(path[i], x, y, z);
+                }
+                else
+                {
+                    Corner(path[i], x, y, z);
+                }
+            }
+
+
+
+        }
+
+        public void Corner(HCell path,int x, int y, int z)
+        {
+            int str;
+            // neutral hat weniger felder als ressourcen
+            if (path.Ressource.GetRessourceType() == Ressource.RessourceType.Neutral)
+                str = 2;
+            else
+                str = 3;
+            int absx = Math.Abs(x);
+            int absy = Math.Abs(y);
+            int absz = Math.Abs(z);
+
+            if (absx == 1 && absy == 1 && absz == 2)
+            {
+                path.SetPrefab(path.GetCellType(),path.Ressource.GetRessourceType(),new Vector3(0,0,0),str);
+            } else if (absx == 2 && absy == 1 && absz == 1)
+            {
+                path.SetPrefab(path.GetCellType(),path.Ressource.GetRessourceType(),new Vector3(0,210,0),str);
+            }
+            
+        }
+
+        public void Straight(HCell path,int x, int y,int z)
+        {
+            int str;
+            // neutral hat weniger felder als ressourcen
+            if (path.Ressource.GetRessourceType() == Ressource.RessourceType.Neutral)
+                str = 1;
+            else
+                str = 2;
+            
+            //das ist nur für straight
+            if (x != 0 && y != 0 && z == 0)
+            {
+                path.SetPrefab(path.GetCellType(),path.Ressource.GetRessourceType(),new Vector3(0,120,0),str);
+            } else if (y != 0 && z != 0 && x == 0)
+            {
+                path.SetPrefab(path.GetCellType(),path.Ressource.GetRessourceType(),new Vector3(0,-120,0),str);
+            }
+            else
+            {
+                path.SetPrefab(path.GetCellType(),path.Ressource.GetRessourceType(),Vector3.zero,str);
+            }
+                
+        
         }
 
         public HCell GetCellIndex(int x, int y, int z)
@@ -358,4 +491,5 @@ namespace Field
             return s;
         }
     }
+    
 }
