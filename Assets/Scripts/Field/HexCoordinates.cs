@@ -31,6 +31,11 @@ namespace Field
             this.z = z;
         }
 
+        public Vector3 GetVector()
+        {
+            return new Vector3(X,Y,Z);
+        }
+
         public bool CompareCoord(HexCoordinates hexCoordinates)
         {
             return hexCoordinates.X == X && hexCoordinates.Y == Y && hexCoordinates.Z == Z;

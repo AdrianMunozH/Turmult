@@ -52,15 +52,14 @@ MonoBehaviour:
   range: 5
   fireRate: 5
   turnSpeed: 10
-  ressourceType: 0
+  ressourceType: 10
   turretType: 2
   lineRenderer: {fileID: 0}
   partToRotate: {fileID: 0}
   firePoint: {fileID: 0}
   enemyTag: Enemy
   canRotate: 0
-  projectilePrefab: {fileID: 7927641795192460296, guid: 448ae3d7bb32a344e9348a9996ae6dfd,
-    type: 3}
+  projectilePrefab: {fileID: 100002, guid: 7a52d3ff698a7dc4dbc5f0152df3371a, type: 3}
   turret: {fileID: 11400000, guid: c341defec2ec37d4e86df642150478b4, type: 2}
   targets: []
   maxTargets: 3
@@ -395,7 +394,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8933498397941002119}
   m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
-  m_LocalPosition: {x: 0.5, y: 3.89, z: 4.1}
+  m_LocalPosition: {x: 0.5, y: 5.08, z: 4.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8836867540277947563}

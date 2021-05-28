@@ -9358,7 +9358,7 @@ GameObject:
   - component: {fileID: -8327588159139940966}
   - component: {fileID: 8474772804393656339}
   m_Layer: 0
-  m_Name: LightningState2
+  m_Name: LightningProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9373,7 +9373,7 @@ Transform:
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 400000}
   - {fileID: 400002}

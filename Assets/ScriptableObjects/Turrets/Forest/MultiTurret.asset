@@ -20,7 +20,7 @@ MonoBehaviour:
   turnSpeed: 10
   turretType: 2
   enemyTag: Enemy
-  ressourceType: 2
+  ressourceType: 10
   canRotate: 0
   name: 
   beschreibung: 

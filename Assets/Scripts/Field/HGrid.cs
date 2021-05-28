@@ -388,15 +388,18 @@ namespace Field
                 y = Math.Abs(path[i - 1].coordinates.Y) - Math.Abs(path[i + 1].coordinates.Y);
                 z = Math.Abs(path[i - 1].coordinates.Z) - Math.Abs(path[i + 1].coordinates.Z);
 
-                // wenn x+z+y = 4  dann ist es gerade, wenn x+z+y = 3  ecke
-                Debug.Log(x + " : " +y + " : " +z);
-                if (Math.Abs(x + z + y) == 4)
+
+                Vector3 magnVector = path[i+1].coordinates.GetVector() - path[i -1].coordinates.GetVector(); 
+                int magn = (int) (Math.Abs(magnVector.x) + Math.Abs(magnVector.y) + Math.Abs(magnVector.z));
+                
+                if (magnVector.x != 0 && magnVector.y != 0 && magnVector.z != 0)
                 {
-                    Straight(path[i], x, y, z);
+                    Corner(path[i-1],path[i],path[i+1], x, y, z);
+                   
                 }
                 else
                 {
-                    Corner(path[i], x, y, z);
+                    Straight(path[i], x, y, z);
                 }
             }
 
@@ -404,11 +407,11 @@ namespace Field
 
         }
 
-        public void Corner(HCell path,int x, int y, int z)
+        public void Corner(HCell prev,HCell curr,HCell next,int x, int y, int z)
         {
             int str;
             // neutral hat weniger felder als ressourcen
-            if (path.Ressource.GetRessourceType() == Ressource.RessourceType.Neutral)
+            if (curr.Ressource.GetRessourceType() == Ressource.RessourceType.Neutral)
                 str = 2;
             else
                 str = 3;
@@ -416,14 +419,42 @@ namespace Field
             int absy = Math.Abs(y);
             int absz = Math.Abs(z);
 
+            // a = prev, b = curr , c=next
+            Vector3 ac = next.transform.position - prev.transform.position;
+            Vector3 ab = curr.transform.position - prev.transform.position;
+            
+            var angle = Vector3.SignedAngle(ac, ab,new Vector3(0,1,0));
+            
+            // Hilfvektor senkr. nach oben für die winkelberechnung++
+            Vector3 control = GetCellIndex(prev.coordinates.X - 1, prev.coordinates.Y - 1, prev.coordinates.Z + 2).transform.position;
+            //Vector3 control = new Vector3(prev.coordinates.X -1, prev.coordinates.Y -1,prev.coordinates.Z+2);
+            //var rotationOfPrefab = (float) (Math.Acos(Vector3.Dot(ac, control) / (ac.magnitude * control.magnitude)) * 180/Math.PI);
+            var rotationOfPrefab = Vector3.Angle(ac, control);
+            Debug.Log(rotationOfPrefab);
+            // debug hat ergeben das control vektor -1 für y hat.
+            Debug.Log(prev.coordinates.ToString() + curr.coordinates.ToString() + next.coordinates.ToString() + control.ToString());
+            if (angle > 0)
+            {
+                curr.SetPrefab(curr.GetCellType(),curr.Ressource.GetRessourceType(),new Vector3(0,rotationOfPrefab+120f,0),str);
+            }
+            else
+            {
+                curr.SetPrefab(curr.GetCellType(),curr.Ressource.GetRessourceType(),new Vector3(0,rotationOfPrefab,0),str);
+            }
+            
+           
+            
+            
+            /*
             if (absx == 1 && absy == 1 && absz == 2)
             {
                 path.SetPrefab(path.GetCellType(),path.Ressource.GetRessourceType(),new Vector3(0,0,0),str);
             } else if (absx == 2 && absy == 1 && absz == 1)
             {
-                path.SetPrefab(path.GetCellType(),path.Ressource.GetRessourceType(),new Vector3(0,210,0),str);
+                path.SetPrefab(path.GetCellType(),path.Ressource.GetRessourceType(),new Vector3(0,120,0),str);
             }
-            
+            */
+
         }
 
         public void Straight(HCell path,int x, int y,int z)

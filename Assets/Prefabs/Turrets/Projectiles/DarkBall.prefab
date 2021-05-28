@@ -23351,8 +23351,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 400010}
-  - component: {fileID: 11400002}
-  - component: {fileID: 114000013055348556}
+  - component: {fileID: 1739266345869735225}
+  - component: {fileID: 5054899177876313623}
   m_Layer: 0
   m_Name: DarkBall
   m_TagString: Untagged
@@ -23379,7 +23379,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &11400002
+--- !u!114 &1739266345869735225
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -23388,11 +23388,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 100010}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11d497e14c8a38f49ac502a303de982d, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f09e93ad8f20404ca466c31915c779f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
---- !u!114 &114000013055348556
+  speed: 25
+  target: {fileID: 0}
+  effects:
+  - {fileID: 5054899177876313623}
+  impactEffect: {fileID: 3591840901927880627, guid: c82ebe3d58760754fae3b9828c56148a,
+    type: 3}
+  particelDestroyTime: 2
+--- !u!114 &5054899177876313623
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -23401,6 +23407,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 100010}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db08735561a38424182823d8d175333b, type: 3}
+  m_Script: {fileID: 11500000, guid: 72181d5aff3db7e4f912408f570c4ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _type: 2
+  targetEnemy: {fileID: 0}
+  damage: 30

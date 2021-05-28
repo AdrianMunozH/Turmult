@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Mono.Collections.Generic;
+using Turrets;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -146,7 +147,7 @@ namespace Field
 
         private void OnMouseDown()
         {
-            if (BuildManager.instance.IsBuildModeOn())
+            if (BuildManager.instance.IsBuildModeOn() && _ressource.GetRessourceType() == Ressource.RessourceType.Neutral)
             {
                 //Wenn Feld noch nicht bebaut ist
                 if (turret != null)
@@ -159,10 +160,12 @@ namespace Field
                     Debug.Log("Bratan, Feld einnehmen!");
                     return;
                 }
-
                 //Bauen des Turms
                 GameObject turretToBuild = BuildManager.instance.GetTurretToBuild();
                 turret = (GameObject) Instantiate(turretToBuild, transform.position, transform.rotation);
+                Turret t = turret.GetComponent<Turret>();
+                
+                SetPrefab((int) t.ressourceType + 2);
                 hasBuilding = true;
                 Debug.Log("reroute turretmode");
                 HGameManager.instance.rerouteEnemys(this);
@@ -225,6 +228,7 @@ namespace Field
         public void SetPrefab(CellType cellType, Ressource.RessourceType ressource, Vector3? rotation = null,int path = 0)
         {
             int index = (int) cellType + (int) ressource + path;
+            
             if(transform.childCount > 0)
                 GameObject.Destroy(transform.GetChild(0).gameObject);
             
