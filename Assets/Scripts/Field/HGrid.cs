@@ -389,13 +389,11 @@ namespace Field
                 z = Math.Abs(path[i - 1].coordinates.Z) - Math.Abs(path[i + 1].coordinates.Z);
 
 
-                Vector3 magnVector = path[i+1].coordinates.GetVector() - path[i -1].coordinates.GetVector(); 
-                int magn = (int) (Math.Abs(magnVector.x) + Math.Abs(magnVector.y) + Math.Abs(magnVector.z));
-                
+                Vector3 magnVector = path[i+1].coordinates.GetVector() - path[i-1].coordinates.GetVector(); 
+                Debug.Log( i + " " +magnVector.ToString());                
                 if (magnVector.x != 0 && magnVector.y != 0 && magnVector.z != 0)
                 {
-                    Corner(path[i-1],path[i],path[i+1], x, y, z);
-                   
+                    Corner(path[i-1],path[i],path[i+1]);
                 }
                 else
                 {
@@ -407,7 +405,20 @@ namespace Field
 
         }
 
-        public void Corner(HCell prev,HCell curr,HCell next,int x, int y, int z)
+        private Vector3 prevVec;
+        private Vector3 nextVec;
+        private Vector3 ac;
+        private Vector3 control;
+        
+        private void OnDrawGizmos()
+        {
+            
+            //Gizmos.DrawLine(prevVec,nextVec);
+            // Gizmos.DrawRay(prevVec,ac);
+            Gizmos.DrawRay(new Vector3(),control);
+        }
+
+        public void Corner(HCell prev,HCell curr,HCell next)
         {
             int str;
             // neutral hat weniger felder als ressourcen
@@ -415,31 +426,43 @@ namespace Field
                 str = 2;
             else
                 str = 3;
-            int absx = Math.Abs(x);
-            int absy = Math.Abs(y);
-            int absz = Math.Abs(z);
+
+            prevVec = prev.transform.position;
+            nextVec = next.transform.position;
 
             // a = prev, b = curr , c=next
             Vector3 ac = next.transform.position - prev.transform.position;
             Vector3 ab = curr.transform.position - prev.transform.position;
+            this.control = GetCellIndex(prev.coordinates.X - 1, prev.coordinates.Y - 1, prev.coordinates.Z + 2).transform.position - prev.transform.position;
+            
+            this.ac = ac;
             
             var angle = Vector3.SignedAngle(ac, ab,new Vector3(0,1,0));
-            
+
+
             // Hilfvektor senkr. nach oben für die winkelberechnung++
-            Vector3 control = GetCellIndex(prev.coordinates.X - 1, prev.coordinates.Y - 1, prev.coordinates.Z + 2).transform.position;
+            Vector3 control = GetCellIndex(prev.coordinates.X - 1, prev.coordinates.Y - 1, prev.coordinates.Z + 2).transform.position - prev.transform.position;
+            prev.lineRenderer.enabled = true;
+            prev.lineRenderer.SetPosition(0,prev.transform.position);
+            prev.lineRenderer.SetPosition(1,prev.transform.position+ac.normalized);
+            
+
+
+
             //Vector3 control = new Vector3(prev.coordinates.X -1, prev.coordinates.Y -1,prev.coordinates.Z+2);
             //var rotationOfPrefab = (float) (Math.Acos(Vector3.Dot(ac, control) / (ac.magnitude * control.magnitude)) * 180/Math.PI);
             var rotationOfPrefab = Vector3.Angle(ac, control);
             Debug.Log(rotationOfPrefab);
             // debug hat ergeben das control vektor -1 für y hat.
-            Debug.Log(prev.coordinates.ToString() + curr.coordinates.ToString() + next.coordinates.ToString() + control.ToString());
+            Debug.Log(ac.ToString() + control.ToString());
+
             if (angle > 0)
             {
-                curr.SetPrefab(curr.GetCellType(),curr.Ressource.GetRessourceType(),new Vector3(0,rotationOfPrefab+120f,0),str);
+                curr.SetPrefab(curr.GetCellType(),curr.Ressource.GetRessourceType(),new Vector3(0,rotationOfPrefab,0),str);
             }
             else
             {
-                curr.SetPrefab(curr.GetCellType(),curr.Ressource.GetRessourceType(),new Vector3(0,rotationOfPrefab,0),str);
+                curr.SetPrefab(curr.GetCellType(),curr.Ressource.GetRessourceType(),new Vector3(0,rotationOfPrefab+180f,0),str);
             }
             
            

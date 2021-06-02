@@ -83,6 +83,8 @@ namespace Field
         */
         //Optimization: Cachen des Renderes auf dem Objekt
         private Renderer rend;
+        public LineRenderer lineRenderer;
+
 
         public Image gridImage;
         
