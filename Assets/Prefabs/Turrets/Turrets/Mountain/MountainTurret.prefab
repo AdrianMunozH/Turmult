@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 3580504868905221051}
   - component: {fileID: 2898319857720867651}
   m_Layer: 0
-  m_Name: MountainTowerHex
+  m_Name: MountainTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -496,7 +496,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4058fd05367c8e54ab736c6e41de0d12, type: 2}
+      objectReference: {fileID: 2100000, guid: 44412213517ffda45855f95c5e30736e, type: 2}
     - target: {fileID: 919132149155446097, guid: 25a62d99d24bf1148ba92fbb560f239a,
         type: 3}
       propertyPath: m_Name
