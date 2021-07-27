@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
 using Field;
+using MLAPI;
+using MLAPI.Messaging;
 using UnityEngine;
 
 namespace Enemies
 {
-    public class EnemySpawn : MonoBehaviour
+    //NetworkBehaviour erbt von MonoBehaviour
+    public class EnemySpawn : NetworkBehaviour
     {
         public GameObject enemyPrefab;
         [HideInInspector] public List<GameObject> enemys;
@@ -272,6 +275,12 @@ namespace Enemies
         public void deleteEnemy(GameObject go)
         {
             enemys.Remove(go);
+        }
+
+        [ServerRpc]
+        private void SpawnObjectServerRpc()
+        {
+            
         }
     }
 }

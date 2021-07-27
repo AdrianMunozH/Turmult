@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7040434030325219526}
   - component: {fileID: 8836346988946111324}
   - component: {fileID: -4468424244418104167}
-  - component: {fileID: 298370388527867992}
   m_Layer: 0
   m_Name: enemy
   m_TagString: Enemy
@@ -113,12 +112,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   path: []
-  moveSpeed: 10
-  defaultSpeed: 10
   pathIndex: 0
   enemySpawn: {fileID: 0}
   life: 100
+  isSlowed: 0
+  moveSpeed: 10
+  defaultSpeed: 10
   _text: {fileID: 3815218281569563750}
+  isAttacking: 0
 --- !u!114 &-4468424244418104167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,20 +137,6 @@ MonoBehaviour:
   PrefabHashGenerator: enemy
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
---- !u!114 &298370388527867992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3181208745485999917}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d7d0fc7f7fb2c246a79134e38bf23f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Position:
-    m_InternalValue: {x: 0, y: 0, z: 0}
 --- !u!1 &7252253663343092537
 GameObject:
   m_ObjectHideFlags: 0
