@@ -14,7 +14,6 @@ public class NetworkGuiManager : MonoBehaviour
         else
         {
             StatusLabels();
-
         }
 
         GUILayout.EndArea();

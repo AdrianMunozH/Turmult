@@ -9,7 +9,7 @@ namespace Enemies
     //NetworkBehaviour erbt von MonoBehaviour
     public class EnemySpawn : NetworkBehaviour
     {
-        public GameObject enemyPrefab;
+        public NetworkObject enemyPrefab;
         [HideInInspector] public List<GameObject> enemys;
 
         //test für shortest path
@@ -87,7 +87,10 @@ namespace Enemies
 
         public void SpawnEnemy(HCell[] path, bool isAttacking)
         {
-            GameObject enemy = Instantiate(enemyPrefab);
+            //Nur auf Clients ausführen
+            if (!IsOwner) return;
+            SpawnObjectServerRpc();
+    /*      GameObject enemy = Instantiate(enemyPrefab);
             enemys.Add(enemy);
             enemy.transform.SetParent(transform, false);
             enemy.transform.position = path[0].gameObject.transform.position;
@@ -95,7 +98,7 @@ namespace Enemies
             enemyMovement.moveSpeed = 3f;
             enemyMovement.isAttacking = isAttacking;
             enemyMovement.path = path;
-            enemyMovement.enemySpawn = this;
+            enemyMovement.enemySpawn = this;*/
         }
         
         public HCell[] Solve()
@@ -276,7 +279,7 @@ namespace Enemies
         [ServerRpc]
         private void SpawnObjectServerRpc()
         {
-            GameObject go = Instantiate(enemyPrefab, Vector3.zero, Quaternion.identity);
+            NetworkObject go = Instantiate(enemyPrefab, Vector3.zero, Quaternion.identity);
             go.GetComponent<NetworkObject>().Spawn();
         }
     }
