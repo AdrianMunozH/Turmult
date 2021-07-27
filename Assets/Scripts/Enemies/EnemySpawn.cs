@@ -38,13 +38,12 @@ namespace Enemies
                     // null check muss vllt drin bleibern
                     if (mov != null && mov.path[j].coordinates.CompareCoord(turretCell.coordinates))
                     {
-                        rebuildPath(i,mov.pathIndex);
-                        
+                        rebuildPath(i, mov.pathIndex);
                     }
-                    if(mov.isAttacking)
-                        rebuildPath(i,mov.pathIndex);
+
+                    if (mov.isAttacking)
+                        rebuildPath(i, mov.pathIndex);
                 }
-                
             }
         }
 
@@ -55,43 +54,38 @@ namespace Enemies
             HCell[] newPath = Solve(mov.path[startIndex]);
             List<HCell> sp = RecPath(newPath);
             sp = ShortestPath(sp, mov.path[startIndex]);
-            
-            // muss noch der attacking modus rein
+
+            //TODO: muss noch der attacking modus rein
             if (sp.Count > 0)
             {
                 mov.pathIndex = 0;
                 mov.path = sp.ToArray();
                 mov.isAttacking = false;
-
             }
-                            
-            
-            
-            
-            
-            // test
-            
 
-          
+            // test
+
+
             else
-            {    // attacking modus
+            {
+                // attacking modus
                 newPath = SolveAttack(mov.path[startIndex]);
                 sp = RecPath(newPath);
                 sp = ShortestPath(sp);
-                
-                
+
+
                 // danach wird am ersten turm gestoppt (vllt +1)
                 int towerIndex = (int) TowerFinder(sp);
                 // von towerindex bis zum letzten element
-                sp.RemoveRange(towerIndex,sp.Count-towerIndex);
+                sp.RemoveRange(towerIndex, sp.Count - towerIndex);
                 mov.isAttacking = true;
                 mov.path = sp.ToArray();
             }
+
             HGrid.Instance.ShortestPathPrefabs(sp.ToArray());
-        
         }
 
-        public void SpawnEnemy(HCell[] path,bool isAttacking)
+        public void SpawnEnemy(HCell[] path, bool isAttacking)
         {
             GameObject enemy = Instantiate(enemyPrefab);
             enemys.Add(enemy);
@@ -103,8 +97,7 @@ namespace Enemies
             enemyMovement.path = path;
             enemyMovement.enemySpawn = this;
         }
-
-        //public HCell[] Solve(HCell start)
+        
         public HCell[] Solve()
         {
             Queue<HCell> queue = new Queue<HCell>();
@@ -135,6 +128,7 @@ namespace Enemies
             Debug.Log("solve list: " + HGrid.Instance.ArrayToString(prev));
             return prev;
         }
+
         public HCell[] Solve(HCell altStart)
         {
             Queue<HCell> queue = new Queue<HCell>();
@@ -167,7 +161,9 @@ namespace Enemies
 
             Debug.Log("solve list: " + HGrid.Instance.ArrayToString(prev));
             return prev;
-        }public HCell[] SolveAttack(HCell altStart)
+        }
+
+        public HCell[] SolveAttack(HCell altStart)
         {
             Queue<HCell> queue = new Queue<HCell>();
             queue.Enqueue(altStart);
@@ -200,8 +196,7 @@ namespace Enemies
             Debug.Log("solve list: " + HGrid.Instance.ArrayToString(prev));
             return prev;
         }
-        
-        
+
 
         public bool Visited(List<int> list, int i)
         {
@@ -239,6 +234,7 @@ namespace Enemies
                 if (path[j].hasBuilding)
                     return j;
             }
+
             // wenn es kein tower gibt dann ist was falsch gelaufen
             return 0;
         }
@@ -256,7 +252,7 @@ namespace Enemies
             // wenn der weg nicht möglich ist kommt eine leere liste zurück // muss also gecheckt werden
             return new List<HCell>();
         }
-    
+
         public List<HCell> ShortestPath(List<HCell> path, HCell altStart)
         {
             path.Reverse();
@@ -280,7 +276,8 @@ namespace Enemies
         [ServerRpc]
         private void SpawnObjectServerRpc()
         {
-            
+            GameObject go = Instantiate(enemyPrefab, Vector3.zero, Quaternion.identity);
+            go.GetComponent<NetworkObject>().Spawn();
         }
     }
 }

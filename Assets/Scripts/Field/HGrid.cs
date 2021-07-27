@@ -389,8 +389,8 @@ namespace Field
                 z = Math.Abs(path[i - 1].coordinates.Z) - Math.Abs(path[i + 1].coordinates.Z);
 
 
-                Vector3 magnVector = path[i+1].coordinates.GetVector() - path[i-1].coordinates.GetVector(); 
-                Debug.Log( i + " " +magnVector.ToString());                
+                Vector3 magnVector = path[i+1].coordinates.GetVector() - path[i-1].coordinates.GetVector();
+                
                 if (magnVector.x != 0 && magnVector.y != 0 && magnVector.z != 0)
                 {
                     Corner(path[i-1],path[i],path[i+1]);
@@ -452,9 +452,6 @@ namespace Field
             //Vector3 control = new Vector3(prev.coordinates.X -1, prev.coordinates.Y -1,prev.coordinates.Z+2);
             //var rotationOfPrefab = (float) (Math.Acos(Vector3.Dot(ac, control) / (ac.magnitude * control.magnitude)) * 180/Math.PI);
             var rotationOfPrefab = Vector3.Angle(ac, control);
-            Debug.Log(rotationOfPrefab);
-            // debug hat ergeben das control vektor -1 für y hat.
-            Debug.Log(ac.ToString() + control.ToString());
 
             if (angle > 0)
             {
