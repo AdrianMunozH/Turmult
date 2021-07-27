@@ -12,8 +12,8 @@ namespace Field
         private GameObject turretToBuildPreview;
         public GameObject standardTurretPrefab;
         public GameObject standardTurretPreviewPrefab;
-        private bool _buildModeOn;
-        private bool _acquireModeOn;
+        public bool _buildModeOn;
+        public bool _acquireModeOn;
 
         void Awake()
         {
