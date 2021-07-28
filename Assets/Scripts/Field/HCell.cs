@@ -26,6 +26,8 @@ namespace Field
         private GameObject previewTurret;
         private Ressource _ressource;
 
+        private BuildManager buildManager;
+
         public Ressource Ressource => _ressource;
 
 
@@ -108,10 +110,10 @@ namespace Field
         {
             //Hier Turrets
             //Nur wenn der Buildmode eingeschaltet ist, werden previews angezeigt
-            if (BuildManager.instance.IsBuildModeOn() && type == CellType.Acquired)
+            if (buildManager.IsBuildModeOn() && type == CellType.Acquired && buildManager.GetTurretToBuild() != null)
             {
                 gridImage.color = SetColor(214.0f/255f, 200.0f/255f, 178.0f/255f,70f/255f);
-                GameObject turretToBuild = BuildManager.instance.getTurretToBuildPreview();
+                GameObject turretToBuild = buildManager.GetTurretToBuildPreview();
                 if (turretToBuild != null)
                 {
                     previewTurret = (GameObject) Instantiate(turretToBuild, transform.position, transform.rotation);
@@ -146,8 +148,10 @@ namespace Field
 
         private void OnMouseDown()
         {
-            if (BuildManager.instance.IsBuildModeOn() && _ressource.GetRessourceType() == Ressource.RessourceType.Neutral)
+            if (buildManager.IsBuildModeOn() && _ressource.GetRessourceType() == Ressource.RessourceType.Neutral)
             {
+                if (buildManager.GetTurretToBuild() == null)
+                    return;
                 //Wenn Feld noch nicht bebaut ist
                 if (turret != null)
                 {
@@ -160,7 +164,7 @@ namespace Field
                     return;
                 }
                 //Bauen des Turms
-                GameObject turretToBuild = BuildManager.instance.GetTurretToBuild();
+                GameObject turretToBuild = buildManager.GetTurretToBuild();
                 turret = (GameObject) Instantiate(turretToBuild, transform.position, transform.rotation);
                 Turret t = turret.GetComponent<Turret>();
                 
@@ -168,7 +172,7 @@ namespace Field
                 hasBuilding = true;
                 Debug.Log("reroute turretmode");
                 HGameManager.instance.rerouteEnemys(this);
-            }else if (BuildManager.instance.isAcquireModeOn())
+            }else if (buildManager.isAcquireModeOn())
             {
                 if (type == CellType.Acquired)
                 {
@@ -197,6 +201,8 @@ namespace Field
         // Start is called before the first frame update
         void Start()
         {
+            buildManager = BuildManager.instance;
+            
             _ressource = new Ressource();
             rend = GetComponent<Renderer>();
             rend.enabled = false;
