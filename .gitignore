@@ -74,6 +74,7 @@ Thumbs.db
 /islandtd/Assets/AssetStoreTools*
 *.apk
 *.unitypackage
+/Assets/Editor.meta
  
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
