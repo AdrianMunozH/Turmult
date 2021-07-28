@@ -10,8 +10,9 @@ namespace Control
 {
     public class UI : MonoBehaviour
     {
-        [SerializeField] private Button towerBuildMode;
-        [SerializeField] private Button minionBuildMode;
+        [SerializeField] private Image bgImage;
+
+        [SerializeField] private Sprite[] bgSprites;
         
         [SerializeField] private GameObject[] ressourceType;
 
@@ -21,17 +22,20 @@ namespace Control
         [SerializeField] private GameObject[] towerTypes;
         [SerializeField] private GameObject[] minionTypes;
 
-        [SerializeField] private BuildManager buildManager;
+        private BuildManager buildManager;
 
         //wenn towerMode false, dann ist man im minionMode
         private bool towerMode;
 
         private void Start()
         {
+            buildManager = BuildManager.instance;
             towerMode = true;
             scrollViewTower.SetActive(true);
             towerTypes[0].SetActive(true);
             ressourceType[0].SetActive(true);
+            bgImage.sprite = bgSprites[1];
+
         }
 
         [UsedImplicitly]
@@ -43,6 +47,7 @@ namespace Control
             DeselectType();
             towerTypes[0].SetActive(true);
             ressourceType[0].SetActive(true);
+            bgImage.sprite = bgSprites[1];
         }
         
         [UsedImplicitly]
@@ -54,6 +59,20 @@ namespace Control
             DeselectType();
             minionTypes[0].SetActive(true);
             ressourceType[0].SetActive(true);
+            bgImage.sprite = bgSprites[1];
+        }
+        [UsedImplicitly]
+        public void SetAcquireMode()
+        {
+            DeselectType();
+            scrollViewTower.SetActive(false);
+            scrollViewMinion.SetActive(false);
+            bgImage.sprite = bgSprites[0];
+            buildManager._acquireModeOn = !buildManager._acquireModeOn;
+            if (buildManager._acquireModeOn && buildManager._buildModeOn)
+            {
+                buildManager._buildModeOn = false;
+            }
         }
 
         [UsedImplicitly]
@@ -68,14 +87,17 @@ namespace Control
                     case "Mountain":
                         towerTypes[0].SetActive(true);
                         ressourceType[0].SetActive(true);
+                        bgImage.sprite = bgSprites[1];
                         break;
                     case "Forest":
                         towerTypes[1].SetActive(true);
                         ressourceType[1].SetActive(true);
+                        bgImage.sprite = bgSprites[2];
                         break;
                     case "Swamp":
                         towerTypes[2].SetActive(true);
                         ressourceType[2].SetActive(true);
+                        bgImage.sprite = bgSprites[3];
                         break;
                 }
             }
@@ -87,14 +109,17 @@ namespace Control
                     case "Mountain":
                         minionTypes[0].SetActive(true);
                         ressourceType[0].SetActive(true);
+                        bgImage.sprite = bgSprites[1];
                         break;
                     case "Forest":
                         minionTypes[1].SetActive(true);
                         ressourceType[1].SetActive(true);
+                        bgImage.sprite = bgSprites[2];
                         break;
                     case "Swamp":
                         minionTypes[2].SetActive(true);
                         ressourceType[2].SetActive(true);
+                        bgImage.sprite = bgSprites[3];
                         break;
                 }
             }

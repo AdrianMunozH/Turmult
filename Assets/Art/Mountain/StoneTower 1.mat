@@ -43,7 +43,7 @@ Material:
     m_Floats:
     - Vector1_8192cefd1cdb4c78a14a79a298d7e5a5: 1
     - _LightProbeContribution: 3.5
-    - _OutlineDepthSensitivity: 0.329
+    - _OutlineDepthSensitivity: 0.285
     - _OutlineNormalsSensitivity: 1
     - _OutlineThickness: 2.5
     - _Smoothness: 0.9

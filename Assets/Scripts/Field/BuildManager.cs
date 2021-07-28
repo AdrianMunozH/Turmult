@@ -12,6 +12,9 @@ namespace Field
         private GameObject turretToBuildPreview;
         public GameObject standardTurretPrefab;
         public GameObject standardTurretPreviewPrefab;
+        public GameObject[] mountainTurrets;
+        public GameObject[] forestTurrets;
+        public GameObject[] swampTurrets;
         public bool _buildModeOn;
         public bool _acquireModeOn;
 
@@ -31,7 +34,7 @@ namespace Field
         void Start()
         {
             //Setzt den Standard Turret
-            turretToBuild = standardTurretPrefab;
+            //TODO Müssen dann noch PreviewPrefabs für alle Türme machen und erst bei der Shop Auswahl setzen
             turretToBuildPreview = standardTurretPreviewPrefab;
         }
 
@@ -40,7 +43,7 @@ namespace Field
             return turretToBuild;
         }
         //Graphics.DrawMesh vllt ist schöner
-        public GameObject getTurretToBuildPreview()
+        public GameObject GetTurretToBuildPreview()
         {
             return turretToBuildPreview;
         }
@@ -71,6 +74,11 @@ namespace Field
             {
                 _buildModeOn = false;
             }
+        }
+
+        public void SetTurretToBuild(GameObject turret)
+        {
+            turretToBuild = turret;
         }
     }
 }
