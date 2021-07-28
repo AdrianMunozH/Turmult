@@ -31,12 +31,6 @@ namespace Control
         // Update is called once per frame
         void FixedUpdate()
         {
-            //Wenn man sich nicht mehr bewegen möchten einfach Escape drücken
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                doMovement = !doMovement;
-            }
-
             if (!doMovement)
                 return;
 
@@ -83,6 +77,12 @@ namespace Control
         
         private void Update()
         {
+            //Wenn man sich nicht mehr bewegen möchten einfach Escape drücken
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                doMovement = !doMovement;
+            }
+            
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 ToggleBoolObject.Toggle(showUi);
