@@ -1,4 +1,6 @@
+using Events;
 using UnityEngine;
+using ValueObjects;
 
 namespace Control
 {
@@ -13,6 +15,8 @@ namespace Control
         public float clampMaxZ = 50f;
         public float clampMinX = -100f;
         public float clampMaxX = 100f;
+        
+        public BoolObject showUi; 
 
 
         public float panBorderThickness = 10;
@@ -25,7 +29,7 @@ namespace Control
         }
 
         // Update is called once per frame
-        void Update()
+        void FixedUpdate()
         {
             //Wenn man sich nicht mehr bewegen möchten einfach Escape drücken
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -76,5 +80,15 @@ namespace Control
             pos.y = Mathf.Clamp(pos.y, minScrollY, maxScrollY);
             transform.position = pos;
         }
+        
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                ToggleBoolObject.Toggle(showUi);
+            }
+        }
     }
+    
+
 }
