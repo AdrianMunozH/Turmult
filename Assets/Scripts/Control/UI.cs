@@ -78,9 +78,14 @@ namespace Control
         [UsedImplicitly]
         public void SelectType(Button type)
         {
+            
+            if (buildManager._acquireModeOn)
+            {
+                towerMode = true;
+                scrollViewTower.SetActive(true);
+            }
             if (towerMode)
             {
-                
                 DeselectType();
                 switch (type.name)
                 {
