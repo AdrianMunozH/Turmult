@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Ocean2
+  m_Shader: {fileID: -6465566751694194690, guid: b88eda5e50011b8448d84d3c69ca3fa7,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_0043b0712f23440ea21a766d6374ad65:
+        m_Texture: {fileID: 2800000, guid: d5793bae40a99af499c6907a0c4c3e46, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_c0e87872e986407d884e3ac31f9049dc:
+        m_Texture: {fileID: 2800000, guid: 9014cb61a52cca949aa6861773fa0eb8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_e755870f443049349eac5fc7ce20df19:
+        m_Texture: {fileID: 2800000, guid: 9014cb61a52cca949aa6861773fa0eb8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_4f837075337f499098a4c0ce0ca3ba9e: 0.01
+    - Vector1_7a213fc91efa4187a9b8198ea968f5f3: 0.0075
+    - Vector1_7e04550b3e2a4ac49dc5d33beaa79a05: 4.15
+    - Vector1_8d08590cf5bf442b8148fbb130fd5bca: 0.46
+    - Vector1_a144ab376a1e447e958adf29512a6b4c: 1.5
+    - Vector1_ac844920794943ddb88a310810bbd4e9: 0.01
+    m_Colors:
+    - Color_0c23fd06dc4249e8be9d2f9340ca731c: {r: 0.7987421, g: 0.8897217, b: 1, a: 1}
+    - Color_47e8595339864b9781130c04ad7be5a3: {r: 0.04111775, g: 0.4535484, b: 0.9339623,
+        a: 1}
+    - Color_bcba5e81dc544bb7be4073bd14a1ba1b: {r: 0.048920073, g: 0.5213787, b: 0.9150943,
+        a: 1}
+  m_BuildTextureStacks: []
