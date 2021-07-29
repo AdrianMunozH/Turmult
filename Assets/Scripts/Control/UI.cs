@@ -15,6 +15,7 @@ namespace Control
         [SerializeField] private Sprite[] bgSprites;
         
         [SerializeField] private GameObject[] ressourceType;
+        [SerializeField] private GameObject acquireMode;
 
         [SerializeField] private GameObject scrollViewTower;
         [SerializeField] private GameObject scrollViewMinion;
@@ -65,6 +66,7 @@ namespace Control
         public void SetAcquireMode()
         {
             DeselectType();
+            acquireMode.SetActive(true);
             scrollViewTower.SetActive(false);
             scrollViewMinion.SetActive(false);
             bgImage.sprite = bgSprites[0];
@@ -146,6 +148,7 @@ namespace Control
                 ressource.SetActive(false);
             }
 
+            acquireMode.SetActive(false);
             buildManager._acquireModeOn = false;
         }
     
