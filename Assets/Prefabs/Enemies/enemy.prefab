@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5245351540438916662}
   - component: {fileID: 7040434030325219526}
   - component: {fileID: 8836346988946111324}
-  - component: {fileID: -4468424244418104167}
+  - component: {fileID: 7019096867883613023}
   m_Layer: 0
   m_Name: enemy
   m_TagString: Enemy
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 3181208745485999917}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 2938547451610704376}
   - {fileID: 6480987152991242892}
@@ -120,7 +120,7 @@ MonoBehaviour:
   defaultSpeed: 10
   _text: {fileID: 3815218281569563750}
   isAttacking: 0
---- !u!114 &-4468424244418104167
+--- !u!114 &7019096867883613023
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

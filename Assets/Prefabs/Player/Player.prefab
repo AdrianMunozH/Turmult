@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 1576148235180730949}
   - component: {fileID: 245886646953897395}
   - component: {fileID: -7877223871002928289}
-  - component: {fileID: -1756908607939304409}
   - component: {fileID: 1211286058648853460}
+  - component: {fileID: 2099758758925309922}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -113,20 +113,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &-1756908607939304409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9078574614522361800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 819f2c6e42b8a3b45a0b387a13658705, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Position:
-    m_InternalValue: {x: 0, y: 0, z: 0}
 --- !u!114 &1211286058648853460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,3 +130,16 @@ MonoBehaviour:
   PrefabHashGenerator: Player
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
+--- !u!114 &2099758758925309922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9078574614522361800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5083a21919e93042a202ec71470be82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 3181208745485999917, guid: 1c0c977ff81db754a94e036494d66ac0, type: 3}

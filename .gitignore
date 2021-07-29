@@ -65,6 +65,7 @@ Thumbs.db
 /[Ll]ibrary/ArtifactDB/
 /sysinfo.txt
 /iosbuild/
+/Build_Linux/
 /testbuild/
 /Assets/ExampleAssets/
 /Assets/"TextMesh Pro"/

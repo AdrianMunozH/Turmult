@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 288332745467519222}
   - component: {fileID: 472681035787753992}
-  - component: {fileID: -8767830963904494462}
   m_Layer: 0
   m_Name: EnemySpawnPoint
   m_TagString: Untagged
@@ -44,25 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 895290b7ca2016c46a6dbca88f5c4525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 3181208745485999917, guid: 1c0c977ff81db754a94e036494d66ac0,
+  enemyPrefab: {fileID: -4468424244418104167, guid: 1c0c977ff81db754a94e036494d66ac0,
     type: 3}
   enemys: []
   defaultStart: {fileID: 0}
   end: {fileID: 0}
---- !u!114 &-8767830963904494462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8963504615295261624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NetworkInstanceId: 0
-  PrefabHash: 12987386759757905314
-  PrefabHashGenerator: EnemySpawnPoint
-  AlwaysReplicateAsRoot: 0
-  DontDestroyWithOwner: 0

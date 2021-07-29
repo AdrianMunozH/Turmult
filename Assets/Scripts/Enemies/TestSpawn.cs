@@ -6,7 +6,7 @@ namespace Enemies
 {
     public class TestSpawn : NetworkBehaviour
     {
-        [SerializeField] private NetworkObject prefab;
+        [SerializeField] private GameObject prefab;
         // Start is called before the first frame update
         void Start()
         {
@@ -16,19 +16,24 @@ namespace Enemies
         // Update is called once per frame
         void Update()
         {
-        
+            if (!IsOwner) return;
+            if (Input.GetKey(KeyCode.X))
+            {
+                SpawnTestObject();
+            }
         }
 
         public void SpawnTestObject()
         {
             SpawnObjectServerRpc();
+            Debug.Log("Running RPC");
         }
     
         [ServerRpc]
         private void SpawnObjectServerRpc()
         {
-            NetworkObject no = Instantiate(prefab, Vector3.zero, Quaternion.identity);
-            no.Spawn();
+            GameObject go = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+            go.GetComponent<NetworkObject>().Spawn();
         }
     }
 }
