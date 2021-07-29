@@ -56,7 +56,7 @@ Material:
     - _LightProbeContribution: 3.5
     - _OutlineDepthSensitivity: 0.412
     - _OutlineNormalsSensitivity: 1
-    - _OutlineThickness: 2
+    - _OutlineThickness: 0
     - _Smoothness: 0.9
     m_Colors:
     - Color_0546b84a8b5a4c5b88fb37e9a4de387c: {r: 1, g: 1, b: 1, a: 0}
