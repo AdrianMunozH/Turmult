@@ -11,12 +11,10 @@ namespace Control
     public class UI : MonoBehaviour
     {
         [SerializeField] private Image bgImage;
-        [SerializeField] private Image bgTopImage;
 
         [SerializeField] private Sprite[] bgSprites;
         
         [SerializeField] private GameObject[] ressourceType;
-        [SerializeField] private GameObject acquireMode;
 
         [SerializeField] private GameObject scrollViewTower;
         [SerializeField] private GameObject scrollViewMinion;
@@ -50,7 +48,6 @@ namespace Control
             towerTypes[0].SetActive(true);
             ressourceType[0].SetActive(true);
             bgImage.sprite = bgSprites[1];
-            bgTopImage.sprite = bgImage.sprite;
         }
         
         [UsedImplicitly]
@@ -71,8 +68,6 @@ namespace Control
             scrollViewTower.SetActive(false);
             scrollViewMinion.SetActive(false);
             bgImage.sprite = bgSprites[0];
-            bgTopImage.sprite = bgImage.sprite;
-            acquireMode.SetActive(true);
             buildManager._acquireModeOn = !buildManager._acquireModeOn;
             if (buildManager._acquireModeOn && buildManager._buildModeOn)
             {
@@ -133,8 +128,6 @@ namespace Control
                         break;
                 }
             }
-
-            bgTopImage.sprite = bgImage.sprite;
         }
 
         void DeselectType()
@@ -154,7 +147,6 @@ namespace Control
             }
 
             buildManager._acquireModeOn = false;
-            acquireMode.SetActive(false);
         }
     
     }
