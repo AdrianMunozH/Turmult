@@ -25,11 +25,12 @@ namespace Enemies
 
         public void SpawnTestObject()
         {
-            SpawnObjectServerRpc();
             Debug.Log("Running RPC");
+            SpawnObjectServerRpc();
+
         }
     
-        [ServerRpc]
+        [ServerRpc(RequireOwnership =  false)]
         private void SpawnObjectServerRpc()
         {
             GameObject go = Instantiate(prefab, Vector3.zero, Quaternion.identity);
