@@ -5477,6 +5477,8 @@ GameObject:
   - component: {fileID: 541232429}
   - component: {fileID: 541232431}
   - component: {fileID: 541232432}
+  - component: {fileID: 541232433}
+  - component: {fileID: 541232434}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -5570,6 +5572,36 @@ MonoBehaviour:
   - {fileID: 10332675}
   - {fileID: 1921698021}
   - {fileID: 578493871}
+--- !u!114 &541232433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 541232428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5083a21919e93042a202ec71470be82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 3181208745485999917, guid: 1c0c977ff81db754a94e036494d66ac0, type: 3}
+--- !u!114 &541232434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 541232428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NetworkInstanceId: 0
+  PrefabHash: 13494567273885427380
+  PrefabHashGenerator: GameManager
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
 --- !u!114 &543646378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9216,8 +9248,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6953708955655802805, guid: 1c0c977ff81db754a94e036494d66ac0,
-          type: 3}
+      - m_Target: {fileID: 541232433}
         m_TargetAssemblyTypeName: Enemies.TestSpawn, Assembly-CSharp
         m_MethodName: SpawnTestObject
         m_Mode: 1
@@ -16086,6 +16117,7 @@ MonoBehaviour:
     NetworkTransport: {fileID: 1583321476}
     RegisteredScenes:
     - asdasd
+    - Game
     AllowRuntimeSceneChanges: 0
     NetworkPrefabs:
     - Prefab: {fileID: 9078574614522361800, guid: 4f522fb63b8743248ac646818788227b,
