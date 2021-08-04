@@ -79,7 +79,7 @@ namespace Field
             cooldown = false;
         }
 
-        private void SpawnEnemyWave()
+        public void SpawnEnemyWave()
         {
             foreach (EnemySpawn enemySpawn in enemySpawns)
             {

@@ -9248,9 +9248,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 541232433}
-        m_TargetAssemblyTypeName: Enemies.TestSpawn, Assembly-CSharp
-        m_MethodName: SpawnTestObject
+      - m_Target: {fileID: 541232429}
+        m_TargetAssemblyTypeName: Field.HGameManager, Assembly-CSharp
+        m_MethodName: SpawnEnemyWave
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

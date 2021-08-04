@@ -42,7 +42,7 @@ namespace Enemies
         {
             // kann auch ersetzt werden durch path[].gameObject.transform.position
             //vecPath = HGrid.Instance.HCellPositions(path);
-            Vector3 position = path[pathIndex].gameObject.transform.position;
+            Vector3 position = new Vector3 (path[pathIndex].gameObject.transform.position.x, path[pathIndex].gameObject.transform.position.y + 1.1f, path[pathIndex].gameObject.transform.position.z);
             if (Vector3.Distance(transform.position, position) < 0.01f)
             {
                 if (pathIndex < path.Length - 1)
