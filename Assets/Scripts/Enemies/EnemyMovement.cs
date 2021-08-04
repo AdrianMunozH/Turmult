@@ -14,6 +14,10 @@ namespace Enemies
 
         public EnemySpawn enemySpawn;
 
+        private Animator animator;
+        private int isAttackingHash;
+        private int isDyingHash;
+
 
         // Stats
         public float life = 100;
@@ -34,6 +38,10 @@ namespace Enemies
             pathIndex = 0;
             moveSpeed = defaultSpeed;
             _canvas = GetComponent<Canvas>();
+            
+            animator = GetComponent<Animator>();
+            isAttackingHash = Animator.StringToHash("isAttacking");
+            isDyingHash = Animator.StringToHash("isDying");
             //_text = GetComponentInChildren<TextMeshProUGUI>();
         }
 
@@ -87,6 +95,7 @@ namespace Enemies
             {
                 _text.SetText("Hit!");
                 _attackCountdown = 1f / attackRate;
+                animator.SetBool(isAttackingHash, true);
             }
 
             _attackCountdown -= Time.deltaTime;
@@ -99,7 +108,7 @@ namespace Enemies
                 life -= damage;
             }
             else
-                Destroy(gameObject);
+                StartCoroutine(KillEnemy());
             // die methode falls wir sowas wie deathanimation macehn 
 
             _text.enabled = true;
@@ -119,6 +128,15 @@ namespace Enemies
         {
             _text.SetText("");
             yield return new WaitForSeconds(0.2f);
+        }
+
+        
+        IEnumerator KillEnemy()
+        {
+            animator.SetBool(isDyingHash, true);
+            moveSpeed = 0;
+            yield return new WaitForSeconds(2f);
+            Destroy(gameObject);
         }
     }
 }
