@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water
-  m_Shader: {fileID: -6465566751694194690, guid: 1b233ad361dcb48418ade167ae67a1df,
+  m_Name: Portal 4
+  m_Shader: {fileID: -6465566751694194690, guid: 9a39a768dbd1c904eb843f705d7b9038,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -20,8 +20,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_5f2297f404304e6bb694550da4506ae4:
-        m_Texture: {fileID: 2800000, guid: ff8e08538b65ad9479403db433ecb774, type: 3}
+    - Texture2D_3e20fd1e3ff84cc181b0a179582f961c:
+        m_Texture: {fileID: 10305, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -37,21 +37,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_29E1D101: 10
-    - Vector1_6995E020: 0.39
-    - Vector1_6FC0F321: 1.36
-    - Vector1_9BE240F: 0.24
-    - Vector1_A3C2C4BE: 11
-    - Vector1_A46BDA69: 7.65
-    - Vector1_B2F47345: -3.51
-    - Vector1_DC1F3E50: 1.71
-    - Vector1_a2b72185d9e64a89a47c6932a9467dac: 0
-    - Vector1_ce73a28d0ee44c74b216491d53a5906d: 0.001
-    - Vector1_d7ee9e181d4143b9b9a313aa5ff8f311: 5.4
+    - Vector1_22ddc8729fce4552a02924084de97c91: 0.1
+    - Vector1_bcfd1af07f2c44278e525112eb7f09d0: 2.85
+    - Vector1_c436fccaf20d4a279008d5ace987dff5: 0.1
+    - Vector1_dbf4e67323764a968aa9f405cc0fe369: 0
     m_Colors:
-    - Color_4b96ea2c77d34d8092b5e14928ec5b3c: {r: 0.40000004, g: 0.34509805, b: 0.4666667,
+    - Color_ff157becef574a34befd113bd595e736: {r: 0.09558986, g: 2.6082377, b: 1.2836353,
         a: 1}
-    - Color_B73BBE24: {r: 0.06330841, g: 0.06330841, b: 0.103773594, a: 1}
-    - Color_BD43C6BF: {r: 0.0056053917, g: 0.0033465356, b: 0.0060488326, a: 1}
-    - Color_EFCDB9B5: {r: 0.3208534, g: 0.27411887, b: 0.6226415, a: 1}
   m_BuildTextureStacks: []
