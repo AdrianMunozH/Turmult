@@ -105,15 +105,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5452768809961582609}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 2.52, z: 0}
+  m_LocalRotation: {x: -0, y: -0.77463573, z: -0, w: 0.6324078}
+  m_LocalPosition: {x: -0.05711913, y: 2.52, z: 0.56506854}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3474613999511653643}
   - {fileID: 6629099769000624128}
   m_Father: {fileID: 6450093076230669727}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -101.544, z: 0}
 --- !u!1 &5965164860795772709
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,9 +172,12 @@ MonoBehaviour:
   partToRotate: {fileID: 4933368902158128073}
   firePoint: {fileID: 6629099769000624128}
   enemyTag: Enemy
-  canRotate: 0
+  canRotate: 1
   projectilePrefab: {fileID: 100004, guid: 7c687a4414095c349a8ec5ac5f3cccb2, type: 3}
   turret: {fileID: 11400000, guid: 3410a57c94cd89342b01560f0adaa574, type: 2}
+  targets: []
+  maxTargets: 0
+  firePoints: []
 --- !u!120 &-6677271779239206385
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -286,7 +289,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  damage: 2
   effects:
   - {fileID: 3279267209617862027}
 --- !u!114 &3279267209617862027

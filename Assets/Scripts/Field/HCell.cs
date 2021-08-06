@@ -1,4 +1,5 @@
-﻿using Turrets;
+﻿using DG.Tweening;
+using Turrets;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -165,8 +166,15 @@ namespace Field
                 }
                 //Bauen des Turms
                 GameObject turretToBuild = buildManager.GetTurretToBuild();
-                turret = (GameObject) Instantiate(turretToBuild, transform.position, transform.rotation);
+                Vector3 turPos = transform.position;
+                turret = (GameObject) Instantiate(turretToBuild, new Vector3(turPos.x, turPos.y - 10, turPos.z) , transform.rotation);
                 Turret t = turret.GetComponent<Turret>();
+                var sequence = DOTween.Sequence();
+                sequence.Append(turret.transform.DOLocalMoveY(turPos.y, 0.5f));
+                sequence.Append(turret.transform.DOShakeScale( 1f, new Vector3(0f, 0.01f, 0f), 5, 0, fadeOut:true));
+                
+                
+                
                 
                 SetPrefab((int) t.ressourceType + 2);
                 hasBuilding = true;
@@ -236,8 +244,15 @@ namespace Field
             
             if(transform.childCount > 0)
                 GameObject.Destroy(transform.GetChild(0).gameObject);
-            
-            GameObject hexagon = Instantiate(hexPrefabs[index], transform.position, transform.rotation);
+            //Unterschiedliche Standartfelder 
+            // if (ressource == Ressource.RessourceType.Neutral && path == 0)
+            // {
+            //     if (Random.Range(1,5)== 1)
+            //         index += Random.Range(1, 5);
+            // }
+            Vector3 pos = transform.position;
+            GameObject hexagon = Instantiate(hexPrefabs[index], new Vector3(pos.x,pos.y -10, pos.z), transform.rotation);
+            hexagon.transform.DOLocalMoveY(pos.y, 0.5f);
 
             if(rotation != null)
                 hexagon.transform.eulerAngles = new Vector3(hexagon.transform.eulerAngles.x + rotation.Value.x,

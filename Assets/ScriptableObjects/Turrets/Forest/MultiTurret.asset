@@ -21,7 +21,7 @@ MonoBehaviour:
   turretType: 2
   enemyTag: Enemy
   ressourceType: 10
-  canRotate: 0
+  canRotate: 1
   name: 
   beschreibung: 
   logo: {fileID: 0}

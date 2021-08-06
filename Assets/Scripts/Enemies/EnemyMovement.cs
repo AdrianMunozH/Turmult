@@ -103,17 +103,17 @@ namespace Enemies
 
         public void TakeDamage(float damage)
         {
-            if (damage < life)
-            {
-                life -= damage;
-            }
-            else
-                StartCoroutine(KillEnemy());
-            // die methode falls wir sowas wie deathanimation macehn 
-
-            _text.enabled = true;
-            _text.SetText(life.ToString());
-            //StartCoroutine("DeactivateText");
+            // if (damage < life)
+            // {
+            //     life -= damage;
+            // }
+            // else
+            //     StartCoroutine(KillEnemy());
+            // // die methode falls wir sowas wie deathanimation macehn 
+            //
+            // _text.enabled = true;
+            // _text.SetText(life.ToString());
+            // //StartCoroutine("DeactivateText");
         }
 
 

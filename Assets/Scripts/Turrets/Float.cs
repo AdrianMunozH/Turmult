@@ -19,7 +19,7 @@ namespace Turrets
         
         void Start () {
             // Store the starting position & rotation of the object
-            posOffset = transform.position;
+            posOffset = transform.localPosition;
             randomizer = Random.Range(0.5f, 2f);
 
         }
@@ -32,7 +32,7 @@ namespace Turrets
             tempPos = posOffset;
             tempPos.y += Mathf.Sin (Time.fixedTime * Mathf.PI * (frequency * randomizer)) * amplitude;
  
-            transform.position = tempPos;
+            transform.localPosition = tempPos;
         }
     }
 

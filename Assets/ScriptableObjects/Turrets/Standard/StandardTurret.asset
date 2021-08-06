@@ -17,11 +17,11 @@ MonoBehaviour:
   mana: 0
   range: 3
   fireRate: 2
-  turnSpeed: 10
+  turnSpeed: 4
   turretType: 0
   enemyTag: Enemy
   ressourceType: 0
-  canRotate: 0
+  canRotate: 1
   name: Der Ultimative Standardturm
   beschreibung: Dieser Turm ist so unglaublich Standard
   logo: {fileID: 0}

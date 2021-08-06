@@ -13,8 +13,11 @@ namespace Field
         public GameObject standardTurretPrefab;
         public GameObject standardTurretPreviewPrefab;
         public GameObject[] mountainTurrets;
+        public GameObject[] mountainPreviewTurrets;
         public GameObject[] forestTurrets;
+        public GameObject[] forestPreviewTurrets;
         public GameObject[] swampTurrets;
+        public GameObject[] swampPreviewTurrets;
         public bool _buildModeOn;
         public bool _acquireModeOn;
 
@@ -79,6 +82,10 @@ namespace Field
         public void SetTurretToBuild(GameObject turret)
         {
             turretToBuild = turret;
+        }
+        public void SetTurretToBuildPreview(GameObject preview)
+        {
+            turretToBuildPreview = preview;
         }
     }
 }

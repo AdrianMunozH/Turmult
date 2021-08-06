@@ -3300,7 +3300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8352941}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5629,8 +5629,12 @@ MonoBehaviour:
     type: 3}
   mountainTurrets:
   - {fileID: 672762153369891017, guid: 05e16edd2929fae4da9f906f302450bf, type: 3}
+  mountainPreviewTurrets:
+  - {fileID: 672762153369891017, guid: 0868d2bafee463d42879b82247dc5a71, type: 3}
   forestTurrets: []
+  forestPreviewTurrets: []
   swampTurrets: []
+  swampPreviewTurrets: []
   _buildModeOn: 0
   _acquireModeOn: 0
 --- !u!114 &541232432

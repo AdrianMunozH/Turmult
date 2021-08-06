@@ -59,7 +59,7 @@ namespace Turrets
                 ressourceType = turret.ressourceType;
                 turretType = turret.turretType;
                 enemyTag = turret.enemyTag;
-                canRotate = turret.canRotate;
+                // canRotate = turret.canRotate;
             }
 
             if (turretType == TurretType.MULTI)
@@ -198,10 +198,16 @@ namespace Turrets
                 return;
             }
             checkType();
+            
 
             // soll mit if statement ausgemacht werden können für statische türme
-            if(canRotate)
+            if (canRotate)
+            {
                 rotate();
+                
+            }
+                
+            
         
             
         
