@@ -97,6 +97,8 @@ namespace Enemies
             enemyMovement.isAttacking = isAttacking;
             enemyMovement.path = path;
             enemyMovement.enemySpawn = this;
+            
+            
         }
         
         public HCell[] Solve()

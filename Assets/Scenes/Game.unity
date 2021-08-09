@@ -4591,7 +4591,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 119
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -5637,6 +5637,7 @@ MonoBehaviour:
   swampPreviewTurrets: []
   _buildModeOn: 0
   _acquireModeOn: 0
+  grid: {fileID: 646463327}
 --- !u!114 &541232432
 MonoBehaviour:
   m_ObjectHideFlags: 0

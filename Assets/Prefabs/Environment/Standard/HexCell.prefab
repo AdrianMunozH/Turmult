@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 9050260254445555536}
   - component: {fileID: 8695769874674735302}
   - component: {fileID: -2930823753010692461}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HexCell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -649,6 +649,8 @@ MonoBehaviour:
     z: 0
   index: 0
   spindex: 0
+  acquiredField: {fileID: 0}
+  neighb: []
   hasBuilding: 0
   hexPrefabs:
   - {fileID: 771220004977217262, guid: 2972403bdcefb6a47a1ef5645260b8d3, type: 3}
@@ -666,7 +668,7 @@ MonoBehaviour:
   - {fileID: 7655556425212797121, guid: 3b65de43dde860f4892a12aba883acab, type: 3}
   - {fileID: 6763611451001946636, guid: 0662dc888428d9348b53cb6b89888257, type: 3}
   - {fileID: 1023656607210297681, guid: c7141b50366a55b4eadc26f1b1b835c9, type: 3}
-  - {fileID: 657644200667063929, guid: e8d548154ae34fd40bcf77ca9a9994fb, type: 3}
+  - {fileID: 657644200667063929, guid: f55c8ff6601c72e4fb93eb6e12f5facc, type: 3}
   - {fileID: 657644200667063929, guid: e8d548154ae34fd40bcf77ca9a9994fb, type: 3}
   - {fileID: 3640900618232963074, guid: 76199f7641ac9754f87415a3e7592038, type: 3}
   - {fileID: 7879624188255872065, guid: d33d574e95d48f040be87d24fdff8ec8, type: 3}

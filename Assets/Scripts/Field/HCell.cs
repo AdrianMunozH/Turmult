@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System.Collections.Generic;
+using DG.Tweening;
 using Turrets;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,7 +13,8 @@ namespace Field
             CanBeAcquired = 0,
             Acquired = 1,
             Neutral = 4,
-            Base
+            Base,
+            Hidden = 6
         };
 
     
@@ -20,13 +22,18 @@ namespace Field
         int distance;
 
         public int index;
-        private CellType type;
+        public CellType type;
         public int spindex;
         private Color startColor;
         private GameObject turret;
         private GameObject previewTurret;
         private Ressource _ressource;
 
+        public GameObject acquiredField;
+
+        public HCell[] neighb;
+
+        
         private BuildManager buildManager;
 
         public Ressource Ressource => _ressource;
@@ -106,6 +113,8 @@ namespace Field
             tempColor.a = a;
             return tempColor;
         }
+
+        
     
         private void OnMouseEnter()
         {
@@ -120,14 +129,13 @@ namespace Field
                     previewTurret = (GameObject) Instantiate(turretToBuild, transform.position, transform.rotation);
                 }
                 //Hier Land
-            }else if (BuildManager.instance.isAcquireModeOn() && type != CellType.Neutral && type != CellType.Acquired)
+            }else if (BuildManager.instance.isAcquireModeOn() && type != CellType.Neutral && type != CellType.Acquired && type == CellType.CanBeAcquired)
             {
                 gridImage.color = SetColor(225f,225f,225f,70f/255f);
                 //rend.material.color = type == CellType.Acquired?GetAcquiredColor():hoverColorAcquireMode;
             }
         }
         
-
         private void OnMouseExit()
         {
             rend.material.color = startColor;
@@ -180,6 +188,7 @@ namespace Field
                 hasBuilding = true;
                 Debug.Log("reroute turretmode");
                 HGameManager.instance.rerouteEnemys(this);
+                
             }else if (buildManager.isAcquireModeOn())
             {
                 if (type == CellType.Acquired)
@@ -189,21 +198,28 @@ namespace Field
                 {
                     Debug.Log("Das Feld ist die Schweiz, lass es in Ruhe");
                
+                }else if (type == CellType.Hidden)
+                {
+                    Debug.Log("Hidden");
                 }
                 else
                 {
                     type = CellType.Acquired;
+                    acquiredField = GameObject.Find("Cylinder");
                     HGameManager.instance.rerouteEnemys(this);
                     Debug.Log("reroute acquiremode");
                     //SetCellColor();
                     SetPrefab(type,_ressource.GetRessourceType());
+                    CheckNeighb();
+                    
                 }
             }
         }
 
         private void Awake()
         {
-            type = CellType.CanBeAcquired;
+            type = CellType.Hidden;
+            
         }
 
         // Start is called before the first frame update
@@ -211,25 +227,92 @@ namespace Field
         {
             buildManager = BuildManager.instance;
             
+            
             _ressource = new Ressource();
             rend = GetComponent<Renderer>();
             rend.enabled = false;
+            
+            SetNeighb();
+            
 
             gridImage.color = SetColor(0f, 0f, 0f, 0f);
-            
             //SetCellColor();
             if (type != CellType.Base) ;
-                //SetPrefab(type,_ressource.GetRessourceType());
+                // SetPrefab(type,_ressource.GetRessourceType());
+        }
+        
+        private void SetNeighb()
+        {
+            //Debug.Log(h.coordinates.ToString() + " ausgewählt");
+            neighb = new HCell[6];
+            int i = 0;
+            foreach (HCell cell in buildManager.Grid.cells)
+            {
+                if (cell.coordinates.X == coordinates.X - 1 && cell.coordinates.Y == coordinates.Y)
+                {
+                    neighb[i] = cell;
+                    i++;
+                }
+                else if (cell.coordinates.X == coordinates.X && cell.coordinates.Y == coordinates.Y - 1)
+                {
+                    neighb[i] = cell;
+                    i++;
+                }
+                else if (cell.coordinates.X == coordinates.X + 1 && cell.coordinates.Y == coordinates.Y)
+                {
+                    neighb[i] = cell;
+                    i++;
+                }
+                else if (cell.coordinates.X == coordinates.X && cell.coordinates.Y == coordinates.Y + 1)
+                {
+                    neighb[i] = cell;
+                    i++;
+                }
+                else if (cell.coordinates.X == coordinates.X - 1 && cell.coordinates.Y == coordinates.Y + 1)
+                {
+                    neighb[i] = cell;
+                    i++;
+                }
+                else if (cell.coordinates.X == coordinates.X + 1 && cell.coordinates.Y == coordinates.Y - 1)
+                {
+                    neighb[i] = cell;
+                    i++;
+                }
+            }
+        }
+
+        public void SetUnacquiredPrefab(HCell cell, CellType cellType, Ressource.RessourceType ressource, Vector3? rotation = null,
+            int path = 0)
+        {
+
+            if (cell.transform.childCount == 0)
+            {
+                cell.SetCellType(CellType.CanBeAcquired);
+                int index = (int) cellType + (int) ressource + path;
+            
+                Vector3 pos = transform.position;
+                GameObject hexagon = Instantiate(hexPrefabs[index], new Vector3(pos.x,pos.y -10, pos.z), transform.rotation);
+                hexagon.transform.DOLocalMoveY(pos.y, 0.5f);
+                
+
+                if(rotation != null)
+                    hexagon.transform.eulerAngles = new Vector3(hexagon.transform.eulerAngles.x + rotation.Value.x,
+                        hexagon.transform.eulerAngles.y + rotation.Value.y,
+                        hexagon.transform.eulerAngles.z + rotation.Value.z);
+            
+                hexagon.transform.SetParent(transform, true);
+            }
+            
         }
 
         public void SetPrefab(int prefabIndex, Vector3? rotation = null)
         {
             
-            
             if(transform.childCount > 0)
                 GameObject.Destroy(transform.GetChild(0).gameObject);
             
             GameObject hexagon = Instantiate(hexPrefabs[prefabIndex], transform.position, transform.rotation);
+            
             
             if(rotation != null)
                 hexagon.transform.eulerAngles = new Vector3(hexagon.transform.eulerAngles.x + rotation.Value.x,
@@ -237,6 +320,16 @@ namespace Field
                     hexagon.transform.eulerAngles.z + rotation.Value.z);
             
             hexagon.transform.SetParent(transform, true);
+            if (acquiredField != null)
+            {
+                var acquire = hexagon.gameObject.transform.Find("Cylinder");
+                acquiredField = acquire.gameObject;
+                acquiredField.SetActive(true);
+            }
+            
+                
+            
+
         }
         public void SetPrefab(CellType cellType, Ressource.RessourceType ressource, Vector3? rotation = null,int path = 0)
         {
@@ -260,6 +353,37 @@ namespace Field
                     hexagon.transform.eulerAngles.z + rotation.Value.z);
             
             hexagon.transform.SetParent(transform, true);
+            //Setzt eingenommen Shader und aktiviert ihn
+            //TODO Material je nach Spieler anpassen
+            var acquire = hexagon.gameObject.transform.Find("Cylinder");
+            acquiredField = acquire.gameObject;
+            acquiredField.SetActive(true);
+            if (type == CellType.Hidden)
+            {
+                hexagon.SetActive(false);
+            }
+            CheckNeighb();
+            
+            
+            
+            
+        }
+
+        void CheckNeighb()
+        {
+            
+            foreach (var cell in neighb)
+            {
+                if (cell.GetCellType() == CellType.Hidden)
+                {
+                    cell.SetCellType(CellType.CanBeAcquired);
+                    cell.SetUnacquiredPrefab(cell, cell.GetCellType(),cell._ressource.GetRessourceType());
+                    Debug.Log("Woop woop");
+                }
+                
+                    
+                
+            }
         }
 
         //Setzt und aktualisiert die Materialen bzw. Farben einer Zelle
@@ -336,6 +460,7 @@ namespace Field
 
             rend.material.color = startColor;
         }
+        
 
         /**
      * Gibt die Farbe des eingenommenen Zustands zurück

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using DG.Tweening;
+using UnityEngine;
 
 namespace Field
 {
@@ -21,6 +23,11 @@ namespace Field
         public bool _buildModeOn;
         public bool _acquireModeOn;
 
+        [SerializeField] private HGrid grid;
+
+        public HGrid Grid => grid;
+        
+
         void Awake()
         {
             if (instance != null)
@@ -32,8 +39,10 @@ namespace Field
             instance = this;
             _buildModeOn = false;
             _acquireModeOn = false;
-        }
 
+            
+        }
+      
         void Start()
         {
             //Setzt den Standard Turret
@@ -86,6 +95,7 @@ namespace Field
         public void SetTurretToBuildPreview(GameObject preview)
         {
             turretToBuildPreview = preview;
+            
         }
     }
 }

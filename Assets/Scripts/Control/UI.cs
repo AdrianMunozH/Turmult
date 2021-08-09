@@ -49,6 +49,7 @@ namespace Control
             towerTypes[0].SetActive(true);
             ressourceType[0].SetActive(true);
             bgImage.sprite = bgSprites[1];
+            Camera.main.cullingMask = -1;
         }
         
         [UsedImplicitly]
@@ -61,6 +62,7 @@ namespace Control
             minionTypes[0].SetActive(true);
             ressourceType[0].SetActive(true);
             bgImage.sprite = bgSprites[1];
+            Camera.main.cullingMask &=  ~(1 << LayerMask.NameToLayer("Shader"));
         }
         [UsedImplicitly]
         public void SetAcquireMode()
@@ -75,6 +77,8 @@ namespace Control
             {
                 buildManager._buildModeOn = false;
             }
+            Camera.main.cullingMask = -1;
+            
         }
 
         [UsedImplicitly]

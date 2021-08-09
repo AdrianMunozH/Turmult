@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FieldEffect 3
+  m_Shader: {fileID: -6465566751694194690, guid: 8a5036a0089739a4892eeb10b33f42e6,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Cubemap_fd90ad78a72e4129bedd1785e9e9d868:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_d3df70ae38a0493cb98023bb7e02e0a3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_df462c9f291b44b888e1fddeb4c472c7:
+        m_Texture: {fileID: 2800000, guid: ec3ccb315de19a140bf689f813d2647b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_0543d0c81a54493184e068b5d8550151: 0
+    - Vector1_537347fa74c64547882ba3e5deec44e9: 0.02
+    - Vector1_7205ba7e03a84d95849b28bc53293610: 0
+    - Vector1_7d4768ef74bd4f5e9c735372c5ef61df: 0.49
+    - Vector1_92450055ccaf4054998cf54c42debc08: 7.87
+    - Vector1_c24042db2934496a99a73db9c4c7ee52: 0
+    - Vector1_e9caab95f0354c609c35c7a1022464dc: 37.95
+    - _OutlineDepthSensitivity: 0.213
+    - _OutlineNormalsSensitivity: 1
+    - _OutlineThickness: 5
+    m_Colors:
+    - Color_c3432c6a6166430e83217595fabb8bdd: {r: 1, g: 1, b: 1, a: 1}
+    - Color_f17de4ff8a4a45979b448da37301eb3f: {r: 0, g: 0.5971427, b: 1, a: 1}
+    - Color_fa5841ad37c147f588f6a72dac21da57: {r: 0.8603976, g: 0.8603976, b: 0.8603976,
+        a: 1}
+    - _Offset: {r: -1.33, g: -0.15, b: 0, a: 0}
+  m_BuildTextureStacks: []
