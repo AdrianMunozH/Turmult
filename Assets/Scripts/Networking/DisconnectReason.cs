@@ -1,4 +1,4 @@
-namespace Networking
+namespace DapperDino.UMT.Lobby.Networking
 {
     public class DisconnectReason
     {

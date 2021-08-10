@@ -4,7 +4,7 @@ using MLAPI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Networking
+namespace DapperDino.UMT.Lobby.Networking
 {
     [RequireComponent(typeof(GameNetPortal))]
     public class ClientGameNetPortal : MonoBehaviour
@@ -65,9 +65,10 @@ namespace Networking
             });
 
             byte[] payloadBytes = Encoding.UTF8.GetBytes(payload);
-
+    
+            Debug.Log("StartClient " + payload);
             NetworkManager.Singleton.NetworkConfig.ConnectionData = payloadBytes;
-
+            
             NetworkManager.Singleton.StartClient();
         }
 
@@ -95,7 +96,7 @@ namespace Networking
 
             HandleClientDisconnect(NetworkManager.Singleton.LocalClientId);
 
-            SceneManager.LoadScene(SceneData.Instance.sceneMainMenu);
+            SceneManager.LoadScene("MainMenu");
         }
 
         private void HandleConnectionFinished(ConnectStatus status)
@@ -120,14 +121,14 @@ namespace Networking
                 SceneManager.sceneLoaded -= HandleSceneLoaded;
                 gameNetPortal.OnUserDisconnectRequested -= HandleUserDisconnectRequested;
 
-                if (SceneManager.GetActiveScene().name != SceneData.Instance.sceneMainMenu)
+                if (SceneManager.GetActiveScene().name != "MainMenu")
                 {
                     if (!DisconnectReason.HasTransitionReason)
                     {
                         DisconnectReason.SetDisconnectReason(ConnectStatus.GenericDisconnect);
                     }
 
-                    SceneManager.LoadScene(SceneData.Instance.sceneMainMenu);
+                    SceneManager.LoadScene("MainMenu");
                 }
                 else
                 {

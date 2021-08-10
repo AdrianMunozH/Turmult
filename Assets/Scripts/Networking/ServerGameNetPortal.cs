@@ -8,67 +8,67 @@ using MLAPI.Spawning;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Networking
+namespace DapperDino.UMT.Lobby.Networking
 {
     public class ServerGameNetPortal : MonoBehaviour
     {
         [Header("Settings")]
         [SerializeField] private int maxPlayers = 4;
 
-        public static ServerGameNetPortal Instance => _instance;
-        private static ServerGameNetPortal _instance;
+        public static ServerGameNetPortal Instance => instance;
+        private static ServerGameNetPortal instance;
 
-        private Dictionary<string, PlayerData> _clientData;
-        private Dictionary<ulong, string> _clientIdToGuid;
-        private Dictionary<ulong, int> _clientSceneMap;
-        private bool _gameInProgress;
+        private Dictionary<string, PlayerData> clientData;
+        private Dictionary<ulong, string> clientIdToGuid;
+        private Dictionary<ulong, int> clientSceneMap;
+        private bool gameInProgress;
 
         private const int MaxConnectionPayload = 1024;
 
-        private GameNetPortal _gameNetPortal;
+        private GameNetPortal gameNetPortal;
 
         private void Awake()
         {
-            if (_instance != null && _instance != this)
+            if (instance != null && instance != this)
             {
                 Destroy(gameObject);
                 return;
             }
 
-            _instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
 
         private void Start()
         {
-            _gameNetPortal = GetComponent<GameNetPortal>();
-            _gameNetPortal.OnNetworkReadied += HandleNetworkReadied;
-
+            gameNetPortal = GetComponent<GameNetPortal>();
+            gameNetPortal.OnNetworkReadied += HandleNetworkReadied;
+            Debug.Log("Subscribed ApprovalCheck");
             NetworkManager.Singleton.ConnectionApprovalCallback += ApprovalCheck;
             NetworkManager.Singleton.OnServerStarted += HandleServerStarted;
 
-            _clientData = new Dictionary<string, PlayerData>();
-            _clientIdToGuid = new Dictionary<ulong, string>();
-            _clientSceneMap = new Dictionary<ulong, int>();
+            clientData = new Dictionary<string, PlayerData>();
+            clientIdToGuid = new Dictionary<ulong, string>();
+            clientSceneMap = new Dictionary<ulong, int>();
         }
 
         private void OnDestroy()
         {
-            if (_gameNetPortal == null) { return; }
+            if (gameNetPortal == null) { return; }
 
-            _gameNetPortal.OnNetworkReadied -= HandleNetworkReadied;
+            gameNetPortal.OnNetworkReadied -= HandleNetworkReadied;
 
             if (NetworkManager.Singleton == null) { return; }
-
+            Debug.Log("Unsubscribed ApprovalCheck");
             NetworkManager.Singleton.ConnectionApprovalCallback -= ApprovalCheck;
             NetworkManager.Singleton.OnServerStarted -= HandleServerStarted;
         }
 
         public PlayerData? GetPlayerData(ulong clientId)
         {
-            if (_clientIdToGuid.TryGetValue(clientId, out string clientGuid))
+            if (clientIdToGuid.TryGetValue(clientId, out string clientGuid))
             {
-                if (_clientData.TryGetValue(clientGuid, out PlayerData playerData))
+                if (clientData.TryGetValue(clientGuid, out PlayerData playerData))
                 {
                     return playerData;
                 }
@@ -87,59 +87,59 @@ namespace Networking
 
         public void StartGame()
         {
-            _gameInProgress = true;
+            gameInProgress = true;
 
-            NetworkSceneManager.SwitchScene(SceneData.Instance.sceneGame);
+            NetworkSceneManager.SwitchScene("Game");
         }
 
         public void EndRound()
         {
-            _gameInProgress = false;
+            gameInProgress = false;
 
-            NetworkSceneManager.SwitchScene(SceneData.Instance.sceneLobby);
+            NetworkSceneManager.SwitchScene("Lobby");
         }
 
         private void HandleNetworkReadied()
         {
             if (!NetworkManager.Singleton.IsServer) { return; }
 
-            _gameNetPortal.OnUserDisconnectRequested += HandleUserDisconnectRequested;
+            gameNetPortal.OnUserDisconnectRequested += HandleUserDisconnectRequested;
             NetworkManager.Singleton.OnClientDisconnectCallback += HandleClientDisconnect;
-            _gameNetPortal.OnClientSceneChanged += HandleClientSceneChanged;
+            gameNetPortal.OnClientSceneChanged += HandleClientSceneChanged;
 
-            NetworkSceneManager.SwitchScene(SceneData.Instance.sceneLobby);
+            NetworkSceneManager.SwitchScene("Lobby");
 
             if (NetworkManager.Singleton.IsHost)
             {
-                _clientSceneMap[NetworkManager.Singleton.LocalClientId] = SceneManager.GetActiveScene().buildIndex;
+                clientSceneMap[NetworkManager.Singleton.LocalClientId] = SceneManager.GetActiveScene().buildIndex;
             }
         }
 
         private void HandleClientDisconnect(ulong clientId)
         {
-            _clientSceneMap.Remove(clientId);
+            clientSceneMap.Remove(clientId);
 
-            if (_clientIdToGuid.TryGetValue(clientId, out string guid))
+            if (clientIdToGuid.TryGetValue(clientId, out string guid))
             {
-                _clientIdToGuid.Remove(clientId);
+                clientIdToGuid.Remove(clientId);
 
-                if (_clientData[guid].ClientId == clientId)
+                if (clientData[guid].ClientId == clientId)
                 {
-                    _clientData.Remove(guid);
+                    clientData.Remove(guid);
                 }
             }
 
             if (clientId == NetworkManager.Singleton.LocalClientId)
             {
-                _gameNetPortal.OnUserDisconnectRequested -= HandleUserDisconnectRequested;
+                gameNetPortal.OnUserDisconnectRequested -= HandleUserDisconnectRequested;
                 NetworkManager.Singleton.OnClientDisconnectCallback -= HandleClientDisconnect;
-                _gameNetPortal.OnClientSceneChanged -= HandleClientSceneChanged;
+                gameNetPortal.OnClientSceneChanged -= HandleClientSceneChanged;
             }
         }
 
         private void HandleClientSceneChanged(ulong clientId, int sceneIndex)
         {
-            _clientSceneMap[clientId] = sceneIndex;
+            clientSceneMap[clientId] = sceneIndex;
         }
 
         private void HandleUserDisconnectRequested()
@@ -150,31 +150,33 @@ namespace Networking
 
             ClearData();
 
-            SceneManager.LoadScene(SceneData.Instance.sceneMainMenu);
+            SceneManager.LoadScene("MainMenu");
         }
 
         private void HandleServerStarted()
         {
+            Debug.Log("zwei");
             if (!NetworkManager.Singleton.IsHost) { return; }
-
+            Debug.Log("hi");
             string clientGuid = Guid.NewGuid().ToString();
             string playerName = PlayerPrefs.GetString("PlayerName", "Missing Name");
 
-            _clientData.Add(clientGuid, new PlayerData(playerName, NetworkManager.Singleton.LocalClientId));
-            _clientIdToGuid.Add(NetworkManager.Singleton.LocalClientId, clientGuid);
+            clientData.Add(clientGuid, new PlayerData(playerName, NetworkManager.Singleton.LocalClientId));
+            clientIdToGuid.Add(NetworkManager.Singleton.LocalClientId, clientGuid);
         }
 
         private void ClearData()
         {
-            _clientData.Clear();
-            _clientIdToGuid.Clear();
-            _clientSceneMap.Clear();
+            clientData.Clear();
+            clientIdToGuid.Clear();
+            clientSceneMap.Clear();
 
-            _gameInProgress = false;
+            gameInProgress = false;
         }
 
         private void ApprovalCheck(byte[] connectionData, ulong clientId, NetworkManager.ConnectionApprovedDelegate callback)
         {
+            Debug.Log(MaxConnectionPayload + " < " + connectionData.Length);
             if (connectionData.Length > MaxConnectionPayload)
             {
                 callback(false, 0, false, null, null);
@@ -195,25 +197,27 @@ namespace Networking
             //     StartCoroutine(WaitToDisconnectClient(oldClientId, ConnectStatus.LoggedInAgain));
             // }
 
-            if (_gameInProgress)
+            if (gameInProgress)
             {
                 gameReturnStatus = ConnectStatus.GameInProgress;
             }
-            else if (_clientData.Count >= maxPlayers)
+            else if (clientData.Count >= maxPlayers)
             {
                 gameReturnStatus = ConnectStatus.ServerFull;
             }
 
+            Debug.Log(gameReturnStatus);
             if (gameReturnStatus == ConnectStatus.Success)
             {
-                _clientSceneMap[clientId] = connectionPayload.clientScene;
-                _clientIdToGuid[clientId] = connectionPayload.clientGUID;
-                _clientData[connectionPayload.clientGUID] = new PlayerData(connectionPayload.playerName, clientId);
+                clientSceneMap[clientId] = connectionPayload.clientScene;
+                clientIdToGuid[clientId] = connectionPayload.clientGUID;
+                clientData[connectionPayload.clientGUID] = new PlayerData(connectionPayload.playerName, clientId);
+                Debug.Log("PlayerData geschrieben:" + connectionPayload.playerName);
             }
 
             callback(false, 0, true, null, null);
 
-            _gameNetPortal.ServerToClientConnectResult(clientId, gameReturnStatus);
+            gameNetPortal.ServerToClientConnectResult(clientId, gameReturnStatus);
 
             if (gameReturnStatus != ConnectStatus.Success)
             {
@@ -223,7 +227,7 @@ namespace Networking
 
         private IEnumerator WaitToDisconnectClient(ulong clientId, ConnectStatus reason)
         {
-            _gameNetPortal.ServerToClientSetDisconnectReason(clientId, reason);
+            gameNetPortal.ServerToClientSetDisconnectReason(clientId, reason);
 
             yield return new WaitForSeconds(0);
 

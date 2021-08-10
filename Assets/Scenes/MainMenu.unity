@@ -3710,7 +3710,7 @@ MonoBehaviour:
     - MainMenu
     - Game
     - Lobby
-    AllowRuntimeSceneChanges: 1
+    AllowRuntimeSceneChanges: 0
     NetworkPrefabs: []
     PlayerPrefabHash:
       id: 0

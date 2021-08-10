@@ -1,3 +1,4 @@
+using DapperDino.UMT.Lobby.Networking;
 using Networking;
 using TMPro;
 using UnityEngine;
@@ -18,13 +19,12 @@ namespace Ui.Lobby
         {
             PlayerPrefs.SetString("PlayerName", displayNameInputField.text);
 
-            GameNetPortal.Instance.StartHost();
+            GameNetPortal.Instance.StartServer();
         }
 
         public void OnClientClicked()
         {
             PlayerPrefs.SetString("PlayerName", displayNameInputField.text);
-
             ClientGameNetPortal.Instance.StartClient();
         }
     }

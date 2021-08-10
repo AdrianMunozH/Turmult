@@ -5,7 +5,7 @@ using MLAPI.Serialization.Pooled;
 using MLAPI.Transports;
 using UnityEngine;
 
-namespace Networking
+namespace DapperDino.UMT.Lobby.Networking
 {
     public class GameNetPortal : MonoBehaviour
     {
@@ -54,9 +54,9 @@ namespace Networking
             UnregisterServerMessageHandlers();
         }
 
-        public void StartHost()
+        public void StartServer()
         {
-            NetworkManager.Singleton.StartHost();
+            NetworkManager.Singleton.StartServer();
         }
 
         public void RequestDisconnect()

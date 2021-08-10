@@ -1,3 +1,4 @@
+using DapperDino.UMT.Lobby.Networking;
 using MLAPI;
 using MLAPI.Connection;
 using MLAPI.Messaging;
@@ -21,7 +22,6 @@ namespace Ui.Lobby
             if (IsClient)
             {
                 lobbyPlayers.OnListChanged += HandleLobbyPlayersStateChanged;
-                Debug.Log("Subscribed Change Playerstate");
             }
 
             if (IsServer)
@@ -33,6 +33,7 @@ namespace Ui.Lobby
 
                 foreach (NetworkClient client in NetworkManager.Singleton.ConnectedClientsList)
                 {
+                    Debug.Log(client.ClientId);
                     HandleClientConnected(client.ClientId);
                 }
             }
@@ -70,9 +71,10 @@ namespace Ui.Lobby
         private void HandleClientConnected(ulong clientId)
         {
             var playerData = ServerGameNetPortal.Instance.GetPlayerData(clientId);
-            Debug.Log(playerData.ToString());
+            Debug.Log("Hier wird auch angeragt");
             if (!playerData.HasValue) { return; }
-            Debug.Log("hi");
+            Debug.Log("Keine Daten");
+
             lobbyPlayers.Add(new LobbyPlayerState(
                 clientId,
                 playerData.Value.PlayerName,
@@ -132,7 +134,7 @@ namespace Ui.Lobby
         {
             StartGameServerRpc();
         }
-
+        
         private void HandleLobbyPlayersStateChanged(NetworkListEvent<LobbyPlayerState> lobbyState)
         {
             for (int i = 0; i < lobbyPlayerCards.Length; i++)
@@ -145,7 +147,7 @@ namespace Ui.Lobby
                 {
                     lobbyPlayerCards[i].DisableDisplay();
                 }
-                Debug.Log("LobbyPlayerCard" +i);
+                
             }
 
             if(IsHost)

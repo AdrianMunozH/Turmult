@@ -1,6 +1,6 @@
 using System;
 
-namespace Networking
+namespace DapperDino.UMT.Lobby.Networking
 {
     [Serializable]
     public class ConnectionPayload
