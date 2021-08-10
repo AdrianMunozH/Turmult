@@ -8,7 +8,6 @@ public class MenuController : MonoBehaviour
     public GameObject settings;
     public GameObject credits;
     public GameObject steuerung;
-    public SceneChanger SceneChanger;
     public BoolObject showUi; 
 
     
@@ -49,17 +48,7 @@ public class MenuController : MonoBehaviour
         mainMenu.SetActive(true);
     }
 
-    public void BackToMainMenu()
-    {
-        SceneChanger.LoadSpecificScene(0);
-    }
 
-    public void ResetLevel()
-    {
-        SceneChanger.ResetLevel();
-        ToggleUi();
-    }
-    
     public void ToggleUi()
     {
         ToggleBoolObject.Toggle(showUi);
