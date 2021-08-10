@@ -52,7 +52,7 @@ namespace Ui.Lobby
 
         private bool IsEveryoneReady()
         {
-            if (lobbyPlayers.Count < 2)
+            if (lobbyPlayers.Count != 3)
             {
                 return false;
             }
@@ -113,8 +113,6 @@ namespace Ui.Lobby
         [ServerRpc(RequireOwnership = false)]
         private void StartGameServerRpc(ServerRpcParams serverRpcParams = default)
         {
-            if (serverRpcParams.Receive.SenderClientId != NetworkManager.Singleton.LocalClientId) { return; }
-
             if (!IsEveryoneReady()) { return; }
 
             ServerGameNetPortal.Instance.StartGame();
@@ -149,10 +147,11 @@ namespace Ui.Lobby
                 }
                 
             }
-
-            if(IsHost)
+            Debug.Log(IsEveryoneReady());
+            if(IsEveryoneReady())
             {
-                startGameButton.interactable = IsEveryoneReady();
+                Debug.Log("JETZT GEHTS HIER LOS");
+                StartGameServerRpc();
             }
         }
     }

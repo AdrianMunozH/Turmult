@@ -43,7 +43,6 @@ namespace DapperDino.UMT.Lobby.Networking
         {
             gameNetPortal = GetComponent<GameNetPortal>();
             gameNetPortal.OnNetworkReadied += HandleNetworkReadied;
-            Debug.Log("Subscribed ApprovalCheck");
             NetworkManager.Singleton.ConnectionApprovalCallback += ApprovalCheck;
             NetworkManager.Singleton.OnServerStarted += HandleServerStarted;
 
@@ -155,9 +154,7 @@ namespace DapperDino.UMT.Lobby.Networking
 
         private void HandleServerStarted()
         {
-            Debug.Log("zwei");
             if (!NetworkManager.Singleton.IsHost) { return; }
-            Debug.Log("hi");
             string clientGuid = Guid.NewGuid().ToString();
             string playerName = PlayerPrefs.GetString("PlayerName", "Missing Name");
 
@@ -176,7 +173,6 @@ namespace DapperDino.UMT.Lobby.Networking
 
         private void ApprovalCheck(byte[] connectionData, ulong clientId, NetworkManager.ConnectionApprovedDelegate callback)
         {
-            Debug.Log(MaxConnectionPayload + " < " + connectionData.Length);
             if (connectionData.Length > MaxConnectionPayload)
             {
                 callback(false, 0, false, null, null);
@@ -200,19 +196,19 @@ namespace DapperDino.UMT.Lobby.Networking
             if (gameInProgress)
             {
                 gameReturnStatus = ConnectStatus.GameInProgress;
+                callback(false, 0, false, null, null);
             }
             else if (clientData.Count >= maxPlayers)
             {
                 gameReturnStatus = ConnectStatus.ServerFull;
+                callback(false, 0, false, null, null);
             }
 
-            Debug.Log(gameReturnStatus);
             if (gameReturnStatus == ConnectStatus.Success)
             {
                 clientSceneMap[clientId] = connectionPayload.clientScene;
                 clientIdToGuid[clientId] = connectionPayload.clientGUID;
                 clientData[connectionPayload.clientGUID] = new PlayerData(connectionPayload.playerName, clientId);
-                Debug.Log("PlayerData geschrieben:" + connectionPayload.playerName);
             }
 
             callback(false, 0, true, null, null);

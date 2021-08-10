@@ -65,10 +65,8 @@ namespace DapperDino.UMT.Lobby.Networking
             });
 
             byte[] payloadBytes = Encoding.UTF8.GetBytes(payload);
-    
-            Debug.Log("StartClient " + payload);
-            NetworkManager.Singleton.NetworkConfig.ConnectionData = payloadBytes;
             
+            NetworkManager.Singleton.NetworkConfig.ConnectionData = payloadBytes;
             NetworkManager.Singleton.StartClient();
         }
 
