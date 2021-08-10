@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 using Turrets;
 using UnityEngine;
@@ -210,7 +211,7 @@ namespace Field
                     Debug.Log("reroute acquiremode");
                     //SetCellColor();
                     SetPrefab(type,_ressource.GetRessourceType());
-                    CheckNeighb();
+                    StartCoroutine(CheckNeighb());
                     
                 }
             }
@@ -287,6 +288,7 @@ namespace Field
 
             if (cell.transform.childCount == 0)
             {
+                
                 cell.SetCellType(CellType.CanBeAcquired);
                 int index = (int) cellType + (int) ressource + path;
             
@@ -326,6 +328,7 @@ namespace Field
                 acquiredField = acquire.gameObject;
                 acquiredField.SetActive(true);
             }
+            StartCoroutine(CheckNeighb());
             
                 
             
@@ -362,27 +365,28 @@ namespace Field
             {
                 hexagon.SetActive(false);
             }
-            CheckNeighb();
+            StartCoroutine(CheckNeighb());
             
             
             
             
         }
 
-        void CheckNeighb()
+        IEnumerator CheckNeighb()
         {
             
+            yield return new WaitForSeconds(0.2f);
             foreach (var cell in neighb)
             {
                 if (cell.GetCellType() == CellType.Hidden)
                 {
                     cell.SetCellType(CellType.CanBeAcquired);
+                    if (_ressource.GetRessourceType()  != Ressource.RessourceType.Neutral)
+                    {
+                        cell._ressource.SetSpecificType(Ressource.RessourceType.Neutral);
+                    }
                     cell.SetUnacquiredPrefab(cell, cell.GetCellType(),cell._ressource.GetRessourceType());
-                    Debug.Log("Woop woop");
                 }
-                
-                    
-                
             }
         }
 

@@ -394,10 +394,12 @@ namespace Field
                 if (magnVector.x != 0 && magnVector.y != 0 && magnVector.z != 0)
                 {
                     Corner(path[i-1],path[i],path[i+1]);
+                    
                 }
                 else
                 {
                     Straight(path[i], x, y, z);
+                    
                 }
             }
 
@@ -455,6 +457,7 @@ namespace Field
 
             if (angle > 0)
             {
+                
                 curr.SetPrefab(curr.GetCellType(),curr.Ressource.GetRessourceType(),new Vector3(0,rotationOfPrefab,0),str);
             }
             else
@@ -480,6 +483,10 @@ namespace Field
         public void Straight(HCell path,int x, int y,int z)
         {
             int str;
+            // if (once)
+            // {
+            //     path.Ressource.SetSpecificType(Ressource.RessourceType.Neutral);
+            // }
             // neutral hat weniger felder als ressourcen
             if (path.Ressource.GetRessourceType() == Ressource.RessourceType.Neutral)
                 str = 1;

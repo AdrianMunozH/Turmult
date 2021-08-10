@@ -54,5 +54,10 @@ namespace Field
                 type = RessourceType.Neutral;
             }
         }
+
+        public void SetSpecificType(RessourceType ressourceType)
+        {
+            type = ressourceType;
+        }
     }
 }
