@@ -95,7 +95,7 @@ namespace Networking
 
             HandleClientDisconnect(NetworkManager.Singleton.LocalClientId);
 
-            SceneManager.LoadScene("Scene_Menu");
+            SceneManager.LoadScene(SceneData.Instance.sceneMainMenu);
         }
 
         private void HandleConnectionFinished(ConnectStatus status)
@@ -120,14 +120,14 @@ namespace Networking
                 SceneManager.sceneLoaded -= HandleSceneLoaded;
                 gameNetPortal.OnUserDisconnectRequested -= HandleUserDisconnectRequested;
 
-                if (SceneManager.GetActiveScene().name != "Scene_Menu")
+                if (SceneManager.GetActiveScene().name != SceneData.Instance.sceneMainMenu)
                 {
                     if (!DisconnectReason.HasTransitionReason)
                     {
                         DisconnectReason.SetDisconnectReason(ConnectStatus.GenericDisconnect);
                     }
 
-                    SceneManager.LoadScene("Scene_Menu");
+                    SceneManager.LoadScene(SceneData.Instance.sceneMainMenu);
                 }
                 else
                 {

@@ -15,48 +15,48 @@ namespace Networking
         [Header("Settings")]
         [SerializeField] private int maxPlayers = 4;
 
-        public static ServerGameNetPortal Instance => instance;
-        private static ServerGameNetPortal instance;
+        public static ServerGameNetPortal Instance => _instance;
+        private static ServerGameNetPortal _instance;
 
-        private Dictionary<string, PlayerData> clientData;
-        private Dictionary<ulong, string> clientIdToGuid;
-        private Dictionary<ulong, int> clientSceneMap;
-        private bool gameInProgress;
+        private Dictionary<string, PlayerData> _clientData;
+        private Dictionary<ulong, string> _clientIdToGuid;
+        private Dictionary<ulong, int> _clientSceneMap;
+        private bool _gameInProgress;
 
         private const int MaxConnectionPayload = 1024;
 
-        private GameNetPortal gameNetPortal;
+        private GameNetPortal _gameNetPortal;
 
         private void Awake()
         {
-            if (instance != null && instance != this)
+            if (_instance != null && _instance != this)
             {
                 Destroy(gameObject);
                 return;
             }
 
-            instance = this;
+            _instance = this;
             DontDestroyOnLoad(gameObject);
         }
 
         private void Start()
         {
-            gameNetPortal = GetComponent<GameNetPortal>();
-            gameNetPortal.OnNetworkReadied += HandleNetworkReadied;
+            _gameNetPortal = GetComponent<GameNetPortal>();
+            _gameNetPortal.OnNetworkReadied += HandleNetworkReadied;
 
             NetworkManager.Singleton.ConnectionApprovalCallback += ApprovalCheck;
             NetworkManager.Singleton.OnServerStarted += HandleServerStarted;
 
-            clientData = new Dictionary<string, PlayerData>();
-            clientIdToGuid = new Dictionary<ulong, string>();
-            clientSceneMap = new Dictionary<ulong, int>();
+            _clientData = new Dictionary<string, PlayerData>();
+            _clientIdToGuid = new Dictionary<ulong, string>();
+            _clientSceneMap = new Dictionary<ulong, int>();
         }
 
         private void OnDestroy()
         {
-            if (gameNetPortal == null) { return; }
+            if (_gameNetPortal == null) { return; }
 
-            gameNetPortal.OnNetworkReadied -= HandleNetworkReadied;
+            _gameNetPortal.OnNetworkReadied -= HandleNetworkReadied;
 
             if (NetworkManager.Singleton == null) { return; }
 
@@ -66,9 +66,9 @@ namespace Networking
 
         public PlayerData? GetPlayerData(ulong clientId)
         {
-            if (clientIdToGuid.TryGetValue(clientId, out string clientGuid))
+            if (_clientIdToGuid.TryGetValue(clientId, out string clientGuid))
             {
-                if (clientData.TryGetValue(clientGuid, out PlayerData playerData))
+                if (_clientData.TryGetValue(clientGuid, out PlayerData playerData))
                 {
                     return playerData;
                 }
@@ -87,59 +87,59 @@ namespace Networking
 
         public void StartGame()
         {
-            gameInProgress = true;
+            _gameInProgress = true;
 
-            NetworkSceneManager.SwitchScene("Scene_Main");
+            NetworkSceneManager.SwitchScene(SceneData.Instance.sceneGame);
         }
 
         public void EndRound()
         {
-            gameInProgress = false;
+            _gameInProgress = false;
 
-            NetworkSceneManager.SwitchScene("Scene_Lobby");
+            NetworkSceneManager.SwitchScene(SceneData.Instance.sceneLobby);
         }
 
         private void HandleNetworkReadied()
         {
             if (!NetworkManager.Singleton.IsServer) { return; }
 
-            gameNetPortal.OnUserDisconnectRequested += HandleUserDisconnectRequested;
+            _gameNetPortal.OnUserDisconnectRequested += HandleUserDisconnectRequested;
             NetworkManager.Singleton.OnClientDisconnectCallback += HandleClientDisconnect;
-            gameNetPortal.OnClientSceneChanged += HandleClientSceneChanged;
+            _gameNetPortal.OnClientSceneChanged += HandleClientSceneChanged;
 
-            NetworkSceneManager.SwitchScene("Scene_Lobby");
+            NetworkSceneManager.SwitchScene(SceneData.Instance.sceneLobby);
 
             if (NetworkManager.Singleton.IsHost)
             {
-                clientSceneMap[NetworkManager.Singleton.LocalClientId] = SceneManager.GetActiveScene().buildIndex;
+                _clientSceneMap[NetworkManager.Singleton.LocalClientId] = SceneManager.GetActiveScene().buildIndex;
             }
         }
 
         private void HandleClientDisconnect(ulong clientId)
         {
-            clientSceneMap.Remove(clientId);
+            _clientSceneMap.Remove(clientId);
 
-            if (clientIdToGuid.TryGetValue(clientId, out string guid))
+            if (_clientIdToGuid.TryGetValue(clientId, out string guid))
             {
-                clientIdToGuid.Remove(clientId);
+                _clientIdToGuid.Remove(clientId);
 
-                if (clientData[guid].ClientId == clientId)
+                if (_clientData[guid].ClientId == clientId)
                 {
-                    clientData.Remove(guid);
+                    _clientData.Remove(guid);
                 }
             }
 
             if (clientId == NetworkManager.Singleton.LocalClientId)
             {
-                gameNetPortal.OnUserDisconnectRequested -= HandleUserDisconnectRequested;
+                _gameNetPortal.OnUserDisconnectRequested -= HandleUserDisconnectRequested;
                 NetworkManager.Singleton.OnClientDisconnectCallback -= HandleClientDisconnect;
-                gameNetPortal.OnClientSceneChanged -= HandleClientSceneChanged;
+                _gameNetPortal.OnClientSceneChanged -= HandleClientSceneChanged;
             }
         }
 
         private void HandleClientSceneChanged(ulong clientId, int sceneIndex)
         {
-            clientSceneMap[clientId] = sceneIndex;
+            _clientSceneMap[clientId] = sceneIndex;
         }
 
         private void HandleUserDisconnectRequested()
@@ -150,7 +150,7 @@ namespace Networking
 
             ClearData();
 
-            SceneManager.LoadScene("Scene_Menu");
+            SceneManager.LoadScene(SceneData.Instance.sceneMainMenu);
         }
 
         private void HandleServerStarted()
@@ -160,17 +160,17 @@ namespace Networking
             string clientGuid = Guid.NewGuid().ToString();
             string playerName = PlayerPrefs.GetString("PlayerName", "Missing Name");
 
-            clientData.Add(clientGuid, new PlayerData(playerName, NetworkManager.Singleton.LocalClientId));
-            clientIdToGuid.Add(NetworkManager.Singleton.LocalClientId, clientGuid);
+            _clientData.Add(clientGuid, new PlayerData(playerName, NetworkManager.Singleton.LocalClientId));
+            _clientIdToGuid.Add(NetworkManager.Singleton.LocalClientId, clientGuid);
         }
 
         private void ClearData()
         {
-            clientData.Clear();
-            clientIdToGuid.Clear();
-            clientSceneMap.Clear();
+            _clientData.Clear();
+            _clientIdToGuid.Clear();
+            _clientSceneMap.Clear();
 
-            gameInProgress = false;
+            _gameInProgress = false;
         }
 
         private void ApprovalCheck(byte[] connectionData, ulong clientId, NetworkManager.ConnectionApprovedDelegate callback)
@@ -195,25 +195,25 @@ namespace Networking
             //     StartCoroutine(WaitToDisconnectClient(oldClientId, ConnectStatus.LoggedInAgain));
             // }
 
-            if (gameInProgress)
+            if (_gameInProgress)
             {
                 gameReturnStatus = ConnectStatus.GameInProgress;
             }
-            else if (clientData.Count >= maxPlayers)
+            else if (_clientData.Count >= maxPlayers)
             {
                 gameReturnStatus = ConnectStatus.ServerFull;
             }
 
             if (gameReturnStatus == ConnectStatus.Success)
             {
-                clientSceneMap[clientId] = connectionPayload.clientScene;
-                clientIdToGuid[clientId] = connectionPayload.clientGUID;
-                clientData[connectionPayload.clientGUID] = new PlayerData(connectionPayload.playerName, clientId);
+                _clientSceneMap[clientId] = connectionPayload.clientScene;
+                _clientIdToGuid[clientId] = connectionPayload.clientGUID;
+                _clientData[connectionPayload.clientGUID] = new PlayerData(connectionPayload.playerName, clientId);
             }
 
             callback(false, 0, true, null, null);
 
-            gameNetPortal.ServerToClientConnectResult(clientId, gameReturnStatus);
+            _gameNetPortal.ServerToClientConnectResult(clientId, gameReturnStatus);
 
             if (gameReturnStatus != ConnectStatus.Success)
             {
@@ -223,7 +223,7 @@ namespace Networking
 
         private IEnumerator WaitToDisconnectClient(ulong clientId, ConnectStatus reason)
         {
-            gameNetPortal.ServerToClientSetDisconnectReason(clientId, reason);
+            _gameNetPortal.ServerToClientSetDisconnectReason(clientId, reason);
 
             yield return new WaitForSeconds(0);
 

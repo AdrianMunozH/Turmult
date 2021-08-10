@@ -17,6 +17,7 @@ namespace Ui.Lobby
 
         public void UpdateDisplay(LobbyPlayerState lobbyPlayerState)
         {
+            Debug.Log(lobbyPlayerState.PlayerName);
             playerDisplayNameText.text = lobbyPlayerState.PlayerName;
             isReadyToggle.isOn = lobbyPlayerState.IsReady;
 

@@ -21,6 +21,7 @@ namespace Ui.Lobby
             if (IsClient)
             {
                 lobbyPlayers.OnListChanged += HandleLobbyPlayersStateChanged;
+                Debug.Log("Subscribed Change Playerstate");
             }
 
             if (IsServer)
@@ -69,9 +70,9 @@ namespace Ui.Lobby
         private void HandleClientConnected(ulong clientId)
         {
             var playerData = ServerGameNetPortal.Instance.GetPlayerData(clientId);
-
+            Debug.Log(playerData.ToString());
             if (!playerData.HasValue) { return; }
-
+            Debug.Log("hi");
             lobbyPlayers.Add(new LobbyPlayerState(
                 clientId,
                 playerData.Value.PlayerName,
@@ -144,6 +145,7 @@ namespace Ui.Lobby
                 {
                     lobbyPlayerCards[i].DisableDisplay();
                 }
+                Debug.Log("LobbyPlayerCard" +i);
             }
 
             if(IsHost)
