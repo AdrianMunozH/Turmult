@@ -447,10 +447,11 @@ namespace Field
 
             // Hilfvektor senkr. nach oben für die winkelberechnung++
             Vector3 control = GetCellIndex(prev.coordinates.X - 1, prev.coordinates.Y - 1, prev.coordinates.Z + 2).transform.position - prev.transform.position;
+           /*
             prev.lineRenderer.enabled = true;
             prev.lineRenderer.SetPosition(0,prev.transform.position);
             prev.lineRenderer.SetPosition(1,prev.transform.position+ac.normalized);
-            
+            */
 
 
 

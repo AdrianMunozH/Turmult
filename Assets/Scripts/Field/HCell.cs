@@ -24,10 +24,17 @@ namespace Field
 
         public int index;
         public CellType type;
+
+        public CellType Celltype
+        {
+            get => type;
+            set => type = value;
+        }
+
         public int spindex;
         private Color startColor;
         private GameObject turret;
-        private GameObject previewTurret;
+        public GameObject previewTurret;
         private Ressource _ressource;
 
         public GameObject acquiredField;
@@ -41,7 +48,13 @@ namespace Field
 
 
         public bool hasBuilding;
-        
+
+        public bool HasBuilding
+        {
+            get => hasBuilding;
+            set => hasBuilding = value;
+        }
+
         // maps gehen nciht wegen unity :((
         [SerializeField] private GameObject[] hexPrefabs;
         /*
@@ -91,7 +104,6 @@ namespace Field
         */
         //Optimization: Cachen des Renderes auf dem Objekt
         private Renderer rend;
-        public LineRenderer lineRenderer;
 
 
         public Image gridImage;
@@ -108,111 +120,33 @@ namespace Field
             type = celltype;
         }
 
-        private Color SetColor(float r,float g,float b, float a)
+        public Color SetColor(float r,float g,float b, float a)
         {
             var tempColor = new Color(r,g,b);
             tempColor.a = a;
             return tempColor;
         }
-
-        private void OnMouseEnter()
-        {
-            //Hier Turrets
-            //Nur wenn der Buildmode eingeschaltet ist, werden previews angezeigt
-            if (buildManager.IsBuildModeOn() && type == CellType.Acquired && buildManager.GetTurretToBuild() != null)
-            {
-                gridImage.color = SetColor(214.0f/255f, 200.0f/255f, 178.0f/255f,70f/255f);
-                GameObject turretToBuild = buildManager.GetTurretToBuildPreview();
-                if (turretToBuild != null)
-                {
-                    previewTurret = (GameObject) Instantiate(turretToBuild, transform.position, transform.rotation);
-                }
-                //Hier Land
-            }else if (BuildManager.instance.isAcquireModeOn() && type != CellType.Neutral && type != CellType.Acquired && type == CellType.CanBeAcquired)
-            {
-                gridImage.color = SetColor(225f,225f,225f,70f/255f);
-                //rend.material.color = type == CellType.Acquired?GetAcquiredColor():hoverColorAcquireMode;
-            }
-        }
         
-        private void OnMouseExit()
+        
+        
+        public void BuildTurret()
         {
-            rend.material.color = startColor;
-            if (BuildManager.instance.IsBuildModeOn())
-            {
-               
-                //Zerstören des Preview Turrets
-                if (previewTurret != null)
-                {
-                    Destroy(previewTurret);
-                }
-
-                
-            }
-            if(type == CellType.Acquired)
-                gridImage.color = SetColor(5f/255f, 55f/255f, 18f/255f,40f/255f);
-            gridImage.color = SetColor(0f, 0f, 0f, 0f);
-        }
-
-        private void OnMouseDown()
-        {
-            if (buildManager.IsBuildModeOn() && _ressource.GetRessourceType() == Ressource.RessourceType.Neutral)
-            {
-                if (buildManager.GetTurretToBuild() == null)
-                    return;
-                //Wenn Feld noch nicht bebaut ist
-                if (turret != null)
-                {
-                    //TODO: Fehlerhandling anpassen
-                    Debug.Log("Hier steht schon was Brudi!");
-                    return;
-                }else if (type != CellType.Acquired)
-                {
-                    Debug.Log("Bratan, Feld einnehmen!");
-                    return;
-                }
-                //Bauen des Turms
-                GameObject turretToBuild = buildManager.GetTurretToBuild();
-                Vector3 turPos = transform.position;
-                turret = (GameObject) Instantiate(turretToBuild, new Vector3(turPos.x, turPos.y - 10, turPos.z) , transform.rotation);
-                Turret t = turret.GetComponent<Turret>();
-                var sequence = DOTween.Sequence();
-                sequence.Append(turret.transform.DOLocalMoveY(turPos.y, 0.5f));
-                sequence.Append(turret.transform.DOShakeScale( 1f, new Vector3(0f, 0.01f, 0f), 5, 0, fadeOut:true));
-                
-                
-                
-                
-                SetPrefab((int) t.ressourceType + 2);
-                hasBuilding = true;
-                Debug.Log("reroute turretmode");
-                HGameManager.instance.rerouteEnemys(this);
-                
-            }else if (buildManager.isAcquireModeOn())
-            {
-                if (type == CellType.Acquired)
-                {
-                    Debug.Log("Das Feld wurde doch schon eingenommen ...");
-                }else if (type == CellType.Neutral || type == CellType.Base)
-                {
-                    Debug.Log("Das Feld ist die Schweiz, lass es in Ruhe");
-               
-                }else if (type == CellType.Hidden)
-                {
-                    Debug.Log("Hidden");
-                }
-                else
-                {
-                    type = CellType.Acquired;
-                    acquiredField = GameObject.Find("Cylinder");
-                    HGameManager.instance.rerouteEnemys(this);
-                    Debug.Log("reroute acquiremode");
-                    //SetCellColor();
-                    SetPrefab(type,_ressource.GetRessourceType());
-                    StartCoroutine(CheckNeighb());
-                    
-                }
-            }
+            Debug.Log("buildTurret    ");
+            GameObject turretToBuild = buildManager.GetTurretToBuild();
+            Vector3 turPos = transform.position;
+            turret = (GameObject) Instantiate(turretToBuild, new Vector3(turPos.x, turPos.y - 10, turPos.z) , transform.rotation);
+            Turret t = turret.GetComponent<Turret>();
+            
+            // Animation
+            var sequence = DOTween.Sequence();
+            sequence.Append(turret.transform.DOLocalMoveY(turPos.y, 0.5f));
+            sequence.Append(turret.transform.DOShakeScale( 1f, new Vector3(0f, 0.01f, 0f), 5, 0, fadeOut:true));
+            //
+            
+            
+            SetPrefab((int) t.ressourceType + 2);
+            hasBuilding = true;
+            
         }
 
         private void Awake()
@@ -245,7 +179,7 @@ namespace Field
             //Debug.Log(h.coordinates.ToString() + " ausgewählt");
             neighb = new HCell[6];
             int i = 0;
-            foreach (HCell cell in buildManager.Grid.cells)
+            foreach (HCell cell in HGrid.Instance.cells)
             {
                 if (cell.coordinates.X == coordinates.X - 1 && cell.coordinates.Y == coordinates.Y)
                 {
@@ -371,7 +305,7 @@ namespace Field
 
         //Sucht Nachbarfelder nach "Hidden" Feldern ab und setzt Prefab.
         //Ist ausgewähltes Feld Ressourcenfeld, werden Nachbarfelder Neutral gesetzt
-        IEnumerator CheckNeighb()
+        public IEnumerator CheckNeighb()
         {
             yield return new WaitForSeconds(0.2f);
             foreach (var cell in neighb)
@@ -424,105 +358,6 @@ namespace Field
             }
         }
 
-        //Setzt und aktualisiert die Materialen bzw. Farben einer Zelle
-        private void SetCellColor()
-        {
-            //TODO SET COLOR VON HCELL ANSCHAUEN
-            if (type != CellType.Neutral)
-            {
-                //startColor = colorUnacquiredNeutral;
-                // UND DAS MINIONSSPAWNPROBLEM FIXEN
-                switch (_ressource.GetRessourceType())
-                {
-                    case Ressource.RessourceType.Berg:
-                        //Wenn  nocht nicht eignenommen
-                        if (type == CellType.CanBeAcquired)
-                        {
-                            //startColor = colorUnacquiredMountain;
-                            SetPrefab(0);
-                            //Wenn eingenommen
-                        }
-                        else if (type == CellType.Acquired)
-                        {
-                            SetPrefab(1);
-                            //startColor = colorAcquiredMountain;
-                        }
-
-                        break;
-                    case Ressource.RessourceType.Sumpf:
-                        if (type == CellType.CanBeAcquired)
-                        {
-                            //startColor = colorUnacquiredSwamp;
-                            SetPrefab(2);
-                        }
-                        else if (type == CellType.Acquired)
-                        {
-                            SetPrefab(3);
-                            //startColor = colorAcquiredSwamp;
-                        }
-
-                        break;
-                    case Ressource.RessourceType.Wald:
-                        if (type == CellType.CanBeAcquired)
-                        {
-                            //startColor = colorUnacquiredForest;
-                            SetPrefab(4);
-                        }
-                        else if (type == CellType.Acquired)
-                        {
-                            SetPrefab(5);
-                            //startColor = colorAcquiredForest;
-                        }
-
-                        break;
-                    default:
-                        if (type == CellType.CanBeAcquired)
-                        {
-                            //startColor = colorUnacquiredNeutral;
-                            SetPrefab(7);
-                        }
-                        else if (type == CellType.Acquired)
-                        {
-                            SetPrefab(6);
-                        }
-
-                        break;
-                }
-            }
-            else
-            {
-                //Neutrale Felder
-                //startColor = colorNeutralField;
-                SetPrefab(8);
-            }
-
-            rend.material.color = startColor;
-        }
-        
-
-        /**
-     * Gibt die Farbe des eingenommenen Zustands zurück
-     
-        private Color GetAcquiredColor()
-        {
-            switch (_ressource.GetRessourceType())
-            {
-                case Ressource.RessourceType.Berg:
-                    return colorAcquiredMountain;
-                case Ressource.RessourceType.Sumpf:
-                    return colorAcquiredSwamp;
-                case Ressource.RessourceType.Wald:
-                    return colorAcquiredForest;
-                default:
-                    return colorAcquiredNeutral;
-            }
-        }
-        */
-
-        // Update is called once per frame
-        void Update()
-        {
-            
-        }
+       
     }
 }

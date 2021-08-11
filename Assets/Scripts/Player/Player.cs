@@ -17,6 +17,31 @@ namespace Player
         public int startGold = 500;
         public int interestRateInPercentPerRound = 5;
         private int forest;
+
+        public int Gold
+        {
+            get => gold;
+            set => gold = value;
+        }
+
+        public int Forest
+        {
+            get => forest;
+            set => forest = value;
+        }
+
+        public int Mountain
+        {
+            get => mountain;
+            set => mountain = value;
+        }
+
+        public int Swamp
+        {
+            get => swamp;
+            set => swamp = value;
+        }
+
         public int startForest = 1;
         private int mountain;
         public int startMountain = 1;
