@@ -88,7 +88,7 @@ namespace Enemies
         public void SpawnEnemy(HCell[] path, bool isAttacking)
         {
             //SpawnObjectServerRpc();
-          GameObject enemy = Instantiate(enemyPrefab);
+            GameObject enemy = Instantiate(enemyPrefab);
             enemys.Add(enemy);
             enemy.transform.SetParent(transform, false);
             enemy.transform.position = path[0].gameObject.transform.position;

@@ -487,11 +487,7 @@ namespace Field
         public void Straight(HCell path,int x, int y,int z)
         {
             int str;
-            // if (once)
-            // {
-            //     path.Ressource.SetSpecificType(Ressource.RessourceType.Neutral);
-            // }
-            // neutral hat weniger felder als ressourcen
+            
             if (path.Ressource.GetRessourceType() == Ressource.RessourceType.Neutral)
                 str = 1;
             else

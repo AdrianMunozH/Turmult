@@ -15,7 +15,7 @@ namespace Field
         };
 
 
-        private RessourceType type;
+        private RessourceType _type;
 
         public Ressource()
         {
@@ -24,7 +24,12 @@ namespace Field
 
         public RessourceType GetRessourceType()
         {
-            return type;
+            return _type;
+        }
+
+        public void SetNeutralType()
+        {
+            _type = RessourceType.Neutral;
         }
 
         /**
@@ -39,25 +44,25 @@ namespace Field
                 switch (Random.Range(0, 3))
                 {
                     case 0:
-                        type = RessourceType.Berg;
+                        _type = RessourceType.Berg;
                         break;
                     case 1:
-                        type = RessourceType.Sumpf;
+                        _type = RessourceType.Sumpf;
                         break;
                     case 2:
-                        type = RessourceType.Wald;
+                        _type = RessourceType.Wald;
                         break;
                 }
             }
             else
             {
-                type = RessourceType.Neutral;
+                _type = RessourceType.Neutral;
             }
         }
 
         public void SetSpecificType(RessourceType ressourceType)
         {
-            type = ressourceType;
+            _type = ressourceType;
         }
     }
 }
