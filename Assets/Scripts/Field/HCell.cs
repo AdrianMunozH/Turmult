@@ -303,6 +303,7 @@ namespace Field
                         hexagon.transform.eulerAngles.z + rotation.Value.z);
             
                 hexagon.transform.SetParent(transform, true);
+                
             }
             
         }
@@ -356,6 +357,8 @@ namespace Field
                     hexagon.transform.eulerAngles.z + rotation.Value.z);
             
             hexagon.transform.SetParent(transform, true);
+            if (ressource == Ressource.RessourceType.Neutral && path == 0)
+                SetRandomFieldMat(hexagon);
             //Setzt eingenommen Shader und aktiviert ihn
             //TODO Material je nach Spieler anpassen
             var acquire = hexagon.gameObject.transform.Find("Cylinder");
@@ -387,6 +390,38 @@ namespace Field
                     }
                     cell.SetUnacquiredPrefab(cell, cell.GetCellType(),cell._ressource.GetRessourceType());
                 }
+            }
+        }
+
+        void SetRandomFieldMat(GameObject field)
+        {
+            int randomMaterial = Random.Range(0, 10);
+            
+            if (randomMaterial < 4)
+                field.GetComponent<MeshRenderer>().material =
+                buildManager.Grid.FieldMaterial[Random.Range(0, buildManager.Grid.FieldMaterial.Length)];
+
+            int randomDirection = Random.Range(0, 6);
+
+            switch (randomDirection)
+            {
+                case 0:
+                    break;
+                case 1:
+                    field.transform.Rotate(0,60,0);
+                    break;
+                case 2:
+                    field.transform.Rotate(0,120,0);
+                    break;
+                case 3:
+                    field.transform.Rotate(0,180,0);
+                    break;
+                case 4:
+                    field.transform.Rotate(0,240,0);
+                    break;
+                case 5:
+                    field.transform.Rotate(0,300,0);
+                    break;
             }
         }
 

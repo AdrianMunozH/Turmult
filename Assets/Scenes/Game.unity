@@ -6380,6 +6380,16 @@ MonoBehaviour:
     type: 3}
   cellLabelPrefab: {fileID: 7695517922269366052, guid: 7aeacb1f4402cdf49a3dd2d9186b544d,
     type: 3}
+  fieldMaterial:
+  - {fileID: 2100000, guid: c0c32545ce6b2d842adf70b6856e627b, type: 2}
+  - {fileID: 2100000, guid: 131e53173ea6306418ee44134adeb9f2, type: 2}
+  - {fileID: 2100000, guid: 6583bf93a583aed46a95cf774118ad8a, type: 2}
+  - {fileID: 2100000, guid: 7764afcac2d355f45a85d73a2dde2db7, type: 2}
+  - {fileID: 2100000, guid: 40db9067fa0d4ca4c9fb28665716d517, type: 2}
+  - {fileID: 2100000, guid: 20efac7c328452941b41cb713ba44510, type: 2}
+  - {fileID: 2100000, guid: 8c0a9cc5e5681b74f9045b402d663eee, type: 2}
+  - {fileID: 2100000, guid: e63f4144e80bc47448eaa9313166be82, type: 2}
+  - {fileID: 2100000, guid: c8ce0979344ceb549924a5f5e7335ac4, type: 2}
   hexImage: {fileID: 2402472035106653718, guid: 820cc4a5b630fee479070fa2f41c25aa,
     type: 3}
   pathTest: []

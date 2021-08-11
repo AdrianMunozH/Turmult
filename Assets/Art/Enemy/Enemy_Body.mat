@@ -47,10 +47,11 @@ Material:
     m_Floats:
     - Vector1_1a024923a81446789471a6343e3b798f: 0.5
     - Vector1_2ca8bd0346bf4b55ab8d543cc637cfa0: 1
+    - Vector1_7a2eff942aec4ac1b0398c11dc2db5c2: 0
     - Vector1_8192cefd1cdb4c78a14a79a298d7e5a5: 1
     - Vector1_dd8ee423b2904e4a9984d233db63b51d: 1
     - _LightProbeContribution: 3.5
-    - _OutlineDepthSensitivity: 1
+    - _OutlineDepthSensitivity: 0
     - _OutlineNormalsSensitivity: 0
     - _OutlineThickness: 1
     - _Smoothness: 0.9

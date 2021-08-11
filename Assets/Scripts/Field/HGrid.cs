@@ -13,6 +13,9 @@ namespace Field
         public HCell cellPrefab;
         public Text cellLabelPrefab;
         Canvas gridCanvas;
+        [SerializeField] private Material[] fieldMaterial;
+
+        public Material[] FieldMaterial => fieldMaterial;
 
         public Image hexImage;
         
