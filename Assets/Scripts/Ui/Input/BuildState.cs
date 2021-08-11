@@ -1,3 +1,4 @@
+using System;
 using Field;
 using UnityEngine;
 
@@ -7,6 +8,9 @@ namespace Ui.Input
     {
         private Ressource.RessourceType _ressourceEnum = Ressource.RessourceType.Berg;
         private int currentTurretIndex = 0;
+        
+        private HexCoordinates prevCell;
+        private GameObject previewTurret;
 
         public Ressource.RessourceType RessourceEnum
         {
@@ -33,45 +37,64 @@ namespace Ui.Input
         // wird das hier ein rpc call ?
         public override void BuyTurret(HCell cell, Ressource.RessourceType ressourceEnum, int turret)
         {
-            if(cell.HasBuilding || cell.Celltype == HCell.CellType.CanBeAcquired) return;
+            Debug.Log(!cell.hasBuilding + " " + cell.Celltype.ToString());
+            if(cell.HasBuilding || cell.Celltype != HCell.CellType.Acquired) return;
 
-            
+            Debug.Log("buyturret");
+            cell.BuildTurret();
             
             // instiantiate turret 
             // cell den turret geben
             // cell hasbuilding true setzten
         }
 
-        
+        private void OnDestroy()
+        {
+            Destroy(previewTurret);
+        }
+
         // update methode quasi
         public override void Input()
         {
+            
             // hover
             RaycastHit hoverHit;
             Ray hoverRay = Camera.main.ScreenPointToRay(UnityEngine.Input.mousePosition);
             
-            GameObject turretToBuild = BuildManager.instance.GetTurretToBuildPreview(); // welcher tower wird gezeigt ?? muss geändert werden
-            GameObject turretPreview;
-            
-            if (turretToBuild != null)
-            {
-                //turretPreview = Instantiate(turretToBuild, UnityEngine.Input.mousePosition, new Vector3(0,0,0)); // Utility class braucht eine methode dafür
-            }
 
-            if (Physics.Raycast(hoverRay, out hoverHit, float.MaxValue,_layerMask))
+            if (Physics.Raycast(hoverRay, out hoverHit, float.MaxValue))
             {
-                Debug.Log("hit");
-                // sollte immer true sein weil with nur eine layer benutzen
+                // sollte immer true sein weil with nur eine layer benutzen -- nicht mehr sadge
                 if (hoverHit.transform.gameObject.tag == "Cell")
                 {
-                    ///turretPreview.transform.DOMove(hover.transform.position,50);
+                    HCell cell = hoverHit.transform.GetComponent<HCell>();
+                    
+                    // gleiche zelle -> turret prefab wird nicht neu gesetzt 
+                    if (!prevCell.CompareCoord(cell.coordinates))
+                    {
+                        // neue prefab
+                        if (cell.GetCellType() == HCell.CellType.Acquired)
+                        {
+
+                            GameObject turretToBuild = BuildManager.instance.GetTurretToBuildPreview(); 
+                            if (turretToBuild != null) 
+                            { 
+                                cell.previewTurret = (GameObject) Instantiate(turretToBuild, cell.transform.position, cell.transform.rotation); 
+                            } 
+                        }
+                        
+                        // altes prefab
+                        Destroy(HGrid.Instance.GetCellIndex(prevCell.X,prevCell.Y).previewTurret);
+                        
+                        
+                        // machen wir immer
+                        prevCell = cell.coordinates;
+                    }
+                        
+                   
                 }
             }
-
-
-
-
-
+            
 
 
             //linker mouseclick
@@ -80,13 +103,13 @@ namespace Ui.Input
                 RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay(UnityEngine.Input.mousePosition);
 
-                if (Physics.Raycast(ray, out hit, 100.0f,_layerMask))
+                if (Physics.Raycast(ray, out hit, 100.0f))
                 {
                     if (hit.transform.gameObject.tag == "Cell")
                     {
+                        
                         BuyTurret(hit.transform.GetComponent<HCell>(),_ressourceEnum,currentTurretIndex);
                         
-                        Debug.Log(hit.transform.gameObject);
                     }
                 }
             }
@@ -94,4 +117,5 @@ namespace Ui.Input
         
         
     }
+    
 }

@@ -32,11 +32,12 @@ namespace Control
         private void Start()
         {
             buildManager = BuildManager.instance;
-            towerMode = true;
+            towerMode = false;
             scrollViewTower.SetActive(true);
             towerTypes[0].SetActive(true);
             ressourceType[0].SetActive(true);
             bgImage.sprite = bgSprites[1];
+            SetAcquireMode();
 
         }
 

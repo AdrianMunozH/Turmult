@@ -34,7 +34,7 @@ namespace Ui.Input
 
         // turret bauen
         // brauchen wir vllt nicht hier
-        public void BuyTurret(PlayerStats player,Ressource.RessourceType ressourceEnum, int turret)
+        public void BuyTurret(Player.Player player,Ressource.RessourceType ressourceEnum, int turret)
         {
             // get turret ressource
             // if ressource costs > player.getressourceoftype -> return;

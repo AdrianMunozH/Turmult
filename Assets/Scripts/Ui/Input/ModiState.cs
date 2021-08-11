@@ -1,14 +1,13 @@
 using Field;
-using Player;
 using UnityEngine;
 
 namespace Ui.Input
 {
-    public abstract class ModiState
+    public abstract class ModiState : MonoBehaviour
     {
         public string name;
         protected LayerMask _layerMask;
-        protected PlayerStats _playerStats;
+        protected Player.Player _playerStats;
         public abstract void Start();
         
         public virtual void BuyMinion()
@@ -31,6 +30,11 @@ namespace Ui.Input
         public void SetLayerMask(LayerMask layerMask)
         {
             layerMask = _layerMask;
+        }
+
+        public void SetPlayer(Player.Player player)
+        {
+            _playerStats = player;
         }
     }
 }
