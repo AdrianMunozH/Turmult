@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Enemies;
+using Mono.Cecil;
 using Turrets;
 using UnityEngine;
 
@@ -47,23 +48,35 @@ namespace Field
             {
             
             };
-        
-        
-        
+            
             enemySpawns = new EnemySpawn[3];
             enemySpawns[0] = Instantiate<EnemySpawn>(spawnPoint);
             enemySpawns[1] = Instantiate<EnemySpawn>(spawnPoint);
             enemySpawns[2] = Instantiate<EnemySpawn>(spawnPoint);
 
             enemySpawns[0].end = HGrid.Instance.GetCellIndex(0, -distanceFromSpawn, distanceFromSpawn);
+            enemySpawns[0].defaultStart = HGrid.Instance.GetCellIndex(0, 0);
             enemySpawns[1].end = HGrid.Instance.GetCellIndex(distanceFromSpawn, 0, -distanceFromSpawn);
+            enemySpawns[1].defaultStart = HGrid.Instance.GetCellIndex(0, 0);
             enemySpawns[2].end = HGrid.Instance.GetCellIndex(-distanceFromSpawn, distanceFromSpawn, 0);
+            enemySpawns[2].defaultStart = HGrid.Instance.GetCellIndex(0, 0);
+
+            foreach (EnemySpawn enemySpawn in enemySpawns)
+            {
+                spath = enemySpawn.Solve();
+                List<HCell> sp = enemySpawn.RecPath(spath);
+                foreach (HCell hcell in sp)
+                {
+                    hcell.SetCellType(HCell.CellType.Acquired);
+                    Ressource res = new Ressource();
+                    res.SetNeutralType();
+                    hcell.Ressource = res;
+                }
+                HGrid.Instance.ShortestPathPrefabs(enemySpawn.ShortestPath(sp).ToArray());
+            }
+            
         }
 
-        void Update()
-        {
-
-        }
     
     
 
@@ -109,6 +122,7 @@ namespace Field
                 HGrid.Instance.ShortestPathPrefabs(sp.ToArray());
             }
         }
+        
 
         public void rerouteEnemys(HCell turretCell)
         {

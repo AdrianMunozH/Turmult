@@ -12,7 +12,6 @@ namespace Field
         public static BuildManager instance;
         private GameObject turretToBuild;
         private GameObject turretToBuildPreview;
-        public GameObject standardTurretPrefab;
         public GameObject standardTurretPreviewPrefab;
         public GameObject[] mountainTurrets;
         public GameObject[] mountainPreviewTurrets;

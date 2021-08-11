@@ -37,7 +37,11 @@ namespace Field
         
         private BuildManager buildManager;
 
-        public Ressource Ressource => _ressource;
+        public Ressource Ressource
+        {
+            get => _ressource;
+            set => _ressource = value;
+        }
 
 
         public bool hasBuilding;
