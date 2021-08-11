@@ -115,7 +115,7 @@ namespace Ui.Lobby
         }
 
         [ServerRpc(RequireOwnership = false)]
-        private void StartGameServerRpc(ServerRpcParams serverRpcParams = default)
+        private void StartGameServerRpc(bool startGameInstant = false, ServerRpcParams serverRpcParams = default)
         {
             if (startGameInstant)
             {
@@ -160,7 +160,7 @@ namespace Ui.Lobby
 
             if (IsEveryoneReady() || startGameInstant)
             {
-                StartGameServerRpc();
+                StartGameServerRpc(startGameInstant);
             }
         }
     }

@@ -146,11 +146,14 @@ namespace Player
         //Aufgerufen sobald sich das Leben ändert
         private void HandlePlayersStateChanged(NetworkListEvent<GamePlayerState> playerState)
         {
-            lifes = playerState.Value.Lifes;
-            Debug.Log(lifes);
-            if (lifes <= 0)
+            if (playerState.Value.ClientId == NetworkManager.Singleton.LocalClientId)
             {
-                gameOVER.gameObject.SetActive(true);
+                lifes = playerState.Value.Lifes;
+                Debug.Log(lifes);
+                if (lifes <= 0)
+                {
+                    gameOVER.gameObject.SetActive(true);
+                }
             }
         }
 
