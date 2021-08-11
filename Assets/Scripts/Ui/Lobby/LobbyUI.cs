@@ -72,19 +72,18 @@ namespace Ui.Lobby
         private void HandleClientConnected(ulong clientId)
         {
             var playerData = ServerGameNetPortal.Instance.GetPlayerData(clientId);
-            Debug.Log("Hier wird auch angeragt");
             if (!playerData.HasValue)
             {
                 return;
             }
-
-            Debug.Log("Keine Daten");
-
+            
             lobbyPlayers.Add(new LobbyPlayerState(
                 clientId,
                 playerData.Value.PlayerName,
                 false
             ));
+            
+            Debug.Log(clientId + playerData.Value.PlayerName);
         }
 
         private void HandleClientDisconnect(ulong clientId)
@@ -159,10 +158,8 @@ namespace Ui.Lobby
                 }
             }
 
-            Debug.Log(IsEveryoneReady());
             if (IsEveryoneReady() || startGameInstant)
             {
-                Debug.Log("JETZT GEHTS HIER LOS");
                 StartGameServerRpc();
             }
         }

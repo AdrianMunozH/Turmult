@@ -1,6 +1,10 @@
-using System;
+using DapperDino.UMT.Lobby.Networking;
 using MLAPI;
+using MLAPI.Connection;
+using MLAPI.Messaging;
+using MLAPI.NetworkVariable.Collections;
 using TMPro;
+using Ui;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -37,12 +41,16 @@ namespace Player
         public TextMeshProUGUI forestTMP;
         public TextMeshProUGUI swampTMP;
         public Image hpBar;
+        public TextMeshProUGUI gameOVER;
         
+        private NetworkList<GamePlayerState> connectedPlayers = new NetworkList<GamePlayerState>();
         
     
         // Start is called before the first frame update
         void Start()
         {
+            if (IsServer) return;
+
             gold = startGold;
             forest = startForest;
             mountain = startMountain;
@@ -58,6 +66,7 @@ namespace Player
 
         private void FixedUpdate()
         {
+            if (IsServer) return;
             goldTMP.text = gold.ToString();
             mountainTMP.text = mountain.ToString();
             forestTMP.text = forest.ToString();
@@ -90,12 +99,89 @@ namespace Player
 
         public void LoseLife()
         {
-            if (lifes-1 > 0)
+            LoseLifeServerRpc();
+        }
+
+        [ContextMenu("LoseLife")]
+        [ServerRpc(RequireOwnership = false)]
+        public void LoseLifeServerRpc(ServerRpcParams serverRpcParams = default)
+        {
+            for (int i = 0; i < connectedPlayers.Count; i++)
             {
-                lifes = lifes - 1;
-                return;
+                Debug.Log(connectedPlayers[i].ClientId +" "+ serverRpcParams.Receive.SenderClientId);
+                
+                if (connectedPlayers[i].ClientId == serverRpcParams.Receive.SenderClientId)
+                {
+                    connectedPlayers[i] = new GamePlayerState(
+                        connectedPlayers[i].ClientId,
+                        connectedPlayers[i].PlayerName,
+                        connectedPlayers[i].Lifes-1
+                    );
+                    Debug.Log(connectedPlayers[i].PlayerName);
+                }
             }
         }
+
+        
+        public override void NetworkStart()
+        {
+            if (IsClient)
+            {
+                connectedPlayers.OnListChanged += HandlePlayersStateChanged;
+            }
+
+            if (IsServer)
+            {
+                NetworkManager.Singleton.OnClientConnectedCallback += HandleClientConnected;
+                NetworkManager.Singleton.OnClientDisconnectCallback += HandleClientDisconnect;
+
+                foreach (NetworkClient client in NetworkManager.Singleton.ConnectedClientsList)
+                {
+                    //Füge alle connected Players der Liste hinzu
+                    HandleClientConnected(client.ClientId);
+                }
+            }
+        }
+
+        //Aufgerufen sobald sich das Leben ändert
+        private void HandlePlayersStateChanged(NetworkListEvent<GamePlayerState> playerState)
+        {
+            lifes = playerState.Value.Lifes;
+            Debug.Log(lifes);
+            if (lifes <= 0)
+            {
+                gameOVER.gameObject.SetActive(true);
+            }
+        }
+
+        private void HandleClientConnected(ulong clientId)
+        {
+            var playerData = ServerGameNetPortal.Instance.GetPlayerData(clientId);
+            if (!playerData.HasValue)
+            {
+                return;
+            }
+            
+            connectedPlayers.Add(new GamePlayerState(
+                clientId,
+                playerData.Value.PlayerName,
+                startLifes
+            ));
+        }
+        
+
+        private void HandleClientDisconnect(ulong clientId)
+        {
+            for (int i = 0; i < connectedPlayers.Count; i++)
+            {
+                if (connectedPlayers[i].ClientId == clientId)
+                {
+                    connectedPlayers.RemoveAt(i);
+                    break;
+                }
+            }
+        }
+
 
     }
 }
