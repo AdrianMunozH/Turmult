@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Field;
 using JetBrains.Annotations;
+using Ui.Input;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -68,6 +69,8 @@ namespace Control
         public void SetAcquireMode()
         {
             DeselectType();
+            PlayerInputManager.Instance.SetState(new AcquireState());
+            
             acquireMode.SetActive(true);
             scrollViewTower.SetActive(false);
             scrollViewMinion.SetActive(false);
@@ -92,6 +95,7 @@ namespace Control
             }
             if (towerMode)
             {
+                PlayerInputManager.Instance.SetState(new BuildState());
                 DeselectType();
                 switch (type.name)
                 {

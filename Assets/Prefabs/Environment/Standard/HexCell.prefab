@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -2930823753010692461}
   m_Layer: 6
   m_Name: HexCell
-  m_TagString: Untagged
+  m_TagString: Cell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -648,6 +648,7 @@ MonoBehaviour:
     x: 0
     z: 0
   index: 0
+  type: 0
   spindex: 0
   acquiredField: {fileID: 0}
   neighb: []

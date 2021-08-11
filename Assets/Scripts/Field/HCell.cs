@@ -24,6 +24,13 @@ namespace Field
 
         public int index;
         public CellType type;
+
+        public CellType Celltype
+        {
+            get => type;
+            set => type = value;
+        }
+
         public int spindex;
         private Color startColor;
         private GameObject turret;
@@ -41,7 +48,13 @@ namespace Field
 
 
         public bool hasBuilding;
-        
+
+        public bool HasBuilding
+        {
+            get => hasBuilding;
+            set => hasBuilding = value;
+        }
+
         // maps gehen nciht wegen unity :((
         [SerializeField] private GameObject[] hexPrefabs;
         /*
