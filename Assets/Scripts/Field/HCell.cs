@@ -115,8 +115,6 @@ namespace Field
             return tempColor;
         }
 
-        
-    
         private void OnMouseEnter()
         {
             //Hier Turrets
@@ -303,9 +301,7 @@ namespace Field
                         hexagon.transform.eulerAngles.z + rotation.Value.z);
             
                 hexagon.transform.SetParent(transform, true);
-                
             }
-            
         }
 
         public void SetPrefab(int prefabIndex, Vector3? rotation = null)
@@ -330,23 +326,15 @@ namespace Field
                 acquiredField.SetActive(true);
             }
             StartCoroutine(CheckNeighb());
-            
-                
-            
-
         }
+        
         public void SetPrefab(CellType cellType, Ressource.RessourceType ressource, Vector3? rotation = null,int path = 0)
         {
             int index = (int) cellType + (int) ressource + path;
             
             if(transform.childCount > 0)
                 GameObject.Destroy(transform.GetChild(0).gameObject);
-            //Unterschiedliche Standartfelder 
-            // if (ressource == Ressource.RessourceType.Neutral && path == 0)
-            // {
-            //     if (Random.Range(1,5)== 1)
-            //         index += Random.Range(1, 5);
-            // }
+            
             Vector3 pos = transform.position;
             GameObject hexagon = Instantiate(hexPrefabs[index], new Vector3(pos.x,pos.y -10, pos.z), transform.rotation);
             hexagon.transform.DOLocalMoveY(pos.y, 0.5f);
@@ -357,9 +345,19 @@ namespace Field
                     hexagon.transform.eulerAngles.z + rotation.Value.z);
             
             hexagon.transform.SetParent(transform, true);
-            if (ressource == Ressource.RessourceType.Neutral && path == 0)
-                SetRandomFieldMat(hexagon);
-            //Setzt eingenommen Shader und aktiviert ihn
+            
+            //Ressourcenfelder ohne Wege werden random gedreht, bei Grasfelder zusätzlich das Material random angepasst
+            if (path == 0)
+            {
+                if (ressource == Ressource.RessourceType.Neutral)
+                    SetRandomField(hexagon, true);
+                else
+                {
+                    SetRandomField(hexagon, false);
+                }
+            }
+            
+            //Setzt "Eingenommen Shader" und aktiviert ihn
             //TODO Material je nach Spieler anpassen
             var acquire = hexagon.gameObject.transform.Find("Cylinder");
             acquiredField = acquire.gameObject;
@@ -369,15 +367,12 @@ namespace Field
                 hexagon.SetActive(false);
             }
             StartCoroutine(CheckNeighb());
-            
-            
-            
-            
         }
 
+        //Sucht Nachbarfelder nach "Hidden" Feldern ab und setzt Prefab.
+        //Ist ausgewähltes Feld Ressourcenfeld, werden Nachbarfelder Neutral gesetzt
         IEnumerator CheckNeighb()
         {
-            
             yield return new WaitForSeconds(0.2f);
             foreach (var cell in neighb)
             {
@@ -393,14 +388,18 @@ namespace Field
             }
         }
 
-        void SetRandomFieldMat(GameObject field)
+        void SetRandomField(GameObject field, bool neutral)
         {
-            int randomMaterial = Random.Range(0, 10);
+            //Grasfeld Material ändern
+            if (neutral)
+            {
+                int randomMaterial = Random.Range(0, 10);
             
-            if (randomMaterial < 4)
-                field.GetComponent<MeshRenderer>().material =
-                buildManager.Grid.FieldMaterial[Random.Range(0, buildManager.Grid.FieldMaterial.Length)];
-
+                if (randomMaterial < 4)
+                    field.GetComponent<MeshRenderer>().material =
+                        buildManager.Grid.FieldMaterial[Random.Range(0, buildManager.Grid.FieldMaterial.Length)];
+            }
+            //Rotation ändern
             int randomDirection = Random.Range(0, 6);
 
             switch (randomDirection)

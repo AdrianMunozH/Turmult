@@ -145,6 +145,7 @@ namespace DapperDino.UMT.Lobby.Networking
         {
             HandleClientDisconnect(NetworkManager.Singleton.LocalClientId);
 
+            
             NetworkManager.Singleton.StopHost();
 
             ClearData();
