@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Ui.Input
 {
-    public abstract class ModiState : MonoBehaviour
+    public abstract class ModiState 
     {
         public string name;
         protected LayerMask _layerMask;

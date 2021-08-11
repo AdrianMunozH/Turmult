@@ -29,7 +29,7 @@ namespace Ui.Input
             cell.Celltype = HCell.CellType.Acquired;
             //cell.acquiredField = GameObject.Find("Cylinder");
             cell.SetPrefab(cell.type,cell.Ressource.GetRessourceType());
-            StartCoroutine(cell.CheckNeighb());
+            cell.StartCoroutine(cell.CheckNeighb());
             // vllt kürzester weg bescheid sagen
 
 

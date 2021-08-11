@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7167300142100881938}
   - component: {fileID: 9050260254445555536}
   - component: {fileID: 8695769874674735302}
+  - component: {fileID: 2320414655629172663}
   m_Layer: 6
   m_Name: HexCell
   m_TagString: Cell
@@ -649,6 +650,7 @@ MonoBehaviour:
   index: 0
   type: 0
   spindex: 0
+  previewTurret: {fileID: 0}
   acquiredField: {fileID: 0}
   neighb: []
   hasBuilding: 0
@@ -676,5 +678,21 @@ MonoBehaviour:
   - {fileID: 624799385870921010, guid: 987f2534a82e98f47b942ce2fe9db934, type: 3}
   - {fileID: 2998554048133317497, guid: c0e70f0d0f97b584093c608026966b26, type: 3}
   - {fileID: 716177578610971882, guid: b747ad00347423a4eb4cfaed495bddc0, type: 3}
-  lineRenderer: {fileID: 0}
   gridImage: {fileID: 0}
+--- !u!114 &2320414655629172663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52612256429328339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NetworkInstanceId: 0
+  PrefabHash: 16103185125700910252
+  PrefabHashGenerator: HexCell
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0

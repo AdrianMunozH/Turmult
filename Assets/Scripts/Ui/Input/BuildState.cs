@@ -47,12 +47,7 @@ namespace Ui.Input
             // cell den turret geben
             // cell hasbuilding true setzten
         }
-
-        private void OnDestroy()
-        {
-            Destroy(previewTurret);
-        }
-
+        
         // update methode quasi
         public override void Input()
         {
@@ -77,14 +72,14 @@ namespace Ui.Input
                         {
 
                             GameObject turretToBuild = BuildManager.instance.GetTurretToBuildPreview(); 
-                            if (turretToBuild != null) 
-                            { 
-                                cell.previewTurret = (GameObject) Instantiate(turretToBuild, cell.transform.position, cell.transform.rotation); 
+                            if (turretToBuild != null)
+                            {
+                                cell.previewTurret = (GameObject) cell.InstantiateTurretPreview(turretToBuild);
                             } 
                         }
                         
                         // altes prefab
-                        Destroy(HGrid.Instance.GetCellIndex(prevCell.X,prevCell.Y).previewTurret);
+                        HGrid.Instance.GetCellIndex(prevCell.X,prevCell.Y).DestroyPreviewTurret();
                         
                         
                         // machen wir immer
