@@ -1,9 +1,16 @@
-﻿using UnityEngine;
+﻿using MLAPI;
+using MLAPI.Messaging;
+using UnityEngine;
 
 namespace Player
 {
-    public class LifeManager : MonoBehaviour
+    public class LifeManager : NetworkBehaviour
     {
-        
+
+        [ServerRpc]
+        public void ChangeLifesServerRpc()
+        {
+            
+        }
     }
 }
