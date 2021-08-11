@@ -18,7 +18,37 @@ namespace Player
         [Header("Lifes")] 
         private int lifes;
         public int startLives = 20;
-    
+
+        public int Gold
+        {
+            get => gold;
+            set => gold = value;
+        }
+
+        public int Wald
+        {
+            get => wald;
+            set => wald = value;
+        }
+
+        public int Berg
+        {
+            get => berg;
+            set => berg = value;
+        }
+
+        public int Sumpf
+        {
+            get => sumpf;
+            set => sumpf = value;
+        }
+
+        public int Lifes
+        {
+            get => lifes;
+            set => lifes = value;
+        }
+
         // Start is called before the first frame update
         void Start()
         {
