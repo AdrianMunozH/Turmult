@@ -1,3 +1,4 @@
+using DapperDino.UMT.Lobby.Networking;
 using MLAPI;
 using UnityEngine;
 
@@ -22,9 +23,8 @@ namespace Networking
 
         static void StartButtons()
         {
-            if (GUILayout.Button("Host")) NetworkManager.Singleton.StartHost();
-            if (GUILayout.Button("Client")) NetworkManager.Singleton.StartClient();
-            if (GUILayout.Button("Server")) NetworkManager.Singleton.StartServer();
+            if (GUILayout.Button("Client")) ClientGameNetPortal.Instance.StartClient();
+            if (GUILayout.Button("Server")) GameNetPortal.Instance.StartServer();
         }
 
         static void StatusLabels()
