@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using MLAPI;
+using MLAPI.Messaging;
 using Turrets;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Field
 {
-    public class HCell : NetworkBehaviour
+    public class HCell : MonoBehaviour
     {
         public enum CellType
         {
@@ -252,6 +253,19 @@ namespace Field
                 hexagon.transform.SetParent(transform, true);
             }
         }
+/*
+        [ServerRpc(RequireOwnership = false)]
+        public void AcquiredThisCellServerRpc()
+        {
+            // sagt allen clients bescheid das das feld eingenommen wurde
+            AcquiredThisCellClientRpc();
+        }
+        [ClientRpc]
+        public void AcquiredThisCellClientRpc()
+        {
+            SetPrefab(type,_ressource.GetRessourceType());
+        }
+        */
 
         public void SetPrefab(int prefabIndex, Vector3? rotation = null)
         {

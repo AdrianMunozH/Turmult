@@ -34,11 +34,17 @@ namespace Ui.Input
             // 
         }
 
+        // nur für baschi
+        public override void OnDestroy()
+        {
+            HGrid.Instance.GetCellIndex(prevCell.X,prevCell.Y).DestroyPreviewTurret();
+        }
+
         // wird das hier ein rpc call ?
         public override void BuyTurret(HCell cell, Ressource.RessourceType ressourceEnum, int turret)
         {
-            Debug.Log(!cell.hasBuilding + " " + cell.Celltype.ToString());
-            if(cell.HasBuilding || cell.Celltype != HCell.CellType.Acquired) return;
+            Debug.Log(!cell.hasBuilding + " " + cell.Celltype.ToString() + cell.Ressource.GetRessourceType());
+            if(cell.HasBuilding || cell.Celltype != HCell.CellType.Acquired || cell.Ressource.GetRessourceType() != Ressource.RessourceType.Neutral) return;
 
             Debug.Log("buyturret");
             cell.BuildTurret();
@@ -68,7 +74,7 @@ namespace Ui.Input
                     if (!prevCell.CompareCoord(cell.coordinates))
                     {
                         // neue prefab
-                        if (cell.GetCellType() == HCell.CellType.Acquired)
+                        if (cell.GetCellType() == HCell.CellType.Acquired && !cell.HasBuilding && cell.Ressource.GetRessourceType() != Ressource.RessourceType.Neutral)
                         {
 
                             GameObject turretToBuild = BuildManager.instance.GetTurretToBuildPreview(); 
@@ -98,11 +104,10 @@ namespace Ui.Input
                 RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay(UnityEngine.Input.mousePosition);
 
-                if (Physics.Raycast(ray, out hit, 100.0f))
+                if (Physics.Raycast(ray, out hit, float.MaxValue))
                 {
                     if (hit.transform.gameObject.tag == "Cell")
                     {
-                        
                         BuyTurret(hit.transform.GetComponent<HCell>(),_ressourceEnum,currentTurretIndex);
                         
                     }

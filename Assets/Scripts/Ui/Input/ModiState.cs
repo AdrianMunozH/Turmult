@@ -25,6 +25,11 @@ namespace Ui.Input
             return;
         }
 
+        public virtual void OnDestroy()
+        {
+            return;
+        }
+
         public abstract void Input();
 
         public void SetLayerMask(LayerMask layerMask)
