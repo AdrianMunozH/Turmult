@@ -2,6 +2,7 @@ using DapperDino.UMT.Lobby.Networking;
 using Networking;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Ui.Lobby
 {
@@ -15,11 +16,9 @@ namespace Ui.Lobby
             PlayerPrefs.GetString("PlayerName");
         }
 
-        public void OnHostClicked()
+        public void OnSinglePlayerClicked()
         {
-            PlayerPrefs.SetString("PlayerName", displayNameInputField.text);
-
-            GameNetPortal.Instance.StartServer();
+            SceneManager.LoadScene("Scenes/Game_SinglePlayer");
         }
 
         public void OnClientClicked()
@@ -27,6 +26,8 @@ namespace Ui.Lobby
             PlayerPrefs.SetString("PlayerName", displayNameInputField.text);
             ClientGameNetPortal.Instance.StartClient();
         }
+        
+        
     }
 }
 

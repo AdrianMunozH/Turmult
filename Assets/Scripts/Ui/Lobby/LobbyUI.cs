@@ -3,7 +3,6 @@ using MLAPI;
 using MLAPI.Connection;
 using MLAPI.Messaging;
 using MLAPI.NetworkVariable.Collections;
-using Networking;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,10 +10,12 @@ namespace Ui.Lobby
 {
     public class LobbyUI : NetworkBehaviour
     {
-        [Header("References")]
-        [SerializeField] private LobbyPlayerCard[] lobbyPlayerCards;
+        [Header("References")] [SerializeField]
+        private LobbyPlayerCard[] lobbyPlayerCards;
+
         [SerializeField] private Button startGameButton;
 
+        [SerializeField] private bool startGameInstant = true;
         private NetworkList<LobbyPlayerState> lobbyPlayers = new NetworkList<LobbyPlayerState>();
 
         public override void NetworkStart()
@@ -71,15 +72,18 @@ namespace Ui.Lobby
         private void HandleClientConnected(ulong clientId)
         {
             var playerData = ServerGameNetPortal.Instance.GetPlayerData(clientId);
-            Debug.Log("Hier wird auch angeragt");
-            if (!playerData.HasValue) { return; }
-            Debug.Log("Keine Daten");
-
+            if (!playerData.HasValue)
+            {
+                return;
+            }
+            
             lobbyPlayers.Add(new LobbyPlayerState(
                 clientId,
                 playerData.Value.PlayerName,
                 false
             ));
+            
+            Debug.Log(clientId + playerData.Value.PlayerName);
         }
 
         private void HandleClientDisconnect(ulong clientId)
@@ -111,9 +115,16 @@ namespace Ui.Lobby
         }
 
         [ServerRpc(RequireOwnership = false)]
-        private void StartGameServerRpc(ServerRpcParams serverRpcParams = default)
+        private void StartGameServerRpc(bool startGameInstant = false, ServerRpcParams serverRpcParams = default)
         {
-            if (!IsEveryoneReady()) { return; }
+            if (startGameInstant)
+            {
+                //Wenn auf true, soll IsEveryoneReady nicht geprüft werden!
+            }
+            else if (!IsEveryoneReady())
+            {
+                return;
+            }
 
             ServerGameNetPortal.Instance.StartGame();
         }
@@ -132,7 +143,7 @@ namespace Ui.Lobby
         {
             StartGameServerRpc();
         }
-        
+
         private void HandleLobbyPlayersStateChanged(NetworkListEvent<LobbyPlayerState> lobbyState)
         {
             for (int i = 0; i < lobbyPlayerCards.Length; i++)
@@ -145,13 +156,11 @@ namespace Ui.Lobby
                 {
                     lobbyPlayerCards[i].DisableDisplay();
                 }
-                
             }
-            Debug.Log(IsEveryoneReady());
-            if(IsEveryoneReady())
+
+            if (IsEveryoneReady() || startGameInstant)
             {
-                Debug.Log("JETZT GEHTS HIER LOS");
-                StartGameServerRpc();
+                StartGameServerRpc(startGameInstant);
             }
         }
     }

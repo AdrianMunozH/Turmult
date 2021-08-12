@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Field;
 using JetBrains.Annotations;
+using Ui.Input;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,11 +32,12 @@ namespace Control
         private void Start()
         {
             buildManager = BuildManager.instance;
-            towerMode = true;
+            towerMode = false;
             scrollViewTower.SetActive(true);
             towerTypes[0].SetActive(true);
             ressourceType[0].SetActive(true);
             bgImage.sprite = bgSprites[1];
+            SetAcquireMode();
 
         }
 
@@ -68,6 +70,8 @@ namespace Control
         public void SetAcquireMode()
         {
             DeselectType();
+            PlayerInputManager.Instance.SetState(new AcquireState());
+            
             acquireMode.SetActive(true);
             scrollViewTower.SetActive(false);
             scrollViewMinion.SetActive(false);
@@ -92,6 +96,7 @@ namespace Control
             }
             if (towerMode)
             {
+                PlayerInputManager.Instance.SetState(new BuildState());
                 DeselectType();
                 switch (type.name)
                 {
