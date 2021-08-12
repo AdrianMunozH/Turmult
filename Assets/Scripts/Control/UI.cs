@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Field;
 using JetBrains.Annotations;
 using Ui.Input;
@@ -30,6 +31,8 @@ namespace Control
 
         private BuildManager buildManager;
 
+        private Vector3 menuPos;
+
         //wenn towerMode false, dann ist man im minionMode
         public bool towerMode;
         
@@ -46,6 +49,8 @@ namespace Control
             bgImage.sprite = bgSprites[1];
             SetAcquireMode();
             currentRessource = 0;
+            menuPos = bgImage.transform.position;
+
 
         }
 
@@ -100,13 +105,16 @@ namespace Control
             {
                 towerMode = true;
                 scrollViewTower.SetActive(true);
+                
             }
             if (towerMode)
             {
                 PlayerInputManager.Instance.SetState(new BuildState());
                 DeselectType();
                 buildMode.SetActive(true);
+                bgImage.transform.position = new Vector3(menuPos.x, menuPos.y - 100, menuPos.z);
                 bgImage.gameObject.SetActive(true);
+                bgImage.transform.DOMoveY(menuPos.y, 0.2f);
                 switch (type.name)
                 {
                     case "Mountain":
@@ -132,6 +140,9 @@ namespace Control
             else
             {
                DeselectType();
+               bgImage.transform.position = new Vector3(menuPos.x, menuPos.y - 100, menuPos.z);
+               bgImage.gameObject.SetActive(true);
+               bgImage.transform.DOMoveY(menuPos.y, 0.2f);
                 switch (type.name)
                 {
                     case "Mountain":
