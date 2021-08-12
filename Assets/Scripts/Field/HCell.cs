@@ -297,10 +297,19 @@ namespace Field
             
             if(transform.childCount > 0)
                 GameObject.Destroy(transform.GetChild(0).gameObject);
-            
+
+            GameObject hexagon;
             Vector3 pos = transform.position;
-            GameObject hexagon = Instantiate(hexPrefabs[index], new Vector3(pos.x,pos.y -10, pos.z), transform.rotation);
-            hexagon.transform.DOLocalMoveY(pos.y, 0.5f);
+            //Tweening nur für Zellen die noch nicht vorhanden sind
+            if (cellType != CellType.Acquired)
+            {
+                hexagon = Instantiate(hexPrefabs[index], new Vector3(pos.x,pos.y -10, pos.z), transform.rotation);
+                hexagon.transform.DOLocalMoveY(pos.y, 0.5f);
+            }
+            else
+            {
+                hexagon = Instantiate(hexPrefabs[index], new Vector3(pos.x,pos.y , pos.z), transform.rotation);
+            }
 
             if(rotation != null)
                 hexagon.transform.eulerAngles = new Vector3(hexagon.transform.eulerAngles.x + rotation.Value.x,
