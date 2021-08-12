@@ -19,53 +19,50 @@ namespace Field
             Base,
             Hidden = 6
         };
-
-    
+        //######## public ###########
         public HexCoordinates coordinates;
-        int distance;
-
         public int index;
         public CellType type;
+
         //Wird gebraucht für das Tweening beim Einnehmen der Zelle
         //Wird in Buildstate.cs auf true gesetzt
         public bool recentlyBuild;
-
-        public CellType Celltype
-        {
-            get => type;
-            set => type = value;
-        }
-
-        public int spindex;
-        private Color startColor;
-        private GameObject turret;
         public GameObject previewTurret;
-        private Ressource _ressource;
-
         public GameObject acquiredField;
-
         public HCell[] neighb;
-
-        
-        private BuildManager buildManager;
-
         public Ressource Ressource
         {
             get => _ressource;
             set => _ressource = value;
         }
-
-
+        
         public bool hasBuilding;
-
         public bool HasBuilding
         {
             get => hasBuilding;
             set => hasBuilding = value;
         }
+        public CellType Celltype
+        {
+            get => type;
+            set => type = value;
+        }
+        
+        public Image gridImage;
+        public int spindex;
+        
+        //######## private ###########
+        private Color startColor;
+        private GameObject turret;
+        private Ressource _ressource;
+        private BuildManager buildManager;
+        private int distance;
+        private Renderer rend;
+
 
         // maps gehen nciht wegen unity :((
         [SerializeField] private GameObject[] hexPrefabs;
+
         /*
         berg    unacq      :0
                 acq        :1
@@ -90,35 +87,11 @@ namespace Field
                 path       :20
         base               :21
                 
-        /*
-        [Header("Color Highlighting")]
-        public Color hoverColorBuildMode = new Color(214.0f/255f, 200.0f/255f, 178.0f/255f,100.0f);
-        public Color hoverColorAcquireMode = new Color(214.0f/255f, 200.0f/255f, 178.0f/255f,100.0f);
-
-        [Header("Cell Color Setup - Acquired")]
-        public Color colorAcquiredNeutral = new Color(214.0f/255f, 200.0f/255f, 178.0f/255f,100.0f);
-        public Color colorAcquiredMountain = new Color(64.0f/255f, 60.0f/255f, 47.0f/255f,100.0f);
-        public Color colorAcquiredSwamp = new Color(81.0f/255f, 143.0f/255f, 116.0f/255f,100.0f);
-        public Color colorAcquiredForest = new Color(6.0f/255f, 84.0f/255f, 15.0f/255f,100.0f);
-
-        [Header("Cell Color Setup - Not Acquired")]
-        public Color colorUnacquiredNeutral = new Color(189.0f/255f, 186.0f/255f, 183.0f/255f,100.0f);
-        public Color colorUnacquiredMountain = new Color(158f/255f, 153f/255f, 138f/255f,100f);
-        public Color colorUnacquiredSwamp = new Color(102f/255f, 110f/255f, 106f/255f,100f);
-        public Color colorUnacquiredForest = new Color(160f/255f, 176f/255f, 162f/255f,100f);
-        
-    
-        [Header("Cell Color Setup - Not Acquired")]
-        public Color colorNeutralField = new Color(56.0f/255f, 56.0f/255f, 56.0f/255f,100.0f);
-        */
+*/
         //Optimization: Cachen des Renderes auf dem Objekt
-        private Renderer rend;
 
-
-        public Image gridImage;
-        
         //bool ob es schon bebaut wurde 
-        
+
         public CellType GetCellType()
         {
             return type;
@@ -129,70 +102,65 @@ namespace Field
             type = celltype;
         }
 
-        public Color SetColor(float r,float g,float b, float a)
+        public Color SetColor(float r, float g, float b, float a)
         {
-            var tempColor = new Color(r,g,b);
+            var tempColor = new Color(r, g, b);
             tempColor.a = a;
             return tempColor;
         }
-        
-        
-        
+
+
         public void BuildTurret()
         {
             Debug.Log("buildTurret    ");
             GameObject turretToBuild = buildManager.GetTurretToBuild();
             Vector3 turPos = transform.position;
-            turret = (GameObject) Instantiate(turretToBuild, new Vector3(turPos.x, turPos.y - 10, turPos.z) , transform.rotation);
+            turret = (GameObject) Instantiate(turretToBuild, new Vector3(turPos.x, turPos.y - 10, turPos.z),
+                transform.rotation);
             Turret t = turret.GetComponent<Turret>();
-            
+
             // Animation
             var sequence = DOTween.Sequence();
             sequence.Append(turret.transform.DOLocalMoveY(turPos.y, 0.5f));
-            sequence.Append(turret.transform.DOShakeScale( 1f, new Vector3(0f, 0.01f, 0f), 5, 0, fadeOut:true));
-            //
-            
-            
+            sequence.Append(turret.transform.DOShakeScale(1f, new Vector3(0f, 0.01f, 0f), 5, 0, fadeOut: true));
+
             SetPrefab((int) t.ressourceType + 2);
             hasBuilding = true;
-            
         }
 
         private void Awake()
         {
             type = CellType.Hidden;
-            
         }
 
         public GameObject InstantiateTurretPreview(GameObject turretToBuild)
         {
-            return Instantiate(turretToBuild, transform.position, transform.rotation); 
+            return Instantiate(turretToBuild, transform.position, transform.rotation);
         }
 
         public void DestroyPreviewTurret()
         {
             Destroy(previewTurret);
-        }        
-        
+        }
+
         // Start is called before the first frame update
         void Start()
         {
             buildManager = BuildManager.instance;
-            
-            
+
+
             _ressource = new Ressource();
             rend = GetComponent<Renderer>();
             rend.enabled = false;
-            
+
             SetNeighb();
-            
 
             gridImage.color = SetColor(0f, 0f, 0f, 0f);
             //SetCellColor();
             if (type != CellType.Base) ;
-                // SetPrefab(type,_ressource.GetRessourceType());
+            // SetPrefab(type,_ressource.GetRessourceType());
         }
-        
+
         private void SetNeighb()
         {
             //Debug.Log(h.coordinates.ToString() + " ausgewählt");
@@ -233,57 +201,43 @@ namespace Field
             }
         }
 
-        public void SetUnacquiredPrefab(HCell cell, CellType cellType, Ressource.RessourceType ressource, Vector3? rotation = null,
+        public void SetUnacquiredPrefab(HCell cell, CellType cellType, Ressource.RessourceType ressource,
+            Vector3? rotation = null,
             int path = 0)
         {
-
             if (cell.transform.childCount == 0)
             {
-                
                 cell.SetCellType(CellType.CanBeAcquired);
                 int index = (int) cellType + (int) ressource + path;
-            
-                Vector3 pos = transform.position;
-                GameObject hexagon = Instantiate(hexPrefabs[index], new Vector3(pos.x,pos.y -10, pos.z), transform.rotation);
-                hexagon.transform.DOLocalMoveY(pos.y, 0.5f);
-                
 
-                if(rotation != null)
+                Vector3 pos = transform.position;
+                GameObject hexagon = Instantiate(hexPrefabs[index], new Vector3(pos.x, pos.y - 10, pos.z),
+                    transform.rotation);
+                hexagon.transform.DOLocalMoveY(pos.y, 0.5f);
+
+
+                if (rotation != null)
                     hexagon.transform.eulerAngles = new Vector3(hexagon.transform.eulerAngles.x + rotation.Value.x,
                         hexagon.transform.eulerAngles.y + rotation.Value.y,
                         hexagon.transform.eulerAngles.z + rotation.Value.z);
-            
+
                 hexagon.transform.SetParent(transform, true);
             }
         }
-/*
-        [ServerRpc(RequireOwnership = false)]
-        public void AcquiredThisCellServerRpc()
-        {
-            // sagt allen clients bescheid das das feld eingenommen wurde
-            AcquiredThisCellClientRpc();
-        }
-        [ClientRpc]
-        public void AcquiredThisCellClientRpc()
-        {
-            SetPrefab(type,_ressource.GetRessourceType());
-        }
-        */
 
         public void SetPrefab(int prefabIndex, Vector3? rotation = null)
         {
-            
-            if(transform.childCount > 0)
+            if (transform.childCount > 0)
                 GameObject.Destroy(transform.GetChild(0).gameObject);
-            
+
             GameObject hexagon = Instantiate(hexPrefabs[prefabIndex], transform.position, transform.rotation);
-            
-            
-            if(rotation != null)
+
+
+            if (rotation != null)
                 hexagon.transform.eulerAngles = new Vector3(hexagon.transform.eulerAngles.x + rotation.Value.x,
                     hexagon.transform.eulerAngles.y + rotation.Value.y,
                     hexagon.transform.eulerAngles.z + rotation.Value.z);
-            
+
             hexagon.transform.SetParent(transform, true);
             if (acquiredField != null)
             {
@@ -291,39 +245,41 @@ namespace Field
                 acquiredField = acquire.gameObject;
                 acquiredField.SetActive(true);
             }
+
             StartCoroutine(CheckNeighb());
         }
-        
-        public void SetPrefab(CellType cellType, Ressource.RessourceType ressource, Vector3? rotation = null,int path = 0)
+
+        public void SetPrefab(CellType cellType, Ressource.RessourceType ressource, Vector3? rotation = null,
+            int path = 0)
         {
             int index = (int) cellType + (int) ressource + path;
-            
-            if(transform.childCount > 0)
+
+            if (transform.childCount > 0)
                 GameObject.Destroy(transform.GetChild(0).gameObject);
 
             GameObject hexagon;
             Vector3 pos = transform.position;
-            
+
             //TODO: Tweening der Zellen anpassen, die unaquired sind. Leider wird das Acquired vor Aufruf dieser Zeile gesetzt
             //Tweening nur für Zellen die noch nicht vorhanden sind
             if (cellType != CellType.Acquired || recentlyBuild)
             {
-                hexagon = Instantiate(hexPrefabs[index], new Vector3(pos.x,pos.y -10, pos.z), transform.rotation);
+                hexagon = Instantiate(hexPrefabs[index], new Vector3(pos.x, pos.y - 10, pos.z), transform.rotation);
                 hexagon.transform.DOLocalMoveY(pos.y, 0.5f);
                 recentlyBuild = false;
             }
             else
             {
-                hexagon = Instantiate(hexPrefabs[index], new Vector3(pos.x,pos.y , pos.z), transform.rotation);
+                hexagon = Instantiate(hexPrefabs[index], new Vector3(pos.x, pos.y, pos.z), transform.rotation);
             }
 
-            if(rotation != null)
+            if (rotation != null)
                 hexagon.transform.eulerAngles = new Vector3(hexagon.transform.eulerAngles.x + rotation.Value.x,
                     hexagon.transform.eulerAngles.y + rotation.Value.y,
                     hexagon.transform.eulerAngles.z + rotation.Value.z);
-            
+
             hexagon.transform.SetParent(transform, true);
-            
+
             //Ressourcenfelder ohne Wege werden random gedreht, bei Grasfelder zusätzlich das Material random angepasst
             if (path == 0)
             {
@@ -334,7 +290,7 @@ namespace Field
                     SetRandomField(hexagon, false);
                 }
             }
-            
+
             //Setzt "Eingenommen Shader" und aktiviert ihn
             //TODO Material je nach Spieler anpassen
             var acquire = hexagon.gameObject.transform.Find("Cylinder");
@@ -344,6 +300,7 @@ namespace Field
             {
                 hexagon.SetActive(false);
             }
+
             StartCoroutine(CheckNeighb());
         }
 
@@ -357,51 +314,31 @@ namespace Field
                 if (cell.GetCellType() == CellType.Hidden)
                 {
                     cell.SetCellType(CellType.CanBeAcquired);
-                    if (_ressource.GetRessourceType()  != Ressource.RessourceType.Neutral)
+                    if (_ressource.GetRessourceType() != Ressource.RessourceType.Neutral)
                     {
                         cell._ressource.SetSpecificType(Ressource.RessourceType.Neutral);
                     }
-                    cell.SetUnacquiredPrefab(cell, cell.GetCellType(),cell._ressource.GetRessourceType());
+
+                    cell.SetUnacquiredPrefab(cell, cell.GetCellType(), cell._ressource.GetRessourceType());
                 }
             }
         }
-
+        
+        //Für Rotation und Material an den Grasfeldern
         void SetRandomField(GameObject field, bool neutral)
         {
             //Grasfeld Material ändern
             if (neutral)
             {
                 int randomMaterial = Random.Range(0, 10);
-            
+
                 if (randomMaterial < 4)
                     field.GetComponent<MeshRenderer>().material =
                         buildManager.Grid.FieldMaterial[Random.Range(0, buildManager.Grid.FieldMaterial.Length)];
             }
+
             //Rotation ändern
-            int randomDirection = Random.Range(0, 6);
-
-            switch (randomDirection)
-            {
-                case 0:
-                    break;
-                case 1:
-                    field.transform.Rotate(0,60,0);
-                    break;
-                case 2:
-                    field.transform.Rotate(0,120,0);
-                    break;
-                case 3:
-                    field.transform.Rotate(0,180,0);
-                    break;
-                case 4:
-                    field.transform.Rotate(0,240,0);
-                    break;
-                case 5:
-                    field.transform.Rotate(0,300,0);
-                    break;
-            }
+            field.transform.Rotate(0, 60*Random.Range(0, 6), 0);
         }
-
-       
     }
 }
