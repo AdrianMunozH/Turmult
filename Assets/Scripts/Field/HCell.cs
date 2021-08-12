@@ -26,6 +26,9 @@ namespace Field
 
         public int index;
         public CellType type;
+        //Wird gebraucht für das Tweening beim Einnehmen der Zelle
+        //Wird in Buildstate.cs auf true gesetzt
+        public bool recentlyBuild;
 
         public CellType Celltype
         {
@@ -303,10 +306,11 @@ namespace Field
             
             //TODO: Tweening der Zellen anpassen, die unaquired sind. Leider wird das Acquired vor Aufruf dieser Zeile gesetzt
             //Tweening nur für Zellen die noch nicht vorhanden sind
-            if (cellType != CellType.Acquired)
+            if (cellType != CellType.Acquired || recentlyBuild)
             {
                 hexagon = Instantiate(hexPrefabs[index], new Vector3(pos.x,pos.y -10, pos.z), transform.rotation);
                 hexagon.transform.DOLocalMoveY(pos.y, 0.5f);
+                recentlyBuild = false;
             }
             else
             {
