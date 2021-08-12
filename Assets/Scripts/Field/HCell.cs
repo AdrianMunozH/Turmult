@@ -300,6 +300,8 @@ namespace Field
 
             GameObject hexagon;
             Vector3 pos = transform.position;
+            
+            //TODO: Tweening der Zellen anpassen, die unaquired sind. Leider wird das Acquired vor Aufruf dieser Zeile gesetzt
             //Tweening nur für Zellen die noch nicht vorhanden sind
             if (cellType != CellType.Acquired)
             {
