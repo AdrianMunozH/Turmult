@@ -5691,8 +5691,6 @@ MonoBehaviour:
   forestPreviewTurrets: []
   swampTurrets: []
   swampPreviewTurrets: []
-  _buildModeOn: 0
-  _acquireModeOn: 0
   grid: {fileID: 646463327}
 --- !u!114 &541232432
 MonoBehaviour:
@@ -5717,6 +5715,7 @@ MonoBehaviour:
   - {fileID: 1743490950}
   - {fileID: 1551631480}
   acquireMode: {fileID: 794514128}
+  buildMode: {fileID: 1336653865}
   scrollViewTower: {fileID: 1183750485}
   scrollViewMinion: {fileID: 235973818}
   towerTypes:
@@ -5727,6 +5726,7 @@ MonoBehaviour:
   - {fileID: 10332675}
   - {fileID: 1921698021}
   - {fileID: 578493871}
+  towerMode: 0
 --- !u!114 &541232433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11459,6 +11459,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   turrets: []
+  ui: {fileID: 541232432}
 --- !u!1 &1103555868
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using Field;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Ui.Input
 {
@@ -38,17 +39,23 @@ namespace Ui.Input
             // server rpc
             //cell.SetPrefab(cell.Celltype,cell.Ressource);
         }
+
+        public override void OnDestroy()
+        {
+            HGrid.Instance.GetCellIndex(prevCell.X, prevCell.Y).gridImage.color =  HGrid.Instance.GetCellIndex(prevCell.X, prevCell.Y).SetColor(0f,0f,0f,0f);;
+        }
+
         public override void Input()
         {
+            
             // hover
             RaycastHit hoverHit;
             Ray hoverRay = Camera.main.ScreenPointToRay(UnityEngine.Input.mousePosition);
-            
 
             if (Physics.Raycast(hoverRay, out hoverHit, float.MaxValue))
             {
                 // sollte immer true sein weil with nur eine layer benutzen -- nicht mehr sadge
-                if (hoverHit.transform.gameObject.tag == "Cell")
+                if (hoverHit.transform.gameObject.tag == "Cell"  && !EventSystem.current.IsPointerOverGameObject())
                 {
                     HCell cell = hoverHit.transform.GetComponent<HCell>();
                     
@@ -74,7 +81,6 @@ namespace Ui.Input
             
             
             
-            
             //linker mouseclick
             if (UnityEngine.Input.GetMouseButtonDown(0))
             {
@@ -83,7 +89,7 @@ namespace Ui.Input
                 if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue))
                 {
 
-                    if (hit.transform.gameObject.tag == "Cell")
+                    if (hit.transform.gameObject.tag == "Cell"  && !EventSystem.current.IsPointerOverGameObject())
                     {
                         //Benötigt wird aktivieren des TweeningEffekts => Hcell
                         hit.transform.GetComponent<HCell>().recentlyBuild = true;

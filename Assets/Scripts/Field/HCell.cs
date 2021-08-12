@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Field
 {
-    public class HCell : MonoBehaviour
+    public class HCell : NetworkBehaviour
     {
         public enum CellType
         {

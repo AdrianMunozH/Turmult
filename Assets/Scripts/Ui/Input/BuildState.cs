@@ -1,6 +1,7 @@
 using System;
 using Field;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Ui.Input
 {
@@ -74,7 +75,7 @@ namespace Ui.Input
                     if (!prevCell.CompareCoord(cell.coordinates))
                     {
                         // neue prefab
-                        if (cell.GetCellType() == HCell.CellType.Acquired && !cell.HasBuilding && cell.Ressource.GetRessourceType() != Ressource.RessourceType.Neutral)
+                        if (cell.GetCellType() == HCell.CellType.Acquired && !cell.HasBuilding && cell.Ressource.GetRessourceType() == Ressource.RessourceType.Neutral)
                         {
 
                             GameObject turretToBuild = BuildManager.instance.GetTurretToBuildPreview(); 
@@ -106,7 +107,7 @@ namespace Ui.Input
 
                 if (Physics.Raycast(ray, out hit, float.MaxValue))
                 {
-                    if (hit.transform.gameObject.tag == "Cell")
+                    if (hit.transform.gameObject.tag == "Cell"  && !EventSystem.current.IsPointerOverGameObject())
                     {
                         BuyTurret(hit.transform.GetComponent<HCell>(),_ressourceEnum,currentTurretIndex);
                         

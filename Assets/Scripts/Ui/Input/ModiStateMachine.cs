@@ -13,10 +13,15 @@ namespace Ui.Input
             if(State != null)
                 State.OnDestroy();
             //set
+            
             State = state;
             // start methode ist für init von variablen usw.
             State.Start();
             State.SetPlayer(player);
+        }
+        public ModiState GetState()
+        {
+            return State;
         }
     }
 }
