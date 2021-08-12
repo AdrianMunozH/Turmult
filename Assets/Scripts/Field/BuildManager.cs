@@ -19,8 +19,7 @@ namespace Field
         public GameObject[] forestPreviewTurrets;
         public GameObject[] swampTurrets;
         public GameObject[] swampPreviewTurrets;
-        public bool _buildModeOn;
-        public bool _acquireModeOn;
+
 
         [SerializeField] private HGrid grid;
 
@@ -36,8 +35,7 @@ namespace Field
             }
 
             instance = this;
-            _buildModeOn = false;
-            _acquireModeOn = false;
+           
 
             
         }
@@ -58,34 +56,7 @@ namespace Field
         {
             return turretToBuildPreview;
         }
-
-        public bool IsBuildModeOn()
-        {
-            return _buildModeOn;
-        }
-
-        public bool isAcquireModeOn()
-        {
-            return _acquireModeOn;
-        }
-
-        public void SetBuildMode()
-        {
-            _buildModeOn = !_buildModeOn;
-            if (_acquireModeOn && _buildModeOn)
-            {
-                _acquireModeOn = false;
-            }
-        }
-
-        public void SetAcquireMode()
-        {
-            _acquireModeOn = !_acquireModeOn;
-            if (_acquireModeOn && _buildModeOn)
-            {
-                _buildModeOn = false;
-            }
-        }
+        
 
         public void SetTurretToBuild(GameObject turret)
         {

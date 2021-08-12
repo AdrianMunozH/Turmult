@@ -17,6 +17,10 @@ namespace Control
         
         [SerializeField] private GameObject[] ressourceType;
         [SerializeField] private GameObject acquireMode;
+        
+        
+        
+        [SerializeField] private GameObject buildMode;
 
         [SerializeField] private GameObject scrollViewTower;
         [SerializeField] private GameObject scrollViewMinion;
@@ -27,29 +31,33 @@ namespace Control
         private BuildManager buildManager;
 
         //wenn towerMode false, dann ist man im minionMode
-        private bool towerMode;
+        public bool towerMode;
+        
+        
+        private int currentRessource;
+        // 0 == berg
+        // 1 == wald
+        // 2 == sumpf
 
         private void Start()
         {
             buildManager = BuildManager.instance;
             towerMode = false;
-            scrollViewTower.SetActive(true);
-            towerTypes[0].SetActive(true);
-            ressourceType[0].SetActive(true);
             bgImage.sprite = bgSprites[1];
             SetAcquireMode();
+            currentRessource = 0;
 
         }
 
         [UsedImplicitly]
-        public void OpenTowerBuildMode()
+        public void OpenTowerBuildMode(int ressource = 0)
         {
             towerMode = true;
             scrollViewTower.SetActive(true);
             scrollViewMinion.SetActive(false);
             DeselectType();
-            towerTypes[0].SetActive(true);
-            ressourceType[0].SetActive(true);
+            towerTypes[ressource].SetActive(true);
+            ressourceType[ressource].SetActive(true);
             bgImage.sprite = bgSprites[1];
             Camera.main.cullingMask = -1;
         }
@@ -61,26 +69,25 @@ namespace Control
             scrollViewMinion.SetActive(true);
             scrollViewTower.SetActive(false);
             DeselectType();
-            minionTypes[0].SetActive(true);
-            ressourceType[0].SetActive(true);
-            bgImage.sprite = bgSprites[1];
+            minionTypes[currentRessource].SetActive(true);
+            ressourceType[currentRessource].SetActive(true);
+            bgImage.sprite = bgSprites[currentRessource+1]; // später wird das acquired bg gelösct und dann brauchen wir kein +1
             Camera.main.cullingMask &=  ~(1 << LayerMask.NameToLayer("Shader"));
         }
         [UsedImplicitly]
         public void SetAcquireMode()
         {
             DeselectType();
+            // setzt den state
             PlayerInputManager.Instance.SetState(new AcquireState());
             
             acquireMode.SetActive(true);
             scrollViewTower.SetActive(false);
             scrollViewMinion.SetActive(false);
+            buildMode.SetActive(false);
+            bgImage.gameObject.SetActive(false);
             bgImage.sprite = bgSprites[0];
-            buildManager._acquireModeOn = !buildManager._acquireModeOn;
-            if (buildManager._acquireModeOn && buildManager._buildModeOn)
-            {
-                buildManager._buildModeOn = false;
-            }
+            
             Camera.main.cullingMask = -1;
             
         }
@@ -89,7 +96,7 @@ namespace Control
         public void SelectType(Button type)
         {
             
-            if (buildManager._acquireModeOn)
+            if (PlayerInputManager.Instance.GetState().name.Equals("Acquire"))
             {
                 towerMode = true;
                 scrollViewTower.SetActive(true);
@@ -98,22 +105,27 @@ namespace Control
             {
                 PlayerInputManager.Instance.SetState(new BuildState());
                 DeselectType();
+                buildMode.SetActive(true);
+                bgImage.gameObject.SetActive(true);
                 switch (type.name)
                 {
                     case "Mountain":
                         towerTypes[0].SetActive(true);
                         ressourceType[0].SetActive(true);
                         bgImage.sprite = bgSprites[1];
+                        currentRessource = 0;
                         break;
                     case "Forest":
                         towerTypes[1].SetActive(true);
                         ressourceType[1].SetActive(true);
                         bgImage.sprite = bgSprites[2];
+                        currentRessource = 1;
                         break;
                     case "Swamp":
                         towerTypes[2].SetActive(true);
                         ressourceType[2].SetActive(true);
                         bgImage.sprite = bgSprites[3];
+                        currentRessource = 2;
                         break;
                 }
             }
@@ -126,16 +138,83 @@ namespace Control
                         minionTypes[0].SetActive(true);
                         ressourceType[0].SetActive(true);
                         bgImage.sprite = bgSprites[1];
+                        currentRessource = 0;
                         break;
                     case "Forest":
                         minionTypes[1].SetActive(true);
                         ressourceType[1].SetActive(true);
                         bgImage.sprite = bgSprites[2];
+                        currentRessource = 1;
                         break;
                     case "Swamp":
                         minionTypes[2].SetActive(true);
                         ressourceType[2].SetActive(true);
                         bgImage.sprite = bgSprites[3];
+                        currentRessource = 2;
+                        break;
+                }
+            }
+        }
+        
+        
+        public void SelectType(string name)
+        {
+            
+            if (PlayerInputManager.Instance.GetState().name.Equals("Acquire"))
+            {
+                towerMode = true;
+                scrollViewTower.SetActive(true);
+            }
+            if (towerMode)
+            {
+                PlayerInputManager.Instance.SetState(new BuildState());
+                DeselectType();
+                buildMode.SetActive(true);
+                bgImage.gameObject.SetActive(true);
+                switch (name)
+                {
+                    case "Mountain":
+                        towerTypes[0].SetActive(true);
+                        ressourceType[0].SetActive(true);
+                        bgImage.sprite = bgSprites[1];
+                        currentRessource = 0;
+                        break;
+                    case "Forest":
+                        towerTypes[1].SetActive(true);
+                        ressourceType[1].SetActive(true);
+                        bgImage.sprite = bgSprites[2];
+                        currentRessource = 1;
+                        break;
+                    case "Swamp":
+                        towerTypes[2].SetActive(true);
+                        ressourceType[2].SetActive(true);
+                        bgImage.sprite = bgSprites[3];
+                        currentRessource = 2;
+                        break;
+                }
+            }
+            else
+            {
+               DeselectType();
+                switch (name)
+                {
+                    case "Mountain":
+                        minionTypes[0].SetActive(true);
+                        ressourceType[0].SetActive(true);
+                        bgImage.sprite = bgSprites[1];
+                        currentRessource = 0;
+                        break;
+                    case "Forest":
+                        minionTypes[1].SetActive(true);
+                        ressourceType[1].SetActive(true);
+                        bgImage.sprite = bgSprites[2];
+                        currentRessource = 1;
+                        break;
+                    case "Swamp":
+                        minionTypes[2].SetActive(true);
+                        ressourceType[2].SetActive(true);
+                        bgImage.sprite = bgSprites[3];
+                        currentRessource = 2;
                         break;
                 }
             }
@@ -143,6 +222,7 @@ namespace Control
 
         void DeselectType()
         {
+            acquireMode.SetActive(false);
             foreach (var tower in towerTypes)
             {
                 tower.SetActive(false);
@@ -156,9 +236,8 @@ namespace Control
             {
                 ressource.SetActive(false);
             }
-
-            acquireMode.SetActive(false);
-            buildManager._acquireModeOn = false;
+           
+            
         }
     
     }
