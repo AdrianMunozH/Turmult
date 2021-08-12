@@ -91,6 +91,8 @@ namespace Ui.Input
 
                     if (hit.transform.gameObject.tag == "Cell"  && !EventSystem.current.IsPointerOverGameObject())
                     {
+                        //Benötigt wird aktivieren des TweeningEffekts => Hcell
+                        hit.transform.GetComponent<HCell>().recentlyBuild = true;
                         AcquireField(hit.transform.GetComponent<HCell>());
                     }
                 }

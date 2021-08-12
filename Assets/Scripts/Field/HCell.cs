@@ -26,6 +26,9 @@ namespace Field
 
         public int index;
         public CellType type;
+        //Wird gebraucht für das Tweening beim Einnehmen der Zelle
+        //Wird in Buildstate.cs auf true gesetzt
+        public bool recentlyBuild;
 
         public CellType Celltype
         {
@@ -297,10 +300,22 @@ namespace Field
             
             if(transform.childCount > 0)
                 GameObject.Destroy(transform.GetChild(0).gameObject);
-            
+
+            GameObject hexagon;
             Vector3 pos = transform.position;
-            GameObject hexagon = Instantiate(hexPrefabs[index], new Vector3(pos.x,pos.y -10, pos.z), transform.rotation);
-            hexagon.transform.DOLocalMoveY(pos.y, 0.5f);
+            
+            //TODO: Tweening der Zellen anpassen, die unaquired sind. Leider wird das Acquired vor Aufruf dieser Zeile gesetzt
+            //Tweening nur für Zellen die noch nicht vorhanden sind
+            if (cellType != CellType.Acquired || recentlyBuild)
+            {
+                hexagon = Instantiate(hexPrefabs[index], new Vector3(pos.x,pos.y -10, pos.z), transform.rotation);
+                hexagon.transform.DOLocalMoveY(pos.y, 0.5f);
+                recentlyBuild = false;
+            }
+            else
+            {
+                hexagon = Instantiate(hexPrefabs[index], new Vector3(pos.x,pos.y , pos.z), transform.rotation);
+            }
 
             if(rotation != null)
                 hexagon.transform.eulerAngles = new Vector3(hexagon.transform.eulerAngles.x + rotation.Value.x,
