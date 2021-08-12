@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using MLAPI;
+using MLAPI.Messaging;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Field
 {
-    public class HGrid : Singleton<HGrid>
+    public class HGrid : NetworkBehaviour
     {
         public int radius;
         public HCell[] cells;
@@ -33,10 +35,7 @@ namespace Field
             }
         }
 
-        // Start is called before the first frame update
-        void Start()
-        {
-        }
+
 
         void Awake()
         {
@@ -58,23 +57,7 @@ namespace Field
             cells = new HCell[cellList.Count];
             cells = cellList.ToArray();
             neutralCell();
-            /*
-            setze neutral 7 felder  x 
-            setze weg
-            setze base
-            setze array mit den vorher mit index
-            setze ressource
-
-             
-            foreach (var cell in cells)
-            {
-                if (cell.GetCellType() != HCell.CellType.Acquired || cell.GetCellType() != HCell.CellType.Neutral)
-                {
-                    cell.gameObject.SetActive(false);
-                }
-                
-            }
-            */
+            
         }
 
         bool hexCircle(int x, int z, int i)
@@ -91,6 +74,12 @@ namespace Field
             }
 
             return false;
+        }
+
+        [ClientRpc]
+        public void SetResourceClientRpc(int x, int y)
+        {
+            GetCellIndex(x, y).ressource.SetRandomType();
         }
 
         void CreateCell(int x, int z, int i)
@@ -116,6 +105,14 @@ namespace Field
             cell.transform.localPosition = position;
             cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, z);
             cell.GetComponent<HCell>().index = i;
+
+            //Celltypen ändern wenn Server am Start ist, über ClienRPC die clients damit aktualisieren
+            if (IsServer)
+            {
+                Debug.Log("Kein Server?");
+                cell.ressource = new Ressource();
+                cell.ressource.SetRandomType();
+            }
 
 
             //hoverImage.enabled = false;
@@ -427,7 +424,7 @@ namespace Field
         {
             int str;
             // neutral hat weniger felder als ressourcen
-            if (curr.Ressource.GetRessourceType() == Ressource.RessourceType.Neutral)
+            if (curr.ressource.GetRessourceType() == Ressource.RessourceType.Neutral)
                 str = 2;
             else
                 str = 3;
@@ -462,11 +459,11 @@ namespace Field
             if (angle > 0)
             {
                 
-                curr.SetPrefab(curr.GetCellType(),curr.Ressource.GetRessourceType(),new Vector3(0,rotationOfPrefab,0),str);
+                curr.SetPrefab(curr.GetCellType(),curr.ressource.GetRessourceType(),new Vector3(0,rotationOfPrefab,0),str);
             }
             else
             {
-                curr.SetPrefab(curr.GetCellType(),curr.Ressource.GetRessourceType(),new Vector3(0,rotationOfPrefab+180f,0),str);
+                curr.SetPrefab(curr.GetCellType(),curr.ressource.GetRessourceType(),new Vector3(0,rotationOfPrefab+180f,0),str);
             }
             
            
@@ -488,7 +485,7 @@ namespace Field
         {
             int str;
             
-            if (path.Ressource.GetRessourceType() == Ressource.RessourceType.Neutral)
+            if (path.ressource.GetRessourceType() == Ressource.RessourceType.Neutral)
                 str = 1;
             else
                 str = 2;
@@ -496,14 +493,14 @@ namespace Field
             //das ist nur für straight
             if (x != 0 && y != 0 && z == 0)
             {
-                path.SetPrefab(path.GetCellType(),path.Ressource.GetRessourceType(),new Vector3(0,120,0),str);
+                path.SetPrefab(path.GetCellType(),path.ressource.GetRessourceType(),new Vector3(0,120,0),str);
             } else if (y != 0 && z != 0 && x == 0)
             {
-                path.SetPrefab(path.GetCellType(),path.Ressource.GetRessourceType(),new Vector3(0,-120,0),str);
+                path.SetPrefab(path.GetCellType(),path.ressource.GetRessourceType(),new Vector3(0,-120,0),str);
             }
             else
             {
-                path.SetPrefab(path.GetCellType(),path.Ressource.GetRessourceType(),Vector3.zero,str);
+                path.SetPrefab(path.GetCellType(),path.ressource.GetRessourceType(),Vector3.zero,str);
             }
                 
         

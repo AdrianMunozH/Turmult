@@ -1,11 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Collections;
 using DG.Tweening;
 using MLAPI;
-using MLAPI.Messaging;
 using Turrets;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace Field
 {
@@ -30,11 +30,7 @@ namespace Field
         public GameObject previewTurret;
         public GameObject acquiredField;
         public HCell[] neighb;
-        public Ressource Ressource
-        {
-            get => _ressource;
-            set => _ressource = value;
-        }
+        public Ressource ressource;
         
         public bool hasBuilding;
         public bool HasBuilding
@@ -54,10 +50,10 @@ namespace Field
         //######## private ###########
         private Color startColor;
         private GameObject turret;
-        private Ressource _ressource;
         private BuildManager buildManager;
         private int distance;
         private Renderer rend;
+        private HGrid _hexGrid;
 
 
         // maps gehen nciht wegen unity :((
@@ -127,11 +123,7 @@ namespace Field
             SetPrefab((int) t.ressourceType + 2);
             hasBuilding = true;
         }
-
-        private void Awake()
-        {
-            type = CellType.Hidden;
-        }
+        
 
         public GameObject InstantiateTurretPreview(GameObject turretToBuild)
         {
@@ -143,22 +135,25 @@ namespace Field
             Destroy(previewTurret);
         }
 
+        private void Awake()
+        {
+            _hexGrid = GameObject.Find("HexGrid").GetComponent<HGrid>();
+            if (_hexGrid == null) throw new Exception("Kein Objekt HexGrid in der Szene gefunden oder es keine Komponente HGrid an diese! ");
+        }
+
         // Start is called before the first frame update
         void Start()
         {
+            type = CellType.Hidden;
             buildManager = BuildManager.instance;
 
 
-            _ressource = new Ressource();
+            ressource = new Ressource();
             rend = GetComponent<Renderer>();
             rend.enabled = false;
-
             SetNeighb();
-
             gridImage.color = SetColor(0f, 0f, 0f, 0f);
-            //SetCellColor();
-            if (type != CellType.Base) ;
-            // SetPrefab(type,_ressource.GetRessourceType());
+            
         }
 
         private void SetNeighb()
@@ -166,7 +161,7 @@ namespace Field
             //Debug.Log(h.coordinates.ToString() + " ausgewählt");
             neighb = new HCell[6];
             int i = 0;
-            foreach (HCell cell in HGrid.Instance.cells)
+            foreach (HCell cell in _hexGrid.cells)
             {
                 if (cell.coordinates.X == coordinates.X - 1 && cell.coordinates.Y == coordinates.Y)
                 {
@@ -314,12 +309,12 @@ namespace Field
                 if (cell.GetCellType() == CellType.Hidden)
                 {
                     cell.SetCellType(CellType.CanBeAcquired);
-                    if (_ressource.GetRessourceType() != Ressource.RessourceType.Neutral)
+                    if (ressource.GetRessourceType() != Ressource.RessourceType.Neutral)
                     {
-                        cell._ressource.SetSpecificType(Ressource.RessourceType.Neutral);
+                        cell.ressource.SetSpecificType(Ressource.RessourceType.Neutral);
                     }
 
-                    cell.SetUnacquiredPrefab(cell, cell.GetCellType(), cell._ressource.GetRessourceType());
+                    cell.SetUnacquiredPrefab(cell, cell.GetCellType(), cell.ressource.GetRessourceType());
                 }
             }
         }
@@ -340,5 +335,6 @@ namespace Field
             //Rotation ändern
             field.transform.Rotate(0, 60*Random.Range(0, 6), 0);
         }
+        
     }
 }

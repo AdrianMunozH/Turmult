@@ -12,6 +12,7 @@ namespace Ui.Input
         
         private HexCoordinates prevCell;
         private GameObject previewTurret;
+        private HGrid _hexGrid;
 
         public Ressource.RessourceType RessourceEnum
         {
@@ -31,6 +32,8 @@ namespace Ui.Input
         public override void Start()
         {
             name = "Build";
+            _hexGrid = GameObject.Find("HexGrid").GetComponent<HGrid>();
+            if (_hexGrid == null) throw new Exception("Kein Objekt HexGrid in der Szene gefunden oder es keine Komponente HGrid an diese! ");
             Debug.Log(name + " Mode");
             // 
         }
@@ -38,14 +41,14 @@ namespace Ui.Input
         // nur für baschi
         public override void OnDestroy()
         {
-            HGrid.Instance.GetCellIndex(prevCell.X,prevCell.Y).DestroyPreviewTurret();
+            _hexGrid.GetCellIndex(prevCell.X,prevCell.Y).DestroyPreviewTurret();
         }
 
         // wird das hier ein rpc call ?
         public override void BuyTurret(HCell cell, Ressource.RessourceType ressourceEnum, int turret)
         {
-            Debug.Log(!cell.hasBuilding + " " + cell.Celltype.ToString() + cell.Ressource.GetRessourceType());
-            if(cell.HasBuilding || cell.Celltype != HCell.CellType.Acquired || cell.Ressource.GetRessourceType() != Ressource.RessourceType.Neutral) return;
+            Debug.Log(!cell.hasBuilding + " " + cell.Celltype.ToString() + cell.ressource.GetRessourceType());
+            if(cell.HasBuilding || cell.Celltype != HCell.CellType.Acquired || cell.ressource.GetRessourceType() != Ressource.RessourceType.Neutral) return;
 
             Debug.Log("buyturret");
             cell.BuildTurret();
@@ -75,7 +78,7 @@ namespace Ui.Input
                     if (!prevCell.CompareCoord(cell.coordinates))
                     {
                         // neue prefab
-                        if (cell.GetCellType() == HCell.CellType.Acquired && !cell.HasBuilding && cell.Ressource.GetRessourceType() == Ressource.RessourceType.Neutral)
+                        if (cell.GetCellType() == HCell.CellType.Acquired && !cell.HasBuilding && cell.ressource.GetRessourceType() == Ressource.RessourceType.Neutral)
                         {
 
                             GameObject turretToBuild = BuildManager.instance.GetTurretToBuildPreview(); 
@@ -86,7 +89,7 @@ namespace Ui.Input
                         }
                         
                         // altes prefab
-                        HGrid.Instance.GetCellIndex(prevCell.X,prevCell.Y).DestroyPreviewTurret();
+                        _hexGrid.GetCellIndex(prevCell.X,prevCell.Y).DestroyPreviewTurret();
                         
                         
                         // machen wir immer

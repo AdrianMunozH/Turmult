@@ -17,11 +17,6 @@ namespace Field
 
         private RessourceType _type;
 
-        public Ressource()
-        {
-            SetType();
-        }
-
         public RessourceType GetRessourceType()
         {
             return _type;
@@ -37,7 +32,7 @@ namespace Field
      * Die Wahrscheinlichkeit, dass eine HCELL ein Ressourcenfeld ist liegt bei chanceRessourceField (default 20%).
      * Die Ressourcen-Typen an sich sind gleichmäßig mit 33% verteilt.
      */
-        private void SetType()
+        public void SetRandomType()
         {
             if (chanceRessourceField >= Random.Range(1, 100))
             {

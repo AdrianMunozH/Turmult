@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Field;
 using MLAPI;
-using MLAPI.Messaging;
 using UnityEngine;
 
 namespace Enemies
@@ -17,14 +17,21 @@ namespace Enemies
         int input;
         public HCell defaultStart;
         public HCell end;
-
+        private HGrid _hexGrid;
+        
         //test für shortest path
+        private void Awake()
+        {
+            _hexGrid = GameObject.Find("HexGrid").GetComponent<HGrid>();
+            if (_hexGrid == null) throw new Exception("Kein Objekt HexGrid in der Szene gefunden oder es keine Komponente HGrid an diese! ");
+        }
 
         // Start is called before the first frame update
         void Start()
         {
+
             enemys = new List<GameObject>();
-            defaultStart = HGrid.Instance.GetCellIndex(0, 0);
+            defaultStart = _hexGrid.GetCellIndex(0, 0);
         }
 
         // checkt ob der weg eines minions überhaupt geöndert werden muss
@@ -62,7 +69,6 @@ namespace Enemies
                 mov.path = sp.ToArray();
                 mov.isAttacking = false;
             }
-
             // test
 
 
@@ -72,8 +78,7 @@ namespace Enemies
                 newPath = SolveAttack(mov.path[startIndex]);
                 sp = RecPath(newPath);
                 sp = ShortestPath(sp);
-
-
+                
                 // danach wird am ersten turm gestoppt (vllt +1)
                 int towerIndex = (int) TowerFinder(sp);
                 // von towerindex bis zum letzten element
@@ -82,12 +87,11 @@ namespace Enemies
                 mov.path = sp.ToArray();
             }
 
-            HGrid.Instance.ShortestPathPrefabs(sp.ToArray());
+            _hexGrid.ShortestPathPrefabs(sp.ToArray());
         }
 
         public void SpawnEnemy(HCell[] path, bool isAttacking)
         {
-            //SpawnObjectServerRpc();
             GameObject enemy = Instantiate(enemyPrefab);
             enemys.Add(enemy);
             enemy.transform.SetParent(transform, false);
@@ -97,8 +101,6 @@ namespace Enemies
             enemyMovement.isAttacking = isAttacking;
             enemyMovement.path = path;
             enemyMovement.enemySpawn = this;
-            
-            
         }
         
         public HCell[] Solve()
@@ -108,12 +110,12 @@ namespace Enemies
             //index stellen
             List<int> visited = new List<int>();
             visited.Add(defaultStart.index);
-            HCell[] prev = new HCell[HGrid.Instance.cells.Length];
+            HCell[] prev = new HCell[_hexGrid.cells.Length];
             int p = 0;
             while (queue.Count > 0)
             {
                 HCell node = queue.Dequeue();
-                HCell[] neighb = HGrid.Instance.Neighb(node);
+                HCell[] neighb = _hexGrid.Neighb(node);
                 for (int i = 0; i < neighb.Length; i++)
                 {
                     //nicht visited
@@ -128,7 +130,7 @@ namespace Enemies
                 }
             }
 
-            Debug.Log("solve list: " + HGrid.Instance.ArrayToString(prev));
+            Debug.Log("solve list: " + _hexGrid.ArrayToString(prev));
             return prev;
         }
 
@@ -139,12 +141,12 @@ namespace Enemies
             //index stellen
             List<int> visited = new List<int>();
             visited.Add(altStart.index);
-            HCell[] prev = new HCell[HGrid.Instance.cells.Length];
+            HCell[] prev = new HCell[_hexGrid.cells.Length];
             int p = 0;
             while (queue.Count > 0)
             {
                 HCell node = queue.Dequeue();
-                HCell[] neighb = HGrid.Instance.Neighb(node);
+                HCell[] neighb = _hexGrid.Neighb(node);
                 for (int i = 0; i < neighb.Length; i++)
                 {
                     //nicht visited
@@ -162,7 +164,7 @@ namespace Enemies
                 }
             }
 
-            Debug.Log("solve list: " + HGrid.Instance.ArrayToString(prev));
+            Debug.Log("solve list: " + _hexGrid.ArrayToString(prev));
             return prev;
         }
 
@@ -173,12 +175,12 @@ namespace Enemies
             //index stellen
             List<int> visited = new List<int>();
             visited.Add(altStart.index);
-            HCell[] prev = new HCell[HGrid.Instance.cells.Length];
+            HCell[] prev = new HCell[_hexGrid.cells.Length];
             int p = 0;
             while (queue.Count > 0)
             {
                 HCell node = queue.Dequeue();
-                HCell[] neighb = HGrid.Instance.NeighbAttack(node);
+                HCell[] neighb = _hexGrid.NeighbAttack(node);
                 for (int i = 0; i < neighb.Length; i++)
                 {
                     //nicht visited
@@ -196,7 +198,7 @@ namespace Enemies
                 }
             }
 
-            Debug.Log("solve list: " + HGrid.Instance.ArrayToString(prev));
+            Debug.Log("solve list: " + _hexGrid.ArrayToString(prev));
             return prev;
         }
 

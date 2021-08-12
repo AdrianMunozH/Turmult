@@ -664,7 +664,7 @@ PrefabInstance:
     - target: {fileID: 7737349480660007027, guid: 70ffae4d7838afd4396b1490a4651350,
         type: 3}
       propertyPath: startGameInstant
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7737349480660007027, guid: 70ffae4d7838afd4396b1490a4651350,
         type: 3}

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Enemies;
 using Turrets;
@@ -14,6 +15,7 @@ namespace Field
         [HideInInspector] public EnemySpawn[] enemySpawns;
         
         private HCell[] spath;
+        private HGrid _hexGrid;
         int input;
     
         //sollte raus
@@ -37,7 +39,8 @@ namespace Field
                 Debug.LogError("Es gibt mehr als einen Buildmanager in der Szene: Bitte nur eine pro Szene!");
                 return;
             }
-
+            _hexGrid = GameObject.Find("HexGrid").GetComponent<HGrid>();
+            if (_hexGrid == null) throw new Exception("Kein Objekt HexGrid in der Szene gefunden oder es keine Komponente HGrid an diese! ");
             instance = this;
         }
 
@@ -53,12 +56,12 @@ namespace Field
             enemySpawns[1] = Instantiate<EnemySpawn>(spawnPoint);
             enemySpawns[2] = Instantiate<EnemySpawn>(spawnPoint);
 
-            enemySpawns[0].end = HGrid.Instance.GetCellIndex(0, -distanceFromSpawn, distanceFromSpawn);
-            enemySpawns[0].defaultStart = HGrid.Instance.GetCellIndex(0, 0);
-            enemySpawns[1].end = HGrid.Instance.GetCellIndex(distanceFromSpawn, 0, -distanceFromSpawn);
-            enemySpawns[1].defaultStart = HGrid.Instance.GetCellIndex(0, 0);
-            enemySpawns[2].end = HGrid.Instance.GetCellIndex(-distanceFromSpawn, distanceFromSpawn, 0);
-            enemySpawns[2].defaultStart = HGrid.Instance.GetCellIndex(0, 0);
+            enemySpawns[0].end = _hexGrid.GetCellIndex(0, -distanceFromSpawn, distanceFromSpawn);
+            enemySpawns[0].defaultStart = _hexGrid.GetCellIndex(0, 0);
+            enemySpawns[1].end = _hexGrid.GetCellIndex(distanceFromSpawn, 0, -distanceFromSpawn);
+            enemySpawns[1].defaultStart = _hexGrid.GetCellIndex(0, 0);
+            enemySpawns[2].end = _hexGrid.GetCellIndex(-distanceFromSpawn, distanceFromSpawn, 0);
+            enemySpawns[2].defaultStart = _hexGrid.GetCellIndex(0, 0);
 
             foreach (EnemySpawn enemySpawn in enemySpawns)
             {
@@ -69,15 +72,14 @@ namespace Field
                     hcell.SetCellType(HCell.CellType.Acquired);
                     Ressource res = new Ressource();
                     res.SetNeutralType();
-                    hcell.Ressource = res;
+                    hcell.ressource = res;
                 }
-                HGrid.Instance.ShortestPathPrefabs(enemySpawn.ShortestPath(sp).ToArray());
+                _hexGrid.ShortestPathPrefabs(enemySpawn.ShortestPath(sp).ToArray());
             }
             
         }
 
-    
-    
+
 
         private void OnCooldown()
         {
@@ -100,7 +102,7 @@ namespace Field
                 List<HCell> sp = enemySpawn.RecPath(spath);
                 sp = enemySpawn.ShortestPath(sp);
                 
-                Debug.Log("***Ergebnis*** " + HGrid.Instance.ListToString(sp) + " : " + sp.Count);
+                Debug.Log("***Ergebnis*** " + _hexGrid.ListToString(sp) + " : " + sp.Count);
                 // es muss gecheckt werden ob die weglänge grö0er als 0 ist
                 if (sp.Count > 0)
                     enemySpawn.SpawnEnemy(sp.ToArray(),false);
@@ -108,7 +110,7 @@ namespace Field
                 else
                 {
                     // attacking modus
-                    spath = enemySpawn.SolveAttack(HGrid.Instance.GetCellIndex(0,0,0));
+                    spath = enemySpawn.SolveAttack(_hexGrid.GetCellIndex(0,0,0));
                     // es wird erstmal der kürzeste weg zur base gesucht
                     sp = enemySpawn.RecPath(spath);
                     sp = enemySpawn.ShortestPath(sp);
@@ -118,7 +120,7 @@ namespace Field
                     sp.RemoveRange(towerIndex,sp.Count-towerIndex);
                     enemySpawn.SpawnEnemy(sp.ToArray(),true);
                 }
-                HGrid.Instance.ShortestPathPrefabs(sp.ToArray());
+                _hexGrid.ShortestPathPrefabs(sp.ToArray());
             }
         }
         

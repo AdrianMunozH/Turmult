@@ -1,3 +1,4 @@
+using System;
 using Enemies;
 using Field;
 using UnityEngine;
@@ -7,20 +8,20 @@ namespace Turrets.Projectile
     public class ImpactProjectile : Projectile
     {
         private Vector3 impact;
+
+        private HGrid _hexGrid;
         // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
 
         private void Awake()
         {
+            _hexGrid = GameObject.Find("HexGrid").GetComponent<HGrid>();
+            if (_hexGrid == null) throw new Exception("Kein Objekt HexGrid in der Szene gefunden oder es keine Komponente HGrid an diese! ");
             if (target != null)
             {
                 Debug.Log("nicht null");
                 int index;
                 EnemyMovement targetEnemy = target.GetComponent<EnemyMovement>();
-                Vector3[] path = HGrid.Instance.HCellPositions(targetEnemy.path);
+                Vector3[] path = _hexGrid.HCellPositions(targetEnemy.path);
             
                 if (targetEnemy.pathIndex < path.Length-1)
                     index = targetEnemy.pathIndex + 1;

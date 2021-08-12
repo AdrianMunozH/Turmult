@@ -1,3 +1,4 @@
+using System;
 using Field;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -7,6 +8,7 @@ namespace Ui.Input
     public class AcquireState : ModiState
     {
         private int _cellPrice;
+        private HGrid _hexGrid;
 
         private HexCoordinates prevCell;
         // Start is called before the first frame update
@@ -16,6 +18,8 @@ namespace Ui.Input
             //HGameManager.instance.CellPrice = _cellPrice;
             _cellPrice = 40;
             Debug.Log(name + " Mode");
+            _hexGrid = GameObject.Find("HexGrid").GetComponent<HGrid>();
+            if (_hexGrid == null) throw new Exception("Kein Objekt HexGrid in der Szene gefunden oder es keine Komponente HGrid an diese! ");
         }
 
         public override void AcquireField(HCell cell)
@@ -31,7 +35,7 @@ namespace Ui.Input
             //cell.acquiredField = GameObject.Find("Cylinder");
             
             //cell.AcquiredThisCellServerRpc();
-            cell.SetPrefab(cell.type,cell.Ressource.GetRessourceType());
+            cell.SetPrefab(cell.type,cell.ressource.GetRessourceType());
             cell.StartCoroutine(cell.CheckNeighb());
             // vllt kürzester weg bescheid sagen
 
@@ -42,7 +46,7 @@ namespace Ui.Input
 
         public override void OnDestroy()
         {
-            HGrid.Instance.GetCellIndex(prevCell.X, prevCell.Y).gridImage.color =  HGrid.Instance.GetCellIndex(prevCell.X, prevCell.Y).SetColor(0f,0f,0f,0f);;
+            _hexGrid.GetCellIndex(prevCell.X, prevCell.Y).gridImage.color =  _hexGrid.GetCellIndex(prevCell.X, prevCell.Y).SetColor(0f,0f,0f,0f);;
         }
 
         public override void Input()
@@ -69,7 +73,7 @@ namespace Ui.Input
                         }
                         else
                         {
-                            HCell prevCellColor = HGrid.Instance.GetCellIndex(prevCell.X, prevCell.Y) ;
+                            HCell prevCellColor = _hexGrid.GetCellIndex(prevCell.X, prevCell.Y) ;
                             prevCellColor.gridImage.color = prevCellColor.SetColor(0f,0f,0f,0f);
                             prevCell = cell.coordinates;
                         }
@@ -77,9 +81,6 @@ namespace Ui.Input
                    
                 }
             }
-            
-            
-            
             
             //linker mouseclick
             if (UnityEngine.Input.GetMouseButtonDown(0))
