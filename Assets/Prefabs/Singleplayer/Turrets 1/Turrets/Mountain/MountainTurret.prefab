@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 2448743140702093524}
   - component: {fileID: 1609040145832873841}
   - component: {fileID: 3580504868905221051}
-  - component: {fileID: 2898319857720867651}
+  - component: {fileID: 24429787625828361}
   m_Layer: 0
   m_Name: MountainTurret
   m_TagString: Untagged
@@ -196,7 +196,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2898319857720867651
+--- !u!114 &24429787625828361
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -205,10 +205,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 3076097380530608750}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf95a135e40b9b446a2d7937955d727b, type: 3}
+  m_Script: {fileID: 11500000, guid: 581e71ceec534886ae4348cbbc111900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnManagerValues: {fileID: 11400000, guid: 4e61b162c9ff5d14792e69f7f8284184, type: 2}
+  range: 2
+  fireRate: 1
+  turnSpeed: 10
+  ressourceType: 0
+  turretType: 0
+  lineRenderer: {fileID: 0}
+  partToRotate: {fileID: 0}
+  firePoint: {fileID: 0}
+  enemyTag: Enemy
+  canRotate: 0
+  projectilePrefab: {fileID: 0}
+  targets: []
+  maxTargets: 0
+  firePoints: []
 --- !u!1 &3076097380662606949
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ namespace Turrets.Effects
         public float slow;
 
         public int ticks;
-        public int tick;
+        private int tick;
 
         private bool isTicking;
         // Start is called before the first frame update
