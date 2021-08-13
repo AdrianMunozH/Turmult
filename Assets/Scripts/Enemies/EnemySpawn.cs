@@ -224,7 +224,6 @@ namespace Enemies
             for (HCell at = end; at != null; at = list[at.index])
             {
                 path.Add(at);
-                Debug.Log(at);
             }
 
             return path;

@@ -282,8 +282,6 @@ namespace Field
 
             }
 */
-            
-            Debug.Log("2");
 
             GameObject hexagon;
             Vector3 pos = transform.position;

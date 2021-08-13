@@ -18,8 +18,10 @@ namespace Control
         
         [SerializeField] private GameObject[] ressourceType;
         [SerializeField] private GameObject acquireMode;
-        
-        
+
+        [SerializeField] private GameObject[] forestLockedImage;
+        [SerializeField] private GameObject[] mountainLockedImage;
+        [SerializeField] private GameObject[] swampLockedImage;
         
         [SerializeField] private GameObject buildMode;
 
@@ -52,6 +54,24 @@ namespace Control
             menuPos = bgImage.transform.position;
 
 
+        }
+
+        public void UnlockTurretImage(Ressource.RessourceType ressource , int turretIndex)
+        {
+            switch (ressource)
+            {
+                case Ressource.RessourceType.Berg:
+                    Debug.Log("hier ui unlocked");
+                    mountainLockedImage[turretIndex].SetActive(false);
+                    break;
+                case Ressource.RessourceType.Sumpf:
+                    swampLockedImage[turretIndex].SetActive(false);
+                    break;
+                    
+                case Ressource.RessourceType.Wald:
+                    forestLockedImage[turretIndex].SetActive(false);
+                    break;
+            }
         }
 
         [UsedImplicitly]
