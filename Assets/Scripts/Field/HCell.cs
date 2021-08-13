@@ -3,6 +3,7 @@ using System.Collections;
 using DG.Tweening;
 using MLAPI;
 using MLAPI.Messaging;
+using MLAPI.NetworkVariable;
 using Turrets;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,8 +24,8 @@ namespace Field
         //######## public ###########
         public HexCoordinates coordinates;
         public int index;
-        public CellType type;
-
+        public CellType type = CellType.Hidden;
+        
         //Wird gebraucht für das Tweening beim Einnehmen der Zelle
         //Wird in Buildstate.cs auf true gesetzt
         public bool recentlyBuild;
@@ -56,10 +57,38 @@ namespace Field
         private int distance;
         private Renderer rend;
         private HGrid _hexGrid;
-
-
-        // maps gehen nciht wegen unity :((
         [SerializeField] private GameObject[] hexPrefabs;
+        
+        
+        //######## network ###########
+        [SerializeField]
+        private NetworkVariable<int> netCelltype = new NetworkVariable<int>((int) CellType.Hidden);
+
+        private void OnEnable()
+        {
+            netCelltype.OnValueChanged += CellTypeChanged;
+        }
+
+        private void OnDisable()
+        {
+            netCelltype.OnValueChanged -= CellTypeChanged;
+        }
+        
+        private void CellTypeChanged(int previousvalue, int newvalue)
+        {
+            if (IsOwner && IsClient)
+            {    
+                Debug.Log("Update Client!");
+            }
+
+            if (!IsServer) return;
+            type = (CellType) newvalue;
+        }
+
+        public void ChangeCellType(CellType newType)
+        {
+            if(IsServer) netCelltype.Value = (int) newType;
+        }
 
         /*
         berg    unacq      :0
@@ -110,7 +139,7 @@ namespace Field
 
         public void BuildTurret()
         {
-            Debug.Log("buildTurret    ");
+
             GameObject turretToBuild = buildManager.GetTurretToBuild();
             Vector3 turPos = transform.position;
             turret = (GameObject) Instantiate(turretToBuild, new Vector3(turPos.x, turPos.y - 10, turPos.z),
@@ -154,17 +183,10 @@ namespace Field
         {
             type = CellType.Hidden;
             buildManager = BuildManager.instance;
-            
             rend = GetComponent<Renderer>();
             rend.enabled = false;
             SetNeighb();
             gridImage.color = SetColor(0f, 0f, 0f, 0f);
-            
-
-            
-            //Auf dem Server Ressourcetypen zufällig setzen
-
-
         }
 
         public override void NetworkStart()
@@ -177,7 +199,6 @@ namespace Field
 
         private void SetNeighb()
         {
-            //Debug.Log(h.coordinates.ToString() + " ausgewählt");
             neighb = new HCell[6];
             int i = 0;
             foreach (HCell cell in _hexGrid.cells)
@@ -247,10 +268,8 @@ namespace Field
                 GameObject.Destroy(transform.GetChild(1).gameObject);
 
             }*/
-           
-           Debug.Log("1");
 
-            GameObject hexagon = Instantiate(hexPrefabs[prefabIndex], transform.position, transform.rotation);
+           GameObject hexagon = Instantiate(hexPrefabs[prefabIndex], transform.position, transform.rotation);
 
 
             if (rotation != null)
@@ -283,8 +302,6 @@ namespace Field
             }
 */
             
-            Debug.Log("2");
-
             GameObject hexagon;
             Vector3 pos = transform.position;
 
@@ -336,6 +353,7 @@ namespace Field
         //Ist ausgewähltes Feld Ressourcenfeld, werden Nachbarfelder Neutral gesetzt
         public IEnumerator CheckNeighb()
         {
+
             yield return new WaitForSeconds(0.2f);
             foreach (var cell in neighb)
             {
