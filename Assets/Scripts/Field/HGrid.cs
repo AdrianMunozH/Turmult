@@ -128,7 +128,6 @@ namespace Field
             position = transform.InverseTransformPoint(position);
             HexCoordinates coordinates = HexCoordinates.FromPosition(position);
             HighlightCell(coordinates, position);
-            Debug.Log("touched at " + coordinates.ToString());
         }
 
 
@@ -166,13 +165,12 @@ namespace Field
 
         public HCell[] Neighb(HCell h)
         {
-            //Debug.Log(h.coordinates.ToString() + " ausgewählt");
             HCell[] neighb = new HCell[6];
             int i = 0;
             foreach (HCell cell in cells)
             {
                 // TODO: fehlt der check ob es schon ein gebäude hat
-                if ((cell.GetCellType() == HCell.CellType.Acquired ||cell.GetCellType() == HCell.CellType.Neutral||cell.GetCellType() == HCell.CellType.Base) && !cell.hasBuilding)
+                if ((cell.GetCellType() == HCell.CellType.Acquired || cell.GetCellType() == HCell.CellType.Neutral || cell.GetCellType() == HCell.CellType.Base) && !cell.hasBuilding)
                 {
                     if (cell.coordinates.X == h.coordinates.X - 1 && cell.coordinates.Y == h.coordinates.Y)
                     {
@@ -206,18 +204,10 @@ namespace Field
                     }
                 }
             }
-            /*
-        for (int j = 0; j < i; j++)
-        {
-            Debug.Log(neighb[j].coordinates.ToString());
-        }
-        */
-
             return WithoutNull(neighb);
         }
         public HCell[] NeighbAttack(HCell h)
         {
-            //Debug.Log(h.coordinates.ToString() + " ausgewählt");
             HCell[] neighb = new HCell[6];
             int i = 0;
             foreach (HCell cell in cells)
@@ -257,12 +247,7 @@ namespace Field
                     }
                 }
             }
-            /*
-        for (int j = 0; j < i; j++)
-        {
-            Debug.Log(neighb[j].coordinates.ToString());
-        }
-        */
+
 
             return WithoutNull(neighb);
         }
@@ -400,7 +385,6 @@ namespace Field
                 else
                 {
                     Straight(path[i], x, y, z);
-                    
                 }
             }
 
