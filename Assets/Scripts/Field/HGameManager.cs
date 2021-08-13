@@ -102,7 +102,6 @@ namespace Field
                 List<HCell> sp = enemySpawn.RecPath(spath);
                 sp = enemySpawn.ShortestPath(sp);
                 
-                Debug.Log("***Ergebnis*** " + _hexGrid.ListToString(sp) + " : " + sp.Count);
                 // es muss gecheckt werden ob die weglänge grö0er als 0 ist
                 if (sp.Count > 0)
                     enemySpawn.SpawnEnemy(sp.ToArray(),false);
