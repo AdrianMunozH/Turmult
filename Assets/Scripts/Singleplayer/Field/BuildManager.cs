@@ -6,7 +6,7 @@ namespace Singleplayer.Field
     /**
  * Buildmanger nach Singleton-Pattern
  */
-    public class BuildManager : NetworkBehaviour
+    public class BuildManager : MonoBehaviour
     {
         public static BuildManager instance;
         private GameObject turretToBuild;

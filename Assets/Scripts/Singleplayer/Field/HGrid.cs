@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace Singleplayer.Field
 {
-    public class HGrid : NetworkBehaviour
+    public class HGrid : MonoBehaviour
     {
         public int radius;
         public HCell[] cells;
@@ -34,9 +34,7 @@ namespace Singleplayer.Field
                 once = false;
             }
         }
-
-
-
+        
         void Awake()
         {
             gridCanvas = GetComponentInChildren<Canvas>();
@@ -76,11 +74,7 @@ namespace Singleplayer.Field
             return false;
         }
 
-        [ClientRpc]
-        public void SetResourceClientRpc(int x, int y)
-        {
-            GetHCellByXyCoordinates(x, y).ressource.SetRandomType();
-        }
+
 
         void CreateCell(int x, int z, int i)
         {

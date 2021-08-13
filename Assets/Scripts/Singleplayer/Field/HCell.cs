@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 
 namespace Singleplayer.Field
 {
-    public class HCell : NetworkBehaviour
+    public class HCell : MonoBehaviour
     {
         public enum CellType
         {

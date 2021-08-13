@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 namespace Singleplayer.Field
 {
-    public class Ressource : NetworkBehaviour
+    public class Ressource : MonoBehaviour
     {
         public float chanceRessourceField = 20f;
 
@@ -17,36 +17,16 @@ namespace Singleplayer.Field
             Neutral = 15
         };
 
-
         public int _type;
-        [SerializeField]
-        private NetworkVariable<int> netType;
-
-        void OnEnable()
-        {
-            netType.OnValueChanged += ValueChanged;
-        }
-        
-        void OnDisable()
-        {
-            netType.OnValueChanged -= ValueChanged;
-        }
-
-        private void ValueChanged(int previousvalue, int newvalue)
-        {
-            if (!IsServer) return;
-            _type = netType.Value;
-        }
 
         public int GetRessourceType()
         {
-            return netType.Value;
+            return _type;
         }
 
-        public void SetNeutralType()
+        Ressource()
         {
-            if (!IsServer) return;
-            netType.Value = (int) RessourceType.Neutral;
+            SetRandomType();
         }
 
         /**
@@ -54,37 +34,24 @@ namespace Singleplayer.Field
      * Die Wahrscheinlichkeit, dass eine HCELL ein Ressourcenfeld ist liegt bei chanceRessourceField (default 20%).
      * Die Ressourcen-Typen an sich sind gleichmäßig mit 33% verteilt.
      */
-        public void SetRandomType()
+        private void SetRandomType()
         {
-            int resType =(int)RessourceType.Neutral;
+            _type =(int)RessourceType.Neutral;
             if (chanceRessourceField >= Random.Range(1, 100))
             {
                 switch (Random.Range(0, 3))
                 {
                     case 0:
-                        resType = (int) RessourceType.Berg;
+                        _type = (int) RessourceType.Berg;
                         break;
                     case 1:
-                        resType = (int)RessourceType.Sumpf;
+                        _type = (int)RessourceType.Sumpf;
                         break;
                     case 2:
-                        resType = (int)RessourceType.Wald;
+                        _type = (int)RessourceType.Wald;
                         break;
                 }
             }
-            ChangeResourceType(resType);
-        }
-
-        public void SetSpecificType(RessourceType ressourceType)
-        {
-            if (!IsServer) return;
-            netType.Value =  (int)ressourceType;
-        }
-        
-        public void ChangeResourceType(int resType)
-        {
-            if (!IsServer) return;
-            netType.Value =  resType;
         }
     }
 }

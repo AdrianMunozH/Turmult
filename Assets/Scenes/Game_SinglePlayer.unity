@@ -718,7 +718,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 541232432}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.UI, Assembly-CSharp
         m_MethodName: OpenTowerBuildMode
         m_Mode: 3
@@ -1231,23 +1231,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 17936723}
   m_CullTransparentMesh: 1
---- !u!114 &35113527
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2712175267253940575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db75c3128837674a9cc57f6680c029c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainMenu: {fileID: 2712175266616860751}
-  settings: {fileID: 2712175267671364070}
-  credits: {fileID: 2712175267446015186}
-  steuerung: {fileID: 2712175267671364070}
-  showUi: {fileID: 11400000, guid: df024cd5c85ef2645a6d822a66260ae0, type: 2}
 --- !u!1 &37397415
 GameObject:
   m_ObjectHideFlags: 0
@@ -1799,7 +1782,6 @@ GameObject:
   m_Component:
   - component: {fileID: 54138893}
   - component: {fileID: 54138892}
-  - component: {fileID: 54138891}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1807,25 +1789,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &54138891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 54138890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
 --- !u!114 &54138892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3814,7 +3777,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 541232431}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
         m_MethodName: SetBuildMode
         m_Mode: 1
@@ -4605,7 +4568,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 541232431}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
         m_MethodName: SetBuildMode
         m_Mode: 1
@@ -7222,7 +7185,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 541232435}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseSwampTurretOne
         m_Mode: 1
@@ -8274,7 +8237,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 541232435}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseForestTurretOne
         m_Mode: 1
@@ -10205,7 +10168,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 541232432}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.UI, Assembly-CSharp
         m_MethodName: SelectType
         m_Mode: 2
@@ -10300,7 +10263,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2110079559}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Player.Player, Assembly-CSharp
         m_MethodName: LoseLife
         m_Mode: 1
@@ -11342,7 +11305,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 541232435}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseSwampTurretThree
         m_Mode: 1
@@ -11842,7 +11805,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 541232431}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
         m_MethodName: SetBuildMode
         m_Mode: 1
@@ -12202,7 +12165,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 541232431}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
         m_MethodName: SetBuildMode
         m_Mode: 1
@@ -13956,7 +13919,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 541232435}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseForestTurretThree
         m_Mode: 1
@@ -17056,12 +17019,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 541232430}
-  - component: {fileID: 541232429}
-  - component: {fileID: 541232431}
-  - component: {fileID: 541232432}
-  - component: {fileID: 541232433}
-  - component: {fileID: 541232434}
-  - component: {fileID: 541232435}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -17069,22 +17026,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &541232429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 541232428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e01e132ac99f3f4895674caf41de89d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPoint: {fileID: 472681035787753992, guid: 66b6426e5071ebf4f9cbf63a9b52ce91,
-    type: 3}
-  enemySpawns: []
-  distanceFromSpawn: 8
 --- !u!4 &541232430
 Transform:
   m_ObjectHideFlags: 0
@@ -17100,118 +17041,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &541232431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 541232428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 186166fd64734d049eeec1871853d0a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  standardTurretPreviewPrefab: {fileID: 7957921693648539177, guid: 8f307c2d33b54124e831ece6c7c12a7b,
-    type: 3}
-  mountainTurrets:
-  - {fileID: 672762153369891017, guid: 05e16edd2929fae4da9f906f302450bf, type: 3}
-  mountainPreviewTurrets:
-  - {fileID: 672762153369891017, guid: 0868d2bafee463d42879b82247dc5a71, type: 3}
-  forestTurrets: []
-  forestPreviewTurrets: []
-  swampTurrets: []
-  swampPreviewTurrets: []
-  grid: {fileID: 646463327}
---- !u!114 &541232432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 541232428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 890c5c53d7c27774cb027f4857e71dba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bgImage: {fileID: 280632580}
-  bgSprites:
-  - {fileID: 21300000, guid: e26d29002fa0fbd458ba2e23038d2e38, type: 3}
-  - {fileID: 21300000, guid: 7258b02c034fe25459f62840894b7c1c, type: 3}
-  - {fileID: 21300000, guid: a821d5b3e177c7b49ba02e4c1557e6a8, type: 3}
-  - {fileID: 21300000, guid: a126ce15959c78c4490a4d0063b73ae4, type: 3}
-  ressourceType:
-  - {fileID: 2130658723}
-  - {fileID: 1743490950}
-  - {fileID: 1551631480}
-  acquireMode: {fileID: 794514128}
-  forestLockedImage:
-  - {fileID: 1490070786}
-  - {fileID: 2049443711}
-  - {fileID: 1521175717}
-  mountainLockedImage:
-  - {fileID: 735549567}
-  - {fileID: 166410549}
-  - {fileID: 138445966}
-  swampLockedImage:
-  - {fileID: 1285265662}
-  - {fileID: 329390062}
-  - {fileID: 1007316362}
-  buildMode: {fileID: 1336653865}
-  scrollViewTower: {fileID: 1183750485}
-  scrollViewMinion: {fileID: 235973818}
-  towerTypes:
-  - {fileID: 1143793885}
-  - {fileID: 268175729}
-  - {fileID: 658931440}
-  minionTypes:
-  - {fileID: 10332675}
-  - {fileID: 1921698021}
-  - {fileID: 578493871}
-  towerMode: 0
---- !u!114 &541232433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 541232428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5083a21919e93042a202ec71470be82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 3181208745485999917, guid: 1c0c977ff81db754a94e036494d66ac0, type: 3}
---- !u!114 &541232434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 541232428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NetworkInstanceId: 0
-  PrefabHash: 13494567273885427380
-  PrefabHashGenerator: GameManager
-  AlwaysReplicateAsRoot: 0
-  DontDestroyWithOwner: 0
---- !u!114 &541232435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 541232428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 012ee57796f2a3144a84c9f5368a733e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &542450145
 GameObject:
   m_ObjectHideFlags: 0
@@ -17673,7 +17502,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 541232431}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
         m_MethodName: SetBuildMode
         m_Mode: 1
@@ -20983,9 +20812,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 646463329}
-  - component: {fileID: 646463327}
   - component: {fileID: 646463328}
-  - component: {fileID: 646463330}
   m_Layer: 0
   m_Name: HexGrid
   m_TagString: Untagged
@@ -20993,37 +20820,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &646463327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 646463326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11c7de629bde5e04d81fcb979bde093e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 25
-  cells: []
-  cellPrefab: {fileID: 8695769874674735302, guid: 3440896b5e0b97240913c787ea30732d,
-    type: 3}
-  fieldMaterial:
-  - {fileID: 2100000, guid: c0c32545ce6b2d842adf70b6856e627b, type: 2}
-  - {fileID: 2100000, guid: 131e53173ea6306418ee44134adeb9f2, type: 2}
-  - {fileID: 2100000, guid: 6583bf93a583aed46a95cf774118ad8a, type: 2}
-  - {fileID: 2100000, guid: 7764afcac2d355f45a85d73a2dde2db7, type: 2}
-  - {fileID: 2100000, guid: 40db9067fa0d4ca4c9fb28665716d517, type: 2}
-  - {fileID: 2100000, guid: 20efac7c328452941b41cb713ba44510, type: 2}
-  - {fileID: 2100000, guid: 8c0a9cc5e5681b74f9045b402d663eee, type: 2}
-  - {fileID: 2100000, guid: e63f4144e80bc47448eaa9313166be82, type: 2}
-  - {fileID: 2100000, guid: c8ce0979344ceb549924a5f5e7335ac4, type: 2}
-  hexImage: {fileID: 2402472035106653718, guid: 820cc4a5b630fee479070fa2f41c25aa,
-    type: 3}
-  pathTest: []
-  go: 0
-  once: 1
 --- !u!222 &646463328
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -21052,23 +20848,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &646463330
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 646463326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NetworkInstanceId: 0
-  PrefabHash: 289825276940923848
-  PrefabHashGenerator: HexGrid
-  AlwaysReplicateAsRoot: 0
-  DontDestroyWithOwner: 0
 --- !u!1 &647975766
 GameObject:
   m_ObjectHideFlags: 0
@@ -25272,7 +25051,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 541232432}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.UI, Assembly-CSharp
         m_MethodName: SetAcquireMode
         m_Mode: 1
@@ -25448,7 +25227,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 541232435}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseMountainTurretOne
         m_Mode: 1
@@ -25967,7 +25746,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 541232431}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
         m_MethodName: SetBuildMode
         m_Mode: 1
@@ -27626,7 +27405,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 541232429}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Field.HGameManager, Assembly-CSharp
         m_MethodName: SpawnEnemyWave
         m_Mode: 1
@@ -28687,7 +28466,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 541232431}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
         m_MethodName: SetBuildMode
         m_Mode: 1
@@ -31920,7 +31699,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 541232431}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BuildManager, Assembly-CSharp
         m_MethodName: SetAcquireMode
         m_Mode: 1
@@ -32579,7 +32358,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 541232431}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
         m_MethodName: SetBuildMode
         m_Mode: 1
@@ -32716,7 +32495,6 @@ GameObject:
   - component: {fileID: 1100171614}
   - component: {fileID: 1100171613}
   - component: {fileID: 1100171612}
-  - component: {fileID: 1100171616}
   m_Layer: 5
   m_Name: UI Canvas
   m_TagString: Untagged
@@ -32811,24 +32589,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1100171616
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1100171611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92ce23ff12d7f0b4dbbb84df30b3b2e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 2110079559}
-  CellLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  turrets: []
-  ui: {fileID: 541232432}
 --- !u!1 &1103555868
 GameObject:
   m_ObjectHideFlags: 0
@@ -33288,7 +33048,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 541232431}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
         m_MethodName: SetBuildMode
         m_Mode: 1
@@ -33459,7 +33219,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 541232432}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.UI, Assembly-CSharp
         m_MethodName: SelectType
         m_Mode: 2
@@ -40208,7 +39968,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1309126618}
-  - component: {fileID: 1309126619}
   m_Layer: 0
   m_Name: TimeTickSysstem
   m_TagString: Untagged
@@ -40230,18 +39989,6 @@ Transform:
   m_Father: {fileID: 541232430}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1309126619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1309126617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dd8d834c17d37d45a4626c2f498347d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1311905418
 GameObject:
   m_ObjectHideFlags: 0
@@ -40795,7 +40542,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 541232435}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseForestTurretTwo
         m_Mode: 1
@@ -43587,7 +43334,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 541232435}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseSwampTurretTwo
         m_Mode: 1
@@ -46461,7 +46208,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 541232431}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
         m_MethodName: SetBuildMode
         m_Mode: 1
@@ -47019,7 +46766,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 541232435}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseMountainTurretTwo
         m_Mode: 1
@@ -47733,7 +47480,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 541232431}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
         m_MethodName: SetBuildMode
         m_Mode: 1
@@ -47979,7 +47726,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 541232432}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.UI, Assembly-CSharp
         m_MethodName: OpenMinionBuildMode
         m_Mode: 1
@@ -48534,7 +48281,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 541232435}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseMountainTurretThree
         m_Mode: 1
@@ -49308,7 +49055,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 541232431}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
         m_MethodName: SetBuildMode
         m_Mode: 1
@@ -49861,7 +49608,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 541232431}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
         m_MethodName: SetBuildMode
         m_Mode: 1
@@ -51750,7 +51497,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 541232431}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
         m_MethodName: SetBuildMode
         m_Mode: 1
@@ -53010,7 +52757,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 541232431}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
         m_MethodName: SetBuildMode
         m_Mode: 1
@@ -53552,7 +53299,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 541232431}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BuildManager, Assembly-CSharp
         m_MethodName: SetBuildMode
         m_Mode: 1
@@ -53702,7 +53449,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 541232431}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
         m_MethodName: SetBuildMode
         m_Mode: 1
@@ -54878,7 +54625,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 541232431}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
         m_MethodName: SetBuildMode
         m_Mode: 1
@@ -55377,7 +55124,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 541232431}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
         m_MethodName: SetBuildMode
         m_Mode: 1
@@ -57075,7 +56822,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 541232431}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
         m_MethodName: SetBuildMode
         m_Mode: 1
@@ -58629,7 +58376,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 541232432}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.UI, Assembly-CSharp
         m_MethodName: SetAcquireMode
         m_Mode: 1
@@ -63028,10 +62775,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2110079561}
-  - component: {fileID: 2110079560}
-  - component: {fileID: 2110079559}
-  - component: {fileID: 2110079562}
-  - component: {fileID: 2110079563}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -63039,52 +62782,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2110079559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2110079558}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29a6e2f9e7f715049bdcdc34f5b92679, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startGold: 100
-  interestRateInPercentPerRound: 5
-  startForest: 1
-  startMountain: 1
-  startSwamp: 1
-  startLifes: 20
-  full: {r: 0, g: 1, b: 0, a: 1}
-  nearlyFull: {r: 0, g: 1, b: 1, a: 1}
-  medium: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  low: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-  superlow: {r: 1, g: 0, b: 0, a: 1}
-  goldTMP: {fileID: 1006179604}
-  mountainTMP: {fileID: 823663096}
-  forestTMP: {fileID: 1407805363}
-  swampTMP: {fileID: 1241800395}
-  hpBar: {fileID: 1571026803}
-  gameOVER: {fileID: 1943753711}
---- !u!114 &2110079560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2110079558}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NetworkInstanceId: 0
-  PrefabHash: 1897319656204293034
-  PrefabHashGenerator: Player
-  AlwaysReplicateAsRoot: 0
-  DontDestroyWithOwner: 0
 --- !u!4 &2110079561
 Transform:
   m_ObjectHideFlags: 0
@@ -63099,30 +62796,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2110079562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2110079558}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa885b297b854fcb9d3e01ed460b1aae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2110079563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2110079558}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3de4055c0af4c0e438fa5c4e3e027e57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2111846566
 GameObject:
   m_ObjectHideFlags: 0
@@ -63414,7 +63087,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 541232431}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
         m_MethodName: SetBuildMode
         m_Mode: 1
@@ -64263,7 +63936,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 541232432}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.UI, Assembly-CSharp
         m_MethodName: SelectType
         m_Mode: 2
@@ -65204,7 +64877,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 35113527}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
         m_MethodName: ResetLevel
         m_Mode: 1
@@ -66602,7 +66275,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2712175267253940574}
-  - component: {fileID: 35113527}
   m_Layer: 0
   m_Name: Menu
   m_TagString: Untagged
@@ -66920,7 +66592,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 35113527}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
         m_MethodName: BackToMainMenu
         m_Mode: 1
@@ -67796,7 +67468,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 35113527}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
         m_MethodName: OpenMainMenu
         m_Mode: 1
@@ -67922,7 +67594,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 35113527}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
         m_MethodName: OpenSettings
         m_Mode: 1
@@ -68359,7 +68031,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 35113527}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
         m_MethodName: ToggleUi
         m_Mode: 1
@@ -69187,7 +68859,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 35113527}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
         m_MethodName: OpenMainMenu
         m_Mode: 1
