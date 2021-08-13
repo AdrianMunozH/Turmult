@@ -27,7 +27,6 @@ namespace Field
         void OnEnable()
         {
             netType.OnValueChanged += ValueChanged;
-            Debug.Log("Subscribed!");
         }
         
         void OnDisable()
@@ -86,7 +85,6 @@ namespace Field
         
         public void ChangeResourceType(int resType)
         {
-            Debug.Log( resType);
             if (!IsServer) return;
             netType.Value =  resType;
         }
