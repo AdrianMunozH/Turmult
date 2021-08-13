@@ -301,11 +301,7 @@ namespace Field
 
             }
 */
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> b555603df8beaf315946c2a1058fdeeda1fbbc7a
             GameObject hexagon;
             Vector3 pos = transform.position;
 

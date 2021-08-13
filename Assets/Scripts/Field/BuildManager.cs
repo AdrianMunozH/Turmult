@@ -36,9 +36,6 @@ namespace Field
             }
 
             instance = this;
-           
-
-            
         }
       
         void Start()
