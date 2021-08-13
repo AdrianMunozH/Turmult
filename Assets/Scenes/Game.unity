@@ -3802,7 +3802,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseMountainTurretOne
         m_Mode: 1
@@ -4593,7 +4593,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseMountainTurretOne
         m_Mode: 1
@@ -7222,21 +7222,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 541232435}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
-        m_MethodName: PurchaseMountainTurretOne
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 541232431}
-        m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
-        m_MethodName: SetBuildMode
+        m_MethodName: PurchaseSwampTurretOne
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8286,21 +8274,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 541232435}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
-        m_MethodName: PurchaseMountainTurretOne
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 541232431}
-        m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
-        m_MethodName: SetBuildMode
+        m_MethodName: PurchaseForestTurretOne
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9472,6 +9448,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 260482584}
   m_CullTransparentMesh: 1
+--- !u!1 &264415907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 264415908}
+  - component: {fileID: 636584645}
+  m_Layer: 0
+  m_Name: Recovery GameObject (636584645)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &264415908
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264415907}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &268175729
 GameObject:
   m_ObjectHideFlags: 0
@@ -11366,21 +11373,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 541232435}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
-        m_MethodName: PurchaseMountainTurretOne
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 541232431}
-        m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
-        m_MethodName: SetBuildMode
+        m_MethodName: PurchaseSwampTurretThree
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11866,7 +11861,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseMountainTurretOne
         m_Mode: 1
@@ -12226,7 +12221,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseMountainTurretOne
         m_Mode: 1
@@ -13992,21 +13987,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 541232435}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
-        m_MethodName: PurchaseMountainTurretOne
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 541232431}
-        m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
-        m_MethodName: SetBuildMode
+        m_MethodName: PurchaseForestTurretThree
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17109,6 +17092,7 @@ GameObject:
   - component: {fileID: 541232432}
   - component: {fileID: 541232433}
   - component: {fileID: 541232434}
+  - component: {fileID: 541232435}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -17193,6 +17177,18 @@ MonoBehaviour:
   - {fileID: 1743490950}
   - {fileID: 1551631480}
   acquireMode: {fileID: 794514128}
+  forestLockedImage:
+  - {fileID: 1490070786}
+  - {fileID: 2049443711}
+  - {fileID: 1521175717}
+  mountainLockedImage:
+  - {fileID: 735549567}
+  - {fileID: 166410549}
+  - {fileID: 138445966}
+  swampLockedImage:
+  - {fileID: 1285265662}
+  - {fileID: 329390062}
+  - {fileID: 1007316362}
   buildMode: {fileID: 1336653865}
   scrollViewTower: {fileID: 1183750485}
   scrollViewMinion: {fileID: 235973818}
@@ -17235,6 +17231,18 @@ MonoBehaviour:
   PrefabHashGenerator: GameManager
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
+--- !u!114 &541232435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 541232428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 012ee57796f2a3144a84c9f5368a733e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &542450145
 GameObject:
   m_ObjectHideFlags: 0
@@ -17684,7 +17692,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseMountainTurretOne
         m_Mode: 1
@@ -20786,6 +20794,14 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 634668851}
+  m_CullTransparentMesh: 1
+--- !u!222 &636584645
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264415907}
   m_CullTransparentMesh: 1
 --- !u!1 &640302759
 GameObject:
@@ -25471,21 +25487,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 541232435}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseMountainTurretOne
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 541232431}
-        m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
-        m_MethodName: SetBuildMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -25990,7 +25994,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseMountainTurretOne
         m_Mode: 1
@@ -28710,7 +28714,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseMountainTurretOne
         m_Mode: 1
@@ -32602,7 +32606,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseMountainTurretOne
         m_Mode: 1
@@ -33311,7 +33315,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseMountainTurretOne
         m_Mode: 1
@@ -40830,21 +40834,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 541232435}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
-        m_MethodName: PurchaseMountainTurretOne
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 541232431}
-        m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
-        m_MethodName: SetBuildMode
+        m_MethodName: PurchaseForestTurretTwo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -43634,21 +43626,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 541232435}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
-        m_MethodName: PurchaseMountainTurretOne
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 541232431}
-        m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
-        m_MethodName: SetBuildMode
+        m_MethodName: PurchaseSwampTurretTwo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -46508,7 +46488,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseMountainTurretOne
         m_Mode: 1
@@ -47078,21 +47058,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 541232435}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
-        m_MethodName: PurchaseMountainTurretOne
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 541232431}
-        m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
-        m_MethodName: SetBuildMode
+        m_MethodName: PurchaseMountainTurretTwo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -47792,7 +47760,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseMountainTurretOne
         m_Mode: 1
@@ -48605,21 +48573,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 541232435}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
-        m_MethodName: PurchaseMountainTurretOne
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 541232431}
-        m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
-        m_MethodName: SetBuildMode
+        m_MethodName: PurchaseMountainTurretThree
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -49379,7 +49335,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseMountainTurretOne
         m_Mode: 1
@@ -49932,7 +49888,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseMountainTurretOne
         m_Mode: 1
@@ -50476,7 +50432,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1658959516}
-  - component: {fileID: 1658959517}
   m_Layer: 5
   m_Name: BottomMenu
   m_TagString: Untagged
@@ -50505,18 +50460,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 152.747}
   m_SizeDelta: {x: 0, y: 305.494}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1658959517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1658959515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 012ee57796f2a3144a84c9f5368a733e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1660790150
 GameObject:
   m_ObjectHideFlags: 0
@@ -51834,7 +51777,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseMountainTurretOne
         m_Mode: 1
@@ -53094,7 +53037,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseMountainTurretOne
         m_Mode: 1
@@ -53786,7 +53729,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseMountainTurretOne
         m_Mode: 1
@@ -54962,7 +54905,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseMountainTurretOne
         m_Mode: 1
@@ -55461,7 +55404,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseMountainTurretOne
         m_Mode: 1
@@ -57159,7 +57102,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseMountainTurretOne
         m_Mode: 1
@@ -59081,31 +59024,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1957766477}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1658959517}
-        m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
-        m_MethodName: PurchaseMountainTurretOne
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 541232431}
-        m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
-        m_MethodName: SetBuildMode
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1957766477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63151,6 +63070,7 @@ GameObject:
   - component: {fileID: 2110079560}
   - component: {fileID: 2110079559}
   - component: {fileID: 2110079562}
+  - component: {fileID: 2110079563}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -63170,7 +63090,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29a6e2f9e7f715049bdcdc34f5b92679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startGold: 500
+  startGold: 100
   interestRateInPercentPerRound: 5
   startForest: 1
   startMountain: 1
@@ -63228,6 +63148,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa885b297b854fcb9d3e01ed460b1aae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2110079563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110079558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3de4055c0af4c0e438fa5c4e3e027e57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2111846566
@@ -63509,7 +63441,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658959517}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
         m_MethodName: PurchaseMountainTurretOne
         m_Mode: 1

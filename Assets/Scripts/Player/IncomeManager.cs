@@ -1,6 +1,9 @@
+using System.Collections.Generic;
 using Field;
 using MLAPI;
 using MLAPI.Messaging;
+using Unity.Mathematics;
+using UnityEngine;
 
 
 // muss in shared
@@ -9,6 +12,10 @@ namespace Player
     public class IncomeManager : NetworkBehaviour
     {
         private static IncomeManager _instance;
+        private bool[] forestTurrets;
+        private bool[] mountainTurrets;
+        private bool[] swampTurrets;
+        
 
         public static IncomeManager Instance
         {
@@ -31,36 +38,94 @@ namespace Player
                 _instance = this;
             }
 
+            forestTurrets = new bool[3];
+            mountainTurrets = new bool[3];
+            swampTurrets = new bool[3];
+
+            _playerStats = GetComponent<Player>();
+
         }
 
-        public bool PurchaseTurret(int turretCost, Ressource.RessourceType ressourceEnum)
+        public bool IsTurretUnlocked(Ressource.RessourceType ressource, int turretIndex)
         {
-            if (turretCost < 0) return false;
-            if (ressourceEnum == Ressource.RessourceType.Sumpf && turretCost < _playerStats.Swamp)
+            if (turretIndex > 4) return false;
+            if (ressource == Ressource.RessourceType.Wald)
             {
-                _playerStats.Swamp -= turretCost;
-                return true;
+                return forestTurrets[turretIndex];
+            }
+            else if (ressource == Ressource.RessourceType.Berg)
+            {
+                return mountainTurrets[turretIndex];
+            }
+            else if (ressource == Ressource.RessourceType.Sumpf)
+            {
+                return swampTurrets[turretIndex];
             }
 
-            if (ressourceEnum ==  Ressource.RessourceType.Berg && turretCost < _playerStats.Mountain)
-            {
-                _playerStats.Mountain -= turretCost;
-                return true;
-            }
+            return false;
 
-            if (ressourceEnum ==  Ressource.RessourceType.Wald && turretCost < _playerStats.Forest)
+        }
+
+        public bool UnlockTurret(int ressourceCost, Ressource.RessourceType ressource, int turretIndex)
+        {
+            if (IsTurretUnlocked(ressource, turretIndex)) return true;
+            if(RessourcePurchase(ressourceCost,ressource))
             {
-                _playerStats.Forest -= turretCost;
-                return true;
+                switch (ressource)
+                {
+                    case Ressource.RessourceType.Berg:
+                        mountainTurrets[turretIndex] = true;
+                        return true;
+                    case Ressource.RessourceType.Wald:
+                        forestTurrets[turretIndex] = true;
+                        return true;
+                    case Ressource.RessourceType.Sumpf:
+                        swampTurrets[turretIndex] = true;
+                        return true;
+                }
             }
 
             return false;
         }
 
+        public bool PurchaseTurret(int turretCost, Ressource.RessourceType ressourceEnum, int turretIndex) 
+        {
+            if (IsTurretUnlocked(ressourceEnum, turretIndex))
+            {
+                return GoldPurchase(turretCost);
+            }
+
+            return false;
+        }
+
+        public bool RessourcePurchase(int ressourceCost, Ressource.RessourceType ressource)
+        {
+            if (ressourceCost < 0) return false;
+            
+            
+            if (ressource == Ressource.RessourceType.Berg && ressourceCost <= _playerStats.Mountain)
+            {
+                _playerStats.Mountain -= ressourceCost;
+                return true;
+            }if (ressource == Ressource.RessourceType.Sumpf && ressourceCost <= _playerStats.Swamp)
+            {
+                _playerStats.Swamp -= ressourceCost;
+                return true;
+            }if (ressource == Ressource.RessourceType.Wald && ressourceCost <= _playerStats.Forest)
+            {
+                _playerStats.Forest -= ressourceCost;
+                return true;
+            }
+            
+            return false;
+        }
+        
+        
+        
         public bool GoldPurchase(int gold)
         {
             if (gold < 0) return false;
-            if (gold > _playerStats.Gold)
+            if (gold <= _playerStats.Gold)
                 return false;
 
             _playerStats.Gold -= gold;
@@ -72,6 +137,7 @@ namespace Player
         // zinsen
         public void Interest()
         {
+            // possible loss of fraction ist gewollt
             float interest = _playerStats.Gold / 10;
             _playerStats.Gold += (int) interest;
         }
