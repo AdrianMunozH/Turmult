@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8681735198296983994}
   - component: {fileID: 7167300142100881938}
   - component: {fileID: 9050260254445555536}
-  - component: {fileID: 2879722102324075469}
   m_Layer: 6
   m_Name: HexCell
   m_TagString: Cell
@@ -631,29 +630,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!114 &2879722102324075469
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 52612256429328339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 738ca9e786878b64fb1f1d26073a18cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coordinates:
-    x: 0
-    z: 0
-  index: 0
-  type: 6
-  recentlyBuild: 0
-  previewTurret: {fileID: 0}
-  acquiredField: {fileID: 0}
-  neighb: []
-  resPrefab: {fileID: 0}
-  hasBuilding: 0
-  gridImage: {fileID: 0}
-  spindex: 0
-  hexPrefabs: []
