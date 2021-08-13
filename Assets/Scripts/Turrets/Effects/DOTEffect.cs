@@ -3,7 +3,7 @@ namespace Turrets.Effects
     public class DOTEffect : Effect
     {
         public int ticks;
-        public int tick;
+        private int tick;
         public float damagePerTick;
 
         private bool _isTicking;
