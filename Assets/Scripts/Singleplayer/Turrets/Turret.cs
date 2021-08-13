@@ -35,7 +35,6 @@ namespace Singleplayer.Turrets
         public bool canRotate;
         
         public GameObject projectilePrefab;
-        [CanBeNull] public TurretScriptableObject turret;
     
         // MultiTargetTurret
         public Transform[] targets;
@@ -51,16 +50,7 @@ namespace Singleplayer.Turrets
             else
                 InvokeRepeating(nameof(UpdateTarget), 0f, 0.5f);
             
-            if (turret != null)
-            {
-                range = turret.range;
-                fireRate = turret.fireRate;
-                turnSpeed = turret.turnSpeed;
-                ressourceType = turret.ressourceType;
-                turretType = turret.turretType;
-                enemyTag = turret.enemyTag;
-                // canRotate = turret.canRotate;
-            }
+
 
             if (turretType == TurretType.MULTI)
             {

@@ -807,7 +807,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4466266023611338673}
-  - component: {fileID: 339930238170846215}
+  - component: {fileID: 4708943117009981094}
   m_Layer: 0
   m_Name: ForestTower2
   m_TagString: Untagged
@@ -849,7 +849,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 152.305, z: 0}
---- !u!114 &339930238170846215
+--- !u!114 &4708943117009981094
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -858,7 +858,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3940805691244041483}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1670edc8f9d16914e876cfeb93f3d936, type: 3}
+  m_Script: {fileID: 11500000, guid: 581e71ceec534886ae4348cbbc111900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   range: 3
@@ -871,7 +871,9 @@ MonoBehaviour:
   firePoint: {fileID: 6635948853193948009}
   enemyTag: Enemy
   canRotate: 0
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 1622539639819434716, guid: f296c8bf4744c3b4a90b2e7c91f73b46,
+    type: 3}
+  turret: {fileID: 0}
   targets: []
   maxTargets: 0
   firePoints: []
