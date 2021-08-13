@@ -24,13 +24,12 @@ namespace Singleplayer.Field
         //######## public ###########
         public HexCoordinates coordinates;
         public int index;
-        public CellType type = CellType.Hidden;
+        [HideInInspector]public CellType type = CellType.Hidden;
         
         //Wird gebraucht für das Tweening beim Einnehmen der Zelle
         //Wird in Buildstate.cs auf true gesetzt
-        public bool recentlyBuild;
-        public GameObject previewTurret;
-        public GameObject acquiredField;
+        [HideInInspector] public bool recentlyBuild;
+        [HideInInspector] public GameObject acquiredField;
         public HCell[] neighb;
         [FormerlySerializedAs("ressource")] public Resource resource;
         public GameObject resPrefab; 
@@ -126,15 +125,6 @@ namespace Singleplayer.Field
         }
         
 
-        public GameObject InstantiateTurretPreview(GameObject turretToBuild)
-        {
-            return Instantiate(turretToBuild, transform.position, transform.rotation);
-        }
-
-        public void DestroyPreviewTurret()
-        {
-            Destroy(previewTurret);
-        }
 
         private void Awake()
         {

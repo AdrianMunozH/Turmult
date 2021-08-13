@@ -17019,6 +17019,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 541232430}
+  - component: {fileID: 541232431}
+  - component: {fileID: 541232429}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -17026,6 +17028,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &541232429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 541232428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae327e3cd9ed47e0b7876ff3dd5ce047, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mountainTurrets:
+  - {fileID: 3076097380530608750, guid: 6656b18a87c20cb4fab28d252a50338c, type: 3}
+  mountainPreviewTurrets: []
+  forestTurrets: []
+  forestPreviewTurrets: []
+  swampTurrets: []
+  swampPreviewTurrets: []
+  grid: {fileID: 0}
 --- !u!4 &541232430
 Transform:
   m_ObjectHideFlags: 0
@@ -17041,6 +17063,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &541232431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 541232428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d95804fc056d47d4be38c62350601024, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPoint: {fileID: -5466852683715092558, guid: d3bbafaac9bfffd478ef2b9390974b9a,
+    type: 3}
+  enemySpawns: []
+  distanceFromSpawn: 8
 --- !u!1 &542450145
 GameObject:
   m_ObjectHideFlags: 0
@@ -20813,6 +20851,7 @@ GameObject:
   m_Component:
   - component: {fileID: 646463329}
   - component: {fileID: 646463328}
+  - component: {fileID: 646463327}
   m_Layer: 0
   m_Name: HexGrid
   m_TagString: Untagged
@@ -20820,6 +20859,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &646463327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 646463326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71758c97df5a453485ecb57d682464e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 0
+  cells: []
+  cellPrefab: {fileID: -9199984732277028179, guid: 64a9a4f9225ac9d43a6fe8c674e566b4,
+    type: 3}
+  fieldMaterial: []
+  hexImage: {fileID: 2402472035106653718, guid: df8f96905cd648c4a915084d31b343b6,
+    type: 3}
+  pathTest: []
+  go: 0
+  once: 1
 --- !u!222 &646463328
 CanvasRenderer:
   m_ObjectHideFlags: 0

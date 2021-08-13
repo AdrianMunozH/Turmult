@@ -11,7 +11,6 @@ namespace Singleplayer.Field
         public static BuildManager instance;
         private GameObject turretToBuild;
         private GameObject turretToBuildPreview;
-        public GameObject standardTurretPreviewPrefab;
         public GameObject[] mountainTurrets;
         public GameObject[] mountainPreviewTurrets;
         public GameObject[] forestTurrets;
@@ -40,7 +39,7 @@ namespace Singleplayer.Field
         {
             //Setzt den Standard Turret
             //TODO Müssen dann noch PreviewPrefabs für alle Türme machen und erst bei der Shop Auswahl setzen
-            turretToBuildPreview = standardTurretPreviewPrefab;
+            turretToBuildPreview = mountainPreviewTurrets[0];
         }
 
         public GameObject GetTurretToBuild()

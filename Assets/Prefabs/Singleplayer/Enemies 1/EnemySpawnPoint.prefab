@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 288332745467519222}
-  - component: {fileID: 472681035787753992}
+  - component: {fileID: -5466852683715092558}
   m_Layer: 0
   m_Name: EnemySpawnPoint
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &472681035787753992
+--- !u!114 &-5466852683715092558
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,10 +40,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8963504615295261624}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 895290b7ca2016c46a6dbca88f5c4525, type: 3}
+  m_Script: {fileID: 11500000, guid: ebac684254864e78937db0ce42551928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 2752767336687910749, guid: ae67f337f7a2c3c44a18cc754669ec7b,
+  enemyPrefab: {fileID: 2752767336687910749, guid: 9a85901e95b9cb94b8d23983fee5b512,
     type: 3}
   enemys: []
   defaultStart: {fileID: 0}
