@@ -1,8 +1,10 @@
+using MLAPI;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Field
 {
-    public class Ressource
+    public class Ressource : NetworkBehaviour
     {
         public float chanceRessourceField = 20f;
 
@@ -15,7 +17,7 @@ namespace Field
         };
 
 
-        private RessourceType _type;
+        public RessourceType _type;
 
         public RessourceType GetRessourceType()
         {

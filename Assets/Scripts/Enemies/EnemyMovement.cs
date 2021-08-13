@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using Field;
+using MLAPI;
 using TMPro;
 using UnityEngine;
 
 namespace Enemies
 {
 
-    public class EnemyMovement : MonoBehaviour
+    public class EnemyMovement : NetworkBehaviour
     {
         [HideInInspector] public HCell[] path;
 

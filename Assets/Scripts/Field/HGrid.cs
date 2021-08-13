@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using MLAPI;
 using MLAPI.Messaging;
 using UnityEngine;
@@ -13,7 +14,6 @@ namespace Field
         public HCell[] cells;
         private List<HCell> cellList;
         public HCell cellPrefab;
-        public Text cellLabelPrefab;
         Canvas gridCanvas;
         [SerializeField] private Material[] fieldMaterial;
 
@@ -79,7 +79,7 @@ namespace Field
         [ClientRpc]
         public void SetResourceClientRpc(int x, int y)
         {
-            GetCellIndex(x, y).ressource.SetRandomType();
+            GetHCellByXyCoordinates(x, y).ressource.SetRandomType();
         }
 
         void CreateCell(int x, int z, int i)
@@ -107,12 +107,8 @@ namespace Field
             cell.GetComponent<HCell>().index = i;
 
             //Celltypen ändern wenn Server am Start ist, über ClienRPC die clients damit aktualisieren
-            if (IsServer)
-            {
-                Debug.Log("Kein Server?");
-                cell.ressource = new Ressource();
-                cell.ressource.SetRandomType();
-            }
+            
+
 
 
             //hoverImage.enabled = false;
@@ -306,7 +302,7 @@ namespace Field
         }
 
 
-        public HCell GetCellIndex(int x, int y)
+        public HCell GetHCellByXyCoordinates(int x, int y)
         {
             foreach (HCell cell in cells)
             {
@@ -318,20 +314,25 @@ namespace Field
 
             return null;
         }
-
+        
+        public HCell GetHCellByIndex(int index)
+        {
+            return cells.FirstOrDefault(cell => cell.index == index);
+        }
+        
         private void neutralCell()
         {
-            GetCellIndex(0, 0, 0).SetCellType(HCell.CellType.Base); // portal
-            GetCellIndex(0,0,0).SetPrefab(19,new Vector3(0,60,0));
+            GetHCellByXyzCoordinates(0, 0, 0).SetCellType(HCell.CellType.Base); // portal
+            GetHCellByXyzCoordinates(0,0,0).SetPrefab(19,new Vector3(0,60,0));
             
-            GetCellIndex(0, 1,-1).SetCellType(HCell.CellType.Base);// arch1
-            GetCellIndex(0, 1,-1).SetPrefab(20,new Vector3(0,-120,0)); //-30
+            GetHCellByXyzCoordinates(0, 1,-1).SetCellType(HCell.CellType.Base);// arch1
+            GetHCellByXyzCoordinates(0, 1,-1).SetPrefab(20,new Vector3(0,-120,0)); //-30
             
-            GetCellIndex(1, -1,0).SetCellType(HCell.CellType.Base); // arch2
-            GetCellIndex(1, -1,0).SetPrefab(20,new Vector3(0,-240,0)); //-150
+            GetHCellByXyzCoordinates(1, -1,0).SetCellType(HCell.CellType.Base); // arch2
+            GetHCellByXyzCoordinates(1, -1,0).SetPrefab(20,new Vector3(0,-240,0)); //-150
             
-            GetCellIndex(-1, 0,1).SetCellType(HCell.CellType.Base); // arch3
-            GetCellIndex(-1, 0,1).SetPrefab(20);
+            GetHCellByXyzCoordinates(-1, 0,1).SetCellType(HCell.CellType.Base); // arch3
+            GetHCellByXyzCoordinates(-1, 0,1).SetPrefab(20);
             
             int z = 0;
             int p = 1;
@@ -340,31 +341,31 @@ namespace Field
             {
                 if (i >= 1 && i < HGameManager.instance.distanceFromSpawn-1)
                 {
-                    pathTest.Add(GetCellIndex(z, m, p));
-                    GetCellIndex(z, m, p).SetCellType(HCell.CellType.Acquired);
-                    GetCellIndex(p, z, m).SetCellType(HCell.CellType.Acquired);
-                    GetCellIndex(m, p, z).SetCellType(HCell.CellType.Acquired);
+                    pathTest.Add(GetHCellByXyzCoordinates(z, m, p));
+                    GetHCellByXyzCoordinates(z, m, p).SetCellType(HCell.CellType.Acquired);
+                    GetHCellByXyzCoordinates(p, z, m).SetCellType(HCell.CellType.Acquired);
+                    GetHCellByXyzCoordinates(m, p, z).SetCellType(HCell.CellType.Acquired);
                 }
                 else
                 {
                     if (i == HGameManager.instance.distanceFromSpawn - 1)
                     {
-                        GetCellIndex(z, m,p).SetPrefab(22); // base
-                        GetCellIndex(p, z,m).SetPrefab(22);
-                        GetCellIndex(m, p,z).SetPrefab(22);
+                        GetHCellByXyzCoordinates(z, m,p).SetPrefab(22); // base
+                        GetHCellByXyzCoordinates(p, z,m).SetPrefab(22);
+                        GetHCellByXyzCoordinates(m, p,z).SetPrefab(22);
                     }
                     else
                     {
-                        GetCellIndex(z, m,p).SetPrefab(21,new Vector3(0,-300,0));
-                        GetCellIndex(p, z,m).SetPrefab(21,new Vector3(0,180,0));
-                        GetCellIndex(m, p,z).SetPrefab(21,new Vector3(0,-60,0));
+                        GetHCellByXyzCoordinates(z, m,p).SetPrefab(21,new Vector3(0,-300,0));
+                        GetHCellByXyzCoordinates(p, z,m).SetPrefab(21,new Vector3(0,180,0));
+                        GetHCellByXyzCoordinates(m, p,z).SetPrefab(21,new Vector3(0,-60,0));
                     }
                         
-                    GetCellIndex(z, m, p).SetCellType(HCell.CellType.Base); // base ?
+                    GetHCellByXyzCoordinates(z, m, p).SetCellType(HCell.CellType.Base); // base ?
                     
-                    GetCellIndex(p, z, m).SetCellType(HCell.CellType.Base);
+                    GetHCellByXyzCoordinates(p, z, m).SetCellType(HCell.CellType.Base);
                     
-                    GetCellIndex(m, p, z).SetCellType(HCell.CellType.Base);
+                    GetHCellByXyzCoordinates(m, p, z).SetCellType(HCell.CellType.Base);
                     
                 }
 
@@ -435,7 +436,7 @@ namespace Field
             // a = prev, b = curr , c=next
             Vector3 ac = next.transform.position - prev.transform.position;
             Vector3 ab = curr.transform.position - prev.transform.position;
-            this.control = GetCellIndex(prev.coordinates.X - 1, prev.coordinates.Y - 1, prev.coordinates.Z + 2).transform.position - prev.transform.position;
+            this.control = GetHCellByXyzCoordinates(prev.coordinates.X - 1, prev.coordinates.Y - 1, prev.coordinates.Z + 2).transform.position - prev.transform.position;
             
             this.ac = ac;
             
@@ -443,7 +444,7 @@ namespace Field
 
 
             // Hilfvektor senkr. nach oben für die winkelberechnung++
-            Vector3 control = GetCellIndex(prev.coordinates.X - 1, prev.coordinates.Y - 1, prev.coordinates.Z + 2).transform.position - prev.transform.position;
+            Vector3 control = GetHCellByXyzCoordinates(prev.coordinates.X - 1, prev.coordinates.Y - 1, prev.coordinates.Z + 2).transform.position - prev.transform.position;
            /*
             prev.lineRenderer.enabled = true;
             prev.lineRenderer.SetPosition(0,prev.transform.position);
@@ -506,7 +507,7 @@ namespace Field
         
         }
 
-        public HCell GetCellIndex(int x, int y, int z)
+        public HCell GetHCellByXyzCoordinates(int x, int y, int z)
         {
             foreach (HCell cell in cells)
             {

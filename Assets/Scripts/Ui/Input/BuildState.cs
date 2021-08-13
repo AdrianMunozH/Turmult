@@ -41,7 +41,7 @@ namespace Ui.Input
         // nur für baschi
         public override void OnDestroy()
         {
-            _hexGrid.GetCellIndex(prevCell.X,prevCell.Y).DestroyPreviewTurret();
+            _hexGrid.GetHCellByXyCoordinates(prevCell.X,prevCell.Y).DestroyPreviewTurret();
         }
 
         // wird das hier ein rpc call ?
@@ -89,7 +89,7 @@ namespace Ui.Input
                         }
                         
                         // altes prefab
-                        _hexGrid.GetCellIndex(prevCell.X,prevCell.Y).DestroyPreviewTurret();
+                        _hexGrid.GetHCellByXyCoordinates(prevCell.X,prevCell.Y).DestroyPreviewTurret();
                         
                         
                         // machen wir immer

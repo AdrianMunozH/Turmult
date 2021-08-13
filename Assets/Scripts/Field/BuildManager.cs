@@ -1,5 +1,6 @@
 ﻿using System;
 using DG.Tweening;
+using MLAPI;
 using UnityEngine;
 
 namespace Field
@@ -7,7 +8,7 @@ namespace Field
     /**
  * Buildmanger nach Singleton-Pattern
  */
-    public class BuildManager : MonoBehaviour
+    public class BuildManager : NetworkBehaviour
     {
         public static BuildManager instance;
         private GameObject turretToBuild;

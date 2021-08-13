@@ -31,7 +31,7 @@ namespace Enemies
         {
 
             enemys = new List<GameObject>();
-            defaultStart = _hexGrid.GetCellIndex(0, 0);
+            defaultStart = _hexGrid.GetHCellByXyCoordinates(0, 0);
         }
 
         // checkt ob der weg eines minions überhaupt geöndert werden muss
@@ -130,7 +130,6 @@ namespace Enemies
                 }
             }
 
-            Debug.Log("solve list: " + _hexGrid.ArrayToString(prev));
             return prev;
         }
 
@@ -220,13 +219,12 @@ namespace Enemies
         public List<HCell> RecPath(HCell[] list)
         {
             List<HCell> path = new List<HCell>();
-            Debug.Log("sp start" + defaultStart.spindex + " index start" + defaultStart.index);
-            Debug.Log("ende: " + end.coordinates.ToString());
 
 
             for (HCell at = end; at != null; at = list[at.index])
             {
                 path.Add(at);
+                Debug.Log(at);
             }
 
             return path;

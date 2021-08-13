@@ -31,6 +31,7 @@ namespace Field
         public GameObject acquiredField;
         public HCell[] neighb;
         public Ressource ressource;
+        public GameObject resPrefab; 
         
         public bool hasBuilding;
         public bool HasBuilding
@@ -139,6 +140,12 @@ namespace Field
         {
             _hexGrid = GameObject.Find("HexGrid").GetComponent<HGrid>();
             if (_hexGrid == null) throw new Exception("Kein Objekt HexGrid in der Szene gefunden oder es keine Komponente HGrid an diese! ");
+            
+            //Setzen der Ressource standardmäßig auf Neutral, Berechnung am Server
+            GameObject res =  Instantiate(resPrefab,gameObject.transform);
+            ressource = res.GetComponent<Ressource>();
+            ressource.SetNeutralType();
+            
         }
 
         // Start is called before the first frame update
@@ -146,14 +153,21 @@ namespace Field
         {
             type = CellType.Hidden;
             buildManager = BuildManager.instance;
-
-
-            ressource = new Ressource();
+            
             rend = GetComponent<Renderer>();
             rend.enabled = false;
             SetNeighb();
             gridImage.color = SetColor(0f, 0f, 0f, 0f);
             
+
+            
+            //Auf dem Server Ressourcetypen zufällig setzen
+            if (IsServer)
+            {
+                ressource.SetRandomType();
+
+            }
+            Debug.Log(ressource.GetRessourceType());
         }
 
         private void SetNeighb()
@@ -200,7 +214,7 @@ namespace Field
             Vector3? rotation = null,
             int path = 0)
         {
-            if (cell.transform.childCount == 0)
+            if (cell.transform.childCount == 1)
             {
                 cell.SetCellType(CellType.CanBeAcquired);
                 int index = (int) cellType + (int) ressource + path;
@@ -222,8 +236,11 @@ namespace Field
 
         public void SetPrefab(int prefabIndex, Vector3? rotation = null)
         {
-            if (transform.childCount > 0)
-                GameObject.Destroy(transform.GetChild(0).gameObject);
+            if (transform.childCount > 1)
+            {
+                GameObject.Destroy(transform.GetChild(1).gameObject);
+
+            }
 
             GameObject hexagon = Instantiate(hexPrefabs[prefabIndex], transform.position, transform.rotation);
 
@@ -250,7 +267,10 @@ namespace Field
             int index = (int) cellType + (int) ressource + path;
 
             if (transform.childCount > 0)
+            {
                 GameObject.Destroy(transform.GetChild(0).gameObject);
+
+            }
 
             GameObject hexagon;
             Vector3 pos = transform.position;

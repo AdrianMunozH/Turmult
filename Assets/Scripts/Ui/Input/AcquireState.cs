@@ -46,7 +46,7 @@ namespace Ui.Input
 
         public override void OnDestroy()
         {
-            _hexGrid.GetCellIndex(prevCell.X, prevCell.Y).gridImage.color =  _hexGrid.GetCellIndex(prevCell.X, prevCell.Y).SetColor(0f,0f,0f,0f);;
+            _hexGrid.GetHCellByXyCoordinates(prevCell.X, prevCell.Y).gridImage.color =  _hexGrid.GetHCellByXyCoordinates(prevCell.X, prevCell.Y).SetColor(0f,0f,0f,0f);;
         }
 
         public override void Input()
@@ -73,7 +73,7 @@ namespace Ui.Input
                         }
                         else
                         {
-                            HCell prevCellColor = _hexGrid.GetCellIndex(prevCell.X, prevCell.Y) ;
+                            HCell prevCellColor = _hexGrid.GetHCellByXyCoordinates(prevCell.X, prevCell.Y) ;
                             prevCellColor.gridImage.color = prevCellColor.SetColor(0f,0f,0f,0f);
                             prevCell = cell.coordinates;
                         }

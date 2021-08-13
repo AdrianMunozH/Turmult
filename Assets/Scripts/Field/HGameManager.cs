@@ -56,24 +56,24 @@ namespace Field
             enemySpawns[1] = Instantiate<EnemySpawn>(spawnPoint);
             enemySpawns[2] = Instantiate<EnemySpawn>(spawnPoint);
 
-            enemySpawns[0].end = _hexGrid.GetCellIndex(0, -distanceFromSpawn, distanceFromSpawn);
-            enemySpawns[0].defaultStart = _hexGrid.GetCellIndex(0, 0);
-            enemySpawns[1].end = _hexGrid.GetCellIndex(distanceFromSpawn, 0, -distanceFromSpawn);
-            enemySpawns[1].defaultStart = _hexGrid.GetCellIndex(0, 0);
-            enemySpawns[2].end = _hexGrid.GetCellIndex(-distanceFromSpawn, distanceFromSpawn, 0);
-            enemySpawns[2].defaultStart = _hexGrid.GetCellIndex(0, 0);
+            enemySpawns[0].end = _hexGrid.GetHCellByXyzCoordinates(0, -distanceFromSpawn, distanceFromSpawn);
+            enemySpawns[0].defaultStart = _hexGrid.GetHCellByXyCoordinates(0, 0);
+            enemySpawns[1].end = _hexGrid.GetHCellByXyzCoordinates(distanceFromSpawn, 0, -distanceFromSpawn);
+            enemySpawns[1].defaultStart = _hexGrid.GetHCellByXyCoordinates(0, 0);
+            enemySpawns[2].end = _hexGrid.GetHCellByXyzCoordinates(-distanceFromSpawn, distanceFromSpawn, 0);
+            enemySpawns[2].defaultStart = _hexGrid.GetHCellByXyCoordinates(0, 0);
 
             foreach (EnemySpawn enemySpawn in enemySpawns)
             {
                 spath = enemySpawn.Solve();
                 List<HCell> sp = enemySpawn.RecPath(spath);
+
                 foreach (HCell hcell in sp)
                 {
-                    hcell.SetCellType(HCell.CellType.Acquired);
-                    Ressource res = new Ressource();
-                    res.SetNeutralType();
-                    hcell.ressource = res;
+                    //Ressource wird im shortestpath benötigt!
+                    hcell.ressource = _hexGrid.GetHCellByIndex(hcell.index).GetComponentInChildren<Ressource>();
                 }
+
                 _hexGrid.ShortestPathPrefabs(enemySpawn.ShortestPath(sp).ToArray());
             }
             
@@ -110,7 +110,7 @@ namespace Field
                 else
                 {
                     // attacking modus
-                    spath = enemySpawn.SolveAttack(_hexGrid.GetCellIndex(0,0,0));
+                    spath = enemySpawn.SolveAttack(_hexGrid.GetHCellByXyzCoordinates(0,0,0));
                     // es wird erstmal der kürzeste weg zur base gesucht
                     sp = enemySpawn.RecPath(spath);
                     sp = enemySpawn.ShortestPath(sp);
