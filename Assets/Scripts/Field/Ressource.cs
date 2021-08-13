@@ -1,4 +1,7 @@
+using System;
 using MLAPI;
+using MLAPI.Messaging;
+using MLAPI.NetworkVariable;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,16 +20,36 @@ namespace Field
         };
 
 
-        public RessourceType _type;
+        public int _type;
+        [SerializeField]
+        private NetworkVariable<int> netType;
 
-        public RessourceType GetRessourceType()
+        void OnEnable()
         {
-            return _type;
+            netType.OnValueChanged += ValueChanged;
+            Debug.Log("Subscribed!");
+        }
+        
+        void OnDisable()
+        {
+            netType.OnValueChanged -= ValueChanged;
+        }
+
+        private void ValueChanged(int previousvalue, int newvalue)
+        {
+            if (!IsServer) return;
+            _type = netType.Value;
+        }
+
+        public int GetRessourceType()
+        {
+            return netType.Value;
         }
 
         public void SetNeutralType()
         {
-            _type = RessourceType.Neutral;
+            if (!IsServer) return;
+            netType.Value = (int) RessourceType.Neutral;
         }
 
         /**
@@ -36,30 +59,36 @@ namespace Field
      */
         public void SetRandomType()
         {
+            int resType =(int)RessourceType.Neutral;
             if (chanceRessourceField >= Random.Range(1, 100))
             {
                 switch (Random.Range(0, 3))
                 {
                     case 0:
-                        _type = RessourceType.Berg;
+                        resType = (int) RessourceType.Berg;
                         break;
                     case 1:
-                        _type = RessourceType.Sumpf;
+                        resType = (int)RessourceType.Sumpf;
                         break;
                     case 2:
-                        _type = RessourceType.Wald;
+                        resType = (int)RessourceType.Wald;
                         break;
                 }
             }
-            else
-            {
-                _type = RessourceType.Neutral;
-            }
+            ChangeResourceType(resType);
         }
 
         public void SetSpecificType(RessourceType ressourceType)
         {
-            _type = ressourceType;
+            if (!IsServer) return;
+            netType.Value =  (int)ressourceType;
+        }
+        
+        public void ChangeResourceType(int resType)
+        {
+            Debug.Log( resType);
+            if (!IsServer) return;
+            netType.Value =  resType;
         }
     }
 }

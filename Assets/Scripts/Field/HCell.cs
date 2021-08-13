@@ -2,6 +2,7 @@
 using System.Collections;
 using DG.Tweening;
 using MLAPI;
+using MLAPI.Messaging;
 using Turrets;
 using UnityEngine;
 using UnityEngine.UI;
@@ -162,12 +163,16 @@ namespace Field
 
             
             //Auf dem Server Ressourcetypen zufällig setzen
+
+
+        }
+
+        public override void NetworkStart()
+        {
             if (IsServer)
             {
                 ressource.SetRandomType();
-
             }
-            Debug.Log(ressource.GetRessourceType());
         }
 
         private void SetNeighb()
@@ -236,11 +241,14 @@ namespace Field
 
         public void SetPrefab(int prefabIndex, Vector3? rotation = null)
         {
-            if (transform.childCount > 1)
+            //TODO: Löschen altes Prefab?
+           /* if (transform.childCount > 1)
             {
                 GameObject.Destroy(transform.GetChild(1).gameObject);
 
-            }
+            }*/
+           
+           Debug.Log("1");
 
             GameObject hexagon = Instantiate(hexPrefabs[prefabIndex], transform.position, transform.rotation);
 
@@ -266,11 +274,16 @@ namespace Field
         {
             int index = (int) cellType + (int) ressource + path;
 
+            //TODO: Altes Prefab löschen
+            /*
             if (transform.childCount > 0)
             {
                 GameObject.Destroy(transform.GetChild(0).gameObject);
 
             }
+*/
+            
+            Debug.Log("2");
 
             GameObject hexagon;
             Vector3 pos = transform.position;
@@ -329,12 +342,12 @@ namespace Field
                 if (cell.GetCellType() == CellType.Hidden)
                 {
                     cell.SetCellType(CellType.CanBeAcquired);
-                    if (ressource.GetRessourceType() != Ressource.RessourceType.Neutral)
+                    if (ressource.GetRessourceType() != (int)Ressource.RessourceType.Neutral)
                     {
                         cell.ressource.SetSpecificType(Ressource.RessourceType.Neutral);
                     }
 
-                    cell.SetUnacquiredPrefab(cell, cell.GetCellType(), cell.ressource.GetRessourceType());
+                    cell.SetUnacquiredPrefab(cell, cell.GetCellType(),  (Ressource.RessourceType) cell.ressource.GetRessourceType());
                 }
             }
         }
@@ -355,6 +368,7 @@ namespace Field
             //Rotation ändern
             field.transform.Rotate(0, 60*Random.Range(0, 6), 0);
         }
+        
         
     }
 }

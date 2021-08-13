@@ -35,7 +35,7 @@ namespace Ui.Input
             //cell.acquiredField = GameObject.Find("Cylinder");
             
             //cell.AcquiredThisCellServerRpc();
-            cell.SetPrefab(cell.type,cell.ressource.GetRessourceType());
+            cell.SetPrefab(cell.type,(Ressource.RessourceType)cell.ressource.GetRessourceType());
             cell.StartCoroutine(cell.CheckNeighb());
             // vllt kürzester weg bescheid sagen
 

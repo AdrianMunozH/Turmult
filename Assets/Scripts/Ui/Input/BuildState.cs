@@ -48,7 +48,7 @@ namespace Ui.Input
         public override void BuyTurret(HCell cell, Ressource.RessourceType ressourceEnum, int turret)
         {
             Debug.Log(!cell.hasBuilding + " " + cell.Celltype.ToString() + cell.ressource.GetRessourceType());
-            if(cell.HasBuilding || cell.Celltype != HCell.CellType.Acquired || cell.ressource.GetRessourceType() != Ressource.RessourceType.Neutral) return;
+            if(cell.HasBuilding || cell.Celltype != HCell.CellType.Acquired || cell.ressource.GetRessourceType() != (int) Ressource.RessourceType.Neutral) return;
 
             Debug.Log("buyturret");
             cell.BuildTurret();
@@ -78,7 +78,7 @@ namespace Ui.Input
                     if (!prevCell.CompareCoord(cell.coordinates))
                     {
                         // neue prefab
-                        if (cell.GetCellType() == HCell.CellType.Acquired && !cell.HasBuilding && cell.ressource.GetRessourceType() == Ressource.RessourceType.Neutral)
+                        if (cell.GetCellType() == HCell.CellType.Acquired && !cell.HasBuilding && cell.ressource.GetRessourceType() == (int)Ressource.RessourceType.Neutral)
                         {
 
                             GameObject turretToBuild = BuildManager.instance.GetTurretToBuildPreview(); 
