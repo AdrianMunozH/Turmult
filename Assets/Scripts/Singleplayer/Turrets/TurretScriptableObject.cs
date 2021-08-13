@@ -16,7 +16,7 @@ namespace Singleplayer.Turrets
         private float fireCountdown = 0f;
         public TurretType turretType; 
         public string enemyTag = "Enemy";
-        public Ressource.RessourceType ressourceType;
+        public Resource.ResourceType ressourceType;
 
         [Header("Rotation und Firepoint")]
         public bool canRotate;

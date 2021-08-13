@@ -5,6 +5,7 @@ using MLAPI;
 using MLAPI.NetworkVariable;
 using Singleplayer.Turrets;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -31,7 +32,7 @@ namespace Singleplayer.Field
         public GameObject previewTurret;
         public GameObject acquiredField;
         public HCell[] neighb;
-        public Ressource ressource;
+        [FormerlySerializedAs("ressource")] public Resource resource;
         public GameObject resPrefab; 
         
         public bool hasBuilding;
@@ -59,36 +60,6 @@ namespace Singleplayer.Field
         [SerializeField] private GameObject[] hexPrefabs;
         
         
-        //######## network ###########
-        [SerializeField]
-        private NetworkVariable<int> netCelltype = new NetworkVariable<int>((int) CellType.Hidden);
-
-        private void OnEnable()
-        {
-            netCelltype.OnValueChanged += CellTypeChanged;
-        }
-
-        private void OnDisable()
-        {
-            netCelltype.OnValueChanged -= CellTypeChanged;
-        }
-        
-        private void CellTypeChanged(int previousvalue, int newvalue)
-        {
-            if (IsOwner && IsClient)
-            {    
-                Debug.Log("Update Client!");
-            }
-
-            if (!IsServer) return;
-            type = (CellType) newvalue;
-        }
-
-        public void ChangeCellType(CellType newType)
-        {
-            if(IsServer) netCelltype.Value = (int) newType;
-        }
-
         /*
         berg    unacq      :0
                 acq        :1
@@ -171,10 +142,8 @@ namespace Singleplayer.Field
             if (_hexGrid == null) throw new Exception("Kein Objekt HexGrid in der Szene gefunden oder es keine Komponente HGrid an diese! ");
             
             //Setzen der Ressource standardmäßig auf Neutral, Berechnung am Server
-            GameObject res =  Instantiate(resPrefab,gameObject.transform);
-            ressource = res.GetComponent<Ressource>();
-            ressource.SetNeutralType();
-            
+            Resource resource =  new Resource();
+
         }
 
         // Start is called before the first frame update
@@ -187,14 +156,7 @@ namespace Singleplayer.Field
             SetNeighb();
             gridImage.color = SetColor(0f, 0f, 0f, 0f);
         }
-
-        public override void NetworkStart()
-        {
-            if (IsServer)
-            {
-                ressource.SetRandomType();
-            }
-        }
+        
 
         private void SetNeighb()
         {
@@ -235,7 +197,7 @@ namespace Singleplayer.Field
             }
         }
 
-        public void SetUnacquiredPrefab(HCell cell, CellType cellType, Ressource.RessourceType ressource,
+        public void SetUnacquiredPrefab(HCell cell, CellType cellType, Resource.ResourceType ressource,
             Vector3? rotation = null,
             int path = 0)
         {
@@ -287,7 +249,7 @@ namespace Singleplayer.Field
             StartCoroutine(CheckNeighb());
         }
 
-        public void SetPrefab(CellType cellType, Ressource.RessourceType ressource, Vector3? rotation = null,
+        public void SetPrefab(CellType cellType, Resource.ResourceType ressource, Vector3? rotation = null,
             int path = 0)
         {
             int index = (int) cellType + (int) ressource + path;
@@ -327,7 +289,7 @@ namespace Singleplayer.Field
             //Ressourcenfelder ohne Wege werden random gedreht, bei Grasfelder zusätzlich das Material random angepasst
             if (path == 0)
             {
-                if (ressource == Ressource.RessourceType.Neutral)
+                if (ressource == Resource.ResourceType.Neutral)
                     SetRandomField(hexagon, true);
                 else
                 {
@@ -359,12 +321,12 @@ namespace Singleplayer.Field
                 if (cell.GetCellType() == CellType.Hidden)
                 {
                     cell.SetCellType(CellType.CanBeAcquired);
-                    if (ressource.GetRessourceType() != (int)Ressource.RessourceType.Neutral)
+                    if (resource.GetResourceType() != Resource.ResourceType.Neutral)
                     {
-                        cell.ressource.SetSpecificType(Ressource.RessourceType.Neutral);
+                        cell.resource.SetSpecificType(Resource.ResourceType.Neutral);
                     }
 
-                    cell.SetUnacquiredPrefab(cell, cell.GetCellType(),  (Ressource.RessourceType) cell.ressource.GetRessourceType());
+                    cell.SetUnacquiredPrefab(cell, cell.GetCellType(),  (Resource.ResourceType) cell.resource.GetResourceType());
                 }
             }
         }

@@ -403,7 +403,7 @@ namespace Singleplayer.Field
         {
             int str;
             // neutral hat weniger felder als ressourcen
-            if ((Ressource.RessourceType)curr.ressource.GetRessourceType() == Ressource.RessourceType.Neutral)
+            if ((Resource.ResourceType)curr.resource.GetResourceType() == Resource.ResourceType.Neutral)
                 str = 2;
             else
                 str = 3;
@@ -438,11 +438,11 @@ namespace Singleplayer.Field
             if (angle > 0)
             {
                 
-                curr.SetPrefab(curr.GetCellType(),(Ressource.RessourceType)curr.ressource.GetRessourceType(),new Vector3(0,rotationOfPrefab,0),str);
+                curr.SetPrefab(curr.GetCellType(),(Resource.ResourceType)curr.resource.GetResourceType(),new Vector3(0,rotationOfPrefab,0),str);
             }
             else
             {
-                curr.SetPrefab(curr.GetCellType(),(Ressource.RessourceType)curr.ressource.GetRessourceType(),new Vector3(0,rotationOfPrefab+180f,0),str);
+                curr.SetPrefab(curr.GetCellType(),(Resource.ResourceType)curr.resource.GetResourceType(),new Vector3(0,rotationOfPrefab+180f,0),str);
             }
             
            
@@ -464,7 +464,7 @@ namespace Singleplayer.Field
         {
             int str;
             
-            if (path.ressource.GetRessourceType() == (int) Ressource.RessourceType.Neutral)
+            if (path.resource.GetResourceType() == Resource.ResourceType.Neutral)
                 str = 1;
             else
                 str = 2;
@@ -472,14 +472,14 @@ namespace Singleplayer.Field
             //das ist nur für straight
             if (x != 0 && y != 0 && z == 0)
             {
-                path.SetPrefab(path.GetCellType(),(Ressource.RessourceType)path.ressource.GetRessourceType(),new Vector3(0,120,0),str);
+                path.SetPrefab(path.GetCellType(),(Resource.ResourceType)path.resource.GetResourceType(),new Vector3(0,120,0),str);
             } else if (y != 0 && z != 0 && x == 0)
             {
-                path.SetPrefab(path.GetCellType(),(Ressource.RessourceType)path.ressource.GetRessourceType(),new Vector3(0,-120,0),str);
+                path.SetPrefab(path.GetCellType(),(Resource.ResourceType)path.resource.GetResourceType(),new Vector3(0,-120,0),str);
             }
             else
             {
-                path.SetPrefab(path.GetCellType(),(Ressource.RessourceType)path.ressource.GetRessourceType(),Vector3.zero,str);
+                path.SetPrefab(path.GetCellType(),(Resource.ResourceType)path.resource.GetResourceType(),Vector3.zero,str);
             }
                 
         

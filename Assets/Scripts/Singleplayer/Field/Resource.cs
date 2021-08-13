@@ -5,11 +5,11 @@ using Random = UnityEngine.Random;
 
 namespace Singleplayer.Field
 {
-    public class Ressource : MonoBehaviour
+    public class Resource
     {
-        public float chanceRessourceField = 20f;
+        public float chanceResourceField = 20f;
 
-        public enum RessourceType
+        public enum ResourceType
         {
             Berg = 0,
             Sumpf = 5,
@@ -17,14 +17,14 @@ namespace Singleplayer.Field
             Neutral = 15
         };
 
-        public int _type;
+        private int _type;
 
-        public int GetRessourceType()
+        public ResourceType GetResourceType()
         {
-            return _type;
+            return (ResourceType) _type;
         }
 
-        Ressource()
+        public Resource()
         {
             SetRandomType();
         }
@@ -36,22 +36,27 @@ namespace Singleplayer.Field
      */
         private void SetRandomType()
         {
-            _type =(int)RessourceType.Neutral;
-            if (chanceRessourceField >= Random.Range(1, 100))
+            _type =(int) ResourceType.Neutral;
+            if (chanceResourceField >= Random.Range(1, 100))
             {
                 switch (Random.Range(0, 3))
                 {
                     case 0:
-                        _type = (int) RessourceType.Berg;
+                        _type = (int) ResourceType.Berg;
                         break;
                     case 1:
-                        _type = (int)RessourceType.Sumpf;
+                        _type = (int) ResourceType.Sumpf;
                         break;
                     case 2:
-                        _type = (int)RessourceType.Wald;
+                        _type = (int) ResourceType.Wald;
                         break;
                 }
             }
+        }
+
+        public void SetSpecificType(ResourceType resType)
+        {
+            _type = (int) resType;
         }
     }
 }

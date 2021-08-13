@@ -19,7 +19,7 @@ namespace Singleplayer.Turrets
         public float turnSpeed = 10f;
         private float fireCountdown = 0f;
 
-        public Ressource.RessourceType ressourceType;
+        public Resource.ResourceType ressourceType;
         public TurretType turretType;
 
 
