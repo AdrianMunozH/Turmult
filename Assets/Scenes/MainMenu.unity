@@ -669,6 +669,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayNameInputField: {fileID: 1119158692}
   transition: {fileID: 107935813}
+  audio: {fileID: 704401235}
 --- !u!4 &65111481
 Transform:
   m_ObjectHideFlags: 0
@@ -3587,7 +3588,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f18dd4336ca97ed4081000df408add4d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ca2cdf046d264014a832577f4accd82c, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
