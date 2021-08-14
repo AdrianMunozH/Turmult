@@ -119,7 +119,7 @@ MonoBehaviour:
   defaultSpeed: 10
   _text: {fileID: 3815218281569563750}
   isAttacking: 0
-  dmgOnBase: 10
+  dmgOnBase: 1
   goldValue: 10
 --- !u!1 &7252253663343092537
 GameObject:

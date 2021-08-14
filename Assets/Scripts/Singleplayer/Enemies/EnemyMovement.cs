@@ -127,6 +127,10 @@ namespace Singleplayer.Enemies
             {
                 IncomeManager.Instance.MinionGold(goldValue);
             }
+            else
+            {
+                HGameManager.instance.loseLife(dmgOnBase);
+            }
             enemySpawn.deleteEnemy(gameObject);
             Destroy(gameObject);
         }

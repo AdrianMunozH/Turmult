@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Singleplayer.Player;
 using Singleplayer.Enemies;
 using Singleplayer.Turrets;
 using Singleplayer.Ui.Input;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 using Image = UnityEngine.UI.Image;
 
 namespace Singleplayer.Field
@@ -17,10 +19,13 @@ namespace Singleplayer.Field
         public float buildingPhaseTimer = 20;
         public float firstBuildingPhaseTimer = 2;
         public float betweenRoundsTimer = 10;
+        [Header("UI")] 
         public GameObject timeBar;
         public GameObject lifeBar;
-        private static UnityEngine.UI.Image _timebar;
-        private static UnityEngine.UI.Image _lifebar;
+        private static Image _timebar;
+        private static Image _lifebar;
+        public GameObject gameOver;
+        
 
         [Header("Lifes")] 
         public static int totalLifes = 20;
@@ -33,6 +38,7 @@ namespace Singleplayer.Field
         public int minionsPerWave = 5;
         private static int _currentWave = 0;
         private List<HCell> minionPath;
+        public static int timeTillSceneChange = 15;
 
         private int _spawnCounter = 0;
 
@@ -62,7 +68,9 @@ namespace Singleplayer.Field
         {
             _timebar = timeBar.GetComponent<Image>();
             _lifebar = lifeBar.GetComponent<Image>();
-            StartCoroutine(LevelTransition());
+            _lifebar.fillAmount = 1;
+            
+            _currentLifes = totalLifes;
 
             if (instance != null)
             {
@@ -100,33 +108,39 @@ namespace Singleplayer.Field
             }
 
             _hexGrid.ShortestPathPrefabs(spawnPoint.ShortestPath(sp).ToArray());
-
-
         }
 
         private void Update()
         {
-            if (_timer > 0 && !PlayerInputManager.Instance.GetState().name.Equals(StateEnum.Battle))
+            if (_currentLifes > 0)
             {
-                _timer -= Time.deltaTime;
-                _timebar.fillAmount = (_timer / buildingPhaseTimer);
-            }
-            else if (!PlayerInputManager.Instance.GetState().name.Equals(StateEnum.Battle))
-            {
-                PlayerInputManager.Instance.SetState(new BattleState());
-                if (_currentWave < waves)
+                if (_timer > 0 && !PlayerInputManager.Instance.GetState().name.Equals(StateEnum.Battle))
                 {
-                    SpawnEnemyWave();
+                    _timer -= Time.deltaTime;
+                    _timebar.fillAmount = (_timer / buildingPhaseTimer);
+                }
+                else if (!PlayerInputManager.Instance.GetState().name.Equals(StateEnum.Battle))
+                {
+                    PlayerInputManager.Instance.SetState(new BattleState());
+                    if (_currentWave < waves)
+                    {
+                        SpawnEnemyWave();
 
-                    _currentWave++;
+                        _currentWave++;
+                    }
+                }
+
+                if (allMinionsSpawned && spawnPoint.enemys.Count == 0)
+                {
+                    allMinionsSpawned = false;
+                    IncomeManager.Instance.Interest();
+                    PlayerInputManager.Instance.SetState(new BuildState());
+                    _timer = buildingPhaseTimer;
                 }
             }
-
-            if (allMinionsSpawned && spawnPoint.enemys.Count == 0)
+            else
             {
-                allMinionsSpawned = false;
-                PlayerInputManager.Instance.SetState(new BuildState());
-                _timer = buildingPhaseTimer;
+                gameOver.SetActive(true);
             }
         }
 
@@ -138,17 +152,13 @@ namespace Singleplayer.Field
             spawnPoint.SpawnEnemy(minionPath.ToArray(), false);
             if (_spawnCounter == minionsPerWave) allMinionsSpawned = true;
         }
-
+        
         IEnumerator LevelTransition()
         {
-            transition.SetTrigger("Start");
-            transition.gameObject.SetActive(true);
-
-            yield return new WaitForSeconds(1f);
-            transition.gameObject.SetActive(false);
-
-
+            yield return new WaitForSeconds(timeTillSceneChange);
+            SceneManager.LoadScene("MainMenu");
         }
+        
 
 
 
@@ -183,17 +193,20 @@ namespace Singleplayer.Field
             _hexGrid.ShortestPathPrefabs(minionPath.ToArray());
         }
 
-        public static void loseLife(int value)
+        public void loseLife(int value)
         {
-            if (_currentLifes-value >= 1)
+            Debug.Log("leben verloren..." + (_currentLifes / totalLifes));
+            if (_currentLifes-value >= 0)
             {
                 _currentLifes-=value;
-                _lifebar.fillAmount = (_currentLifes / totalLifes);
+
             }
             else
             {
-                //TODO: Hier hat der Spieler verloren
+                Debug.Log("KEIN AUFRUF");
+                StartCoroutine(nameof(LevelTransition));
             }
+            _lifebar.fillAmount = (float)((float)_currentLifes / (float)totalLifes);
         }
         
     }
