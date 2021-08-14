@@ -21,7 +21,7 @@ namespace Singleplayer.Field
         //######## public ###########
         public HexCoordinates coordinates;
         public int index;
-        public CellType type = CellType.Hidden;
+        [SerializeField] private CellType type = CellType.Hidden;
         
         //Wird gebraucht für das Tweening beim Einnehmen der Zelle
         //Wird in Buildstate.cs auf true gesetzt
@@ -86,11 +86,6 @@ namespace Singleplayer.Field
 
         //bool ob es schon bebaut wurde 
 
-        public CellType GetCellType()
-        {
-            return type;
-        }
-
         public void SetCellType(CellType celltype)
         {
             type = celltype;
@@ -143,13 +138,12 @@ namespace Singleplayer.Field
             
             //Setzen der Ressource standardmäßig auf Neutral, Berechnung am Server
             resource =  new Resource();
-
         }
 
         // Start is called before the first frame update
         void Start()
         {
-            type = CellType.Hidden;
+
             buildManager = BuildManager.instance;
             rend = GetComponent<Renderer>();
             rend.enabled = false;
@@ -201,9 +195,7 @@ namespace Singleplayer.Field
             Vector3? rotation = null,
             int path = 0)
         {
-
-                cell.SetCellType(CellType.CanBeAcquired);
-                int index = (int) cellType + (int) ressource + path;
+            int index = (int) cellType + (int) ressource + path;
 
                 Vector3 pos = transform.position;
                 GameObject hexagon = Instantiate(hexPrefabs[index], new Vector3(pos.x, pos.y - 10, pos.z),
@@ -250,6 +242,7 @@ namespace Singleplayer.Field
         public void SetPrefab(CellType cellType, Resource.ResourceType ressource, Vector3? rotation = null,
             int path = 0)
         {
+            Debug.Log(cellType);
             int index = (int) cellType + (int) ressource + path;
 
             //TODO: Altes Prefab löschen
@@ -315,10 +308,10 @@ namespace Singleplayer.Field
             yield return new WaitForSeconds(0.2f);
             foreach (var cell in neighb)
             {
-                if (cell.GetCellType() == CellType.Hidden)
+                if (cell.Celltype == CellType.Hidden)
                 {
                     cell.SetCellType(CellType.CanBeAcquired);
-                    cell.SetUnacquiredPrefab(cell, cell.GetCellType(),   cell.resource.GetResource());
+                    cell.SetUnacquiredPrefab(cell, cell.Celltype,   cell.resource.GetResource());
                 }
             }
         }

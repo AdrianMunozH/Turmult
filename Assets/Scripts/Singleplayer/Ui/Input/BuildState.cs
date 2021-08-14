@@ -78,7 +78,7 @@ namespace Singleplayer.Ui.Input
                     if (!prevCell.CompareCoord(cell.coordinates))
                     {
                         // neue prefab
-                        if (cell.GetCellType() == HCell.CellType.Acquired && !cell.HasBuilding && cell.resource.GetResource() == Resource.ResourceType.Neutral)
+                        if (cell.Celltype == HCell.CellType.Acquired && !cell.HasBuilding && cell.resource.GetResource() == Resource.ResourceType.Neutral)
                         {
 
                             GameObject turretToBuild = BuildManager.instance.GetTurretToBuildPreview(); 

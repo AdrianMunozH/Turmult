@@ -53,8 +53,6 @@ namespace Singleplayer.Field
             
             enemySpawns = new EnemySpawn[1];
             enemySpawns[0] = Instantiate<EnemySpawn>(spawnPoint);
-
-
             enemySpawns[0].end = _hexGrid.GetHCellByXyzCoordinates(distanceFromSpawn, 0, -distanceFromSpawn);
             enemySpawns[0].defaultStart = _hexGrid.GetHCellByXyCoordinates(0, 0);
 
@@ -67,6 +65,7 @@ namespace Singleplayer.Field
                 foreach (HCell hcell in sp)
                 {
                     //Ressource wird im shortestpath benötigt!
+                    hcell.Celltype = HCell.CellType.Acquired;
                     hcell.resource = _hexGrid.GetHCellByIndex(hcell.index).resource;
                 }
 

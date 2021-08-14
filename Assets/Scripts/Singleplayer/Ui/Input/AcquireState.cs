@@ -35,7 +35,7 @@ namespace Singleplayer.Ui.Input
             //cell.acquiredField = GameObject.Find("Cylinder");
             
             //cell.AcquiredThisCellServerRpc();
-            cell.SetPrefab(cell.type, cell.resource.GetResource());
+            cell.SetPrefab(cell.Celltype, cell.resource.GetResource());
             cell.StartCoroutine(cell.CheckNeighb());
             // vllt kürzester weg bescheid sagen
 
@@ -65,7 +65,7 @@ namespace Singleplayer.Ui.Input
                     
                         if (prevCell.CompareCoord(cell.coordinates))
                         {
-                            if (cell.GetCellType() == HCell.CellType.CanBeAcquired && prevCell.CompareCoord(cell.coordinates))
+                            if (cell.Celltype == HCell.CellType.CanBeAcquired && prevCell.CompareCoord(cell.coordinates))
                             {
                                 cell.gridImage.color = cell.SetColor(225f,225f,225f,70f/255f);
                             }
