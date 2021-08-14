@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using Singleplayer.Field;
-using MLAPI;
+using Singleplayer.Player;
 using TMPro;
 using UnityEngine;
 
@@ -32,6 +32,9 @@ namespace Singleplayer.Enemies
         public bool isAttacking;
         private double _attackCountdown = 0f;
         private double attackRate = 1f;
+
+        public int dmgOnBase;
+        public int goldValue;
 
         // Start is called before the first frame update
         void Start()
@@ -65,7 +68,7 @@ namespace Singleplayer.Enemies
                     }
                     else
                     {
-                        Die();
+                        Die(false);
                     }
                 }
 
@@ -108,7 +111,7 @@ namespace Singleplayer.Enemies
                  life -= damage;
             }
             else
-                 Die();
+                 Die(true);
             // // die methode falls wir sowas wie deathanimation macehn 
             //
             Debug.Log(damage + " take damage+");
@@ -118,8 +121,12 @@ namespace Singleplayer.Enemies
             // //StartCoroutine("DeactivateText");
         }
 
-        public void Die()
+        public void Die(bool gotKilled)
         {
+            if (gotKilled)
+            {
+                IncomeManager.Instance.MinionGold(goldValue);
+            }
             enemySpawn.deleteEnemy(gameObject);
             Destroy(gameObject);
         }
