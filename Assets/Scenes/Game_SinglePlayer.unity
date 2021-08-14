@@ -17124,21 +17124,21 @@ MonoBehaviour:
   - {fileID: 3076097380530608750, guid: 6656b18a87c20cb4fab28d252a50338c, type: 3}
   - {fileID: 3076097380530608750, guid: 6656b18a87c20cb4fab28d252a50338c, type: 3}
   forestTurrets:
-  - {fileID: 3940805691244041483, guid: bc0016dad42303848aa1452f94f4dd2d, type: 3}
-  - {fileID: 3995092328936062685, guid: 2b09ddba6da8a1b42baec33b62e78a1e, type: 3}
-  - {fileID: 672762153369891017, guid: 26ff1a3c43049a5449daa38db2d601f1, type: 3}
+  - {fileID: 672762153369891017, guid: 2b09ddba6da8a1b42baec33b62e78a1e, type: 3}
+  - {fileID: 3940805691244041483, guid: c8396bd75e02959489b7aa5de6b42778, type: 3}
+  - {fileID: 3995092328936062685, guid: bc0016dad42303848aa1452f94f4dd2d, type: 3}
   forestPreviewTurrets:
-  - {fileID: 3940805691244041483, guid: bc0016dad42303848aa1452f94f4dd2d, type: 3}
-  - {fileID: 3995092328936062685, guid: 2b09ddba6da8a1b42baec33b62e78a1e, type: 3}
-  - {fileID: 672762153369891017, guid: 26ff1a3c43049a5449daa38db2d601f1, type: 3}
+  - {fileID: 672762153369891017, guid: 2b09ddba6da8a1b42baec33b62e78a1e, type: 3}
+  - {fileID: 3940805691244041483, guid: c8396bd75e02959489b7aa5de6b42778, type: 3}
+  - {fileID: 3995092328936062685, guid: bc0016dad42303848aa1452f94f4dd2d, type: 3}
   swampTurrets:
   - {fileID: 8476073457476039546, guid: 7c5b668bfd6dfa34586662251fd814d2, type: 3}
-  - {fileID: 7946498073699439795, guid: f601f0ed54ca4d042b452b95c982f858, type: 3}
-  - {fileID: 4849936137909261494, guid: c7a86dd394fad3940923d3ac6f78ced0, type: 3}
+  - {fileID: 7946498073699439795, guid: c7a86dd394fad3940923d3ac6f78ced0, type: 3}
+  - {fileID: 4849936137909261494, guid: f601f0ed54ca4d042b452b95c982f858, type: 3}
   swampPreviewTurrets:
   - {fileID: 8476073457476039546, guid: 7c5b668bfd6dfa34586662251fd814d2, type: 3}
-  - {fileID: 7946498073699439795, guid: f601f0ed54ca4d042b452b95c982f858, type: 3}
-  - {fileID: 4849936137909261494, guid: c7a86dd394fad3940923d3ac6f78ced0, type: 3}
+  - {fileID: 7946498073699439795, guid: c7a86dd394fad3940923d3ac6f78ced0, type: 3}
+  - {fileID: 4849936137909261494, guid: f601f0ed54ca4d042b452b95c982f858, type: 3}
   grid: {fileID: 646463327}
 --- !u!4 &541232430
 Transform:
@@ -63172,9 +63172,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startGold: 500
   interestRateInPercentPerRound: 5
-  startForest: 1
-  startMountain: 1
-  startSwamp: 1
+  startForest: 55
+  startMountain: 55
+  startSwamp: 55
   startLifes: 20
   full: {r: 0, g: 1, b: 0, a: 1}
   nearlyFull: {r: 0, g: 1, b: 1, a: 1}
