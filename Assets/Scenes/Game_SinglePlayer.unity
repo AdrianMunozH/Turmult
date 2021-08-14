@@ -33542,6 +33542,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2110079562}
   ui: {fileID: 1100171618}
+  menuController: {fileID: 0}
 --- !u!114 &1100171617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63316,54 +63317,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2083321343}
   m_CullTransparentMesh: 1
---- !u!1 &2085237168
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2085237169}
-  - component: {fileID: 2085237170}
-  m_Layer: 0
-  m_Name: AudioChannelMixer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2085237169
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2085237168}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -52.82168, y: 238.46451, z: 0.3717041}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 24
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2085237170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2085237168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b79fa412a2d288941b6ff746af3eeab5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mixerGroup: 
-  mixer: {fileID: 24100000, guid: 7af5efb80c4696646ab82f6d9d2108c8, type: 2}
-  master: {fileID: 11400000, guid: bd5d3231ea0a28b4a8fd00c19a22a2d4, type: 2}
-  music: {fileID: 11400000, guid: 066fc87f35502d54db43973b03e2e014, type: 2}
-  fx: {fileID: 11400000, guid: c1306de8b3bb4a74bbec3da395932853, type: 2}
 --- !u!1 &2098172816
 GameObject:
   m_ObjectHideFlags: 0
@@ -65934,10 +65887,10 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
+      - m_Target: {fileID: 2712175266828017998}
+        m_TargetAssemblyTypeName: Audio.AudioChannelMixer, Assembly-CSharp
         m_MethodName: SetLevel
-        m_Mode: 0
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -65978,6 +65931,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2712175266828017996}
   - component: {fileID: 2712175266828017995}
+  - component: {fileID: 2712175266828017998}
   m_Layer: 0
   m_Name: Slider
   m_TagString: Untagged
@@ -65985,6 +65939,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2712175266828017998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2712175266828017997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b79fa412a2d288941b6ff746af3eeab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixerGroup: Music
+  mixer: {fileID: 24100000, guid: 7af5efb80c4696646ab82f6d9d2108c8, type: 2}
+  master: {fileID: 11400000, guid: bd5d3231ea0a28b4a8fd00c19a22a2d4, type: 2}
+  music: {fileID: 11400000, guid: 066fc87f35502d54db43973b03e2e014, type: 2}
+  fx: {fileID: 11400000, guid: c1306de8b3bb4a74bbec3da395932853, type: 2}
 --- !u!222 &2712175266839222160
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -68013,6 +67984,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2712175267417093760}
   - component: {fileID: 2712175267417093775}
+  - component: {fileID: 2712175267417093762}
   m_Layer: 0
   m_Name: Slider
   m_TagString: Untagged
@@ -68020,6 +67992,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2712175267417093762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2712175267417093761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b79fa412a2d288941b6ff746af3eeab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixerGroup: Master
+  mixer: {fileID: 24100000, guid: 7af5efb80c4696646ab82f6d9d2108c8, type: 2}
+  master: {fileID: 11400000, guid: bd5d3231ea0a28b4a8fd00c19a22a2d4, type: 2}
+  music: {fileID: 11400000, guid: 066fc87f35502d54db43973b03e2e014, type: 2}
+  fx: {fileID: 11400000, guid: c1306de8b3bb4a74bbec3da395932853, type: 2}
 --- !u!114 &2712175267417093775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68071,10 +68060,10 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
+      - m_Target: {fileID: 2712175267417093762}
+        m_TargetAssemblyTypeName: Audio.AudioChannelMixer, Assembly-CSharp
         m_MethodName: SetLevel
-        m_Mode: 0
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -69149,10 +69138,10 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
+      - m_Target: {fileID: 2712175268043459205}
+        m_TargetAssemblyTypeName: Audio.AudioChannelMixer, Assembly-CSharp
         m_MethodName: SetLevel
-        m_Mode: 0
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -69193,6 +69182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2712175268043459203}
   - component: {fileID: 2712175268043459202}
+  - component: {fileID: 2712175268043459205}
   m_Layer: 0
   m_Name: Slider
   m_TagString: Untagged
@@ -69200,6 +69190,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2712175268043459205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2712175268043459204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b79fa412a2d288941b6ff746af3eeab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixerGroup: FX
+  mixer: {fileID: 24100000, guid: 7af5efb80c4696646ab82f6d9d2108c8, type: 2}
+  master: {fileID: 11400000, guid: bd5d3231ea0a28b4a8fd00c19a22a2d4, type: 2}
+  music: {fileID: 11400000, guid: 066fc87f35502d54db43973b03e2e014, type: 2}
+  fx: {fileID: 11400000, guid: c1306de8b3bb4a74bbec3da395932853, type: 2}
 --- !u!114 &2712175268079939576
 MonoBehaviour:
   m_ObjectHideFlags: 0
