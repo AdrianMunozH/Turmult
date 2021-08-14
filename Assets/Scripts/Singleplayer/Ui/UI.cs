@@ -82,6 +82,9 @@ namespace Singleplayer.Ui
             ressourceType[ressource].SetActive(true);
             bgImage.sprite = bgSprites[1];
             Camera.main.cullingMask = -1;
+            
+            //TurretToBuild wird erst beim Purchase gesetzt
+            buildManager.SetTurretToBuild(null);
         }
         
         [UsedImplicitly]

@@ -39,7 +39,7 @@ namespace Singleplayer.Field
         {
             //Setzt den Standard Turret
             //TODO Müssen dann noch PreviewPrefabs für alle Türme machen und erst bei der Shop Auswahl setzen
-            turretToBuildPreview = mountainPreviewTurrets[0];
+            // turretToBuildPreview = mountainPreviewTurrets[0];
         }
 
         public GameObject GetTurretToBuild()

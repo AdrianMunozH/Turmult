@@ -114,25 +114,28 @@ namespace Singleplayer.Field
         {
            return Instantiate(previewTurret,transform.position,transform.rotation);
         }
-        
+
         public void BuildTurret()
         {
 
-            GameObject turretToBuild = buildManager.GetTurretToBuild();
-            Vector3 turPos = transform.position;
-            turret = (GameObject) Instantiate(turretToBuild, new Vector3(turPos.x, turPos.y - 10, turPos.z),
-                transform.rotation);
-            Turret t = turret.GetComponent<Turret>();
+            if (buildManager.GetTurretToBuild() != null)
+            {
+                GameObject turretToBuild = buildManager.GetTurretToBuild();
+                Vector3 turPos = transform.position;
+                turret = (GameObject) Instantiate(turretToBuild, new Vector3(turPos.x, turPos.y - 10, turPos.z),
+                    transform.rotation);
+                Turret t = turret.GetComponent<Turret>();
 
-            // Animation
-            var sequence = DOTween.Sequence();
-            sequence.Append(turret.transform.DOLocalMoveY(turPos.y, 0.5f));
-            sequence.Append(turret.transform.DOShakeScale(1f, new Vector3(0f, 0.01f, 0f), 5, 0, fadeOut: true));
+                // Animation
+                var sequence = DOTween.Sequence();
+                sequence.Append(turret.transform.DOLocalMoveY(turPos.y, 0.5f));
+                sequence.Append(turret.transform.DOShakeScale(1f, new Vector3(0f, 0.01f, 0f), 5, 0, fadeOut: true));
 
-            SetPrefab((int) t.ressourceType + 2);
-            hasBuilding = true;
+                SetPrefab((int) t.ressourceType + 2);
+                hasBuilding = true;
+            }
         }
-        
+
 
 
         private void Awake()
