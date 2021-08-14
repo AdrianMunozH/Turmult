@@ -40,9 +40,13 @@ namespace Singleplayer.Field
         private bool cooldown;
 
         private bool deleteLater;
+        
+        [SerializeField] Animator transition;
 
         void Awake()
         {
+            StartCoroutine(LevelTransition());
+            
             if (instance != null)
             {
                 Debug.LogError("Es gibt mehr als einen Buildmanager in der Szene: Bitte nur eine pro Szene!");
@@ -101,6 +105,17 @@ namespace Singleplayer.Field
 
 
 
+        }
+        
+        IEnumerator LevelTransition()
+        {
+            transition.SetTrigger("Start");
+            transition.gameObject.SetActive(true);
+            
+            yield return new WaitForSeconds(1f);
+            transition.gameObject.SetActive(false);
+            
+            
         }
 
 
