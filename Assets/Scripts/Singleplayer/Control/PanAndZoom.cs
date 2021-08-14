@@ -7,6 +7,10 @@ public class PanAndZoom : MonoBehaviour
     [SerializeField] private float zoomSpeed = 10f;
     [SerializeField] private float zoomInMax = 30f;
     [SerializeField] private float zoomOutMax = 70f;
+    [SerializeField] private float leftCamBorder = -60f;
+    [SerializeField] private float rightCamBorder = 170f;
+    [SerializeField] private float upperCamBorder = 20f;
+    [SerializeField] private float lowerCamBorder = -220f;
     
     
     private CinemachineInputProvider _inputProvider;
@@ -82,10 +86,17 @@ public class PanAndZoom : MonoBehaviour
 
     public void PanScreen(float x, float y)
     {
-        Vector3 direction = _cameraRotation* PanDirection(x, y);
+        Vector3 direction = _cameraRotation * PanDirection(x, y);
         direction.y = 0;
         var position = _cameraTransform.position;
-        position = Vector3.Lerp(position ,  position  + direction * panSpeed ,Time.deltaTime);
+        var positionTarget = position;
+
+        positionTarget.x = Mathf.Clamp(positionTarget.x +direction.x * panSpeed,leftCamBorder,rightCamBorder);
+        positionTarget.z = Mathf.Clamp(positionTarget.z +direction.z * panSpeed,lowerCamBorder,upperCamBorder);
+
+        position = Vector3.Lerp(position, positionTarget, Time.deltaTime);
+        
+
         _cameraTransform.position = position;
     }
 }
