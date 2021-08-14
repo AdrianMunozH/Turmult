@@ -1,3 +1,4 @@
+
 using Singleplayer.Field;
 using UnityEngine;
 
@@ -123,6 +124,26 @@ namespace Singleplayer.Player
                 return false;
 
             _playerStats.Gold -= gold;
+            return true;
+        }
+
+        public bool GetResource(int resource, Resource.ResourceType resourceType)
+        {
+            if (resource < 0) return false;
+
+            switch (resourceType)
+            {
+                case Resource.ResourceType.Berg:
+                    _playerStats.Mountain += resource;
+                    break;
+                case Resource.ResourceType.Wald:
+                    _playerStats.Forest += resource;
+                    break;
+                case Resource.ResourceType.Sumpf:
+                    _playerStats.Swamp += resource;
+                    break;
+            }
+
             return true;
         }
 

@@ -30,6 +30,7 @@ namespace Singleplayer.Ui.Input
 
             if(IncomeManager.Instance == null) Debug.Log("Incomemanager darf nicht null sein!");
             if(!IncomeManager.Instance.GoldPurchase(_cellPrice)) return;
+            IncomeManager.Instance.GetResource(1,cell.resource.GetResource());
             // vllt sowas wie IncomeManager.Instance.MakePurchase() --- rückgabe bool
             
             cell.Celltype = HCell.CellType.Acquired;
