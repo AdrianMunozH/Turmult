@@ -13,22 +13,30 @@ namespace Singleplayer.Field
     public class HGameManager : MonoBehaviour
     {
         public static HGameManager instance;
-        
-        public float buildingPhaseTimer = 5;
+
+        public float buildingPhaseTimer = 20;
         public float firstBuildingPhaseTimer = 2;
         public float betweenRoundsTimer = 10;
-        public GameObject HpBar;
-        private UnityEngine.UI.Image _timebar;
+        public GameObject timeBar;
+        public GameObject lifeBar;
+        private static UnityEngine.UI.Image _timebar;
+        private static UnityEngine.UI.Image _lifebar;
+
+        [Header("Lifes")] 
+        public static int totalLifes = 20;
+        private static int _currentLifes;
         
         //WaveSpawning
-        [Header("Spawning")]
-        public EnemySpawn spawnPoint;
+        [Header("Spawning")] public EnemySpawn spawnPoint;
         public int waves = 50;
         public float timeBetweenMinionSpawn = 0.8f;
         public int minionsPerWave = 5;
-        private int _currentWave = 0;
+        private static int _currentWave = 0;
         private List<HCell> minionPath;
+
         private int _spawnCounter = 0;
+
+        //Wird benötigt für das checken, ob alle Minions getötet wurden
         private bool allMinionsSpawned;
 
         private float _timer;
@@ -47,14 +55,15 @@ namespace Singleplayer.Field
         private bool cooldown;
 
         private bool deleteLater;
-        
+
         [SerializeField] Animator transition;
 
         void Awake()
         {
-            _timebar = HpBar.GetComponent<Image>();
+            _timebar = timeBar.GetComponent<Image>();
+            _lifebar = lifeBar.GetComponent<Image>();
             StartCoroutine(LevelTransition());
-            
+
             if (instance != null)
             {
                 Debug.LogError("Es gibt mehr als einen Buildmanager in der Szene: Bitte nur eine pro Szene!");
@@ -75,11 +84,11 @@ namespace Singleplayer.Field
             PlayerInputManager.Instance.SetState(new BuildState());
 
             TimeTickSystem.OnTick += delegate(object sender, TimeTickSystem.OnTickEventArgs args) { };
-            
+
             spawnPoint = Instantiate(spawnPoint);
             spawnPoint.end = _hexGrid.GetHCellByXyzCoordinates(distanceFromSpawn, 0, -distanceFromSpawn);
             spawnPoint.defaultStart = _hexGrid.GetHCellByXyCoordinates(0, 0);
-            
+
             spath = spawnPoint.Solve();
             List<HCell> sp = spawnPoint.RecPath(spath);
 
@@ -91,7 +100,7 @@ namespace Singleplayer.Field
             }
 
             _hexGrid.ShortestPathPrefabs(spawnPoint.ShortestPath(sp).ToArray());
-            
+
 
         }
 
@@ -102,36 +111,43 @@ namespace Singleplayer.Field
                 _timer -= Time.deltaTime;
                 _timebar.fillAmount = (_timer / buildingPhaseTimer);
             }
-            else if ( !PlayerInputManager.Instance.GetState().name.Equals(StateEnum.Battle))
+            else if (!PlayerInputManager.Instance.GetState().name.Equals(StateEnum.Battle))
             {
                 PlayerInputManager.Instance.SetState(new BattleState());
                 if (_currentWave < waves)
                 {
                     SpawnEnemyWave();
-                    
+
                     _currentWave++;
                 }
             }
+
+            if (allMinionsSpawned && spawnPoint.enemys.Count == 0)
+            {
+                allMinionsSpawned = false;
+                PlayerInputManager.Instance.SetState(new BuildState());
+                _timer = buildingPhaseTimer;
+            }
         }
-        
-        IEnumerator SpawnEnemyWithDelay() 
+
+        IEnumerator SpawnEnemyWithDelay()
         {
-            yield return new WaitForSeconds(timeBetweenMinionSpawn*_spawnCounter);
+            yield return new WaitForSeconds(timeBetweenMinionSpawn * _spawnCounter);
             // es muss gecheckt werden ob die weglänge grö0er als 0 ist
             Debug.Log("spawned...");
             spawnPoint.SpawnEnemy(minionPath.ToArray(), false);
             if (_spawnCounter == minionsPerWave) allMinionsSpawned = true;
         }
-        
+
         IEnumerator LevelTransition()
         {
             transition.SetTrigger("Start");
             transition.gameObject.SetActive(true);
-            
+
             yield return new WaitForSeconds(1f);
             transition.gameObject.SetActive(false);
-            
-            
+
+
         }
 
 
@@ -163,15 +179,22 @@ namespace Singleplayer.Field
                 StartCoroutine(nameof(SpawnEnemyWithDelay));
                 _spawnCounter++;
             }
+
             _hexGrid.ShortestPathPrefabs(minionPath.ToArray());
         }
 
-
-    public void rerouteEnemys(HCell turretCell)
+        public static void loseLife(int value)
         {
-
-                spawnPoint.recheckPath(turretCell);
-            
+            if (_currentLifes-value >= 1)
+            {
+                _currentLifes-=value;
+                _lifebar.fillAmount = (_currentLifes / totalLifes);
+            }
+            else
+            {
+                //TODO: Hier hat der Spieler verloren
+            }
         }
+        
     }
 }
