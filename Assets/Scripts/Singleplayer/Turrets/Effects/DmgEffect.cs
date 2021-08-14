@@ -21,7 +21,6 @@ namespace Singleplayer.Turrets.Effects
 
         public override void Hit()
         {
-            Debug.Log("hit");
             targetEnemy.TakeDamage(damage);
         }
     }

@@ -17391,8 +17391,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d95804fc056d47d4be38c62350601024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingPhaseTimer: 2
-  firstBuildingPhaseTimer: 2
+  buildingPhaseTimer: 30
+  firstBuildingPhaseTimer: 30
   betweenRoundsTimer: 5
   timeBar: {fileID: 1571026801}
   lifeBar: {fileID: 328944216}

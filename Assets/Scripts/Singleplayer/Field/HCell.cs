@@ -242,7 +242,7 @@ namespace Singleplayer.Field
         public void SetPrefab(CellType cellType, Resource.ResourceType ressource, Vector3? rotation = null,
             int path = 0)
         {
-            Debug.Log(cellType);
+            
             int index = (int) cellType + (int) ressource + path;
 
             //TODO: Altes Prefab löschen
