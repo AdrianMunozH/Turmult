@@ -32861,7 +32861,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &1074042828
 AudioSource:
   m_ObjectHideFlags: 0
@@ -32875,7 +32875,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: a2c1f855bf4c3af4fa228f8083178aa6, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -44536,7 +44536,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &1428209709
 AudioSource:
   m_ObjectHideFlags: 0
@@ -44550,7 +44550,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 0ca997cd9fe254b4d9149f1443538bd2, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -57673,7 +57673,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &1889532583
 AudioSource:
   m_ObjectHideFlags: 0
@@ -57687,7 +57687,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: ca2cdf046d264014a832577f4accd82c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -64237,6 +64237,10 @@ MonoBehaviour:
   swampTMP: {fileID: 1241800395}
   hpBar: {fileID: 1571026803}
   gameOVER: {fileID: 1943753711}
+  mountainSong: {fileID: 1074042828}
+  forestSong: {fileID: 1889532583}
+  swampSong: {fileID: 1428209709}
+  currentSong: {fileID: 0}
 --- !u!1 &2111846566
 GameObject:
   m_ObjectHideFlags: 0
