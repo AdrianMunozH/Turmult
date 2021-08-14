@@ -5,6 +5,8 @@ using Singleplayer.Enemies;
 using Singleplayer.Turrets;
 using Singleplayer.Ui.Input;
 using UnityEngine;
+using UnityEngine.UIElements;
+using Image = UnityEngine.UI.Image;
 
 namespace Singleplayer.Field
 {
@@ -15,8 +17,11 @@ namespace Singleplayer.Field
         public float buildingPhaseTimer = 5;
         public float firstBuildingPhaseTimer = 2;
         public float betweenRoundsTimer = 10;
+        public GameObject HpBar;
+        private UnityEngine.UI.Image _timebar;
         
         //WaveSpawning
+        [Header("Spawning")]
         public EnemySpawn spawnPoint;
         public int waves = 50;
         public float timeBetweenMinionSpawn = 0.8f;
@@ -24,6 +29,7 @@ namespace Singleplayer.Field
         private int _currentWave = 0;
         private List<HCell> minionPath;
         private int _spawnCounter = 0;
+        private bool allMinionsSpawned;
 
         private float _timer;
         private HCell[] spath;
@@ -46,6 +52,7 @@ namespace Singleplayer.Field
 
         void Awake()
         {
+            _timebar = HpBar.GetComponent<Image>();
             StartCoroutine(LevelTransition());
             
             if (instance != null)
@@ -93,6 +100,7 @@ namespace Singleplayer.Field
             if (_timer > 0 && !PlayerInputManager.Instance.GetState().name.Equals(StateEnum.Battle))
             {
                 _timer -= Time.deltaTime;
+                _timebar.fillAmount = (_timer / buildingPhaseTimer);
             }
             else if ( !PlayerInputManager.Instance.GetState().name.Equals(StateEnum.Battle))
             {
@@ -112,8 +120,7 @@ namespace Singleplayer.Field
             // es muss gecheckt werden ob die weglänge grö0er als 0 ist
             Debug.Log("spawned...");
             spawnPoint.SpawnEnemy(minionPath.ToArray(), false);
-            
-
+            if (_spawnCounter == minionsPerWave) allMinionsSpawned = true;
         }
         
         IEnumerator LevelTransition()

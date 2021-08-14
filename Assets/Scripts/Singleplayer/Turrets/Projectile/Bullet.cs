@@ -14,16 +14,22 @@ namespace Singleplayer.Turrets.Projectile
 
         public override void HitTarget()
         {
-            //Partikeleffekt
-            GameObject particleEffect = (GameObject) Instantiate(impactEffect, transform.position, transform.rotation);
+            
             //TODO: Hit implementieren
             //target.GetComponent<EnemyMovement>().TakeDamage(damage);
             foreach (var effect in effects)
             {
                 effect.Hit();
             }
+            //Partikeleffekt
+            if(impactEffect != null)
+            {
+                var particleEffect = (GameObject) Instantiate(impactEffect, transform.position, transform.rotation);
+                Destroy(particleEffect, particelDestroyTime);
+            }
+
             Destroy(gameObject);
-            Destroy(particleEffect, particelDestroyTime);
+            
         }
     }
 }

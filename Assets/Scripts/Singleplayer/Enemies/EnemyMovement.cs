@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using Singleplayer.Field;
-using MLAPI;
+using Singleplayer.Player;
 using TMPro;
 using UnityEngine;
 
 namespace Singleplayer.Enemies
 {
 
-    public class EnemyMovement : NetworkBehaviour
+    public class EnemyMovement : MonoBehaviour
     {
         [HideInInspector] public HCell[] path;
 
@@ -32,6 +32,9 @@ namespace Singleplayer.Enemies
         public bool isAttacking;
         private double _attackCountdown = 0f;
         private double attackRate = 1f;
+
+        public int dmgOnBase;
+        public int goldValue;
 
         // Start is called before the first frame update
         void Start()
@@ -65,8 +68,7 @@ namespace Singleplayer.Enemies
                     }
                     else
                     {
-                        enemySpawn.deleteEnemy(gameObject);
-                        Destroy(gameObject);
+                        Die(false);
                     }
                 }
 
@@ -104,17 +106,29 @@ namespace Singleplayer.Enemies
 
         public void TakeDamage(float damage)
         {
-            // if (damage < life)
-            // {
-            //     life -= damage;
-            // }
-            // else
-            //     StartCoroutine(KillEnemy());
+            if (damage < life)
+            {
+                 life -= damage;
+            }
+            else
+                 Die(true);
             // // die methode falls wir sowas wie deathanimation macehn 
             //
-            // _text.enabled = true;
-            // _text.SetText(life.ToString());
+            Debug.Log(damage + " take damage+");
+            // kann später gelöscht werden ist nur zum debugen
+            _text.enabled = true;
+            _text.SetText(life.ToString());
             // //StartCoroutine("DeactivateText");
+        }
+
+        public void Die(bool gotKilled)
+        {
+            if (gotKilled)
+            {
+                IncomeManager.Instance.MinionGold(goldValue);
+            }
+            enemySpawn.deleteEnemy(gameObject);
+            Destroy(gameObject);
         }
 
 

@@ -204,7 +204,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 0.34509805}
+      maxColor: {r: 0.066037714, g: 0.05077428, b: 0.05077428, a: 0.6509804}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -406,7 +406,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -459,7 +459,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -4876,7 +4876,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 0, g: 0, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -5078,7 +5078,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -5131,7 +5131,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -5885,10 +5885,10 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 0}
+        key0: {r: 0, g: 0, b: 0, a: 0}
         key1: {r: 0, g: 0.11764706, b: 0.56078434, a: 0.5058824}
         key2: {r: 0.22352941, g: 0.45490196, b: 0, a: 1}
-        key3: {r: 0.29803923, g: 0, b: 0, a: 0.49019608}
+        key3: {r: 0.22352941, g: 0.45490196, b: 0, a: 0.49019608}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
@@ -5896,7 +5896,7 @@ ParticleSystem:
         ctime0: 0
         ctime1: 17155
         ctime2: 42405
-        ctime3: 65535
+        ctime3: 42405
         ctime4: 0
         ctime5: 0
         ctime6: 0
@@ -9750,7 +9750,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -9803,7 +9803,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -14025,7 +14025,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 400006}
-  - component: {fileID: 114000012005501830}
+  - component: {fileID: 4993580569727452040}
+  - component: {fileID: 98089412975847913}
   m_Layer: 0
   m_Name: Poison
   m_TagString: Untagged
@@ -14051,7 +14052,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114000012005501830
+--- !u!114 &4993580569727452040
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14060,9 +14061,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 100006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db08735561a38424182823d8d175333b, type: 3}
+  m_Script: {fileID: 11500000, guid: e2be38e54f72429e887a6da7ef9a89ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 20
+  target: {fileID: 0}
+  effects:
+  - {fileID: 98089412975847913}
+  impactEffect: {fileID: 0}
+  particelDestroyTime: 2
+--- !u!114 &98089412975847913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b95ee7c29fb474596f221d032bbe2a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 3
+  targetEnemy: {fileID: 0}
+  ticks: 15
+  tick: 0
+  damagePerTick: 2
 --- !u!1 &100008
 GameObject:
   m_ObjectHideFlags: 0
@@ -14079,7 +14103,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &400008
 Transform:
   m_ObjectHideFlags: 0
@@ -14105,7 +14129,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.4282007, g: 0.9705882, b: 0.47682852, a: 1}
+  m_Color: {r: 0.39048594, g: 0.7075472, b: 0.42013916, a: 1}
   m_Intensity: 10.2
   m_Range: 25
   m_SpotAngle: 30

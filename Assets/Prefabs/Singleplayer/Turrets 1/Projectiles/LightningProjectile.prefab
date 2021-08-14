@@ -9353,10 +9353,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 400004}
-  - component: {fileID: 1213723822406348268}
   - component: {fileID: -1955983273490140699}
-  - component: {fileID: -8327588159139940966}
-  - component: {fileID: 8474772804393656339}
+  - component: {fileID: 7613043890032407727}
+  - component: {fileID: 316200651313984885}
+  - component: {fileID: 1174647988294136111}
   m_Layer: 0
   m_Name: LightningProjectile
   m_TagString: Untagged
@@ -9381,26 +9381,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1213723822406348268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f09e93ad8f20404ca466c31915c779f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 25
-  target: {fileID: 0}
-  effects:
-  - {fileID: 8474772804393656339}
-  - {fileID: -8327588159139940966}
-  impactEffect: {fileID: 3591840901927880627, guid: c82ebe3d58760754fae3b9828c56148a,
-    type: 3}
-  particelDestroyTime: 2
 --- !u!135 &-1955983273490140699
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9414,7 +9394,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-8327588159139940966
+--- !u!114 &7613043890032407727
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9423,13 +9403,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 100004}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72181d5aff3db7e4f912408f570c4ec6, type: 3}
+  m_Script: {fileID: 11500000, guid: e2be38e54f72429e887a6da7ef9a89ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 2
+  speed: 25
+  target: {fileID: 0}
+  effects:
+  - {fileID: 316200651313984885}
+  - {fileID: 1174647988294136111}
+  impactEffect: {fileID: 0}
+  particelDestroyTime: 2
+--- !u!114 &316200651313984885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7df1ea6738824b869daa8a0e9d3be3be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   targetEnemy: {fileID: 0}
-  damage: 30
---- !u!114 &8474772804393656339
+  damage: 20
+--- !u!114 &1174647988294136111
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9438,10 +9436,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 100004}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db34c48a2f048ec459efbf58b53528ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 65f00b073d2b4b7e94b065e3490af8eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 0
   targetEnemy: {fileID: 0}
   slow: 0.3
   ticks: 5

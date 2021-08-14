@@ -184,6 +184,10 @@ namespace Player
         }
 
 
+        public void MinionGold()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
 

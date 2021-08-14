@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Singleplayer.Turrets.Effects
 {
     public class DmgEffect : Effect
@@ -8,7 +10,7 @@ namespace Singleplayer.Turrets.Effects
         // Start is called before the first frame update
         void Start()
         {
-            _type = EffectType.DMG;
+            Type = EffectType.DMG;
         }
 
         // Update is called once per frame
@@ -19,6 +21,7 @@ namespace Singleplayer.Turrets.Effects
 
         public override void Hit()
         {
+            Debug.Log("hit");
             targetEnemy.TakeDamage(damage);
         }
     }

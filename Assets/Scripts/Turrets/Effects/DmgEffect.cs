@@ -8,7 +8,7 @@ namespace Turrets.Effects
         // Start is called before the first frame update
         void Start()
         {
-            _type = EffectType.DMG;
+            Type = EffectType.DMG;
         }
 
         // Update is called once per frame

@@ -1,3 +1,4 @@
+
 using Singleplayer.Field;
 using UnityEngine;
 
@@ -62,7 +63,7 @@ namespace Singleplayer.Player
         public bool UnlockTurret(int ressourceCost, Resource.ResourceType ressource, int turretIndex)
         {
             if (IsTurretUnlocked(ressource, turretIndex)) return true;
-            if(RessourcePurchase(ressourceCost,ressource))
+            if(ResourcePurchase(ressourceCost,ressource))
             {
                 switch (ressource)
                 {
@@ -92,22 +93,22 @@ namespace Singleplayer.Player
             return false;
         }
 
-        public bool RessourcePurchase(int ressourceCost, Resource.ResourceType ressource)
+        public bool ResourcePurchase(int resourceCost, Resource.ResourceType ressource)
         {
-            if (ressourceCost < 0) return false;
+            if (resourceCost < 0) return false;
             
             
-            if (ressource == Resource.ResourceType.Berg && ressourceCost <= _playerStats.Mountain)
+            if (ressource == Resource.ResourceType.Berg && resourceCost <= _playerStats.Mountain)
             {
-                _playerStats.Mountain -= ressourceCost;
+                _playerStats.Mountain -= resourceCost;
                 return true;
-            }if (ressource == Resource.ResourceType.Sumpf && ressourceCost <= _playerStats.Swamp)
+            }if (ressource == Resource.ResourceType.Sumpf && resourceCost <= _playerStats.Swamp)
             {
-                _playerStats.Swamp -= ressourceCost;
+                _playerStats.Swamp -= resourceCost;
                 return true;
-            }if (ressource == Resource.ResourceType.Wald && ressourceCost <= _playerStats.Forest)
+            }if (ressource == Resource.ResourceType.Wald && resourceCost <= _playerStats.Forest)
             {
-                _playerStats.Forest -= ressourceCost;
+                _playerStats.Forest -= resourceCost;
                 return true;
             }
             
@@ -126,6 +127,26 @@ namespace Singleplayer.Player
             return true;
         }
 
+        public bool GetResource(int resource, Resource.ResourceType resourceType)
+        {
+            if (resource < 0) return false;
+
+            switch (resourceType)
+            {
+                case Resource.ResourceType.Berg:
+                    _playerStats.Mountain += resource;
+                    break;
+                case Resource.ResourceType.Wald:
+                    _playerStats.Forest += resource;
+                    break;
+                case Resource.ResourceType.Sumpf:
+                    _playerStats.Swamp += resource;
+                    break;
+            }
+
+            return true;
+        }
+
 
 
         // zinsen
@@ -135,8 +156,12 @@ namespace Singleplayer.Player
             float interest = _playerStats.Gold / 10;
             _playerStats.Gold += (int) interest;
         }
-    
-    
+
+        public void MinionGold(int gold)
+        {
+            if(gold < 0) return;
+            _playerStats.Gold += gold;
+        }
         //TODO
     /*
         //runden geld
