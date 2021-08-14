@@ -67,19 +67,6 @@ namespace Singleplayer.Player
             set => swampAffinity = value;
         }
 
-        [Header("Lifes")]
-        
-        private int lifes;
-        public int startLifes = 20;
-        private float hpBarValue;
-        
-        [Header("Lifebar Color")] 
-        public Color full = Color.green;
-        public Color nearlyFull = Color.cyan;
-        public Color medium = Color.yellow;
-        public Color low = new Color(0.6f,0.4f,0.2f);
-        public Color superlow = Color.red;
-        
         [Header("Textfelder/Gameobjekte")] 
         public TextMeshProUGUI goldTMP;
         public TextMeshProUGUI mountainTMP;
@@ -103,11 +90,7 @@ namespace Singleplayer.Player
             forest = startForest;
             mountain = startMountain;
             swamp = startSwamp;
-            lifes = startLifes;
-            //Berechnung des Fillamounts
-            hpBarValue = (float) lifes / startLifes;
-            hpBar.fillAmount = hpBarValue;
-            
+
             //TODO Eventsubscription für Interestberechnung
         }
         
@@ -119,31 +102,7 @@ namespace Singleplayer.Player
             mountainTMP.text = mountain.ToString();
             forestTMP.text = forest.ToString();
             swampTMP.text = swamp.ToString();
-            
-            //Berechnung des Fillamounts
-            hpBarValue = (float) lifes / startLifes;
-            hpBar.fillAmount = hpBarValue;
-            hpBar.color = getHpBarColor();
-            
-        }
 
-        private Color getHpBarColor()
-        {
-            if (hpBarValue > 0.95)
-            {
-                return full; 
-            }
-            else if (hpBarValue > 0.8)
-            {
-                return nearlyFull;
-            }else if (hpBarValue > 0.6)
-            {
-                return medium;
-            }else if (hpBarValue > 0.4)
-            {
-                return low;
-            }
-            return superlow;
         }
 
         public void LoseLife()
