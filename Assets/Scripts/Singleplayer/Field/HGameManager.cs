@@ -51,17 +51,13 @@ namespace Singleplayer.Field
             
             };
             
-            enemySpawns = new EnemySpawn[3];
+            enemySpawns = new EnemySpawn[1];
             enemySpawns[0] = Instantiate<EnemySpawn>(spawnPoint);
-            enemySpawns[1] = Instantiate<EnemySpawn>(spawnPoint);
-            enemySpawns[2] = Instantiate<EnemySpawn>(spawnPoint);
 
-            enemySpawns[0].end = _hexGrid.GetHCellByXyzCoordinates(0, -distanceFromSpawn, distanceFromSpawn);
+
+            enemySpawns[0].end = _hexGrid.GetHCellByXyzCoordinates(distanceFromSpawn, 0, -distanceFromSpawn);
             enemySpawns[0].defaultStart = _hexGrid.GetHCellByXyCoordinates(0, 0);
-            enemySpawns[1].end = _hexGrid.GetHCellByXyzCoordinates(distanceFromSpawn, 0, -distanceFromSpawn);
-            enemySpawns[1].defaultStart = _hexGrid.GetHCellByXyCoordinates(0, 0);
-            enemySpawns[2].end = _hexGrid.GetHCellByXyzCoordinates(-distanceFromSpawn, distanceFromSpawn, 0);
-            enemySpawns[2].defaultStart = _hexGrid.GetHCellByXyCoordinates(0, 0);
+
 
             foreach (EnemySpawn enemySpawn in enemySpawns)
             {
