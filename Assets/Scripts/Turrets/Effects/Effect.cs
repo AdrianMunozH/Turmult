@@ -7,7 +7,8 @@ namespace Turrets.Effects
 {
     public abstract class Effect : MonoBehaviour
     {
-        public EffectType _type;
+        [field: HideInInspector] public EffectType Type { get; set; }
+
         public EnemyMovement targetEnemy;
         // Start is called before the first frame update
     

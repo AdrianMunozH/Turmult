@@ -17197,12 +17197,12 @@ MonoBehaviour:
   - {fileID: 3649422415846563407, guid: ef12f9a06df353f49b59abc0b6eecbb4, type: 3}
   - {fileID: 7053591247536687710, guid: 1851b34ffd1fd0d499c95d4b25279e93, type: 3}
   forestTurrets:
-  - {fileID: 3940805691244041483, guid: 2628949381d2df245844ff567ba6149f, type: 3}
-  - {fileID: 3995092328936062685, guid: d4c05a903f06a0f448fa8d7861f05bb7, type: 3}
+  - {fileID: 3940805691244041483, guid: e69e376b469e24544b61925d35ac3da4, type: 3}
+  - {fileID: 3995092328936062685, guid: f019ee0380dea2a47afdf03c677a83a6, type: 3}
   - {fileID: 672762153369891017, guid: 2b09ddba6da8a1b42baec33b62e78a1e, type: 3}
   forestPreviewTurrets:
-  - {fileID: 3940805691244041483, guid: 2628949381d2df245844ff567ba6149f, type: 3}
-  - {fileID: 3995092328936062685, guid: d4c05a903f06a0f448fa8d7861f05bb7, type: 3}
+  - {fileID: 672762153369891017, guid: 05e16edd2929fae4da9f906f302450bf, type: 3}
+  - {fileID: 3940805691244041483, guid: a1a15c97f2c08dd46a595d5d1aa56c93, type: 3}
   - {fileID: 672762153369891017, guid: 2b09ddba6da8a1b42baec33b62e78a1e, type: 3}
   swampTurrets:
   - {fileID: 8476073457476039546, guid: 7c5b668bfd6dfa34586662251fd814d2, type: 3}
@@ -17241,13 +17241,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingPhaseTimer: 5
-  firstBuildingPhaseTimer: 2
+  firstBuildingPhaseTimer: 10
   betweenRoundsTimer: 10
   spawnPoint: {fileID: -5466852683715092558, guid: d3bbafaac9bfffd478ef2b9390974b9a,
     type: 3}
-  waves: 50
-  timeBetweenMinionSpawn: 0.5
-  minionsPerWave: 5
+  waves: 2
+  timeBetweenMinionSpawn: 0
+  minionsPerWave: 0
   distanceFromSpawn: 8
   transition: {fileID: 370615712}
 --- !u!1 &542450145

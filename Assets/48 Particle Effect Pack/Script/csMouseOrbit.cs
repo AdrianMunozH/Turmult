@@ -41,7 +41,7 @@ namespace _48_Particle_Effect_Pack.Script
                 y = ClampAngle(y, yMinLimit, yMaxLimit);
 
                 Quaternion rotation = Quaternion.Euler(y, x, 0);
-                Vector3 position = rotation * new Vector3(0, 0, -distance) + Target.position;
+                Vector3 position = rotation * new Vector3(0, 0, -distance*2) + Target.position;
 
                 transform.rotation = rotation;
                 transform.position = position;

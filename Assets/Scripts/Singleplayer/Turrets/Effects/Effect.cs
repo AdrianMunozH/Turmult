@@ -5,7 +5,8 @@ namespace Singleplayer.Turrets.Effects
 {
     public abstract class Effect : MonoBehaviour
     {
-        public EffectType _type;
+        public EffectType Type { get; set; }
+
         public EnemyMovement targetEnemy;
         // Start is called before the first frame update
     

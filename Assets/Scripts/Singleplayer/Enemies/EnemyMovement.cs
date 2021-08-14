@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Singleplayer.Enemies
 {
 
-    public class EnemyMovement : NetworkBehaviour
+    public class EnemyMovement : MonoBehaviour
     {
         [HideInInspector] public HCell[] path;
 
@@ -65,8 +65,7 @@ namespace Singleplayer.Enemies
                     }
                     else
                     {
-                        enemySpawn.deleteEnemy(gameObject);
-                        Destroy(gameObject);
+                        Die();
                     }
                 }
 
@@ -104,17 +103,25 @@ namespace Singleplayer.Enemies
 
         public void TakeDamage(float damage)
         {
-            // if (damage < life)
-            // {
-            //     life -= damage;
-            // }
-            // else
-            //     StartCoroutine(KillEnemy());
+            if (damage < life)
+            {
+                 life -= damage;
+            }
+            else
+                 Die();
             // // die methode falls wir sowas wie deathanimation macehn 
             //
-            // _text.enabled = true;
-            // _text.SetText(life.ToString());
+            Debug.Log(damage + " take damage+");
+            // kann später gelöscht werden ist nur zum debugen
+            _text.enabled = true;
+            _text.SetText(life.ToString());
             // //StartCoroutine("DeactivateText");
+        }
+
+        public void Die()
+        {
+            enemySpawn.deleteEnemy(gameObject);
+            Destroy(gameObject);
         }
 
 

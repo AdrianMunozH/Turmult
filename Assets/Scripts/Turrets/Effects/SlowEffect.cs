@@ -11,7 +11,7 @@ namespace Turrets.Effects
         // Start is called before the first frame update
         void Start()
         {
-            _type = EffectType.SLOW;
+            Type = EffectType.SLOW;
         }
 
         // Update is called once per frame

@@ -49,6 +49,7 @@ namespace Enemies
         // Update is called once per frame
         void Update()
         {
+            if(path.Length == 0) return;
             // kann auch ersetzt werden durch path[].gameObject.transform.position
             //vecPath = HGrid.Instance.HCellPositions(path);
             Vector3 position = new Vector3 (path[pathIndex].gameObject.transform.position.x, path[pathIndex].gameObject.transform.position.y + 2.3f, path[pathIndex].gameObject.transform.position.z);

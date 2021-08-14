@@ -32787,7 +32787,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 400016}
-  - component: {fileID: 114000010572434224}
+  - component: {fileID: -8997264610802385035}
+  - component: {fileID: 9019521061954556788}
   m_Layer: 0
   m_Name: Explosion3
   m_TagString: Untagged
@@ -32804,14 +32805,14 @@ Transform:
   m_GameObject: {fileID: 100016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.030070305, y: 0.031286, z: 0.026317596}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 400012}
   - {fileID: 400020}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114000010572434224
+--- !u!114 &-8997264610802385035
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -32820,9 +32821,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 100016}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db08735561a38424182823d8d175333b, type: 3}
+  m_Script: {fileID: 11500000, guid: e2be38e54f72429e887a6da7ef9a89ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 20
+  target: {fileID: 0}
+  effects:
+  - {fileID: 9019521061954556788}
+  impactEffect: {fileID: 0}
+  particelDestroyTime: 2
+--- !u!114 &9019521061954556788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7df1ea6738824b869daa8a0e9d3be3be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 2
+  targetEnemy: {fileID: 0}
+  damage: 10
 --- !u!1 &100018
 GameObject:
   m_ObjectHideFlags: 0

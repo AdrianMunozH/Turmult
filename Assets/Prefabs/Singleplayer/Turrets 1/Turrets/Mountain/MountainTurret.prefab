@@ -208,17 +208,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 581e71ceec534886ae4348cbbc111900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 2
+  range: 4
   fireRate: 1
   turnSpeed: 10
   ressourceType: 0
   turretType: 0
   lineRenderer: {fileID: 0}
   partToRotate: {fileID: 0}
-  firePoint: {fileID: 0}
+  firePoint: {fileID: 6040476681578908872}
   enemyTag: Enemy
   canRotate: 0
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 100004, guid: b64ab43704d53b84793e1ef56b0d9958, type: 3}
   targets: []
   maxTargets: 0
   firePoints: []
