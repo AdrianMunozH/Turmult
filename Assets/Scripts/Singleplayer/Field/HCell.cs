@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections;
 using DG.Tweening;
-using MLAPI;
-using MLAPI.NetworkVariable;
 using Singleplayer.Turrets;
 using UnityEngine;
 using UnityEngine.UI;
@@ -203,8 +201,7 @@ namespace Singleplayer.Field
             Vector3? rotation = null,
             int path = 0)
         {
-            if (cell.transform.childCount == 1)
-            {
+
                 cell.SetCellType(CellType.CanBeAcquired);
                 int index = (int) cellType + (int) ressource + path;
 
@@ -220,7 +217,7 @@ namespace Singleplayer.Field
                         hexagon.transform.eulerAngles.z + rotation.Value.z);
 
                 hexagon.transform.SetParent(transform, true);
-            }
+
         }
 
         public void SetPrefab(int prefabIndex, Vector3? rotation = null)
@@ -229,7 +226,6 @@ namespace Singleplayer.Field
             if (transform.childCount > 1)
             {
                 GameObject.Destroy(transform.GetChild(1).gameObject);
-
             }
 
            GameObject hexagon = Instantiate(hexPrefabs[prefabIndex], transform.position, transform.rotation);
@@ -270,6 +266,7 @@ namespace Singleplayer.Field
             //Tweening nur für Zellen die noch nicht vorhanden sind
             if (cellType != CellType.Acquired || recentlyBuild)
             {
+
                 hexagon = Instantiate(hexPrefabs[index], new Vector3(pos.x, pos.y - 10, pos.z), transform.rotation);
                 hexagon.transform.DOLocalMoveY(pos.y, 0.5f);
                 recentlyBuild = false;
@@ -321,12 +318,7 @@ namespace Singleplayer.Field
                 if (cell.GetCellType() == CellType.Hidden)
                 {
                     cell.SetCellType(CellType.CanBeAcquired);
-                    if (resource.GetResource() != Resource.ResourceType.Neutral)
-                    {
-                        cell.resource.SetSpecificType(Resource.ResourceType.Neutral);
-                    }
-
-                    cell.SetUnacquiredPrefab(cell, cell.GetCellType(),  (Resource.ResourceType) cell.resource.GetResource());
+                    cell.SetUnacquiredPrefab(cell, cell.GetCellType(),   cell.resource.GetResource());
                 }
             }
         }

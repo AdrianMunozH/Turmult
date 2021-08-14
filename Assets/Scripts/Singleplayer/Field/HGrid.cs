@@ -84,9 +84,10 @@ namespace Singleplayer.Field
             cell.transform.localPosition = position;
             cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, z);
             cell.GetComponent<HCell>().index = i;
+            cell.Celltype = HCell.CellType.Hidden;
 
             //Celltypen ändern wenn Server am Start ist, über ClienRPC die clients damit aktualisieren
-            
+
 
 
 
@@ -357,9 +358,7 @@ namespace Singleplayer.Field
                     Straight(path[i], x, y, z);
                 }
             }
-
-
-
+            
         }
 
         private Vector3 prevVec;
