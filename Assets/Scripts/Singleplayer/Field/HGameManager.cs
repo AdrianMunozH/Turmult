@@ -148,7 +148,6 @@ namespace Singleplayer.Field
         {
             yield return new WaitForSeconds(timeBetweenMinionSpawn * _spawnCounter);
             // es muss gecheckt werden ob die weglänge grö0er als 0 ist
-            Debug.Log("spawned...");
             spawnPoint.SpawnEnemy(minionPath.ToArray(), false);
             if (_spawnCounter == minionsPerWave) allMinionsSpawned = true;
         }
@@ -195,7 +194,6 @@ namespace Singleplayer.Field
 
         public void loseLife(int value)
         {
-            Debug.Log("leben verloren..." + (_currentLifes / totalLifes));
             if (_currentLifes-value >= 0)
             {
                 _currentLifes-=value;
@@ -203,7 +201,6 @@ namespace Singleplayer.Field
             }
             else
             {
-                Debug.Log("KEIN AUFRUF");
                 StartCoroutine(nameof(LevelTransition));
             }
             _lifebar.fillAmount = (float)((float)_currentLifes / (float)totalLifes);

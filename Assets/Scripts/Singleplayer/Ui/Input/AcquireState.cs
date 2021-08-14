@@ -34,16 +34,10 @@ namespace Singleplayer.Ui.Input
             // vllt sowas wie IncomeManager.Instance.MakePurchase() --- rückgabe bool
             
             cell.Celltype = HCell.CellType.Acquired;
-            //cell.acquiredField = GameObject.Find("Cylinder");
             
             //cell.AcquiredThisCellServerRpc();
             cell.SetPrefab(cell.Celltype, cell.resource.GetResource());
             cell.StartCoroutine(cell.CheckNeighb());
-            // vllt kürzester weg bescheid sagen
-
-
-            // server rpc
-            //cell.SetPrefab(cell.Celltype,cell.Ressource);
         }
 
         public override void OnDestroy()
