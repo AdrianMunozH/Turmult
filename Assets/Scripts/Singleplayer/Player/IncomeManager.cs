@@ -13,10 +13,7 @@ namespace Singleplayer.Player
         private bool[] swampTurrets;
         
 
-        public static IncomeManager Instance
-        {
-            get { return _instance; }
-        }
+        public static IncomeManager Instance => _instance;
 
         private Player _playerStats;
 
@@ -88,6 +85,7 @@ namespace Singleplayer.Player
         {
             if (IsTurretUnlocked(ressourceEnum, turretIndex))
             {
+                Debug.Log("turret is unlocked");
                 return GoldPurchase(turretCost);
             }
 
@@ -121,7 +119,7 @@ namespace Singleplayer.Player
         public bool GoldPurchase(int gold)
         {
             if (gold < 0) return false;
-            if (gold <= _playerStats.Gold)
+            if (gold >= _playerStats.Gold)
                 return false;
 
             _playerStats.Gold -= gold;

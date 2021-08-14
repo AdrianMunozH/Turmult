@@ -1,5 +1,6 @@
 using System;
 using Singleplayer.Field;
+using Singleplayer.Player;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -7,24 +8,14 @@ namespace Singleplayer.Ui.Input
 {
     public class BuildState : ModiState
     {
-        private Resource.ResourceType _ressourceEnum = Resource.ResourceType.Berg;
-        private int currentTurretIndex = 0;
-        
+      
         private HexCoordinates prevCell;
         private GameObject previewTurret;
         private HGrid _hexGrid;
 
-        public Resource.ResourceType RessourceEnum
-        {
-            get => _ressourceEnum;
-            set => _ressourceEnum = value;
-        }
+        
 
-        public int CurrentTurretIndex
-        {
-            get => currentTurretIndex;
-            set => currentTurretIndex = value;
-        }
+   
         // Start is called before the first frame update
 
         
@@ -45,13 +36,19 @@ namespace Singleplayer.Ui.Input
         }
 
         // wird das hier ein rpc call ?
-        public override void BuyTurret(HCell cell, Resource.ResourceType ressourceEnum, int turret)
+        public override void BuyTurret(HCell cell, Resource.ResourceType resource, int turrentIndex)
         {
-            Debug.Log(!cell.hasBuilding + " " + cell.Celltype.ToString() + cell.resource.GetResource());
+            Debug.Log(cell.hasBuilding + " " + cell.Celltype.ToString() + cell.resource.GetResource());
             if(cell.HasBuilding || cell.Celltype != HCell.CellType.Acquired || cell.resource.GetResource() != Resource.ResourceType.Neutral) return;
-
-            Debug.Log("buyturret");
-            cell.BuildTurret();
+            
+            if (IncomeManager.Instance.PurchaseTurret(20, resource, turrentIndex))
+            {
+                cell.BuildTurret();
+                Debug.Log("buyturret");
+            }
+                
+            
+            
             
             // instiantiate turret 
             // cell den turret geben
@@ -78,7 +75,7 @@ namespace Singleplayer.Ui.Input
                     if (!prevCell.CompareCoord(cell.coordinates))
                     {
                         // neue prefab
-                        if (cell.GetCellType() == HCell.CellType.Acquired && !cell.HasBuilding && cell.resource.GetResource() == Resource.ResourceType.Neutral)
+                        if (cell.Celltype == HCell.CellType.Acquired && !cell.HasBuilding && cell.resource.GetResource() == Resource.ResourceType.Neutral)
                         {
 
                             GameObject turretToBuild = BuildManager.instance.GetTurretToBuildPreview(); 
@@ -112,7 +109,7 @@ namespace Singleplayer.Ui.Input
                 {
                     if (hit.transform.gameObject.tag == "Cell"  && !EventSystem.current.IsPointerOverGameObject())
                     {
-                        BuyTurret(hit.transform.GetComponent<HCell>(),_ressourceEnum,currentTurretIndex);
+                        BuyTurret(hit.transform.GetComponent<HCell>(),CurrentResource,CurrentTurretIndex);
                         
                     }
                 }

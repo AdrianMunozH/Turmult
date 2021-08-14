@@ -3,11 +3,28 @@ using UnityEngine;
 
 namespace Singleplayer.Ui.Input
 {
-    public abstract class ModiState 
+    public abstract class ModiState
     {
+        private Resource.ResourceType _currentResource;
+        private int _currentTurretIndex = 0;
+        
         public string name;
-        protected LayerMask _layerMask;
         protected Player.Player _playerStats;
+        
+        // setter getter
+        public Resource.ResourceType CurrentResource
+        {
+            get => _currentResource;
+            set => _currentResource = value;
+        }
+        
+        public int CurrentTurretIndex
+        {
+            get => _currentTurretIndex;
+            set => _currentTurretIndex = value;
+        }
+        //
+        
         public abstract void Start();
         
         public virtual void BuyMinion()
@@ -32,14 +49,12 @@ namespace Singleplayer.Ui.Input
 
         public abstract void Input();
 
-        public void SetLayerMask(LayerMask layerMask)
-        {
-            layerMask = _layerMask;
-        }
+
 
         public void SetPlayer(Player.Player player)
         {
             _playerStats = player;
         }
+        
     }
 }

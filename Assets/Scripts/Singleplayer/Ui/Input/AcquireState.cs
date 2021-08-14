@@ -2,6 +2,7 @@ using System;
 using Singleplayer.Field;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Singleplayer.Player;
 
 namespace Singleplayer.Ui.Input
 {
@@ -16,7 +17,7 @@ namespace Singleplayer.Ui.Input
         {
             name = "Acquire";
             //HGameManager.instance.CellPrice = _cellPrice;
-            _cellPrice = 40;
+            _cellPrice = 20;
             Debug.Log(name + " Mode");
             _hexGrid = GameObject.Find("HexGrid").GetComponent<HGrid>();
             if (_hexGrid == null) throw new Exception("Kein Objekt HexGrid in der Szene gefunden oder es keine Komponente HGrid an diese! ");
@@ -28,14 +29,15 @@ namespace Singleplayer.Ui.Input
             if (_playerStats.startGold < _cellPrice) return;
             if (cell.Celltype != HCell.CellType.CanBeAcquired) return;
 
-
+            if(IncomeManager.Instance == null) Debug.Log("hä");
+            if(!IncomeManager.Instance.GoldPurchase(_cellPrice)) return;
             // vllt sowas wie IncomeManager.Instance.MakePurchase() --- rückgabe bool
             
             cell.Celltype = HCell.CellType.Acquired;
             //cell.acquiredField = GameObject.Find("Cylinder");
             
             //cell.AcquiredThisCellServerRpc();
-            cell.SetPrefab(cell.type, cell.resource.GetResource());
+            cell.SetPrefab(cell.Celltype, cell.resource.GetResource());
             cell.StartCoroutine(cell.CheckNeighb());
             // vllt kürzester weg bescheid sagen
 
@@ -65,7 +67,7 @@ namespace Singleplayer.Ui.Input
                     
                         if (prevCell.CompareCoord(cell.coordinates))
                         {
-                            if (cell.GetCellType() == HCell.CellType.CanBeAcquired && prevCell.CompareCoord(cell.coordinates))
+                            if (cell.Celltype == HCell.CellType.CanBeAcquired && prevCell.CompareCoord(cell.coordinates))
                             {
                                 cell.gridImage.color = cell.SetColor(225f,225f,225f,70f/255f);
                             }

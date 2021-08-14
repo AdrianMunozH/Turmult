@@ -142,18 +142,21 @@ namespace Singleplayer.Ui
                         ressourceType[0].SetActive(true);
                         bgImage.sprite = bgSprites[1];
                         currentRessource = 0;
+                        PlayerInputManager.Instance.GetState().CurrentResource = Resource.ResourceType.Berg;
                         break;
                     case "Forest":
                         towerTypes[1].SetActive(true);
                         ressourceType[1].SetActive(true);
                         bgImage.sprite = bgSprites[2];
                         currentRessource = 1;
+                        PlayerInputManager.Instance.GetState().CurrentResource = Resource.ResourceType.Wald;
                         break;
                     case "Swamp":
                         towerTypes[2].SetActive(true);
                         ressourceType[2].SetActive(true);
                         bgImage.sprite = bgSprites[3];
                         currentRessource = 2;
+                        PlayerInputManager.Instance.GetState().CurrentResource = Resource.ResourceType.Sumpf;
                         break;
                 }
             }
@@ -209,18 +212,21 @@ namespace Singleplayer.Ui
                         ressourceType[0].SetActive(true);
                         bgImage.sprite = bgSprites[1];
                         currentRessource = 0;
+                        PlayerInputManager.Instance.GetState().CurrentResource = Resource.ResourceType.Berg;
                         break;
                     case "Forest":
                         towerTypes[1].SetActive(true);
                         ressourceType[1].SetActive(true);
                         bgImage.sprite = bgSprites[2];
                         currentRessource = 1;
+                        PlayerInputManager.Instance.GetState().CurrentResource = Resource.ResourceType.Wald;
                         break;
                     case "Swamp":
                         towerTypes[2].SetActive(true);
                         ressourceType[2].SetActive(true);
                         bgImage.sprite = bgSprites[3];
                         currentRessource = 2;
+                        PlayerInputManager.Instance.GetState().CurrentResource = Resource.ResourceType.Sumpf;
                         break;
                 }
             }
