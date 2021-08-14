@@ -71,7 +71,7 @@ namespace Singleplayer.Field
                 foreach (HCell hcell in sp)
                 {
                     //Ressource wird im shortestpath benötigt!
-                    hcell.resource = _hexGrid.GetHCellByIndex(hcell.index).GetComponentInChildren<Resource>();
+                    hcell.resource = _hexGrid.GetHCellByIndex(hcell.index).resource;
                 }
 
                 _hexGrid.ShortestPathPrefabs(enemySpawn.ShortestPath(sp).ToArray());

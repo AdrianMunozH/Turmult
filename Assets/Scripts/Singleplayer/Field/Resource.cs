@@ -1,3 +1,4 @@
+using Field;
 using MLAPI;
 using MLAPI.NetworkVariable;
 using UnityEngine;
@@ -18,15 +19,15 @@ namespace Singleplayer.Field
         };
 
         private int _type;
-
-        public ResourceType GetResourceType()
-        {
-            return (ResourceType) _type;
-        }
-
+        
         public Resource()
         {
             SetRandomType();
+        }
+
+        public ResourceType GetResource()
+        {
+            return (ResourceType) _type;
         }
 
         /**
@@ -36,7 +37,7 @@ namespace Singleplayer.Field
      */
         private void SetRandomType()
         {
-            _type =(int) ResourceType.Neutral;
+            _type = (int) ResourceType.Neutral;
             if (chanceResourceField >= Random.Range(1, 100))
             {
                 switch (Random.Range(0, 3))

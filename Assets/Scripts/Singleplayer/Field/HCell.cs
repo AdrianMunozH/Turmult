@@ -5,7 +5,6 @@ using MLAPI;
 using MLAPI.NetworkVariable;
 using Singleplayer.Turrets;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -24,15 +23,16 @@ namespace Singleplayer.Field
         //######## public ###########
         public HexCoordinates coordinates;
         public int index;
-        [HideInInspector]public CellType type = CellType.Hidden;
+        public CellType type = CellType.Hidden;
         
         //Wird gebraucht für das Tweening beim Einnehmen der Zelle
         //Wird in Buildstate.cs auf true gesetzt
-        [HideInInspector] public bool recentlyBuild;
+        [HideInInspector]public bool recentlyBuild;
         [HideInInspector] public GameObject acquiredField;
         public HCell[] neighb;
-        [FormerlySerializedAs("ressource")] public Resource resource;
-        public GameObject resPrefab; 
+        public Resource resource;
+        public GameObject resPrefab;
+        public GameObject previewTurret;
         
         public bool hasBuilding;
         public bool HasBuilding
@@ -105,7 +105,16 @@ namespace Singleplayer.Field
             return tempColor;
         }
 
+        public void DestroyPreviewTurret()
+        {
+            Destroy(previewTurret);
+        }
 
+        public GameObject InstantiateTurretPreview(GameObject previewTurret)
+        {
+           return Instantiate(previewTurret,transform.position,transform.rotation);
+        }
+        
         public void BuildTurret()
         {
 
@@ -132,7 +141,7 @@ namespace Singleplayer.Field
             if (_hexGrid == null) throw new Exception("Kein Objekt HexGrid in der Szene gefunden oder es keine Komponente HGrid an diese! ");
             
             //Setzen der Ressource standardmäßig auf Neutral, Berechnung am Server
-            Resource resource =  new Resource();
+            resource =  new Resource();
 
         }
 
@@ -214,11 +223,11 @@ namespace Singleplayer.Field
         public void SetPrefab(int prefabIndex, Vector3? rotation = null)
         {
             //TODO: Löschen altes Prefab?
-           /* if (transform.childCount > 1)
+            if (transform.childCount > 1)
             {
                 GameObject.Destroy(transform.GetChild(1).gameObject);
 
-            }*/
+            }
 
            GameObject hexagon = Instantiate(hexPrefabs[prefabIndex], transform.position, transform.rotation);
 
@@ -245,14 +254,12 @@ namespace Singleplayer.Field
             int index = (int) cellType + (int) ressource + path;
 
             //TODO: Altes Prefab löschen
-            /*
+            
             if (transform.childCount > 0)
             {
                 GameObject.Destroy(transform.GetChild(0).gameObject);
-
             }
-*/
-
+            
             GameObject hexagon;
             Vector3 pos = transform.position;
 
@@ -311,12 +318,12 @@ namespace Singleplayer.Field
                 if (cell.GetCellType() == CellType.Hidden)
                 {
                     cell.SetCellType(CellType.CanBeAcquired);
-                    if (resource.GetResourceType() != Resource.ResourceType.Neutral)
+                    if (resource.GetResource() != Resource.ResourceType.Neutral)
                     {
                         cell.resource.SetSpecificType(Resource.ResourceType.Neutral);
                     }
 
-                    cell.SetUnacquiredPrefab(cell, cell.GetCellType(),  (Resource.ResourceType) cell.resource.GetResourceType());
+                    cell.SetUnacquiredPrefab(cell, cell.GetCellType(),  (Resource.ResourceType) cell.resource.GetResource());
                 }
             }
         }

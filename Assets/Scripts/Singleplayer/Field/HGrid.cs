@@ -18,23 +18,8 @@ namespace Singleplayer.Field
         [SerializeField] private Material[] fieldMaterial;
 
         public Material[] FieldMaterial => fieldMaterial;
-
         public Image hexImage;
-        
-        //test delete later
-        public List<HCell> pathTest = new List<HCell>();
-        public bool go;
-        public bool once = true;
 
-        private void Update()
-        {
-            if (go && once)
-            {
-                ShortestPathPrefabs(pathTest.ToArray());
-                once = false;
-            }
-        }
-        
         void Awake()
         {
             gridCanvas = GetComponentInChildren<Canvas>();
@@ -320,7 +305,6 @@ namespace Singleplayer.Field
             {
                 if (i >= 1 && i < HGameManager.instance.distanceFromSpawn-1)
                 {
-                    pathTest.Add(GetHCellByXyzCoordinates(z, m, p));
                     GetHCellByXyzCoordinates(z, m, p).SetCellType(HCell.CellType.Acquired);
                     GetHCellByXyzCoordinates(p, z, m).SetCellType(HCell.CellType.Acquired);
                     GetHCellByXyzCoordinates(m, p, z).SetCellType(HCell.CellType.Acquired);
@@ -403,7 +387,7 @@ namespace Singleplayer.Field
         {
             int str;
             // neutral hat weniger felder als ressourcen
-            if ((Resource.ResourceType)curr.resource.GetResourceType() == Resource.ResourceType.Neutral)
+            if ((Resource.ResourceType)curr.resource.GetResource() == Resource.ResourceType.Neutral)
                 str = 2;
             else
                 str = 3;
@@ -438,11 +422,11 @@ namespace Singleplayer.Field
             if (angle > 0)
             {
                 
-                curr.SetPrefab(curr.GetCellType(),(Resource.ResourceType)curr.resource.GetResourceType(),new Vector3(0,rotationOfPrefab,0),str);
+                curr.SetPrefab(curr.GetCellType(),(Resource.ResourceType)curr.resource.GetResource(),new Vector3(0,rotationOfPrefab,0),str);
             }
             else
             {
-                curr.SetPrefab(curr.GetCellType(),(Resource.ResourceType)curr.resource.GetResourceType(),new Vector3(0,rotationOfPrefab+180f,0),str);
+                curr.SetPrefab(curr.GetCellType(),(Resource.ResourceType)curr.resource.GetResource(),new Vector3(0,rotationOfPrefab+180f,0),str);
             }
             
            
@@ -464,7 +448,7 @@ namespace Singleplayer.Field
         {
             int str;
             
-            if (path.resource.GetResourceType() == Resource.ResourceType.Neutral)
+            if (path.resource.GetResource() == Resource.ResourceType.Neutral)
                 str = 1;
             else
                 str = 2;
@@ -472,14 +456,14 @@ namespace Singleplayer.Field
             //das ist nur für straight
             if (x != 0 && y != 0 && z == 0)
             {
-                path.SetPrefab(path.GetCellType(),(Resource.ResourceType)path.resource.GetResourceType(),new Vector3(0,120,0),str);
+                path.SetPrefab(path.GetCellType(),(Resource.ResourceType)path.resource.GetResource(),new Vector3(0,120,0),str);
             } else if (y != 0 && z != 0 && x == 0)
             {
-                path.SetPrefab(path.GetCellType(),(Resource.ResourceType)path.resource.GetResourceType(),new Vector3(0,-120,0),str);
+                path.SetPrefab(path.GetCellType(),(Resource.ResourceType)path.resource.GetResource(),new Vector3(0,-120,0),str);
             }
             else
             {
-                path.SetPrefab(path.GetCellType(),(Resource.ResourceType)path.resource.GetResourceType(),Vector3.zero,str);
+                path.SetPrefab(path.GetCellType(),(Resource.ResourceType)path.resource.GetResource(),Vector3.zero,str);
             }
                 
         

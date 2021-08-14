@@ -1782,6 +1782,7 @@ GameObject:
   m_Component:
   - component: {fileID: 54138893}
   - component: {fileID: 54138892}
+  - component: {fileID: 54138891}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1789,6 +1790,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &54138891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54138890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
 --- !u!114 &54138892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17042,12 +17062,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mountainTurrets:
   - {fileID: 3076097380530608750, guid: 6656b18a87c20cb4fab28d252a50338c, type: 3}
-  mountainPreviewTurrets: []
-  forestTurrets: []
-  forestPreviewTurrets: []
-  swampTurrets: []
-  swampPreviewTurrets: []
-  grid: {fileID: 0}
+  - {fileID: 3649422415846563407, guid: ef12f9a06df353f49b59abc0b6eecbb4, type: 3}
+  - {fileID: 7053591247536687710, guid: 1851b34ffd1fd0d499c95d4b25279e93, type: 3}
+  mountainPreviewTurrets:
+  - {fileID: 3076097380530608750, guid: 6656b18a87c20cb4fab28d252a50338c, type: 3}
+  - {fileID: 3076097380530608750, guid: 6656b18a87c20cb4fab28d252a50338c, type: 3}
+  - {fileID: 3076097380530608750, guid: 6656b18a87c20cb4fab28d252a50338c, type: 3}
+  forestTurrets:
+  - {fileID: 3940805691244041483, guid: bc0016dad42303848aa1452f94f4dd2d, type: 3}
+  - {fileID: 3995092328936062685, guid: 2b09ddba6da8a1b42baec33b62e78a1e, type: 3}
+  - {fileID: 672762153369891017, guid: 26ff1a3c43049a5449daa38db2d601f1, type: 3}
+  forestPreviewTurrets:
+  - {fileID: 3940805691244041483, guid: bc0016dad42303848aa1452f94f4dd2d, type: 3}
+  - {fileID: 3995092328936062685, guid: 2b09ddba6da8a1b42baec33b62e78a1e, type: 3}
+  - {fileID: 672762153369891017, guid: 26ff1a3c43049a5449daa38db2d601f1, type: 3}
+  swampTurrets:
+  - {fileID: 8476073457476039546, guid: 7c5b668bfd6dfa34586662251fd814d2, type: 3}
+  - {fileID: 7946498073699439795, guid: f601f0ed54ca4d042b452b95c982f858, type: 3}
+  - {fileID: 4849936137909261494, guid: c7a86dd394fad3940923d3ac6f78ced0, type: 3}
+  swampPreviewTurrets:
+  - {fileID: 8476073457476039546, guid: 7c5b668bfd6dfa34586662251fd814d2, type: 3}
+  - {fileID: 7946498073699439795, guid: f601f0ed54ca4d042b452b95c982f858, type: 3}
+  - {fileID: 4849936137909261494, guid: c7a86dd394fad3940923d3ac6f78ced0, type: 3}
+  grid: {fileID: 646463327}
 --- !u!4 &541232430
 Transform:
   m_ObjectHideFlags: 0
@@ -20871,16 +20908,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71758c97df5a453485ecb57d682464e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0
+  radius: 21
   cells: []
   cellPrefab: {fileID: -9199984732277028179, guid: 64a9a4f9225ac9d43a6fe8c674e566b4,
     type: 3}
-  fieldMaterial: []
+  fieldMaterial:
+  - {fileID: 2100000, guid: c0c32545ce6b2d842adf70b6856e627b, type: 2}
+  - {fileID: 2100000, guid: 131e53173ea6306418ee44134adeb9f2, type: 2}
+  - {fileID: 2100000, guid: 6583bf93a583aed46a95cf774118ad8a, type: 2}
+  - {fileID: 2100000, guid: 7764afcac2d355f45a85d73a2dde2db7, type: 2}
+  - {fileID: 2100000, guid: 40db9067fa0d4ca4c9fb28665716d517, type: 2}
+  - {fileID: 2100000, guid: 20efac7c328452941b41cb713ba44510, type: 2}
+  - {fileID: 2100000, guid: 8c0a9cc5e5681b74f9045b402d663eee, type: 2}
+  - {fileID: 2100000, guid: e63f4144e80bc47448eaa9313166be82, type: 2}
+  - {fileID: 2100000, guid: c8ce0979344ceb549924a5f5e7335ac4, type: 2}
   hexImage: {fileID: 2402472035106653718, guid: df8f96905cd648c4a915084d31b343b6,
     type: 3}
-  pathTest: []
-  go: 0
-  once: 1
 --- !u!222 &646463328
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -32556,6 +32599,9 @@ GameObject:
   - component: {fileID: 1100171614}
   - component: {fileID: 1100171613}
   - component: {fileID: 1100171612}
+  - component: {fileID: 1100171618}
+  - component: {fileID: 1100171617}
+  - component: {fileID: 1100171616}
   m_Layer: 5
   m_Name: UI Canvas
   m_TagString: Untagged
@@ -32650,6 +32696,79 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1100171616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100171611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe6be430fdf04e76b1623a2ecfeea0e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 2110079562}
+  ui: {fileID: 1100171618}
+--- !u!114 &1100171617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100171611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f9807ec3bd3436a8ccdffbf2f8930c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1100171618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100171611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ef0a206c87ea14cae87d7b47fa146a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgImage: {fileID: 280632580}
+  bgSprites:
+  - {fileID: 21300000, guid: e26d29002fa0fbd458ba2e23038d2e38, type: 3}
+  - {fileID: 21300000, guid: 7258b02c034fe25459f62840894b7c1c, type: 3}
+  - {fileID: 21300000, guid: a821d5b3e177c7b49ba02e4c1557e6a8, type: 3}
+  - {fileID: 21300000, guid: a126ce15959c78c4490a4d0063b73ae4, type: 3}
+  ressourceType:
+  - {fileID: 2130658723}
+  - {fileID: 1743490950}
+  - {fileID: 1551631480}
+  acquireMode: {fileID: 794514128}
+  forestLockedImage:
+  - {fileID: 1490070786}
+  - {fileID: 2049443711}
+  - {fileID: 1521175717}
+  mountainLockedImage:
+  - {fileID: 735549567}
+  - {fileID: 166410549}
+  - {fileID: 138445966}
+  swampLockedImage:
+  - {fileID: 1285265662}
+  - {fileID: 329390062}
+  - {fileID: 1007316362}
+  buildMode: {fileID: 1336653865}
+  scrollViewTower: {fileID: 1183750485}
+  scrollViewMinion: {fileID: 235973818}
+  towerTypes:
+  - {fileID: 1143793885}
+  - {fileID: 268175729}
+  - {fileID: 658931440}
+  minionTypes:
+  - {fileID: 10332675}
+  - {fileID: 1921698021}
+  - {fileID: 578493871}
+  towerMode: 0
 --- !u!1 &1103555868
 GameObject:
   m_ObjectHideFlags: 0
@@ -62836,6 +62955,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2110079561}
+  - component: {fileID: 2110079562}
+  - component: {fileID: 2110079560}
+  - component: {fileID: 2110079559}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -62843,6 +62965,30 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2110079559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110079558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fdd1bbc9b2847a38a04e146be6a97ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2110079560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110079558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d8bb87145bc4c9ba3cf92e13151645f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2110079561
 Transform:
   m_ObjectHideFlags: 0
@@ -62857,6 +63003,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2110079562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110079558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c25612366f441e1850551d394db77c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startGold: 500
+  interestRateInPercentPerRound: 5
+  startForest: 1
+  startMountain: 1
+  startSwamp: 1
+  startLifes: 20
+  full: {r: 0, g: 1, b: 0, a: 1}
+  nearlyFull: {r: 0, g: 1, b: 1, a: 1}
+  medium: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  low: {r: 0.6, g: 0.4, b: 0.2, a: 1}
+  superlow: {r: 1, g: 0, b: 0, a: 1}
+  goldTMP: {fileID: 1006179604}
+  mountainTMP: {fileID: 823663096}
+  forestTMP: {fileID: 1407805363}
+  swampTMP: {fileID: 1241800395}
+  hpBar: {fileID: 1571026803}
+  gameOVER: {fileID: 1943753711}
 --- !u!1 &2111846566
 GameObject:
   m_ObjectHideFlags: 0
