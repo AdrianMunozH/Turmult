@@ -447,8 +447,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3276399387699635687}
   - component: {fileID: 3094714698504868643}
-  - component: {fileID: 856835614708524560}
   - component: {fileID: 8121135288718317001}
+  - component: {fileID: 5235248087869738655}
   m_Layer: 0
   m_Name: Enemy 1
   m_TagString: Enemy
@@ -496,27 +496,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &856835614708524560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2752767336687910749}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e463cba0419e57e489bb995c409d0e6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  path: []
-  pathIndex: 0
-  enemySpawn: {fileID: 0}
-  life: 100
-  isSlowed: 0
-  moveSpeed: 0
-  defaultSpeed: 10
-  _text: {fileID: 0}
-  isAttacking: 0
 --- !u!65 &8121135288718317001
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -530,6 +509,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 2.7633705, z: 2}
   m_Center: {x: 0, y: 1.2315338, z: 0}
+--- !u!114 &5235248087869738655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2752767336687910749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f3302bc8cd4d4cab989f9d0b0e1b00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  path: []
+  pathIndex: 0
+  enemySpawn: {fileID: 0}
+  life: 100
+  isSlowed: 0
+  moveSpeed: 0
+  defaultSpeed: 10
+  _text: {fileID: 0}
+  isAttacking: 0
 --- !u!1 &2866279945620784262
 GameObject:
   m_ObjectHideFlags: 0

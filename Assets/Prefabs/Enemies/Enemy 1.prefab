@@ -514,7 +514,7 @@ MonoBehaviour:
   life: 100
   isSlowed: 0
   moveSpeed: 0
-  defaultSpeed: 10
+  defaultSpeed: 30
   _text: {fileID: 0}
   isAttacking: 0
 --- !u!65 &8121135288718317001

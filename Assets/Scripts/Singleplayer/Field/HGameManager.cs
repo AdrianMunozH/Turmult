@@ -13,16 +13,15 @@ namespace Singleplayer.Field
         public static HGameManager instance;
         
         public float buildingPhaseTimer = 5;
-        public float firstBuildingPhaseTimer = 10;
+        public float firstBuildingPhaseTimer = 2;
         public float betweenRoundsTimer = 10;
         
         //WaveSpawning
         public EnemySpawn spawnPoint;
-        public int waves;
+        public int waves = 50;
         public float timeBetweenMinionSpawn;
         public float minionsPerWave;
-
-        [HideInInspector] public EnemySpawn[] enemySpawns;
+        private int _currentWave = 0;
 
         private float _timer;
         private HCell[] spath;
@@ -67,27 +66,23 @@ namespace Singleplayer.Field
             PlayerInputManager.Instance.SetState(new BuildState());
 
             TimeTickSystem.OnTick += delegate(object sender, TimeTickSystem.OnTickEventArgs args) { };
+            
+            spawnPoint = Instantiate(spawnPoint);
+            spawnPoint.end = _hexGrid.GetHCellByXyzCoordinates(distanceFromSpawn, 0, -distanceFromSpawn);
+            spawnPoint.defaultStart = _hexGrid.GetHCellByXyCoordinates(0, 0);
+            
+            spath = spawnPoint.Solve();
+            List<HCell> sp = spawnPoint.RecPath(spath);
 
-            enemySpawns = new EnemySpawn[1];
-            enemySpawns[0] = Instantiate<EnemySpawn>(spawnPoint);
-            enemySpawns[0].end = _hexGrid.GetHCellByXyzCoordinates(distanceFromSpawn, 0, -distanceFromSpawn);
-            enemySpawns[0].defaultStart = _hexGrid.GetHCellByXyCoordinates(0, 0);
-
-
-            foreach (EnemySpawn enemySpawn in enemySpawns)
+            foreach (HCell hcell in sp)
             {
-                spath = enemySpawn.Solve();
-                List<HCell> sp = enemySpawn.RecPath(spath);
-
-                foreach (HCell hcell in sp)
-                {
-                    //Ressource wird im shortestpath benötigt!
-                    hcell.Celltype = HCell.CellType.Acquired;
-                    hcell.resource = _hexGrid.GetHCellByIndex(hcell.index).resource;
-                }
-
-                _hexGrid.ShortestPathPrefabs(enemySpawn.ShortestPath(sp).ToArray());
+                //Ressource wird im shortestpath benötigt!
+                hcell.Celltype = HCell.CellType.Acquired;
+                hcell.resource = _hexGrid.GetHCellByIndex(hcell.index).resource;
             }
+
+            _hexGrid.ShortestPathPrefabs(spawnPoint.ShortestPath(sp).ToArray());
+            
 
         }
 
@@ -100,11 +95,13 @@ namespace Singleplayer.Field
             else
             {
                 PlayerInputManager.Instance.SetState(new BattleState());
-                SpawnEnemyWave();
+                if (_currentWave < waves)
+                {
+                    SpawnEnemyWave();
+                    _currentWave++;
+                }
+                
             }
-
-
-
         }
         
         IEnumerator LevelTransition()
@@ -166,10 +163,9 @@ namespace Singleplayer.Field
 
     public void rerouteEnemys(HCell turretCell)
         {
-            foreach (EnemySpawn enemySpawn in enemySpawns)
-            {
-                enemySpawn.recheckPath(turretCell);
-            }
+
+                spawnPoint.recheckPath(turretCell);
+            
         }
     }
 }

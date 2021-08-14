@@ -17241,14 +17241,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingPhaseTimer: 5
-  firstBuildingPhaseTimer: 10
+  firstBuildingPhaseTimer: 2
   betweenRoundsTimer: 10
   spawnPoint: {fileID: -5466852683715092558, guid: d3bbafaac9bfffd478ef2b9390974b9a,
     type: 3}
-  waves: 0
+  waves: 50
   timeBetweenMinionSpawn: 0
   minionsPerWave: 0
-  enemySpawns: []
   distanceFromSpawn: 8
   transition: {fileID: 370615712}
 --- !u!1 &542450145

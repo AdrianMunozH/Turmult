@@ -12,7 +12,7 @@ namespace Singleplayer.Ui.Input
 
         public override void Input()
         {
-            throw new System.NotImplementedException();
+            //Hier muss nichts passieren ...
         }
     }
     

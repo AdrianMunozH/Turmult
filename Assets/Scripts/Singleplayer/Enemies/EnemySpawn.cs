@@ -29,9 +29,7 @@ namespace Singleplayer.Enemies
         // Start is called before the first frame update
         void Start()
         {
-
             enemys = new List<GameObject>();
-            defaultStart = _hexGrid.GetHCellByXyCoordinates(0, 0);
         }
 
         // checkt ob der weg eines minions überhaupt geöndert werden muss
