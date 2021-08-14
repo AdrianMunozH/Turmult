@@ -58,7 +58,6 @@ namespace Singleplayer.Ui
             switch (ressource)
             {
                 case Resource.ResourceType.Berg:
-                    Debug.Log("hier ui unlocked");
                     mountainLockedImage[turretIndex].SetActive(false);
                     break;
                 case Resource.ResourceType.Sumpf:

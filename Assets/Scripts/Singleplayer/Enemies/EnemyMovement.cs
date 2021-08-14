@@ -114,7 +114,7 @@ namespace Singleplayer.Enemies
                  Die(true);
             // // die methode falls wir sowas wie deathanimation macehn 
             //
-            Debug.Log(damage + " take damage+");
+
             // kann später gelöscht werden ist nur zum debugen
             _text.enabled = true;
             _text.SetText(life.ToString());
@@ -139,7 +139,7 @@ namespace Singleplayer.Enemies
         public void Slow(float slow)
         {
             isSlowed = true;
-            Debug.Log("isSlowed");
+            //Debug.Log("isSlowed");
             moveSpeed = defaultSpeed * (1 - slow);
         }
 

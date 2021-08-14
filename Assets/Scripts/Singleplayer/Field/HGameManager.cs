@@ -5,7 +5,6 @@ using Singleplayer.Player;
 using Singleplayer.Enemies;
 using Singleplayer.Turrets;
 using Singleplayer.Ui.Input;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Image = UnityEngine.UI.Image;
@@ -39,6 +38,8 @@ namespace Singleplayer.Field
         private static int _currentWave = 0;
         private List<HCell> minionPath;
         public static int timeTillSceneChange = 15;
+        //setzt die alten SP wege zurück
+        private HCell[] _lastShortestPath;
 
         private int _spawnCounter = 0;
 
@@ -107,7 +108,10 @@ namespace Singleplayer.Field
                 hcell.resource = _hexGrid.GetHCellByIndex(hcell.index).resource;
             }
 
-            _hexGrid.ShortestPathPrefabs(spawnPoint.ShortestPath(sp).ToArray());
+            HCell[] temp = spawnPoint.ShortestPath(sp).ToArray();
+            _hexGrid.ShortestPathPrefabs(temp);
+            _lastShortestPath = temp;
+
         }
 
         private void Update()
@@ -148,6 +152,7 @@ namespace Singleplayer.Field
         {
             yield return new WaitForSeconds(timeBetweenMinionSpawn * _spawnCounter);
             // es muss gecheckt werden ob die weglänge grö0er als 0 ist
+
             spawnPoint.SpawnEnemy(minionPath.ToArray(), false);
             if (_spawnCounter == minionsPerWave) allMinionsSpawned = true;
         }
@@ -190,6 +195,33 @@ namespace Singleplayer.Field
             }
 
             _hexGrid.ShortestPathPrefabs(minionPath.ToArray());
+            // wenns null ist brauchen wir nicht aufräumen
+            if(_lastShortestPath == null) return;
+
+            foreach (var lastSP in _lastShortestPath)
+            {
+                
+                if (!IsInArray(lastSP, minionPath.ToArray()))
+                {
+                    lastSP.SetPrefab(lastSP.Celltype,lastSP.resource.GetResource());
+                }
+            }
+            
+            
+            // am ende setzten wir den aktuellen kürzesten weg auf lastShortestPath
+            _lastShortestPath = minionPath.ToArray();
+        }
+
+        private bool IsInArray(HCell hCell,HCell[] arr)
+        {
+            foreach (var currentCell in arr)
+            {
+                if (hCell.coordinates.CompareCoord(currentCell.coordinates))
+                    return true;
+            }
+
+            return false;
+
         }
 
         public void loseLife(int value)
