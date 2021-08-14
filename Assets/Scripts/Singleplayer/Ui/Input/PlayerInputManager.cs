@@ -7,6 +7,9 @@ namespace Singleplayer.Ui.Input
         private static PlayerInputManager _instance;
         [SerializeField]
         public UI ui;
+        
+
+        [SerializeField] private MenuController menuController;
 
         public static PlayerInputManager Instance
         {
@@ -61,6 +64,23 @@ namespace Singleplayer.Ui.Input
                 {
                     ui.OpenTowerBuildMode();
                 }
+            }else if (UnityEngine.Input.GetKeyDown(KeyCode.Escape))
+
+            {
+                if (!menuController.menuOpen)
+                {
+                    menuController.gameObject.SetActive(true);
+                    menuController.OpenMainMenu();
+                }
+
+                else
+                {
+                    menuController.gameObject.SetActive(false);
+                    menuController.OpenMainMenu();
+                }
+                    
+                
+                
             }
 
             
