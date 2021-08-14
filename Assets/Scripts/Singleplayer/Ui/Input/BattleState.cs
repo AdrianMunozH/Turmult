@@ -7,7 +7,6 @@ namespace Singleplayer.Ui.Input
         public override void Start()
         {
             name = "Battle";
-            Debug.Log(name + " Mode");
         }
 
         public override void Input()

@@ -55,7 +55,6 @@ namespace Singleplayer.Enemies
         public void rebuildPath(int enemyIndex, int startIndex)
         {
             EnemyMovement mov = enemys[enemyIndex].GetComponent<EnemyMovement>();
-            Debug.Log("mov coord: " + mov.path[startIndex].coordinates.ToString());
             HCell[] newPath = Solve(mov.path[startIndex]);
             List<HCell> sp = RecPath(newPath);
             sp = ShortestPath(sp, mov.path[startIndex]);
@@ -161,7 +160,6 @@ namespace Singleplayer.Enemies
                 }
             }
 
-            Debug.Log("solve list: " + _hexGrid.ArrayToString(prev));
             return prev;
         }
 
@@ -195,7 +193,6 @@ namespace Singleplayer.Enemies
                 }
             }
 
-            Debug.Log("solve list: " + _hexGrid.ArrayToString(prev));
             return prev;
         }
 
@@ -248,7 +245,7 @@ namespace Singleplayer.Enemies
                 return path;
             }
 
-            Debug.Log("leer");
+
             // wenn der weg nicht möglich ist kommt eine leere liste zurück // muss also gecheckt werden
             return new List<HCell>();
         }
@@ -262,7 +259,6 @@ namespace Singleplayer.Enemies
                 return path;
             }
 
-            Debug.Log("leer");
             // wenn der weg nicht möglich ist kommt eine leere liste zurück // muss also gecheckt werden
             return new List<HCell>();
         }

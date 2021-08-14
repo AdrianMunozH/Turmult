@@ -19,9 +19,11 @@ namespace Singleplayer.Field
         //WaveSpawning
         public EnemySpawn spawnPoint;
         public int waves = 50;
-        public float timeBetweenMinionSpawn;
-        public float minionsPerWave;
+        public float timeBetweenMinionSpawn = 0.8f;
+        public int minionsPerWave = 5;
         private int _currentWave = 0;
+        private List<HCell> minionPath;
+        private int _spawnCounter = 0;
 
         private float _timer;
         private HCell[] spath;
@@ -92,16 +94,26 @@ namespace Singleplayer.Field
             {
                 _timer -= Time.deltaTime;
             }
-            else
+            else if ( !PlayerInputManager.Instance.GetState().name.Equals(StateEnum.Battle))
             {
                 PlayerInputManager.Instance.SetState(new BattleState());
                 if (_currentWave < waves)
                 {
                     SpawnEnemyWave();
+                    
                     _currentWave++;
                 }
-                
             }
+        }
+        
+        IEnumerator SpawnEnemyWithDelay() 
+        {
+            yield return new WaitForSeconds(timeBetweenMinionSpawn*_spawnCounter);
+            // es muss gecheckt werden ob die weglänge grö0er als 0 ist
+            Debug.Log("spawned...");
+            spawnPoint.SpawnEnemy(minionPath.ToArray(), false);
+            
+
         }
         
         IEnumerator LevelTransition()
@@ -134,30 +146,17 @@ namespace Singleplayer.Field
         /// </summary>
         public void SpawnEnemyWave()
         {
+            _spawnCounter = 0;
             // könnte in der methode init werden (spath)
             spath = spawnPoint.Solve();
             List<HCell> sp = spawnPoint.RecPath(spath);
-            sp = spawnPoint.ShortestPath(sp);
-
-            // es muss gecheckt werden ob die weglänge grö0er als 0 ist
-            if (sp.Count > 0)
-                spawnPoint.SpawnEnemy(sp.ToArray(), false);
-            // normaler modus                Nicht angreifen
-            else
+            minionPath = spawnPoint.ShortestPath(sp);
+            for (int i = 0; i < minionsPerWave; i++)
             {
-                // attacking modus
-                spath = spawnPoint.SolveAttack(_hexGrid.GetHCellByXyzCoordinates(0, 0, 0));
-                // es wird erstmal der kürzeste weg zur base gesucht
-                sp = spawnPoint.RecPath(spath);
-                sp = spawnPoint.ShortestPath(sp);
-                // danach wird am ersten turm gestoppt
-                int towerIndex = (int) spawnPoint.TowerFinder(sp); // +1
-                // von towerindex bis zum letzten element
-                sp.RemoveRange(towerIndex, sp.Count - towerIndex);
-                spawnPoint.SpawnEnemy(sp.ToArray(), true);
+                StartCoroutine(nameof(SpawnEnemyWithDelay));
+                _spawnCounter++;
             }
-
-            _hexGrid.ShortestPathPrefabs(sp.ToArray());
+            _hexGrid.ShortestPathPrefabs(minionPath.ToArray());
         }
 
 

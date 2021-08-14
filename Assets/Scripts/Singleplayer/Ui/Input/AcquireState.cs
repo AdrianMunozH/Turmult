@@ -18,7 +18,6 @@ namespace Singleplayer.Ui.Input
             name = "Acquire";
             //HGameManager.instance.CellPrice = _cellPrice;
             _cellPrice = 20;
-            Debug.Log(name + " Mode");
             _hexGrid = GameObject.Find("HexGrid").GetComponent<HGrid>();
             if (_hexGrid == null) throw new Exception("Kein Objekt HexGrid in der Szene gefunden oder es keine Komponente HGrid an diese! ");
         }
@@ -29,7 +28,7 @@ namespace Singleplayer.Ui.Input
             if (_playerStats.startGold < _cellPrice) return;
             if (cell.Celltype != HCell.CellType.CanBeAcquired) return;
 
-            if(IncomeManager.Instance == null) Debug.Log("hä");
+            if(IncomeManager.Instance == null) Debug.Log("Incomemanager darf nicht null sein!");
             if(!IncomeManager.Instance.GoldPurchase(_cellPrice)) return;
             // vllt sowas wie IncomeManager.Instance.MakePurchase() --- rückgabe bool
             

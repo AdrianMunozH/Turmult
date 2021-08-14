@@ -17246,8 +17246,8 @@ MonoBehaviour:
   spawnPoint: {fileID: -5466852683715092558, guid: d3bbafaac9bfffd478ef2b9390974b9a,
     type: 3}
   waves: 50
-  timeBetweenMinionSpawn: 0
-  minionsPerWave: 0
+  timeBetweenMinionSpawn: 0.5
+  minionsPerWave: 5
   distanceFromSpawn: 8
   transition: {fileID: 370615712}
 --- !u!1 &542450145
