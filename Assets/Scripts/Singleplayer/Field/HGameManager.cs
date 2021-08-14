@@ -111,6 +111,7 @@ namespace Singleplayer.Field
             HCell[] temp = spawnPoint.ShortestPath(sp).ToArray();
             _hexGrid.ShortestPathPrefabs(temp);
             _lastShortestPath = temp;
+            StartCoroutine(LevelFadeIn());
 
         }
 
@@ -161,6 +162,13 @@ namespace Singleplayer.Field
         {
             yield return new WaitForSeconds(timeTillSceneChange);
             SceneManager.LoadScene("MainMenu");
+        }
+
+        IEnumerator LevelFadeIn()
+        {
+            transition.SetTrigger("Start");
+            yield return new WaitForSeconds(1f);
+            transition.gameObject.SetActive(false);
         }
         
 

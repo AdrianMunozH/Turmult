@@ -33,7 +33,7 @@ namespace Ui.Lobby
         IEnumerator LevelTransition()
         {
             transition.gameObject.SetActive(true);
-            
+
             yield return new WaitForSeconds(4f);
             
             SceneManager.LoadScene("Scenes/Game_SinglePlayer");
