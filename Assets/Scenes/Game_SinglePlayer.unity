@@ -3561,7 +3561,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 64, y: 661.863, z: 650}
 --- !u!1 &114343070
 GameObject:
@@ -8693,7 +8693,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: cbc21c55f610f3b489b83700b80892b5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cbc21c55f610f3b489b83700b80892b5,
         type: 3}
@@ -17440,8 +17440,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d95804fc056d47d4be38c62350601024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingPhaseTimer: 2
-  firstBuildingPhaseTimer: 2
+  buildingPhaseTimer: 30
+  firstBuildingPhaseTimer: 30
   betweenRoundsTimer: 5
   timeBar: {fileID: 1571026801}
   lifeBar: {fileID: 328944216}
@@ -25578,7 +25578,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &791169909
 GameObject:
@@ -28706,6 +28706,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 893502940}
   m_CullTransparentMesh: 1
+--- !u!1 &894807178 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3922155004046331433, guid: 6318a8a2801bcf449b0824bc36384da2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1456324658}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &894807181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894807178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b79fa412a2d288941b6ff746af3eeab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixerGroup: FX
+  mixer: {fileID: 24100000, guid: 7af5efb80c4696646ab82f6d9d2108c8, type: 2}
+  master: {fileID: 11400000, guid: bd5d3231ea0a28b4a8fd00c19a22a2d4, type: 2}
+  music: {fileID: 11400000, guid: 066fc87f35502d54db43973b03e2e014, type: 2}
+  fx: {fileID: 11400000, guid: c1306de8b3bb4a74bbec3da395932853, type: 2}
 --- !u!1 &898515136
 GameObject:
   m_ObjectHideFlags: 0
@@ -45202,6 +45225,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -211.312
       objectReference: {fileID: 0}
+    - target: {fileID: 3922155004046331439, guid: 6318a8a2801bcf449b0824bc36384da2,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922155004046331439, guid: 6318a8a2801bcf449b0824bc36384da2,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 894807181}
+    - target: {fileID: 3922155004046331439, guid: 6318a8a2801bcf449b0824bc36384da2,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922155004046331439, guid: 6318a8a2801bcf449b0824bc36384da2,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Audio.AudioChannelMixer, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 3922155004245127774, guid: 6318a8a2801bcf449b0824bc36384da2,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -45231,6 +45274,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -70.43733
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922155005041518054, guid: 6318a8a2801bcf449b0824bc36384da2,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922155005041518054, guid: 6318a8a2801bcf449b0824bc36384da2,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1796946786}
+    - target: {fileID: 3922155005041518054, guid: 6318a8a2801bcf449b0824bc36384da2,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922155005041518054, guid: 6318a8a2801bcf449b0824bc36384da2,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Audio.AudioChannelMixer, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3922155005404132850, guid: 6318a8a2801bcf449b0824bc36384da2,
         type: 3}
@@ -45296,6 +45359,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922155005495849506, guid: 6318a8a2801bcf449b0824bc36384da2,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922155005495849506, guid: 6318a8a2801bcf449b0824bc36384da2,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1838416002}
+    - target: {fileID: 3922155005495849506, guid: 6318a8a2801bcf449b0824bc36384da2,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922155005495849506, guid: 6318a8a2801bcf449b0824bc36384da2,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Audio.AudioChannelMixer, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3922155005500650490, guid: 6318a8a2801bcf449b0824bc36384da2,
         type: 3}
@@ -54297,7 +54380,7 @@ PrefabInstance:
     - target: {fileID: 3388955263055795329, guid: bd47dcc7e5e56064386ca5b203fe2703,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 3388955263055795329, guid: bd47dcc7e5e56064386ca5b203fe2703,
         type: 3}
@@ -54987,6 +55070,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1782278793}
   m_CullTransparentMesh: 1
+--- !u!1 &1796946783 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3922155005041518048, guid: 6318a8a2801bcf449b0824bc36384da2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1456324658}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1796946786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796946783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b79fa412a2d288941b6ff746af3eeab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixerGroup: Music
+  mixer: {fileID: 24100000, guid: 7af5efb80c4696646ab82f6d9d2108c8, type: 2}
+  master: {fileID: 11400000, guid: bd5d3231ea0a28b4a8fd00c19a22a2d4, type: 2}
+  music: {fileID: 11400000, guid: 066fc87f35502d54db43973b03e2e014, type: 2}
+  fx: {fileID: 11400000, guid: c1306de8b3bb4a74bbec3da395932853, type: 2}
 --- !u!1 &1802505857
 GameObject:
   m_ObjectHideFlags: 0
@@ -56176,6 +56282,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1836177168}
   m_CullTransparentMesh: 1
+--- !u!1 &1838415999 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3922155005495849516, guid: 6318a8a2801bcf449b0824bc36384da2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1456324658}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1838416002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838415999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b79fa412a2d288941b6ff746af3eeab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixerGroup: Master
+  mixer: {fileID: 24100000, guid: 7af5efb80c4696646ab82f6d9d2108c8, type: 2}
+  master: {fileID: 11400000, guid: bd5d3231ea0a28b4a8fd00c19a22a2d4, type: 2}
+  music: {fileID: 11400000, guid: 066fc87f35502d54db43973b03e2e014, type: 2}
+  fx: {fileID: 11400000, guid: c1306de8b3bb4a74bbec3da395932853, type: 2}
 --- !u!1 &1842068530
 GameObject:
   m_ObjectHideFlags: 0

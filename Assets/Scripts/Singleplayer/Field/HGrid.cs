@@ -17,6 +17,8 @@ namespace Singleplayer.Field
         Canvas gridCanvas;
         [SerializeField] private Material[] fieldMaterial;
 
+        
+
         public Material[] FieldMaterial => fieldMaterial;
         public Image hexImage;
 
@@ -291,12 +293,15 @@ namespace Singleplayer.Field
             
             GetHCellByXyzCoordinates(0, 1,-1).SetCellType(HCell.CellType.Base);// arch1
             GetHCellByXyzCoordinates(0, 1,-1).SetPrefab(20,new Vector3(0,-120,0)); //-30
+            GetHCellByXyzCoordinates(0, 1, -1).hasBuilding = true;
             
             GetHCellByXyzCoordinates(1, -1,0).SetCellType(HCell.CellType.Base); // arch2
             GetHCellByXyzCoordinates(1, -1,0).SetPrefab(20,new Vector3(0,-240,0)); //-150
+            GetHCellByXyzCoordinates(1, -1, 0).hasBuilding = true;
             
             GetHCellByXyzCoordinates(-1, 0,1).SetCellType(HCell.CellType.Base); // arch3
             GetHCellByXyzCoordinates(-1, 0,1).SetPrefab(20);
+            GetHCellByXyzCoordinates(-1, 0, 1).hasBuilding = true;
             
             int z = 0;
             int p = 1;
@@ -349,12 +354,11 @@ namespace Singleplayer.Field
                 
                 if (magnVector.x != 0 && magnVector.y != 0 && magnVector.z != 0)
                 {
-                    Debug.Log(path[i].Celltype);
+                    ;
                     Corner(path[i-1],path[i],path[i+1]);
                 }
                 else
                 {
-                    Debug.Log(path[i].Celltype);
                     Straight(path[i], x, y, z);
                 }
             }
@@ -456,7 +460,7 @@ namespace Singleplayer.Field
                 path.SetPrefab(path.Celltype,path.resource.GetResource(),Vector3.zero,str);
             }
             
-            Debug.Log("WAS "+ path.Celltype);
+            
             
         }
 

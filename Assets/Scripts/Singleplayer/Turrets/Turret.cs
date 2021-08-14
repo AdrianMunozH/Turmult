@@ -212,7 +212,6 @@ namespace Singleplayer.Turrets
             
             if (projectile != null)
             {
-                Debug.Log("projectile nicht null");
                 projectile.Seek(target);
             }
             else

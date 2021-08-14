@@ -38,13 +38,11 @@ namespace Singleplayer.Ui.Input
         // wird das hier ein rpc call ?
         public override void BuyTurret(HCell cell, Resource.ResourceType resource, int turrentIndex)
         {
-            Debug.Log(cell.hasBuilding + " " + cell.Celltype.ToString() + cell.resource.GetResource());
             if(cell.HasBuilding || cell.Celltype != HCell.CellType.Acquired || cell.resource.GetResource() != Resource.ResourceType.Neutral) return;
             
             if (IncomeManager.Instance.PurchaseTurret(20, resource, turrentIndex))
             {
                 cell.BuildTurret();
-                Debug.Log("buyturret");
             }
                 
             
