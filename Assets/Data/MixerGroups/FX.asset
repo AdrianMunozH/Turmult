@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712e849c76211354887e14187fe65493, type: 3}
   m_Name: FX
   m_EditorClassIdentifier: 
-  defaultValue: 0
+  defaultValue: 1
   description: "Speichert die FX-Lautst\xE4rke \xFCber die Szenen"
