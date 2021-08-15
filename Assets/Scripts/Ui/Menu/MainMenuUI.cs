@@ -23,7 +23,12 @@ namespace Ui.Lobby
 
         public void OnSinglePlayerClicked()
         {
-            StartCoroutine(LevelTransition());
+            StartCoroutine(LevelTransition("Scenes/Game_SinglePlayer"));
+        }
+
+        public void OnTutorialClicked()
+        {
+            StartCoroutine(LevelTransition("Scenes/Tutorial"));
         }
 
         public void OnClientClicked()
@@ -32,14 +37,14 @@ namespace Ui.Lobby
             ClientGameNetPortal.Instance.StartClient();
         }
 
-        IEnumerator LevelTransition()
+        IEnumerator LevelTransition(string name)
         {
             transition.gameObject.SetActive(true);
             StartCoroutine(StartFade(audio, 4f, 0f));
 
             yield return new WaitForSeconds(5f);
             
-            SceneManager.LoadScene("Scenes/Game_SinglePlayer");
+            SceneManager.LoadScene(name);
         }
         public static IEnumerator StartFade(AudioSource audioSource, float duration, float targetVolume)
         {

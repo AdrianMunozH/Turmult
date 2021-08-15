@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.SceneManagement;
 
 namespace Singleplayer.Tutorial
@@ -183,6 +184,7 @@ namespace Singleplayer.Tutorial
             {
                 if (popUps[popUpIndex].GetComponent<PopUp>().next)
                 {
+                    StartCoroutine(LevelTransition());
                     popUpIndex++;
                 }
             }
@@ -190,7 +192,7 @@ namespace Singleplayer.Tutorial
             {
                 if (popUps[popUpIndex].GetComponent<PopUp>().next)
                 {
-                    StartCoroutine(LevelTransition());
+                    
                 }
             }
             
@@ -215,7 +217,12 @@ namespace Singleplayer.Tutorial
 
         public void LoadSceneMode()
         {
+            foreach (var popUp in popUps)
+            {
+                popUp.SetActive(false);
+            }
             StartCoroutine(LevelTransition());
+            this.enabled = false;
         }
         
         IEnumerator LevelTransition()
