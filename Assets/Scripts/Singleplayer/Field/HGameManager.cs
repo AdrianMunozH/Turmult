@@ -435,15 +435,7 @@ namespace Singleplayer.Field
         public void loseLife(int value)
         {
             
-            if (_currentLifes-value >= 0)
-            {
-                _currentLifes-=value;
-
-            }
-            else
-            {
-                StartCoroutine(nameof(LevelTransition));
-            }
+            _currentLifes-=value;
             _lifebar.fillAmount = (float)((float)_currentLifes / (float)totalLifes);
         }
     
