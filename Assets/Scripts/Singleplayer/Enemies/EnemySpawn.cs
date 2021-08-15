@@ -8,7 +8,7 @@ namespace Singleplayer.Enemies
     //NetworkBehaviour erbt von MonoBehaviour
     public class EnemySpawn : MonoBehaviour
     {
-        [SerializeField] public GameObject enemyPrefab;
+        [SerializeField] public GameObject[] enemyPrefab;
         [HideInInspector] public List<GameObject> enemys;
 
         //test für shortest path
@@ -107,9 +107,9 @@ namespace Singleplayer.Enemies
             //_hexGrid.ShortestPathPrefabs(sp.ToArray());
         }
 
-        public void SpawnEnemy(HCell[] path, bool isAttacking)
+        public void SpawnEnemy(HCell[] path, bool isAttacking,int prefabId)
         {
-            GameObject enemy = Instantiate(enemyPrefab);
+            GameObject enemy = Instantiate(enemyPrefab[prefabId]);
             enemys.Add(enemy);
             enemy.transform.SetParent(transform, false);
             enemy.transform.position = path[0].gameObject.transform.position;

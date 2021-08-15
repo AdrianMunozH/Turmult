@@ -3242,31 +3242,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 116613070}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
-        m_MethodName: PurchaseMountainTurretOne
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
-        m_MethodName: SetBuildMode
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &116613070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3959,7 +3935,7 @@ GameObject:
   - component: {fileID: 147415620}
   - component: {fileID: 147415619}
   m_Layer: 5
-  m_Name: Tower (1)
+  m_Name: Minion 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4512,7 +4488,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 99999
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9c9dadd8e29966847b454edeb4a53a9e, type: 2}
   m_sharedMaterial: {fileID: 3582507721319190955, guid: 9c9dadd8e29966847b454edeb4a53a9e,
@@ -6922,7 +6898,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 99999
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9c9dadd8e29966847b454edeb4a53a9e, type: 2}
   m_sharedMaterial: {fileID: 3582507721319190955, guid: 9c9dadd8e29966847b454edeb4a53a9e,
@@ -10764,7 +10740,7 @@ GameObject:
   - component: {fileID: 354982704}
   - component: {fileID: 354982703}
   m_Layer: 5
-  m_Name: Tower (1)
+  m_Name: Minion 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11123,7 +11099,7 @@ GameObject:
   - component: {fileID: 365441535}
   - component: {fileID: 365441534}
   m_Layer: 5
-  m_Name: Tower (3)
+  m_Name: Minion 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15846,11 +15822,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d95804fc056d47d4be38c62350601024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingPhaseTimer: 5
-  firstBuildingPhaseTimer: 5
+  buildingPhaseTimer: 12
+  firstBuildingPhaseTimer: 12
   timeBar: {fileID: 1571026801}
   lifeBar: {fileID: 328944216}
   gameOver: {fileID: 703961776}
+  sentEnemiesPrefabId: 
+  IncomeFromSentMinions: 0
   totalLifes: 20
   spawnPoint: {fileID: -5466852683715092558, guid: d3bbafaac9bfffd478ef2b9390974b9a,
     type: 3}
@@ -16228,7 +16206,7 @@ GameObject:
   - component: {fileID: 555394239}
   - component: {fileID: 555394238}
   m_Layer: 5
-  m_Name: Tower (2)
+  m_Name: Minion 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24448,7 +24426,7 @@ GameObject:
   - component: {fileID: 805299515}
   - component: {fileID: 805299514}
   m_Layer: 5
-  m_Name: Tower (1)
+  m_Name: Minion 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26637,7 +26615,7 @@ GameObject:
   - component: {fileID: 905327137}
   - component: {fileID: 905327136}
   m_Layer: 5
-  m_Name: Tower (4)
+  m_Name: Minion 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30680,31 +30658,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1089149852}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
-        m_MethodName: PurchaseMountainTurretOne
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
-        m_MethodName: SetBuildMode
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1089149852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31239,7 +31193,7 @@ GameObject:
   - component: {fileID: 1113859501}
   - component: {fileID: 1113859500}
   m_Layer: 5
-  m_Name: Tower (2)
+  m_Name: Minion 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39956,7 +39910,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 99999
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9c9dadd8e29966847b454edeb4a53a9e, type: 2}
   m_sharedMaterial: {fileID: 3582507721319190955, guid: 9c9dadd8e29966847b454edeb4a53a9e,
@@ -43462,7 +43416,7 @@ GameObject:
   - component: {fileID: 1526162523}
   - component: {fileID: 1526162522}
   m_Layer: 5
-  m_Name: Tower (3)
+  m_Name: Minion 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44733,7 +44687,7 @@ GameObject:
   - component: {fileID: 1567285207}
   - component: {fileID: 1567285206}
   m_Layer: 5
-  m_Name: Tower (3)
+  m_Name: Minion 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46172,7 +46126,7 @@ GameObject:
   - component: {fileID: 1612469537}
   - component: {fileID: 1612469536}
   m_Layer: 5
-  m_Name: Tower
+  m_Name: Minion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46590,7 +46544,7 @@ GameObject:
   - component: {fileID: 1627630145}
   - component: {fileID: 1627630144}
   m_Layer: 5
-  m_Name: Tower (2)
+  m_Name: Minion 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48525,31 +48479,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1716727302}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
-        m_MethodName: PurchaseMountainTurretOne
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
-        m_MethodName: SetBuildMode
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1716727302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49634,31 +49564,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1745641661}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
-        m_MethodName: PurchaseMountainTurretOne
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
-        m_MethodName: SetBuildMode
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1745641661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50321,7 +50227,7 @@ GameObject:
   - component: {fileID: 1771093742}
   - component: {fileID: 1771093741}
   m_Layer: 5
-  m_Name: Tower (4)
+  m_Name: Minion 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50714,9 +50620,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '
-
-'
+  m_text: 99999
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9c9dadd8e29966847b454edeb4a53a9e, type: 2}
   m_sharedMaterial: {fileID: 3582507721319190955, guid: 9c9dadd8e29966847b454edeb4a53a9e,
@@ -51519,7 +51423,7 @@ GameObject:
   - component: {fileID: 1823891165}
   - component: {fileID: 1823891164}
   m_Layer: 5
-  m_Name: Tower (4)
+  m_Name: Minion 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52092,31 +51996,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1836177171}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Control.Shop, Assembly-CSharp
-        m_MethodName: PurchaseMountainTurretOne
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Field.BuildManager, Assembly-CSharp
-        m_MethodName: SetBuildMode
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1836177171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53457,7 +53337,7 @@ GameObject:
   - component: {fileID: 1903236230}
   - component: {fileID: 1903236229}
   m_Layer: 5
-  m_Name: Tower
+  m_Name: Minion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53785,7 +53665,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 99999
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9c9dadd8e29966847b454edeb4a53a9e, type: 2}
   m_sharedMaterial: {fileID: 3582507721319190955, guid: 9c9dadd8e29966847b454edeb4a53a9e,
@@ -56740,9 +56620,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '
-
-'
+  m_text: 99999
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9c9dadd8e29966847b454edeb4a53a9e, type: 2}
   m_sharedMaterial: {fileID: 3582507721319190955, guid: 9c9dadd8e29966847b454edeb4a53a9e,
@@ -59722,7 +59600,7 @@ GameObject:
   - component: {fileID: 2116152978}
   - component: {fileID: 2116152977}
   m_Layer: 5
-  m_Name: Tower
+  m_Name: Minion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -7,6 +7,7 @@ using Singleplayer.Turrets;
 using Singleplayer.Ui.Input;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using Image = UnityEngine.UI.Image;
 
@@ -25,6 +26,14 @@ namespace Singleplayer.Field
         private static Image _lifebar;
         private TextMeshProUGUI _timebarLabel;
         public GameObject gameOver;
+        
+        [Header("Enemies")]
+        public List<int> sentEnemiesPrefabId;
+        public int IncomeFromSentMinions = 0;
+        //SentEnemiesPrefab befüllen mit den normalen Waveminions + den gesendeten
+        //IncomeFromSentMinoins erhöhen
+        //Minions in EnemySpawn an richtiger Stelle hinterlegen
+        
         
 //Todo: Lifes eigentlich an den Player auslagern
         [Header("Lifes")] 
@@ -151,8 +160,10 @@ namespace Singleplayer.Field
                     //Zurück zu Buildstate!
                     if (allMinionsSpawned && spawnPoint.enemys.Count == 0)
                     {
+                        sentEnemiesPrefabId.Clear();
                         allMinionsSpawned = false;
                         IncomeManager.Instance.Interest();
+                        IncomeManager.Instance.IncreasePlayerGold(IncomeFromSentMinions);
                         PlayerInputManager.Instance.SetState(new BuildState());
                         _timer = buildingPhaseTimer;
                         _timebarLabel.text = (_currentWave).ToString();
@@ -168,15 +179,15 @@ namespace Singleplayer.Field
         }
         
 
-        IEnumerator SpawnEnemyWithDelay()
+        IEnumerator SpawnEnemyWithDelay(int prefabId)
         {
             yield return new WaitForSeconds(timeBetweenMinionSpawn * _spawnCounter);
             // es muss gecheckt werden ob die weglänge grö0er als 0 ist
             if (_isAttacking)
             {
-                spawnPoint.SpawnEnemy(minionPath.ToArray(), true);
+                spawnPoint.SpawnEnemy(minionPath.ToArray(), true, prefabId);
             }else 
-                spawnPoint.SpawnEnemy(minionPath.ToArray(), false);
+                spawnPoint.SpawnEnemy(minionPath.ToArray(), false,prefabId);
             
             if (_spawnCounter == minionsPerWave) allMinionsSpawned = true;
         }
@@ -270,7 +281,7 @@ namespace Singleplayer.Field
                 _isAttacking = false;
                 for (int i = 0; i < minionsPerWave; i++)
                 {
-                    StartCoroutine(nameof(SpawnEnemyWithDelay));
+                    StartCoroutine(nameof(SpawnEnemyWithDelay), sentEnemiesPrefabId[_spawnCounter]);
                     _spawnCounter++;
                 }
             }
@@ -282,7 +293,7 @@ namespace Singleplayer.Field
                 _isAttacking = true;
                 for (int i = 0; i < minionsPerWave; i++)
                 {
-                    StartCoroutine(nameof(SpawnEnemyWithDelay));
+                    StartCoroutine(nameof(SpawnEnemyWithDelay),sentEnemiesPrefabId[_spawnCounter]);
                     _spawnCounter++;
                 }
             }
@@ -384,8 +395,12 @@ namespace Singleplayer.Field
 
             // am ende setzten wir den aktuellen kürzesten weg auf lastShortestPath
             _lastShortestPath = tempArr;
-        
-            
+        }
+
+        public void SendMinion(int minionId, int goldIncrease)
+        {
+            sentEnemiesPrefabId.Add(minionId);
+            IncomeFromSentMinions += goldIncrease;
         }
     }
 }
