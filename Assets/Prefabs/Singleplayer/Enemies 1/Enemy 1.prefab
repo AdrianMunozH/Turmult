@@ -625,7 +625,8 @@ MonoBehaviour:
   isSlowed: 0
   moveSpeed: 0
   defaultSpeed: 8
-  _text: {fileID: 0}
+  GoldText: {fileID: 3796157377483457373, guid: c7c37f616bd57ae47b60ea97b54e2d42,
+    type: 3}
   isAttacking: 0
   isTurret: 0
   dmgOnBase: 1
