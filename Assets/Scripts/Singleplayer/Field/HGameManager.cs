@@ -11,6 +11,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using Image = UnityEngine.UI.Image;
+using Random = UnityEngine.Random;
 
 namespace Singleplayer.Field
 {
@@ -36,6 +37,8 @@ namespace Singleplayer.Field
         [Header("Enemies")]
         public List<int> sentEnemiesPrefabId;
         public int IncomeFromSentMinions = 0;
+
+        private int _overAllMinions = 0;
         //SentEnemiesPrefab befüllen mit den normalen Waveminions + den gesendeten
         //IncomeFromSentMinoins erhöhen
         //Minions in EnemySpawn an richtiger Stelle hinterlegen
@@ -151,18 +154,15 @@ namespace Singleplayer.Field
 
                 if (PlayerInputManager.Instance.GetState().name.Equals(StateEnum.Battle))
                 {
-                    int oldMinionsPerWaveCount = minionsPerWave;
+
                     if (_currentWave < waves && !allMinionsSpawned)
                     {
-                        //Wenn Minions gesendet worden sind diese hinzufügen in den Minions per Wave Count erhöhen!
-                        if (sentEnemiesPrefabId.Count > 0)
-                        {
-                            minionsPerWave += sentEnemiesPrefabId.Count;
-                        }
+
+                        Debug.Log("oh oh");
                         SpawnEnemyWave();
                         _currentWave++;
 
-                        minionsPerWave = oldMinionsPerWaveCount;
+
                     }
                     
                     //Zurück zu Buildstate!
@@ -197,7 +197,7 @@ namespace Singleplayer.Field
             }else 
                 spawnPoint.SpawnEnemy(minionPath.ToArray(), false,prefabId);
             
-            if (_spawnCounter == minionsPerWave) allMinionsSpawned = true;
+            if (_spawnCounter == _overAllMinions) allMinionsSpawned = true;
         }
         
         IEnumerator LevelTransition()
@@ -267,18 +267,29 @@ namespace Singleplayer.Field
         public void SpawnEnemyWave()
         {
             _spawnCounter = 0;
+            _overAllMinions = 0;
 
             spawningList = new List<int>();
+            spawningList.Clear();
+            
             for (int i = 0; i < minionsPerWave; i++)
             {
                 //Erst einmal nur Typ 1 Minions in Standard waves!
                 spawningList.Add(0);
             }
-
-            spawningList.Concat(sentEnemiesPrefabId);
             
+            spawningList.AddRange(sentEnemiesPrefabId);
             //Minions werden hier durcheinander geworfen, sodass Sie nicht immer in gleicher Reihenfolge starten
-            List<int> shuffledcards = spawningList.OrderBy(a => Guid.NewGuid()).ToList();
+            for (int i = 0; i < spawningList.Count; i++) {
+                int temp = spawningList[i];
+                int randomIndex = Random.Range(i, spawningList.Count);
+                spawningList[i] = spawningList[randomIndex];
+                spawningList[randomIndex] = temp;
+            }
+            
+            _overAllMinions = spawningList.Count;
+            Debug.Log("Overall: "+_overAllMinions );
+
             if (CalculatePath())
             {
                 // normaler modus                Nicht angreifen
@@ -286,12 +297,11 @@ namespace Singleplayer.Field
                 _isAttacking = false;
                 for (int i = 0; i < spawningList.Count; i++)
                 {
-                    Debug.Log(shuffledcards[i]);
-                    StartCoroutine(nameof(SpawnEnemyWithDelay), shuffledcards[_spawnCounter]);
+                    StartCoroutine(nameof(SpawnEnemyWithDelay), spawningList[i]);
                     _spawnCounter++;
+
                 }
             }
-            
             else
             {
                 // attacking modus
@@ -299,7 +309,7 @@ namespace Singleplayer.Field
                 _isAttacking = true;
                 for (int i = 0; i < spawningList.Count; i++)
                 {
-                    StartCoroutine(nameof(SpawnEnemyWithDelay),shuffledcards[_spawnCounter]);
+                    StartCoroutine(nameof(SpawnEnemyWithDelay),spawningList[i]);
                     _spawnCounter++;
                 }
             }
@@ -405,8 +415,22 @@ namespace Singleplayer.Field
 
         public void SendMinion(int value)
         {
-            sentEnemiesPrefabId.Add(1);
+            sentEnemiesPrefabId.Add(value);
             IncomeFromSentMinions += 1;
+            Debug.Log("click");
+        }
+        
+        
+        public string ListToString(List<int> list)
+        {
+            string s = "";
+            foreach (int i in list)
+            {
+                //s += h.coordinates.ToString() + "\n";
+                s += i + ", ";
+            }
+            
+            return s;
         }
     }
 }
