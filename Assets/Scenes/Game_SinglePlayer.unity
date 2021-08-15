@@ -16226,13 +16226,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d95804fc056d47d4be38c62350601024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
   buildingPhaseTimer: 25
   firstBuildingPhaseTimer: 45
-=======
-  buildingPhaseTimer: 30
-  firstBuildingPhaseTimer: 10
->>>>>>> 6d3420602d392371085620136a29dd851b06b8cd
   timeBar: {fileID: 1571026801}
   lifeBar: {fileID: 328944216}
   gameOver: {fileID: 703961776}
