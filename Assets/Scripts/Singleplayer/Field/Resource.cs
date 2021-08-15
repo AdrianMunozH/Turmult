@@ -8,7 +8,7 @@ namespace Singleplayer.Field
 {
     public class Resource
     {
-        public float chanceResourceField = 20f;
+        public float chanceResourceField = 5f;
 
         public enum ResourceType
         {
