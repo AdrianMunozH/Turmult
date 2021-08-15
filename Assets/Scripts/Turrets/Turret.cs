@@ -62,6 +62,7 @@ namespace Turrets
             //Range auf Hexradius anpassen
             range *= HexMetrics.outerRadius;
         }
+        
 
         /**
  * Methode wird 2x pro Sekunde aufgerufen und ermittelt den am wenigsten entfernten Gegner

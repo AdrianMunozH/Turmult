@@ -9,9 +9,12 @@ namespace Singleplayer.Turrets.Projectile
     {
         [HideInInspector]public Transform target;
         public List<Effect> effects;
+        public AudioSource audioSource;
+        
         // Start is called before the first frame update
         void Start()
         {
+            audioSource = GetComponent<AudioSource>();
             foreach (var effect in effects)
             {
                 if(target != null)
@@ -24,9 +27,21 @@ namespace Singleplayer.Turrets.Projectile
         void Update()
         {
             if (target != null)
+            {
+                
                 HitTarget();
+                if (audioSource != null && !audioSource.isPlaying)
+                {
+                    audioSource.Play();
+                }
 
+            } else 
+            {
+                if(audioSource != null)
+                    audioSource.Stop();
+            }
         }
+        
         public void Seek(Transform _target)
         {
             //TODO: SET EFFECTS OR SPEED

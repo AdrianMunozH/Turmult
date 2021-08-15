@@ -14,7 +14,7 @@ namespace Singleplayer.Turrets.Projectile
         public List<Effect> effects;
         // vllt mit scriptableobject für die base stats von den effects 
         // sollte vermieden werden das hier jetzt tausende stats nochmal stehen
-  
+        
 
         // Start is called before the first frame update
         void Start()
@@ -23,24 +23,23 @@ namespace Singleplayer.Turrets.Projectile
             {
                 if(target != null)
                     effect.targetEnemy = target.gameObject.GetComponent<EnemyMovement>();
-            
+
                 if (effect.Type == EffectType.DMG)
                 {
-                    DmgEffect eff = (DmgEffect)effect;
+                    DmgEffect eff = (DmgEffect) effect;
                     //eff.damage = damage; // brauche ich vllt gar nicht
                 }
 
                 if (effect.Type == EffectType.AOE)
                 {
-                    AoeEffect eff = (AoeEffect)effect;
+                    AoeEffect eff = (AoeEffect) effect;
                     //eff.damage = damage;
-                    if(eff.AOE == null)
+                    if (eff.AOE == null)
                         eff.AOE = GetComponent<SphereCollider>();
                 }
 
                 if (effect.Type == EffectType.SLOW)
                 {
-                
                 }
             }
         }

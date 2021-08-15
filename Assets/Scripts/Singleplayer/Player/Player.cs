@@ -72,8 +72,6 @@ namespace Singleplayer.Player
         public TextMeshProUGUI mountainTMP;
         public TextMeshProUGUI forestTMP;
         public TextMeshProUGUI swampTMP;
-        public Image hpBar;
-        public TextMeshProUGUI gameOVER;
         
         [SerializeField] public AudioSource mountainSong;
         [SerializeField] public AudioSource forestSong;
@@ -85,7 +83,6 @@ namespace Singleplayer.Player
         // Start is called before the first frame update
         void Start()
         {
-
             gold = startGold;
             forest = startForest;
             mountain = startMountain;
@@ -97,7 +94,6 @@ namespace Singleplayer.Player
 
         private void FixedUpdate()
         {
-            
             goldTMP.text = gold.ToString();
             mountainTMP.text = mountain.ToString();
             forestTMP.text = forest.ToString();
@@ -105,10 +101,6 @@ namespace Singleplayer.Player
 
         }
 
-        public void LoseLife()
-        {
-            //TODO
-        }
 
         public void SetSong(AudioSource song)
         {
@@ -126,8 +118,6 @@ namespace Singleplayer.Player
                 StartCoroutine(StartFade(song, 5f, volume));
                 currentSong = song;
             }
-                
-            
         }
         
         public static IEnumerator StartFade(AudioSource audioSource, float duration, float targetVolume)
@@ -143,9 +133,6 @@ namespace Singleplayer.Player
             }
             yield break;
         }
-
-
-        
 
 
     }
