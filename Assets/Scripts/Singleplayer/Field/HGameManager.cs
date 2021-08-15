@@ -55,6 +55,7 @@ namespace Singleplayer.Field
         private HCell[] _lastShortestPath;
         private List<int> spawningList;
         private int _spawnCounter = 0;
+        private bool _alreadySentState = false;
 
         //Wird benötigt für das checken, ob alle Minions getötet wurden
         private bool allMinionsSpawned;
@@ -155,19 +156,19 @@ namespace Singleplayer.Field
                 if (PlayerInputManager.Instance.GetState().name.Equals(StateEnum.Battle))
                 {
 
-                    if (_currentWave < waves && !allMinionsSpawned)
+                    if (_currentWave < waves && !allMinionsSpawned && !_alreadySentState)
                     {
-
+                        _alreadySentState = true;
                         Debug.Log("oh oh");
                         SpawnEnemyWave();
                         _currentWave++;
-
-
                     }
                     
                     //Zurück zu Buildstate!
                     if (allMinionsSpawned && spawnPoint.enemys.Count == 0)
                     {
+                        _alreadySentState = false;
+                        Debug.Log("ja.. " + allMinionsSpawned);
                         sentEnemiesPrefabId.Clear();
                         allMinionsSpawned = false;
                         IncomeManager.Instance.Interest();
