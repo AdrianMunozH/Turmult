@@ -17,7 +17,6 @@ namespace Singleplayer.Field
 
         public float buildingPhaseTimer = 20;
         public float firstBuildingPhaseTimer = 2;
-        public float betweenRoundsTimer = 10;
         [Header("UI")] 
         public GameObject timeBar;
         public GameObject lifeBar;
@@ -25,10 +24,10 @@ namespace Singleplayer.Field
         private static Image _lifebar;
         public GameObject gameOver;
         
-
+//Todo: Lifes eigentlich an den Player auslagern
         [Header("Lifes")] 
-        public static int totalLifes = 20;
-        private static int _currentLifes;
+        public int totalLifes = 20;
+        private int _currentLifes;
         
         //WaveSpawning
         [Header("Spawning")] public EnemySpawn spawnPoint;
@@ -117,31 +116,41 @@ namespace Singleplayer.Field
 
         private void Update()
         {
+            //Spiel läuft
             if (_currentLifes > 0)
             {
+                // Buildstate und Time nicht abgelaufen
                 if (_timer > 0 && !PlayerInputManager.Instance.GetState().name.Equals(StateEnum.Battle))
                 {
                     _timer -= Time.deltaTime;
                     _timebar.fillAmount = (_timer / buildingPhaseTimer);
-                }
-                else if (!PlayerInputManager.Instance.GetState().name.Equals(StateEnum.Battle))
-                {
-                    PlayerInputManager.Instance.SetState(new BattleState());
-                    if (_currentWave < waves)
-                    {
-                        SpawnEnemyWave();
 
-                        _currentWave++;
+                    //wenn Zeit abgelaufen -> Battlephase
+                    if (_timer <= 0)
+                    {
+                        PlayerInputManager.Instance.SetState(new BattleState());
                     }
                 }
 
-                if (allMinionsSpawned && spawnPoint.enemys.Count == 0)
+                if (PlayerInputManager.Instance.GetState().name.Equals(StateEnum.Battle))
                 {
-                    allMinionsSpawned = false;
-                    IncomeManager.Instance.Interest();
-                    PlayerInputManager.Instance.SetState(new BuildState());
-                    _timer = buildingPhaseTimer;
+                    if (_currentWave < waves && !allMinionsSpawned)
+                    {
+                        SpawnEnemyWave();
+                        _currentWave++;
+                    }
+                    
+                    //Zurück zu Buildstate!
+                    if (allMinionsSpawned && spawnPoint.enemys.Count == 0)
+                    {
+                        allMinionsSpawned = false;
+                        IncomeManager.Instance.Interest();
+                        PlayerInputManager.Instance.SetState(new BuildState());
+                        _timer = buildingPhaseTimer;
+                    }
                 }
+
+
             }
             else
             {

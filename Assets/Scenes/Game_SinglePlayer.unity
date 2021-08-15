@@ -11535,7 +11535,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9056604, g: 0.2842247, b: 0.09825563, a: 1}
+  m_Color: {r: 0.9607843, g: 0.28627452, b: 0.13725491, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -17576,17 +17576,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d95804fc056d47d4be38c62350601024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingPhaseTimer: 40
-  firstBuildingPhaseTimer: 40
-  betweenRoundsTimer: 5
+  buildingPhaseTimer: 5
+  firstBuildingPhaseTimer: 5
   timeBar: {fileID: 1571026801}
   lifeBar: {fileID: 328944216}
   gameOver: {fileID: 703961776}
+  totalLifes: 20
   spawnPoint: {fileID: -5466852683715092558, guid: d3bbafaac9bfffd478ef2b9390974b9a,
     type: 3}
   waves: 10
-  timeBetweenMinionSpawn: 1.5
-  minionsPerWave: 25
+  timeBetweenMinionSpawn: 0.6
+  minionsPerWave: 5
   distanceFromSpawn: 8
   transition: {fileID: 370615712}
 --- !u!114 &541232432
@@ -24447,6 +24447,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1100171615}
     m_Modifications:
+    - target: {fileID: 2339258695120115695, guid: 85a1cf83d55f1a4449ef1781de0fb02c,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339258695120115695, guid: 85a1cf83d55f1a4449ef1781de0fb02c,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339258695120115695, guid: 85a1cf83d55f1a4449ef1781de0fb02c,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339258695724214108, guid: 85a1cf83d55f1a4449ef1781de0fb02c,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.21176471
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339258695724214108, guid: 85a1cf83d55f1a4449ef1781de0fb02c,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.76862746
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339258695724214108, guid: 85a1cf83d55f1a4449ef1781de0fb02c,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.9607843
+      objectReference: {fileID: 0}
     - target: {fileID: 2339258695724214109, guid: 85a1cf83d55f1a4449ef1781de0fb02c,
         type: 3}
       propertyPath: m_Pivot.x
@@ -24575,6 +24605,36 @@ PrefabInstance:
     - target: {fileID: 2339258695724214110, guid: 85a1cf83d55f1a4449ef1781de0fb02c,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339258695802169405, guid: 85a1cf83d55f1a4449ef1781de0fb02c,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339258695802169405, guid: 85a1cf83d55f1a4449ef1781de0fb02c,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339258695802169405, guid: 85a1cf83d55f1a4449ef1781de0fb02c,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339258696162016575, guid: 85a1cf83d55f1a4449ef1781de0fb02c,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339258696162016575, guid: 85a1cf83d55f1a4449ef1781de0fb02c,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339258696162016575, guid: 85a1cf83d55f1a4449ef1781de0fb02c,
+        type: 3}
+      propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -48843,7 +48903,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.28346387, g: 0.91737014, b: 0.9245283, a: 1}
+  m_Color: {r: 0.19215687, g: 0.9607843, b: 0.68235296, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
