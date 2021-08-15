@@ -110,9 +110,12 @@ namespace Singleplayer.Field
 
         public void BuildTurret()
         {
-
             if (buildManager.GetTurretToBuild() != null)
             {
+                if (transform.childCount > 0)
+                {
+                    Destroy(transform.GetChild(0).gameObject);
+                }
                 GameObject turretToBuild = buildManager.GetTurretToBuild();
                 Vector3 turPos = transform.position;
                 turret = (GameObject) Instantiate(turretToBuild, new Vector3(turPos.x, turPos.y - 10, turPos.z),
