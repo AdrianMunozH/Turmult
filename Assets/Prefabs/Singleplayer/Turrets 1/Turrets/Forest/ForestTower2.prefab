@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 4339987774518027367}
   - component: {fileID: 834679373312322498}
   - component: {fileID: 3202507103951429384}
+  - component: {fileID: 1771070454704950277}
   m_Layer: 0
-  m_Name: ForestTower3
+  m_Name: ForestTower2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,6 +83,36 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1771070454704950277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3995092328936062685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 581e71ceec534886ae4348cbbc111900, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 3
+  fireRate: 1
+  turnSpeed: 10
+  ressourceType: 10
+  turretType: 2
+  lineRenderer: {fileID: 0}
+  partToRotate: {fileID: 0}
+  firePoint: {fileID: 0}
+  enemyTag: Enemy
+  canRotate: 0
+  projectilePrefab: {fileID: 0}
+  targets:
+  - {fileID: 0}
+  - {fileID: 0}
+  maxTargets: 2
+  firePoints:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &4561115233540846408
 GameObject:
   m_ObjectHideFlags: 0

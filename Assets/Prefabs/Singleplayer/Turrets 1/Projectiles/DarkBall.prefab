@@ -406,7 +406,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -459,7 +459,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -4972,7 +4972,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -5025,7 +5025,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -5078,7 +5078,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -5131,7 +5131,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -9750,7 +9750,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -9803,7 +9803,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -14422,7 +14422,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -14475,7 +14475,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -19076,7 +19076,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -19129,7 +19129,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -23351,8 +23351,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 400010}
-  - component: {fileID: 1739266345869735225}
-  - component: {fileID: 5054899177876313623}
+  - component: {fileID: 9029142472554011866}
+  - component: {fileID: -2655942024017325986}
+  - component: {fileID: -6881197049545249202}
   m_Layer: 0
   m_Name: DarkBall
   m_TagString: Untagged
@@ -23379,7 +23380,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1739266345869735225
+--- !u!114 &9029142472554011866
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -23388,17 +23389,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 100010}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f09e93ad8f20404ca466c31915c779f, type: 3}
+  m_Script: {fileID: 11500000, guid: e2be38e54f72429e887a6da7ef9a89ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 25
+  speed: 70
   target: {fileID: 0}
   effects:
-  - {fileID: 5054899177876313623}
-  impactEffect: {fileID: 3591840901927880627, guid: c82ebe3d58760754fae3b9828c56148a,
-    type: 3}
+  - {fileID: -2655942024017325986}
+  - {fileID: -6881197049545249202}
+  impactEffect: {fileID: 0}
   particelDestroyTime: 2
---- !u!114 &5054899177876313623
+--- !u!114 &-2655942024017325986
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -23407,9 +23408,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 100010}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72181d5aff3db7e4f912408f570c4ec6, type: 3}
+  m_Script: {fileID: 11500000, guid: 7df1ea6738824b869daa8a0e9d3be3be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 2
   targetEnemy: {fileID: 0}
-  damage: 30
+  damage: 55
+--- !u!114 &-6881197049545249202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65f00b073d2b4b7e94b065e3490af8eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetEnemy: {fileID: 0}
+  slow: 1
+  ticks: 3
+  tick: 0

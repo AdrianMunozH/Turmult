@@ -103,6 +103,7 @@ namespace Singleplayer.Turrets
         {
             for (int i = 0; i < targets.Length; i++)
             {
+                target = targets[0];
                 UpdateTarget(i);
             }
             
@@ -176,6 +177,17 @@ namespace Singleplayer.Turrets
             Gizmos.DrawWireSphere(transform.position, range);
         }
 
+        private bool AreTargetsNull()
+        {
+            foreach (var t in targets)
+            {
+                if (t != null)
+                    return false;
+            }
+
+            return true;
+        }
+
         void Update()
         {
             //Wenn kein Target verhanden keine Updates
@@ -187,6 +199,14 @@ namespace Singleplayer.Turrets
                 }
                 return;
             }
+            
+            Debug.Log(targets.Length);
+            if(AreTargetsNull() && turretType == TurretType.MULTI)
+            {
+                Debug.Log("hier");
+                 return;
+            }
+            
             checkType();
             
 
