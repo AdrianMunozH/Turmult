@@ -1,3 +1,4 @@
+using System.Resources;
 using Cinemachine;
 using UnityEngine;
 
@@ -10,6 +11,9 @@ namespace Singleplayer.Ui.Input
         public UI ui;
 
         [SerializeField] private MenuController menuController;
+
+
+        [HideInInspector] public bool BuildAndAcquireBlocked;
 
         public static PlayerInputManager Instance
         {
@@ -27,7 +31,37 @@ namespace Singleplayer.Ui.Input
                 _instance = this;
             }
         }
-        
+
+        public void AcquireModeOn()
+        {
+            if(State.name.Equals("Acquire")) return;
+            
+            Debug.Log("state b4: " + State.name + BuildAndAcquireBlocked );
+            if (State.name.Equals("Build") || !BuildAndAcquireBlocked)
+            {
+                SetState(new AcquireState());
+            }
+        }
+
+        public void BuildStateOn()
+        {
+            if(State.name.Equals("Build")) return;
+            
+            Debug.Log("state b4: " + State.name + BuildAndAcquireBlocked );
+            if (State.name.Equals("Acquire")|| !BuildAndAcquireBlocked)
+            {
+                SetState(new BuildState());
+            }
+        }
+
+        public void BattleStateOn()
+        {
+            if(State.name.Equals("Battle")) return;
+            
+            Debug.Log("state b4: " + State.name);
+            BuildAndAcquireBlocked = true;
+            SetState(new BattleState());
+        }
         
         
         // UI - aqcuire / build

@@ -109,7 +109,7 @@ namespace Singleplayer.Field
         {
             //Initiales setzen des Timers
             _timer = firstBuildingPhaseTimer;
-            PlayerInputManager.Instance.SetState(new BuildState());
+            PlayerInputManager.Instance.SetState(new AcquireState());
 
             TimeTickSystem.OnTick += delegate(object sender, TimeTickSystem.OnTickEventArgs args) { };
 
@@ -152,7 +152,7 @@ namespace Singleplayer.Field
                     //wenn Zeit abgelaufen -> Battlephase
                     if (_timer <= 0)
                     {
-                        PlayerInputManager.Instance.SetState(new BattleState());
+                        PlayerInputManager.Instance.BattleStateOn();
                     }
                 }
 
@@ -174,7 +174,8 @@ namespace Singleplayer.Field
                         allMinionsSpawned = false;
                         IncomeManager.Instance.Interest();
                         IncomeManager.Instance.IncreasePlayerGold(IncomeFromSentMinions);
-                        PlayerInputManager.Instance.SetState(new BuildState());
+                        PlayerInputManager.Instance.BuildAndAcquireBlocked = false;
+                        PlayerInputManager.Instance.AcquireModeOn();
                         _timer = buildingPhaseTimer;
                         _timebarLabel.text = (_currentWave).ToString();
                     }
