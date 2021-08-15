@@ -6023,9 +6023,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7281319259414597129}
   - component: {fileID: -7064929445547236414}
+  - component: {fileID: -4806253479264582076}
   m_Layer: 0
   m_Name: SwampTower2
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6099,6 +6100,29 @@ MonoBehaviour:
   targets: []
   maxTargets: 0
   firePoints: []
+--- !u!114 &-4806253479264582076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7946498073699439795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f3302bc8cd4d4cab989f9d0b0e1b00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  path: []
+  pathIndex: 0
+  enemySpawn: {fileID: 0}
+  life: 100
+  isSlowed: 0
+  moveSpeed: 0
+  defaultSpeed: 0
+  isAttacking: 0
+  isTurret: 1
+  dmgOnBase: 0
+  goldValue: 0
 --- !u!1 &8081957940543061778
 GameObject:
   m_ObjectHideFlags: 0
