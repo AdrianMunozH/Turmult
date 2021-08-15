@@ -26,9 +26,10 @@ GameObject:
   - component: {fileID: 7685590069109510372}
   - component: {fileID: 6703441915477876545}
   - component: {fileID: 8855096862191201163}
+  - component: {fileID: -3129090178096582777}
   m_Layer: 0
   m_Name: MountainTower3Bottom
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,6 +98,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-3129090178096582777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7053591247536687710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f3302bc8cd4d4cab989f9d0b0e1b00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  path: []
+  pathIndex: 0
+  enemySpawn: {fileID: 0}
+  life: 100
+  isSlowed: 0
+  moveSpeed: 0
+  defaultSpeed: 0
+  isAttacking: 0
+  isTurret: 1
+  dmgOnBase: 0
+  goldValue: 0
 --- !u!1001 &7813405120436707233
 PrefabInstance:
   m_ObjectHideFlags: 0

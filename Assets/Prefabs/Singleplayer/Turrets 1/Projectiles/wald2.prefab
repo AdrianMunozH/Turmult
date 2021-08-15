@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &300426235829738154
 Transform:
   m_ObjectHideFlags: 0
@@ -4812,7 +4812,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetEnemy: {fileID: 0}
   damage: 200
-  damageTargetOnce: 1
+  damageTargetOnce: 0
   AOE: {fileID: 8421091955793017823}
 --- !u!1 &5564232021700692178
 GameObject:

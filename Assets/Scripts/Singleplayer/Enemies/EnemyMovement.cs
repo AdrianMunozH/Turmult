@@ -29,9 +29,8 @@ namespace Singleplayer.Enemies
         [HideInInspector] public float moveSpeed;
         public float defaultSpeed;
 
-        //kann wahrscheinlich raus
-        private Canvas _canvas;
-        public TMP_Text _text;
+
+        
         public bool isAttacking;
         private double _attackCountdown = 0f;
         private double attackRate = 1f;
@@ -45,7 +44,6 @@ namespace Singleplayer.Enemies
         {
             pathIndex = 0;
             moveSpeed = defaultSpeed;
-            _canvas = GetComponent<Canvas>();
             _totalLife = life;
             
             animator = GetComponent<Animator>();
@@ -70,7 +68,6 @@ namespace Singleplayer.Enemies
                     if (isAttacking)
                     {
                         Attacking();
-                        _text.SetText("Attack!");
                     }
                     else
                     {
@@ -102,9 +99,8 @@ namespace Singleplayer.Enemies
         {
             if (_attackCountdown <= 0f)
             {
-                _text.SetText("Hit!");
                 _attackCountdown = 1f / attackRate;
-                //animator.SetBool(isAttackingHash, true);
+                animator.SetBool(isAttackingHash, true);
             }
 
             _attackCountdown -= Time.deltaTime;
@@ -121,16 +117,10 @@ namespace Singleplayer.Enemies
                 life -= damage;
             }
             else
-                 Die(true);
-            // // die methode falls wir sowas wie deathanimation macehn 
-            //
-            if (_canvas != null)
             {
-                _text.enabled = true;
-                _text.SetText(life.ToString());
-            }
+                Die(true);
 
-            healthbar.GetComponent<UnityEngine.UI.Image>().fillAmount = (life / _totalLife);
+            }
             // kann später gelöscht werden ist nur zum debugen
 
             // //StartCoroutine("DeactivateText");
@@ -167,13 +157,7 @@ namespace Singleplayer.Enemies
             //Debug.Log("isSlowed");
             moveSpeed = defaultSpeed * (1 - slow);
         }
-
-        IEnumerator DeactivateText()
-        {
-            _text.SetText("");
-            yield return new WaitForSeconds(0.2f);
-        }
-
+        
         
         IEnumerator KillEnemy()
         {
