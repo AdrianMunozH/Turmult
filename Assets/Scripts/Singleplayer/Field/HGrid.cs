@@ -194,7 +194,7 @@ namespace Singleplayer.Field
             foreach (HCell cell in cells)
             {
                 // Checkt mit absicht nicht nach towern
-                if (cell.Celltype == HCell.CellType.Acquired ||cell.Celltype == HCell.CellType.Neutral)
+                if (cell.Celltype == HCell.CellType.Acquired ||cell.Celltype == HCell.CellType.Neutral|| cell.Celltype == HCell.CellType.Base)
                 {
                     if (cell.coordinates.X == h.coordinates.X - 1 && cell.coordinates.Y == h.coordinates.Y)
                     {
@@ -290,6 +290,7 @@ namespace Singleplayer.Field
         {
             GetHCellByXyzCoordinates(0, 0, 0).SetCellType(HCell.CellType.Base); // portal
             GetHCellByXyzCoordinates(0,0,0).SetPrefab(19,new Vector3(0,60,0));
+            GetHCellByXyzCoordinates(0, 1, -1).hasBuilding = true;
             
             GetHCellByXyzCoordinates(0, 1,-1).SetCellType(HCell.CellType.Base);// arch1
             GetHCellByXyzCoordinates(0, 1,-1).SetPrefab(20,new Vector3(0,-120,0)); //-30

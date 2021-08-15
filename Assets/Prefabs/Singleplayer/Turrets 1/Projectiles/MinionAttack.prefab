@@ -11,11 +11,10 @@ GameObject:
   - component: {fileID: 7927641795192460308}
   - component: {fileID: 7927641795192460311}
   - component: {fileID: 7927641795192460310}
-  - component: {fileID: 7280441146831588744}
-  - component: {fileID: -8434775513740980717}
-  - component: {fileID: 2089165779626471828}
+  - component: {fileID: 1669098401960367681}
+  - component: {fileID: 6605457980170798701}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: MinionAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,7 +83,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7280441146831588744
+--- !u!114 &1669098401960367681
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,18 +92,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 7927641795192460296}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f09e93ad8f20404ca466c31915c779f, type: 3}
+  m_Script: {fileID: 11500000, guid: e2be38e54f72429e887a6da7ef9a89ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 70
+  speed: 30
   target: {fileID: 0}
   effects:
-  - {fileID: 2089165779626471828}
-  - {fileID: -8434775513740980717}
-  impactEffect: {fileID: 3591840901927880627, guid: c82ebe3d58760754fae3b9828c56148a,
-    type: 3}
+  - {fileID: 6605457980170798701}
+  isTurret: 0
+  impactEffect: {fileID: 0}
   particelDestroyTime: 2
---- !u!114 &-8434775513740980717
+--- !u!114 &6605457980170798701
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,26 +111,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7927641795192460296}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db34c48a2f048ec459efbf58b53528ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 7df1ea6738824b869daa8a0e9d3be3be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 0
   targetEnemy: {fileID: 0}
-  slow: 0
-  ticks: 10
-  tick: 0
---- !u!114 &2089165779626471828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7927641795192460296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72181d5aff3db7e4f912408f570c4ec6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _type: 2
-  targetEnemy: {fileID: 0}
-  damage: 10
+  damage: 3

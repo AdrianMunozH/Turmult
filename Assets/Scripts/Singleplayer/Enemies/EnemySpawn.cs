@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Singleplayer.Field;
-using MLAPI;
 using UnityEngine;
 
 namespace Singleplayer.Enemies
 {
     //NetworkBehaviour erbt von MonoBehaviour
-    public class EnemySpawn : NetworkBehaviour
+    public class EnemySpawn : MonoBehaviour
     {
         [SerializeField] public GameObject enemyPrefab;
         [HideInInspector] public List<GameObject> enemys;
@@ -33,7 +32,7 @@ namespace Singleplayer.Enemies
         }
 
         // checkt ob der weg eines minions überhaupt geöndert werden muss
-        public void recheckPath(HCell turretCell)
+        public void RecheckPath(HCell turretCell)
         {
             for (int i = 0; i < enemys.Count; i++)
             {
@@ -43,16 +42,16 @@ namespace Singleplayer.Enemies
                     // null check muss vllt drin bleibern
                     if (mov != null && mov.path[j].coordinates.CompareCoord(turretCell.coordinates))
                     {
-                        rebuildPath(i, mov.pathIndex);
+                        RebuildPath(i, mov.pathIndex);
                     }
 
                     if (mov.isAttacking)
-                        rebuildPath(i, mov.pathIndex);
+                        RebuildPath(i, mov.pathIndex);
                 }
             }
         }
 
-        public void rebuildPath(int enemyIndex, int startIndex)
+        public void RebuildPath(int enemyIndex, int startIndex)
         {
             EnemyMovement mov = enemys[enemyIndex].GetComponent<EnemyMovement>();
             HCell[] newPath = Solve(mov.path[startIndex]);
@@ -65,12 +64,32 @@ namespace Singleplayer.Enemies
                 mov.pathIndex = 0;
                 mov.path = sp.ToArray();
                 mov.isAttacking = false;
+                Debug.Log("hier");
             }
-            // test
-
-
             else
             {
+                
+                Debug.Log("hier2");
+                var attackPath = SolveAttack(mov.path[startIndex]);
+                Debug.Log(_hexGrid.ArrayToString(attackPath )+  " attackPath" );
+                // es wird erstmal der kürzeste weg zur base gesucht
+                var attackList = RecPath(attackPath);
+                Debug.Log(_hexGrid.ArrayToString(attackList.ToArray()) + " recpath" );
+                attackList = ShortestPath(attackList,mov.path[startIndex]);
+                Debug.Log(_hexGrid.ArrayToString(attackList.ToArray()) +" shortestpath" );
+                
+                // danach wird am ersten turm gestoppt
+                int towerIndex = (int) TowerFinder(attackList); // +1
+                // von towerindex bis zum letzten element
+                Debug.Log(_hexGrid.ArrayToString(attackList.ToArray()) );
+                attackList.RemoveRange(towerIndex,attackList.Count-towerIndex);
+                
+                // neu setzen des weges
+                mov.path = attackList.ToArray();
+                mov.isAttacking = true;
+                mov.pathIndex = 0;
+
+                /*alt 
                 // attacking modus
                 newPath = SolveAttack(mov.path[startIndex]);
                 sp = RecPath(newPath);
@@ -82,9 +101,10 @@ namespace Singleplayer.Enemies
                 sp.RemoveRange(towerIndex, sp.Count - towerIndex);
                 mov.isAttacking = true;
                 mov.path = sp.ToArray();
+                */
             }
-
-            _hexGrid.ShortestPathPrefabs(sp.ToArray());
+            // ich glaube das muss raus -- prefabs werden in hgamemanager neu gesetzt 
+            //_hexGrid.ShortestPathPrefabs(sp.ToArray());
         }
 
         public void SpawnEnemy(HCell[] path, bool isAttacking)
@@ -228,7 +248,7 @@ namespace Singleplayer.Enemies
         {
             for (int j = 0; j < path.Count; j++)
             {
-                if (path[j].hasBuilding)
+                if (path[j].hasBuilding && path[j].Celltype != HCell.CellType.Base)
                     return j;
             }
 
@@ -253,6 +273,7 @@ namespace Singleplayer.Enemies
         public List<HCell> ShortestPath(List<HCell> path, HCell altStart)
         {
             path.Reverse();
+            
             // ich glaub ich war hier bisschen faul und es sollte mehr gecheckt werden :D
             if (path.Count > 0 && path[0].coordinates.CompareCoord(altStart.coordinates))
             {
