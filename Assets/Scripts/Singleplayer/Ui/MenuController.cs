@@ -1,5 +1,6 @@
 ﻿using Events;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using ValueObjects;
 
 namespace Singleplayer.Ui
@@ -60,6 +61,11 @@ namespace Singleplayer.Ui
         public void QuitGame()
         {
             Application.Quit();
+        }
+
+        public void BackToMenu()
+        {
+            SceneManager.LoadScene("MainMenu");
         }
         
 

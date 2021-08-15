@@ -13,6 +13,8 @@ namespace Singleplayer.Player
         private bool[] mountainTurrets;
         private bool[] swampTurrets;
         
+        
+        
 
         public static IncomeManager Instance => _instance;
 
@@ -135,14 +137,32 @@ namespace Singleplayer.Player
             {
                 case Resource.ResourceType.Berg:
                     _playerStats.Mountain += resource;
+                    _playerStats.MountainAffinity += resource;
+                    
+                    
                     break;
                 case Resource.ResourceType.Wald:
                     _playerStats.Forest += resource;
+                    _playerStats.ForestAffinity += resource;
+                    
                     break;
                 case Resource.ResourceType.Sumpf:
                     _playerStats.Swamp += resource;
+                    _playerStats.SwampAffinity += resource;
                     break;
             }
+            if (_playerStats.currentSong != _playerStats.mountainSong &&_playerStats.MountainAffinity > _playerStats.ForestAffinity && _playerStats.MountainAffinity > _playerStats.SwampAffinity)
+                _playerStats.SetSong(_playerStats.mountainSong);
+            else if(_playerStats.currentSong == _playerStats.mountainSong &&(_playerStats.MountainAffinity == _playerStats.ForestAffinity || _playerStats.MountainAffinity == _playerStats.SwampAffinity))
+                _playerStats.SetSong(_playerStats.mountainSong);
+            else if (_playerStats.currentSong != _playerStats.forestSong &&_playerStats.ForestAffinity > _playerStats.MountainAffinity && _playerStats.ForestAffinity > _playerStats.SwampAffinity)
+                _playerStats.SetSong(_playerStats.forestSong);
+            else if (_playerStats.currentSong == _playerStats.forestSong &&(_playerStats.ForestAffinity == _playerStats.MountainAffinity || _playerStats.ForestAffinity == _playerStats.SwampAffinity))
+                _playerStats.SetSong(_playerStats.forestSong);
+            else if (_playerStats.currentSong != _playerStats.swampSong &&_playerStats.SwampAffinity > _playerStats.MountainAffinity && _playerStats.SwampAffinity > _playerStats.ForestAffinity)
+                _playerStats.SetSong(_playerStats.swampSong);
+            else if (_playerStats.currentSong == _playerStats.swampSong &&(_playerStats.SwampAffinity == _playerStats.MountainAffinity || _playerStats.SwampAffinity == _playerStats.ForestAffinity))
+                _playerStats.SetSong(_playerStats.swampSong);
 
             return true;
         }
