@@ -33,8 +33,11 @@ namespace Singleplayer.Ui
                 settings.SetActive(false);
                 mainMenu.SetActive(false);
                 menuOpen = false;
+                Time.timeScale = 1;
             }
-            
+
+
+
         }
 
         public void BackToMainMenu()
@@ -65,6 +68,7 @@ namespace Singleplayer.Ui
 
         public void BackToMenu()
         {
+            Time.timeScale = 1;
             SceneManager.LoadScene("MainMenu");
         }
         

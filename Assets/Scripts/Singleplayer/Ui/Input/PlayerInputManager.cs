@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 
 namespace Singleplayer.Ui.Input
@@ -7,7 +8,6 @@ namespace Singleplayer.Ui.Input
         private static PlayerInputManager _instance;
         [SerializeField]
         public UI ui;
-        
 
         [SerializeField] private MenuController menuController;
 
@@ -70,12 +70,14 @@ namespace Singleplayer.Ui.Input
                 if (!menuController.menuOpen)
                 {
                     menuController.gameObject.SetActive(true);
+                    Time.timeScale = 0;
                     menuController.OpenMainMenu();
                 }
 
                 else
                 {
                     menuController.gameObject.SetActive(false);
+                    Time.timeScale = 1;
                     menuController.OpenMainMenu();
                 }
                     
