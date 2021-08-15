@@ -129,6 +129,11 @@ namespace Singleplayer.Player
             return true;
         }
 
+        public void IncreasePlayerGold(int gold)
+        {
+            _playerStats.Gold += gold;
+        }
+        
         public bool GetResource(int resource, Resource.ResourceType resourceType)
         {
             if (resource < 0) return false;
