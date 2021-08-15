@@ -122,7 +122,7 @@ namespace Singleplayer.Player
         public bool GoldPurchase(int gold)
         {
             if (gold < 0) return false;
-            if (gold >= _playerStats.Gold)
+            if (gold > _playerStats.Gold)
                 return false;
 
             _playerStats.Gold -= gold;

@@ -107,14 +107,16 @@ namespace Singleplayer.Enemies
             //_hexGrid.ShortestPathPrefabs(sp.ToArray());
         }
 
-        public void SpawnEnemy(HCell[] path, bool isAttacking,int prefabId)
+        public void SpawnEnemy(HCell[] path, bool isAttacking,int prefabId, float lifeFactor = 1f , float moveFactor = 1f)
         {
             GameObject enemy = Instantiate(enemyPrefab[prefabId]);
             enemys.Add(enemy);
             enemy.transform.SetParent(transform, false);
             enemy.transform.position = path[0].gameObject.transform.position;
             EnemyMovement enemyMovement = enemy.GetComponent<EnemyMovement>();
+            enemyMovement.life *= lifeFactor;
             enemyMovement.moveSpeed = 3f;
+            enemyMovement.moveSpeed *= moveFactor;
             enemyMovement.isAttacking = isAttacking;
             enemyMovement.path = path;
             enemyMovement.enemySpawn = this;
