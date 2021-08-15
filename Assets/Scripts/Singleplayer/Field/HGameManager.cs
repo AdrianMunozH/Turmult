@@ -202,19 +202,24 @@ namespace Singleplayer.Field
             yield return new WaitForSeconds(timeBetweenMinionSpawn * _spawnCounter);
             // es muss gecheckt werden ob die weglänge grö0er als 0 ist
             float lifefactor = 1 + (_currentWave / 10);
+
             float moveFactor = 1;
             if (_currentWave > 8)
             {
-                moveFactor = 1.1f;
+                moveFactor = 1.2f;
+                lifefactor += 0.5f;
             }else if (_currentWave > 16)
             {
-                moveFactor = 1.3f;
+                moveFactor = 1.4f;
+                lifefactor += 0.5f;
             }else if (_currentWave > 24)
             {
-                moveFactor = 1.5f;
+                moveFactor = 2f;
+                lifefactor += 1f;
             }else if (_currentWave > 30)
             {
-                moveFactor = 1.8f;
+                moveFactor = 3f;
+                lifefactor += 1.5f;
             }
             
             if (_isAttacking)
@@ -320,11 +325,9 @@ namespace Singleplayer.Field
                 }else if (_currentWave > 10)
                 {
                     minionPool.Add(2);
-
                 }else if (_currentWave > 5)
                 {
                     minionPool.Add(1);
-
                 }
                 else
                 {
