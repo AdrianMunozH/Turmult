@@ -5,6 +5,7 @@ using Singleplayer.Player;
 using Singleplayer.Enemies;
 using Singleplayer.Turrets;
 using Singleplayer.Ui.Input;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Image = UnityEngine.UI.Image;
@@ -22,6 +23,7 @@ namespace Singleplayer.Field
         public GameObject lifeBar;
         private static Image _timebar;
         private static Image _lifebar;
+        private TextMeshProUGUI _timebarLabel;
         public GameObject gameOver;
         
 //Todo: Lifes eigentlich an den Player auslagern
@@ -69,7 +71,8 @@ namespace Singleplayer.Field
             _timebar = timeBar.GetComponent<Image>();
             _lifebar = lifeBar.GetComponent<Image>();
             _lifebar.fillAmount = 1;
-            
+            _timebarLabel = _timebar.GetComponentInChildren<TextMeshProUGUI>();
+            _timebarLabel.text = "1";
             _currentLifes = totalLifes;
 
             if (instance != null)
@@ -147,6 +150,7 @@ namespace Singleplayer.Field
                         IncomeManager.Instance.Interest();
                         PlayerInputManager.Instance.SetState(new BuildState());
                         _timer = buildingPhaseTimer;
+                        _timebarLabel.text = (_currentWave).ToString();
                     }
                 }
 
