@@ -56,10 +56,6 @@ public class PanAndZoom : MonoBehaviour
             ZoomScreen(z);
         }
         
-        if(Input.GetButtonDown("Fire1"))
-        {
-            Debug.Log("Fire");
-        }
     }
 
     public Vector3 PanDirection(float x, float y)

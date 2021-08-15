@@ -54,6 +54,7 @@ namespace Singleplayer.Field
         //sollte raus
         HCell start;
         HCell end;
+        private bool _isAttacking;
 
         [Header("Setup Endpoint")] public int distanceFromSpawn = 5;
 
@@ -88,7 +89,7 @@ namespace Singleplayer.Field
 
         void Start()
         {
-            //Intiales setzen des Timers
+            //Initiales setzen des Timers
             _timer = firstBuildingPhaseTimer;
             PlayerInputManager.Instance.SetState(new BuildState());
 
@@ -103,9 +104,13 @@ namespace Singleplayer.Field
 
             foreach (HCell hcell in sp)
             {
-                //Ressource wird im shortestpath benötigt!
-                hcell.Celltype = HCell.CellType.Acquired;
-                hcell.resource = _hexGrid.GetHCellByIndex(hcell.index).resource;
+                //Resource wird im shortestpath benötigt!
+                if (hcell.Celltype != HCell.CellType.Base)
+                {
+                    
+                    hcell.Celltype = HCell.CellType.Acquired;
+                    hcell.resource.SetSpecificType(Resource.ResourceType.Neutral);
+                }
             }
 
             HCell[] temp = spawnPoint.ShortestPath(sp).ToArray();
@@ -148,13 +153,18 @@ namespace Singleplayer.Field
                 gameOver.SetActive(true);
             }
         }
+        
 
         IEnumerator SpawnEnemyWithDelay()
         {
             yield return new WaitForSeconds(timeBetweenMinionSpawn * _spawnCounter);
             // es muss gecheckt werden ob die weglänge grö0er als 0 ist
-
-            spawnPoint.SpawnEnemy(minionPath.ToArray(), false);
+            if (_isAttacking)
+            {
+                spawnPoint.SpawnEnemy(minionPath.ToArray(), true);
+            }else 
+                spawnPoint.SpawnEnemy(minionPath.ToArray(), false);
+            
             if (_spawnCounter == minionsPerWave) allMinionsSpawned = true;
         }
         
@@ -186,6 +196,39 @@ namespace Singleplayer.Field
             cooldown = false;
         }
 
+        public List<HCell> ArrayToList(HCell[] arr)
+        {
+            List<HCell> list = new List<HCell>();
+            foreach (var currentCell in arr)
+            {
+                list.Add(currentCell);
+            }
+            return list;
+        }
+
+        public bool CalculatePath()
+        {
+            spath = spawnPoint.Solve();
+            List<HCell> sp = spawnPoint.RecPath(spath);
+            minionPath = spawnPoint.ShortestPath(sp);
+            
+            return minionPath.Count > 0;
+        }
+
+        public void CalulateAttack()
+        {
+            spath = spawnPoint.SolveAttack(_hexGrid.GetHCellByXyzCoordinates(0,0,0));
+            // es wird erstmal der kürzeste weg zur base gesucht
+            List<HCell> sp = spawnPoint.RecPath(spath);
+            minionPath = spawnPoint.ShortestPath(sp);
+                
+            // danach wird am ersten turm gestoppt
+            int towerIndex = (int) spawnPoint.TowerFinder(minionPath); // +1
+            // von towerindex bis zum letzten element
+            Debug.Log(_hexGrid.ArrayToString(minionPath.ToArray()) );
+            minionPath.RemoveRange(towerIndex,sp.Count-towerIndex);
+            
+        }
         /// <summary>
         /// Singleplayer modus: Nur wegberechnung für einen Spawnpoint
         /// </summary>
@@ -193,6 +236,7 @@ namespace Singleplayer.Field
         {
             _spawnCounter = 0;
             // könnte in der methode init werden (spath)
+            /*
             spath = spawnPoint.Solve();
             List<HCell> sp = spawnPoint.RecPath(spath);
             minionPath = spawnPoint.ShortestPath(sp);
@@ -201,15 +245,61 @@ namespace Singleplayer.Field
                 StartCoroutine(nameof(SpawnEnemyWithDelay));
                 _spawnCounter++;
             }
+            */
+            ///
+            /// attack test
+            /// 
 
-            _hexGrid.ShortestPathPrefabs(minionPath.ToArray());
+            if (CalculatePath())
+            {
+                // normaler modus                Nicht angreifen
+                
+                _isAttacking = false;
+                for (int i = 0; i < minionsPerWave; i++)
+                {
+                    StartCoroutine(nameof(SpawnEnemyWithDelay));
+                    _spawnCounter++;
+                }
+            }
+            
+            else
+            {
+                // attacking modus
+                CalulateAttack();
+                _isAttacking = true;
+                for (int i = 0; i < minionsPerWave; i++)
+                {
+                    StartCoroutine(nameof(SpawnEnemyWithDelay));
+                    _spawnCounter++;
+                }
+            }
+
+
+            HCell[] tempArr = minionPath.ToArray();
+            ///
+            ///
+            /// attack test
+            ///
+            /*
+            
+            if (minionPath.Count == 0)
+            {
+                tempArr = _lastShortestPath;
+                minionPath = ArrayToList(_lastShortestPath);
+            }
+            else
+                tempArr = minionPath.ToArray();
+                
+            */
+            _hexGrid.ShortestPathPrefabs(tempArr);
+
             // wenns null ist brauchen wir nicht aufräumen
             if(_lastShortestPath == null) return;
 
             foreach (var lastSP in _lastShortestPath)
             {
                 
-                if (!IsInArray(lastSP, minionPath.ToArray()))
+                if (!IsInArray(lastSP, tempArr) && lastSP.Celltype != HCell.CellType.Base)
                 {
                     lastSP.SetPrefab(lastSP.Celltype,lastSP.resource.GetResource());
                 }
@@ -217,7 +307,7 @@ namespace Singleplayer.Field
             
             
             // am ende setzten wir den aktuellen kürzesten weg auf lastShortestPath
-            _lastShortestPath = minionPath.ToArray();
+            _lastShortestPath = tempArr;
         }
 
         private bool IsInArray(HCell hCell,HCell[] arr)
@@ -246,6 +336,41 @@ namespace Singleplayer.Field
             }
             _lifebar.fillAmount = (float)((float)_currentLifes / (float)totalLifes);
         }
+    
+        public void TowerDestroyed(HexCoordinates coordinates)
+        {
+            _hexGrid.GetHCellByXyCoordinates(coordinates.X, coordinates.Y).hasBuilding = false;
+            
+            for (int i = 0; i < spawnPoint.enemys.Count; i++)
+            {
+                EnemyMovement temp = spawnPoint.enemys[i].GetComponent<EnemyMovement>();
+                _isAttacking = false;
+                temp.isAttacking = false;
+                spawnPoint.RebuildPath(i,temp.pathIndex);
+                
+            }
+
+
+            // nur für die prefabs
+            CalculatePath();
+            HCell[] tempArr = minionPath.ToArray();
+            _hexGrid.ShortestPathPrefabs(tempArr);
+
+            // wenns null ist brauchen wir nicht aufräumen
+            if (_lastShortestPath == null) return;
+
+            foreach (var lastSP in _lastShortestPath)
+            {
+                if (!IsInArray(lastSP, tempArr) && lastSP.Celltype != HCell.CellType.Base)
+                {
+                    lastSP.SetPrefab(lastSP.Celltype, lastSP.resource.GetResource());
+                }
+            }
+
+            // am ende setzten wir den aktuellen kürzesten weg auf lastShortestPath
+            _lastShortestPath = tempArr;
         
+            
+        }
     }
 }

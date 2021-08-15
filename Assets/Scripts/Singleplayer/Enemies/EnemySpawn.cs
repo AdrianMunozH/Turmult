@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Singleplayer.Field;
-using MLAPI;
 using UnityEngine;
 
 namespace Singleplayer.Enemies
 {
     //NetworkBehaviour erbt von MonoBehaviour
-    public class EnemySpawn : NetworkBehaviour
+    public class EnemySpawn : MonoBehaviour
     {
         [SerializeField] public GameObject enemyPrefab;
         [HideInInspector] public List<GameObject> enemys;
@@ -33,7 +32,7 @@ namespace Singleplayer.Enemies
         }
 
         // checkt ob der weg eines minions überhaupt geöndert werden muss
-        public void recheckPath(HCell turretCell)
+        public void RecheckPath(HCell turretCell)
         {
             for (int i = 0; i < enemys.Count; i++)
             {
@@ -43,16 +42,16 @@ namespace Singleplayer.Enemies
                     // null check muss vllt drin bleibern
                     if (mov != null && mov.path[j].coordinates.CompareCoord(turretCell.coordinates))
                     {
-                        rebuildPath(i, mov.pathIndex);
+                        RebuildPath(i, mov.pathIndex);
                     }
 
                     if (mov.isAttacking)
-                        rebuildPath(i, mov.pathIndex);
+                        RebuildPath(i, mov.pathIndex);
                 }
             }
         }
 
-        public void rebuildPath(int enemyIndex, int startIndex)
+        public void RebuildPath(int enemyIndex, int startIndex)
         {
             EnemyMovement mov = enemys[enemyIndex].GetComponent<EnemyMovement>();
             HCell[] newPath = Solve(mov.path[startIndex]);
@@ -71,6 +70,21 @@ namespace Singleplayer.Enemies
 
             else
             {
+                spath = SolveAttack(_hexGrid.GetHCellByIndex(startIndex));
+                // es wird erstmal der kürzeste weg zur base gesucht
+                sp = RecPath(spath);
+                sp = ShortestPath(sp);
+                
+                // danach wird am ersten turm gestoppt
+                int towerIndex = (int) TowerFinder(sp); // +1
+                // von towerindex bis zum letzten element
+                Debug.Log(_hexGrid.ArrayToString(sp.ToArray()) );
+                sp.RemoveRange(towerIndex,sp.Count-towerIndex);
+                mov.path = sp.ToArray();
+                mov.isAttacking = true;
+                mov.pathIndex = 0;
+
+                /*alt 
                 // attacking modus
                 newPath = SolveAttack(mov.path[startIndex]);
                 sp = RecPath(newPath);
@@ -82,9 +96,10 @@ namespace Singleplayer.Enemies
                 sp.RemoveRange(towerIndex, sp.Count - towerIndex);
                 mov.isAttacking = true;
                 mov.path = sp.ToArray();
+                */
             }
-
-            _hexGrid.ShortestPathPrefabs(sp.ToArray());
+            // ich glaube das muss raus -- prefabs werden in hgamemanager neu gesetzt 
+            //_hexGrid.ShortestPathPrefabs(sp.ToArray());
         }
 
         public void SpawnEnemy(HCell[] path, bool isAttacking)

@@ -2,6 +2,8 @@ using Singleplayer.Enemies;
 using Singleplayer.Field;
 using JetBrains.Annotations;
 using Singleplayer.Turrets.Projectile;
+using UnityEditor.Build.Content;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 
@@ -19,6 +21,9 @@ namespace Singleplayer.Turrets
         public float turnSpeed = 10f;
         private float fireCountdown = 0f;
 
+        public HexCoordinates Coordinates;    
+
+        // enums
         public Resource.ResourceType ressourceType;
         public TurretType turretType;
 
@@ -29,11 +34,11 @@ namespace Singleplayer.Turrets
 
         [Header("Unity Setup Fields")] public Transform partToRotate;
         public Transform firePoint;
-        public string enemyTag = "Enemy";
-
-
         public bool canRotate;
         
+        public string enemyTag = "Enemy";
+        
+        // hier sind der dmg und die effecte drin
         public GameObject projectilePrefab;
     
         // MultiTargetTurret
@@ -200,7 +205,7 @@ namespace Singleplayer.Turrets
                 return;
             }
             
-            Debug.Log(targets.Length);
+            
             if(AreTargetsNull() && turretType == TurretType.MULTI)
             {
                 Debug.Log("hier");

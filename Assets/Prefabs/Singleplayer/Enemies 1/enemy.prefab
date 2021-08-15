@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5245351540438916662}
   - component: {fileID: 7040434030325219526}
   - component: {fileID: 4841535487354923705}
+  - component: {fileID: 563346350211925631}
   m_Layer: 0
   m_Name: enemy
   m_TagString: Enemy
@@ -119,8 +120,36 @@ MonoBehaviour:
   defaultSpeed: 10
   _text: {fileID: 3815218281569563750}
   isAttacking: 0
+  isTurret: 0
   dmgOnBase: 1
   goldValue: 10
+--- !u!114 &563346350211925631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3181208745485999917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 581e71ceec534886ae4348cbbc111900, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 2.3
+  fireRate: 1
+  turnSpeed: 10
+  ressourceType: 0
+  turretType: 0
+  lineRenderer: {fileID: 0}
+  partToRotate: {fileID: 0}
+  firePoint: {fileID: 2938547451610704376}
+  enemyTag: Turret
+  canRotate: 0
+  projectilePrefab: {fileID: 7927641795192460296, guid: e41326fe95ace8c449d57a1e05e3bd75,
+    type: 3}
+  targets: []
+  maxTargets: 0
+  firePoints: []
 --- !u!1 &7252253663343092537
 GameObject:
   m_ObjectHideFlags: 0

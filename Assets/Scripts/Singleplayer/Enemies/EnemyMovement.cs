@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Singleplayer.Field;
 using Singleplayer.Player;
+using Singleplayer.Turrets;
 using TMPro;
 using UnityEngine;
 
@@ -33,6 +34,7 @@ namespace Singleplayer.Enemies
         private double _attackCountdown = 0f;
         private double attackRate = 1f;
 
+        public bool isTurret;
         public int dmgOnBase;
         public int goldValue;
 
@@ -52,8 +54,10 @@ namespace Singleplayer.Enemies
         // Update is called once per frame
         void Update()
         {
+            if(isTurret) return;
             // kann auch ersetzt werden durch path[].gameObject.transform.position
             //vecPath = HGrid.Instance.HCellPositions(path);
+            Debug.Log(path + " " + pathIndex);
             Vector3 position = new Vector3 (path[pathIndex].gameObject.transform.position.x, path[pathIndex].gameObject.transform.position.y + 2.3f, path[pathIndex].gameObject.transform.position.z);
             if (Vector3.Distance(transform.position, position) < 0.01f)
             {
@@ -98,7 +102,7 @@ namespace Singleplayer.Enemies
             {
                 _text.SetText("Hit!");
                 _attackCountdown = 1f / attackRate;
-                animator.SetBool(isAttackingHash, true);
+                //animator.SetBool(isAttackingHash, true);
             }
 
             _attackCountdown -= Time.deltaTime;
@@ -108,16 +112,23 @@ namespace Singleplayer.Enemies
         {
             if (damage < life)
             {
-                 life -= damage;
+                if (isTurret)
+                {
+                    Debug.Log("damage: " + damage);
+                }
+                life -= damage;
             }
             else
                  Die(true);
             // // die methode falls wir sowas wie deathanimation macehn 
             //
-
+            if (_canvas != null)
+            {
+                _text.enabled = true;
+                _text.SetText(life.ToString());
+            }
             // kann später gelöscht werden ist nur zum debugen
-            _text.enabled = true;
-            _text.SetText(life.ToString());
+            
             // //StartCoroutine("DeactivateText");
         }
 
@@ -131,7 +142,17 @@ namespace Singleplayer.Enemies
             {
                 HGameManager.instance.loseLife(dmgOnBase);
             }
-            enemySpawn.deleteEnemy(gameObject);
+            //nur minions müssen aus der liste removed werden
+            if (!isTurret)
+                enemySpawn.deleteEnemy(gameObject);
+            else
+            {
+                // wichtiges TODO
+                // cell darf kein hasBuilding mehr haben!!
+                HGameManager.instance.TowerDestroyed(GetComponent<Turret>().Coordinates);
+            }
+                
+            
             Destroy(gameObject);
         }
 

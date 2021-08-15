@@ -15,7 +15,7 @@ namespace Singleplayer.Field
             CanBeAcquired = 0,
             Acquired = 1,
             Neutral = 4,
-            Base,
+            Base = 21,
             Hidden = 6
         };
         //######## public ###########
@@ -73,13 +73,14 @@ namespace Singleplayer.Field
                 towerbase  :12
                 straight   :13
                 corner     :14
-        neutral acq/unacq  :15
-                straight   :16
-                corner     :17
-        portal  mid        :18
-                site       :19
-                path       :20
-        base               :21
+        neutral unacq      :15
+                acquired   :16
+                straight   :17
+                corner     :18
+        portal  mid        :19
+                site       :20
+                path       :21
+        base               :22
                 
 */
         //Optimization: Cachen des Renderes auf dem Objekt
@@ -118,6 +119,8 @@ namespace Singleplayer.Field
                 turret = (GameObject) Instantiate(turretToBuild, new Vector3(turPos.x, turPos.y - 10, turPos.z),
                     transform.rotation);
                 Turret t = turret.GetComponent<Turret>();
+
+                t.Coordinates = coordinates;
 
                 // Animation
                 var sequence = DOTween.Sequence();
