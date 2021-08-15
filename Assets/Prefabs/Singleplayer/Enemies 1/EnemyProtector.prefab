@@ -213,15 +213,15 @@ MonoBehaviour:
   path: []
   pathIndex: 0
   enemySpawn: {fileID: 0}
-  life: 100
+  life: 200
   isSlowed: 0
   moveSpeed: 0
   defaultSpeed: 10
   _text: {fileID: 0}
   isAttacking: 0
   isTurret: 0
-  dmgOnBase: 1
-  goldValue: 10
+  dmgOnBase: 2
+  goldValue: 15
 --- !u!114 &9131098989084014961
 MonoBehaviour:
   m_ObjectHideFlags: 0

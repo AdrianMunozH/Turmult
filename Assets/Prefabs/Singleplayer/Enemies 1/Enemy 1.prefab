@@ -624,7 +624,7 @@ MonoBehaviour:
   life: 100
   isSlowed: 0
   moveSpeed: 0
-  defaultSpeed: 10
+  defaultSpeed: 8
   _text: {fileID: 0}
   isAttacking: 0
   isTurret: 0

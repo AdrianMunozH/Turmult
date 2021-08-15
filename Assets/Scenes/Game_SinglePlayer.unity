@@ -15823,7 +15823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingPhaseTimer: 30
-  firstBuildingPhaseTimer: 30
+  firstBuildingPhaseTimer: 60
   timeBar: {fileID: 1571026801}
   lifeBar: {fileID: 328944216}
   gameOver: {fileID: 703961776}
@@ -15834,7 +15834,7 @@ MonoBehaviour:
     type: 3}
   waves: 10
   timeBetweenMinionSpawn: 0.6
-  minionsPerWave: 5
+  minionsPerWave: 2
   distanceFromSpawn: 8
   transition: {fileID: 370615712}
 --- !u!114 &541232432
@@ -59383,7 +59383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c25612366f441e1850551d394db77c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startGold: 140
+  startGold: 100
   interestRateInPercentPerRound: 5
   startForest: 1
   startMountain: 1
