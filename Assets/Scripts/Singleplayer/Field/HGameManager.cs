@@ -352,7 +352,9 @@ namespace Singleplayer.Field
 
 
             // nur für die prefabs
-            CalculatePath();
+            if(!CalculatePath())
+                CalulateAttack();
+            
             HCell[] tempArr = minionPath.ToArray();
             _hexGrid.ShortestPathPrefabs(tempArr);
 

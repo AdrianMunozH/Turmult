@@ -64,23 +64,28 @@ namespace Singleplayer.Enemies
                 mov.pathIndex = 0;
                 mov.path = sp.ToArray();
                 mov.isAttacking = false;
+                Debug.Log("hier");
             }
-            // test
-
-
             else
             {
-                spath = SolveAttack(_hexGrid.GetHCellByIndex(startIndex));
+                
+                Debug.Log("hier2");
+                var attackPath = SolveAttack(mov.path[startIndex]);
+                Debug.Log(_hexGrid.ArrayToString(attackPath )+  " attackPath" );
                 // es wird erstmal der kürzeste weg zur base gesucht
-                sp = RecPath(spath);
-                sp = ShortestPath(sp);
+                var attackList = RecPath(attackPath);
+                Debug.Log(_hexGrid.ArrayToString(attackList.ToArray()) + " recpath" );
+                attackList = ShortestPath(attackList,mov.path[startIndex]);
+                Debug.Log(_hexGrid.ArrayToString(attackList.ToArray()) +" shortestpath" );
                 
                 // danach wird am ersten turm gestoppt
-                int towerIndex = (int) TowerFinder(sp); // +1
+                int towerIndex = (int) TowerFinder(attackList); // +1
                 // von towerindex bis zum letzten element
-                Debug.Log(_hexGrid.ArrayToString(sp.ToArray()) );
-                sp.RemoveRange(towerIndex,sp.Count-towerIndex);
-                mov.path = sp.ToArray();
+                Debug.Log(_hexGrid.ArrayToString(attackList.ToArray()) );
+                attackList.RemoveRange(towerIndex,attackList.Count-towerIndex);
+                
+                // neu setzen des weges
+                mov.path = attackList.ToArray();
                 mov.isAttacking = true;
                 mov.pathIndex = 0;
 
@@ -243,7 +248,7 @@ namespace Singleplayer.Enemies
         {
             for (int j = 0; j < path.Count; j++)
             {
-                if (path[j].hasBuilding)
+                if (path[j].hasBuilding && path[j].Celltype != HCell.CellType.Base)
                     return j;
             }
 
@@ -268,6 +273,7 @@ namespace Singleplayer.Enemies
         public List<HCell> ShortestPath(List<HCell> path, HCell altStart)
         {
             path.Reverse();
+            
             // ich glaub ich war hier bisschen faul und es sollte mehr gecheckt werden :D
             if (path.Count > 0 && path[0].coordinates.CompareCoord(altStart.coordinates))
             {

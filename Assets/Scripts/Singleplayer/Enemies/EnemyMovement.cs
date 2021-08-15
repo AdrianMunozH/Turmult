@@ -57,7 +57,6 @@ namespace Singleplayer.Enemies
             if(isTurret) return;
             // kann auch ersetzt werden durch path[].gameObject.transform.position
             //vecPath = HGrid.Instance.HCellPositions(path);
-            Debug.Log(path + " " + pathIndex);
             Vector3 position = new Vector3 (path[pathIndex].gameObject.transform.position.x, path[pathIndex].gameObject.transform.position.y + 2.3f, path[pathIndex].gameObject.transform.position.z);
             if (Vector3.Distance(transform.position, position) < 0.01f)
             {
