@@ -5465,6 +5465,36 @@ Transform:
   m_Father: {fileID: 7281319259414597129}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5067880178209777445
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6670528528461320411}
+  m_Layer: 0
+  m_Name: firepoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6670528528461320411
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5067880178209777445}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.074, y: 2.33, z: 0.116}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7281319259414597129}
+  m_RootOrder: 24
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5091098736177171587
 GameObject:
   m_ObjectHideFlags: 0
@@ -5992,8 +6022,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7281319259414597129}
+  - component: {fileID: -7064929445547236414}
   m_Layer: 0
-  m_Name: SwampTower3
+  m_Name: SwampTower2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6034,9 +6065,40 @@ Transform:
   - {fileID: 2270926164462734227}
   - {fileID: 7378988218362448082}
   - {fileID: 7842222025659854982}
+  - {fileID: 6670528528461320411}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -32.58, z: 0}
+--- !u!114 &-7064929445547236414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7946498073699439795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 581e71ceec534886ae4348cbbc111900, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 4
+  fireRate: 1
+  turnSpeed: 10
+  Coordinates:
+    x: 0
+    z: 0
+  ressourceType: 5
+  turretType: 0
+  lineRenderer: {fileID: 0}
+  partToRotate: {fileID: 0}
+  firePoint: {fileID: 6670528528461320411}
+  canRotate: 0
+  enemyTag: Enemy
+  projectilePrefab: {fileID: 7659036860808421068, guid: 9a9dd53adbd46ac4981c694409a6477e,
+    type: 3}
+  targets: []
+  maxTargets: 0
+  firePoints: []
 --- !u!1 &8081957940543061778
 GameObject:
   m_ObjectHideFlags: 0
