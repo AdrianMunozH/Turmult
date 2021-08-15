@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Diagnostics;
 using TMPro;
 using Singleplayer.Ui;
 using UnityEngine;
@@ -38,11 +39,11 @@ namespace Singleplayer.Player
             set => swamp = value;
         }
 
-        public int startForest = 1;
+        public int startForest = 0;
         private int mountain;
-        public int startMountain = 1;
+        public int startMountain = 0;
         private int swamp;
-        public int startSwamp = 1;
+        public int startSwamp = 0;
         
         [Header("Spieler Affinität")]
         private int mountainAffinity;
@@ -87,6 +88,23 @@ namespace Singleplayer.Player
             forest = startForest;
             mountain = startMountain;
             swamp = startSwamp;
+
+            int randomResource = Random.Range(1, 3);
+            switch (randomResource)
+            {
+                case 1:
+                    mountain += 1;
+                    break;
+                case 2:
+                    forest += 1;
+                    break;
+                case 3:
+                    swamp += 1;
+                    break;
+                default:
+                    mountain += 1;
+                    break;
+            }
 
             //TODO Eventsubscription für Interestberechnung
         }

@@ -103,7 +103,7 @@ namespace Singleplayer.Ui
         {
             DeselectType();
             // setzt den state
-            PlayerInputManager.Instance.SetState(new AcquireState());
+            PlayerInputManager.Instance.AcquireModeOn();
             
             acquireMode.SetActive(true);
             scrollViewTower.SetActive(false);
@@ -128,7 +128,7 @@ namespace Singleplayer.Ui
             }
             if (towerMode)
             {
-                PlayerInputManager.Instance.SetState(new BuildState());
+                PlayerInputManager.Instance.BuildStateOn();
                 DeselectType();
                 buildMode.SetActive(true);
                 bgImage.transform.position = new Vector3(menuPos.x, menuPos.y - 100, menuPos.z);
@@ -200,7 +200,7 @@ namespace Singleplayer.Ui
             }
             if (towerMode)
             {
-                PlayerInputManager.Instance.SetState(new BuildState());
+                PlayerInputManager.Instance.BuildStateOn();
                 DeselectType();
                 buildMode.SetActive(true);
                 bgImage.gameObject.SetActive(true);

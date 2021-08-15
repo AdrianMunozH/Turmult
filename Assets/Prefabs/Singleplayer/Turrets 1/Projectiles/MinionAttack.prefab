@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7927641795192460296}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.788443, y: -8.051855, z: -3.4002457}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -99,7 +99,6 @@ MonoBehaviour:
   target: {fileID: 0}
   effects:
   - {fileID: 6605457980170798701}
-  isTurret: 0
   impactEffect: {fileID: 0}
   particelDestroyTime: 2
 --- !u!114 &6605457980170798701

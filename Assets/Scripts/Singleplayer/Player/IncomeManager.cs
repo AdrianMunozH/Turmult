@@ -88,7 +88,6 @@ namespace Singleplayer.Player
         {
             if (IsTurretUnlocked(ressourceEnum, turretIndex))
             {
-                Debug.Log("turret is unlocked");
                 return GoldPurchase(turretCost);
             }
 

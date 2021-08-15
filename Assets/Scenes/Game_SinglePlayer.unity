@@ -30896,6 +30896,7 @@ MonoBehaviour:
   player: {fileID: 2110079562}
   ui: {fileID: 1100171618}
   menuController: {fileID: 516941497}
+  BuildAndAcquireBlocked: 0
 --- !u!114 &1100171617
 MonoBehaviour:
   m_ObjectHideFlags: 0
