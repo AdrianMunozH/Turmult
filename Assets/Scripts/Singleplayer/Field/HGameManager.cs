@@ -147,7 +147,14 @@ namespace Singleplayer.Field
                 if (_timer > 0 && !PlayerInputManager.Instance.GetState().name.Equals(StateEnum.Battle))
                 {
                     _timer -= Time.deltaTime;
-                    _timebar.fillAmount = (_timer / buildingPhaseTimer);
+                    if (_currentWave == 0)
+                    {
+                        _timebar.fillAmount = (_timer / firstBuildingPhaseTimer);
+                    }
+                    else
+                    {
+                        _timebar.fillAmount = (_timer / buildingPhaseTimer);
+                    }
 
                     //wenn Zeit abgelaufen -> Battlephase
                     if (_timer <= 0)
@@ -194,11 +201,27 @@ namespace Singleplayer.Field
         {
             yield return new WaitForSeconds(timeBetweenMinionSpawn * _spawnCounter);
             // es muss gecheckt werden ob die weglänge grö0er als 0 ist
+            float lifefactor = 1 + (_currentWave / 10);
+            float moveFactor = 1;
+            if (_currentWave > 8)
+            {
+                moveFactor = 1.1f;
+            }else if (_currentWave > 16)
+            {
+                moveFactor = 1.3f;
+            }else if (_currentWave > 24)
+            {
+                moveFactor = 1.5f;
+            }else if (_currentWave > 30)
+            {
+                moveFactor = 1.8f;
+            }
+            
             if (_isAttacking)
             {
-                spawnPoint.SpawnEnemy(minionPath.ToArray(), true, prefabId);
+                spawnPoint.SpawnEnemy(minionPath.ToArray(), true, prefabId,lifefactor,moveFactor);
             }else 
-                spawnPoint.SpawnEnemy(minionPath.ToArray(), false,prefabId);
+                spawnPoint.SpawnEnemy(minionPath.ToArray(), false,prefabId,lifefactor,moveFactor);
             
             if (_spawnCounter == _overAllMinions) allMinionsSpawned = true;
         }
@@ -274,10 +297,49 @@ namespace Singleplayer.Field
             spawningList = new List<int>();
             spawningList.Clear();
             
-            for (int i = 0; i < minionsPerWave; i++)
+            // TODO Auf jeden Fall anständige verteilung machen!
+            for (int i = 0; i < minionsPerWave + _currentWave; i++)
             {
-                //Erst einmal nur Typ 1 Minions in Standard waves!
-                spawningList.Add(0);
+                List<int> minionPool = new List<int>();
+                int random = Random.Range(0, 6);
+                    
+                if (_currentWave > 30)
+                {
+                    minionPool.Add(6);
+                }else if (_currentWave > 25)
+                {
+                    minionPool.Add(5);
+                }else if (_currentWave > 20)
+                {
+                    minionPool.Add(4);
+
+                }else if (_currentWave > 15)
+                {
+                    minionPool.Add(3);
+
+                }else if (_currentWave > 10)
+                {
+                    minionPool.Add(2);
+
+                }else if (_currentWave > 5)
+                {
+                    minionPool.Add(1);
+
+                }
+                else
+                {
+                    minionPool.Add(0);
+                }
+
+                if (minionPool.Count > random)
+                {
+                    //Erst einmal nur Typ 1 Minions in Standard waves!
+                    spawningList.Add(minionPool[random]);
+                }
+                else
+                {
+                    spawningList.Add(0);
+                }
             }
             
             spawningList.AddRange(sentEnemiesPrefabId);
