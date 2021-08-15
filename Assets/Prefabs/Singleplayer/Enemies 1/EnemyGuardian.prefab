@@ -416,12 +416,12 @@ MonoBehaviour:
   life: 100
   isSlowed: 0
   moveSpeed: 0
-  defaultSpeed: 10
+  defaultSpeed: 8
   _text: {fileID: 0}
   isAttacking: 0
   isTurret: 0
-  dmgOnBase: 1
-  goldValue: 10
+  dmgOnBase: 2
+  goldValue: 20
 --- !u!114 &6221578994114414582
 MonoBehaviour:
   m_ObjectHideFlags: 0

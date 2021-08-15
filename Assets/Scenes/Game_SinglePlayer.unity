@@ -15822,8 +15822,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d95804fc056d47d4be38c62350601024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingPhaseTimer: 12
-  firstBuildingPhaseTimer: 12
+  buildingPhaseTimer: 30
+  firstBuildingPhaseTimer: 60
   timeBar: {fileID: 1571026801}
   lifeBar: {fileID: 328944216}
   gameOver: {fileID: 703961776}
@@ -15834,7 +15834,7 @@ MonoBehaviour:
     type: 3}
   waves: 10
   timeBetweenMinionSpawn: 0.6
-  minionsPerWave: 5
+  minionsPerWave: 2
   distanceFromSpawn: 8
   transition: {fileID: 370615712}
 --- !u!114 &541232432
@@ -59383,11 +59383,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c25612366f441e1850551d394db77c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startGold: 500
+  startGold: 100
   interestRateInPercentPerRound: 5
-  startForest: 4
-  startMountain: 4
-  startSwamp: 4
+  startForest: 1
+  startMountain: 1
+  startSwamp: 1
   goldTMP: {fileID: 1006179604}
   mountainTMP: {fileID: 823663096}
   forestTMP: {fileID: 1407805363}

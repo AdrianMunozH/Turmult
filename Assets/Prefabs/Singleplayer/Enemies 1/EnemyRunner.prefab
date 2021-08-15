@@ -179,10 +179,10 @@ MonoBehaviour:
   path: []
   pathIndex: 0
   enemySpawn: {fileID: 0}
-  life: 100
+  life: 120
   isSlowed: 0
   moveSpeed: 0
-  defaultSpeed: 10
+  defaultSpeed: 12
   _text: {fileID: 0}
   isAttacking: 0
   isTurret: 0
