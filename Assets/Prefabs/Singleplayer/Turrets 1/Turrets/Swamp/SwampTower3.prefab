@@ -4907,9 +4907,10 @@ GameObject:
   - component: {fileID: 9199275146325918121}
   - component: {fileID: 6363185263615079779}
   - component: {fileID: 3442777993730909379}
+  - component: {fileID: -3311729978958814546}
   m_Layer: 0
   m_Name: SwampTower3
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4993,17 +4994,43 @@ MonoBehaviour:
   range: 5
   fireRate: 2
   turnSpeed: 10
+  Coordinates:
+    x: 0
+    z: 0
   ressourceType: 5
   turretType: 0
   lineRenderer: {fileID: 0}
   partToRotate: {fileID: 8229439576287929874}
   firePoint: {fileID: 2353101734274603719}
-  enemyTag: Enemy
   canRotate: 1
+  enemyTag: Enemy
   projectilePrefab: {fileID: 100010, guid: a5ae8cade69b6ed48a5943ce8cdf7087, type: 3}
   targets: []
   maxTargets: 0
   firePoints: []
+--- !u!114 &-3311729978958814546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4849936137909261494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f3302bc8cd4d4cab989f9d0b0e1b00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  path: []
+  pathIndex: 0
+  enemySpawn: {fileID: 0}
+  life: 100
+  isSlowed: 0
+  moveSpeed: 0
+  defaultSpeed: 0
+  isAttacking: 0
+  isTurret: 1
+  dmgOnBase: 0
+  goldValue: 0
 --- !u!1 &5156627168310276651
 GameObject:
   m_ObjectHideFlags: 0

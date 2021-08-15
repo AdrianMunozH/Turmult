@@ -944,9 +944,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4466266023611338673}
   - component: {fileID: -8033652954965107170}
+  - component: {fileID: 8462088712675160236}
   m_Layer: 0
   m_Name: ForestTower1
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -995,6 +996,29 @@ MonoBehaviour:
   targets: []
   maxTargets: 0
   firePoints: []
+--- !u!114 &8462088712675160236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3940805691244041483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f3302bc8cd4d4cab989f9d0b0e1b00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  path: []
+  pathIndex: 0
+  enemySpawn: {fileID: 0}
+  life: 100
+  isSlowed: 0
+  moveSpeed: 0
+  defaultSpeed: 0
+  isAttacking: 0
+  isTurret: 1
+  dmgOnBase: 0
+  goldValue: 0
 --- !u!1 &4226273470042109443
 GameObject:
   m_ObjectHideFlags: 0

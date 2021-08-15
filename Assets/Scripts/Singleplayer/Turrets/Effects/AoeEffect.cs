@@ -27,14 +27,7 @@ namespace Singleplayer.Turrets.Effects
             {
                 if (collider.gameObject.tag.Equals("Enemy"))
                 {
-                    Debug.Log(!damageTargetOnce + " " + !collider.GetComponent<EnemyMovement>().Equals(targetEnemy));
-                
-                    //  klassen zu vergleichen ist kacke darum funkt. nicht, brauche noch eine ID oder sowas
-                    if (!damageTargetOnce && !collider.GetComponent<EnemyMovement>().Equals(targetEnemy))
-                    {
-                        collider.GetComponent<EnemyMovement>().TakeDamage(damage);
-                    }
-
+                    collider.GetComponent<EnemyMovement>().TakeDamage(damage);
                 }
             }
         }

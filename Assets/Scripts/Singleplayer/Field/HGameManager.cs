@@ -28,6 +28,7 @@ namespace Singleplayer.Field
         private static Image _lifebar;
         private TextMeshProUGUI _timebarLabel;
         public GameObject gameOver;
+        public GameObject won;
         
         //Todo: Lifes eigentlich an den Player auslagern
         [Header("Lifes")] 
@@ -141,7 +142,7 @@ namespace Singleplayer.Field
         private void Update()
         {
             //Spiel läuft
-            if (_currentLifes > 0)
+            if (_currentLifes > 0 )
             {
                 // Buildstate und Time nicht abgelaufen
                 if (_timer > 0 && !PlayerInputManager.Instance.GetState().name.Equals(StateEnum.Battle))
@@ -189,6 +190,9 @@ namespace Singleplayer.Field
                 }
 
 
+            }else if (!(_currentWave < waves))
+            {
+                won.SetActive(true);
             }
             else
             {

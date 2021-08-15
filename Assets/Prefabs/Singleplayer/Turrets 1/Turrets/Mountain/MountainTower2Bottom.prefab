@@ -72,9 +72,10 @@ GameObject:
   - component: {fileID: 1027191679274093392}
   - component: {fileID: 3000987427059695514}
   - component: {fileID: 1143797088321016993}
+  - component: {fileID: 4877130053172136345}
   m_Layer: 0
   m_Name: MountainTower2Bottom
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -158,17 +159,43 @@ MonoBehaviour:
   range: 7
   fireRate: 1
   turnSpeed: 10
+  Coordinates:
+    x: 0
+    z: 0
   ressourceType: 0
   turretType: 0
   lineRenderer: {fileID: 0}
   partToRotate: {fileID: 0}
   firePoint: {fileID: 61465344779229559}
-  enemyTag: Enemy
   canRotate: 0
+  enemyTag: Enemy
   projectilePrefab: {fileID: 100002, guid: 692efa58c52665646a42536f36d37b21, type: 3}
   targets: []
   maxTargets: 0
   firePoints: []
+--- !u!114 &4877130053172136345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3649422415846563407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f3302bc8cd4d4cab989f9d0b0e1b00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  path: []
+  pathIndex: 0
+  enemySpawn: {fileID: 0}
+  life: 100
+  isSlowed: 0
+  moveSpeed: 0
+  defaultSpeed: 0
+  isAttacking: 0
+  isTurret: 1
+  dmgOnBase: 0
+  goldValue: 0
 --- !u!1 &5722415173472143460
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,13 +298,16 @@ MonoBehaviour:
   range: 7
   fireRate: 1
   turnSpeed: 10
+  Coordinates:
+    x: 0
+    z: 0
   ressourceType: 0
   turretType: 0
   lineRenderer: {fileID: 0}
   partToRotate: {fileID: 0}
   firePoint: {fileID: 61465344779229559}
-  enemyTag: Enemy
   canRotate: 0
+  enemyTag: Enemy
   projectilePrefab: {fileID: 100002, guid: 692efa58c52665646a42536f36d37b21, type: 3}
   targets: []
   maxTargets: 0
