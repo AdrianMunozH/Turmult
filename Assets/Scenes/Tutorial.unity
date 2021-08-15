@@ -24306,6 +24306,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1116443573}
+    - target: {fileID: 1683610992341059158, guid: 0adba39b3d074ff4fbbc6b31dd4bc02c,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1683610992341059159, guid: 0adba39b3d074ff4fbbc6b31dd4bc02c,
         type: 3}
       propertyPath: m_Pivot.x
@@ -24419,7 +24424,7 @@ PrefabInstance:
     - target: {fileID: 1683610992341059160, guid: 0adba39b3d074ff4fbbc6b31dd4bc02c,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1683610992986955336, guid: 0adba39b3d074ff4fbbc6b31dd4bc02c,
         type: 3}
