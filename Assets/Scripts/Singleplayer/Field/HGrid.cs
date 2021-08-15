@@ -311,9 +311,7 @@ namespace Singleplayer.Field
             {
                 if (i >= 1 && i < HGameManager.instance.distanceFromSpawn-1)
                 {
-                    GetHCellByXyzCoordinates(z, m, p).SetCellType(HCell.CellType.Acquired);
                     GetHCellByXyzCoordinates(p, z, m).SetCellType(HCell.CellType.Acquired);
-                    GetHCellByXyzCoordinates(m, p, z).SetCellType(HCell.CellType.Acquired);
                 }
                 else
                 {
@@ -323,9 +321,7 @@ namespace Singleplayer.Field
                     }
                     else
                     {
-                        GetHCellByXyzCoordinates(z, m,p).SetPrefab(21,new Vector3(0,-300,0));
                         GetHCellByXyzCoordinates(p, z,m).SetPrefab(21,new Vector3(0,180,0));
-                        GetHCellByXyzCoordinates(m, p,z).SetPrefab(21,new Vector3(0,-60,0));
                     }
                     GetHCellByXyzCoordinates(p, z, m).SetCellType(HCell.CellType.Base);
                 }
