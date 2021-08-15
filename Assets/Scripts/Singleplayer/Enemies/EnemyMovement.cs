@@ -4,6 +4,7 @@ using Singleplayer.Player;
 using Singleplayer.Turrets;
 using TMPro;
 using UnityEngine;
+using Image = UnityEngine.UIElements.Image;
 
 namespace Singleplayer.Enemies
 {
@@ -19,10 +20,11 @@ namespace Singleplayer.Enemies
         private Animator animator;
         private int isAttackingHash;
         private int isDyingHash;
-
+        public GameObject healthbar;
 
         // Stats
         public float life = 100;
+        private float _totalLife;
         public bool isSlowed;
         [HideInInspector] public float moveSpeed;
         public float defaultSpeed;
@@ -44,6 +46,7 @@ namespace Singleplayer.Enemies
             pathIndex = 0;
             moveSpeed = defaultSpeed;
             _canvas = GetComponent<Canvas>();
+            _totalLife = life;
             
             animator = GetComponent<Animator>();
             isAttackingHash = Animator.StringToHash("isAttacking");
@@ -126,8 +129,10 @@ namespace Singleplayer.Enemies
                 _text.enabled = true;
                 _text.SetText(life.ToString());
             }
+
+            healthbar.GetComponent<UnityEngine.UI.Image>().fillAmount = (life / _totalLife);
             // kann später gelöscht werden ist nur zum debugen
-            
+
             // //StartCoroutine("DeactivateText");
         }
 
