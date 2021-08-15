@@ -3029,6 +3029,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyRunner
       objectReference: {fileID: 0}
+    - target: {fileID: 1872291901596713600, guid: e8750552920f58f4d9d2c5f8ae7a86d6,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2193550906968478166, guid: e8750552920f58f4d9d2c5f8ae7a86d6,
         type: 3}
       propertyPath: m_RootOrder
@@ -5472,7 +5477,7 @@ PrefabInstance:
     - target: {fileID: 3094714698504868643, guid: ae67f337f7a2c3c44a18cc754669ec7b,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3276399387699635687, guid: ae67f337f7a2c3c44a18cc754669ec7b,
         type: 3}
@@ -8123,6 +8128,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.097
+      objectReference: {fileID: 0}
+    - target: {fileID: 8348325745948809054, guid: e0d8584ee43c91a47b1fc1c753753a02,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8381638117041548012, guid: e0d8584ee43c91a47b1fc1c753753a02,
         type: 3}
