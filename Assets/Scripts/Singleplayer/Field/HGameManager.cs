@@ -53,8 +53,11 @@ namespace Singleplayer.Field
         public static int timeTillSceneChange = 15;
         //setzt die alten SP wege zurück
         private HCell[] _lastShortestPath;
+        //Liste aller zu senden Units: (PrefabId)
         private List<int> spawningList;
+        //Wenn Minions gesendet werden, hält diese Variable die gesamte Anzahl der gesendeten Minions
         private int _spawnCounter = 0;
+        //Ohne diesen bool wird die Wave doppelt gespawnt
         private bool _alreadySentState = false;
 
         //Wird benötigt für das checken, ob alle Minions getötet wurden
@@ -159,7 +162,6 @@ namespace Singleplayer.Field
                     if (_currentWave < waves && !allMinionsSpawned && !_alreadySentState)
                     {
                         _alreadySentState = true;
-                        Debug.Log("oh oh");
                         SpawnEnemyWave();
                         _currentWave++;
                     }
@@ -168,7 +170,6 @@ namespace Singleplayer.Field
                     if (allMinionsSpawned && spawnPoint.enemys.Count == 0)
                     {
                         _alreadySentState = false;
-                        Debug.Log("ja.. " + allMinionsSpawned);
                         sentEnemiesPrefabId.Clear();
                         allMinionsSpawned = false;
                         IncomeManager.Instance.Interest();
@@ -258,7 +259,6 @@ namespace Singleplayer.Field
             // danach wird am ersten turm gestoppt
             int towerIndex = (int) spawnPoint.TowerFinder(minionPath); // +1
             // von towerindex bis zum letzten element
-            Debug.Log(_hexGrid.ArrayToString(minionPath.ToArray()) );
             minionPath.RemoveRange(towerIndex,sp.Count-towerIndex);
             
         }
@@ -289,7 +289,6 @@ namespace Singleplayer.Field
             }
             
             _overAllMinions = spawningList.Count;
-            Debug.Log("Overall: "+_overAllMinions );
 
             if (CalculatePath())
             {
@@ -418,7 +417,6 @@ namespace Singleplayer.Field
         {
             sentEnemiesPrefabId.Add(value);
             IncomeFromSentMinions += 1;
-            Debug.Log("click");
         }
         
         
