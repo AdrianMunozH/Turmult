@@ -15799,25 +15799,25 @@ MonoBehaviour:
   - {fileID: 3649422415846563407, guid: ef12f9a06df353f49b59abc0b6eecbb4, type: 3}
   - {fileID: 7053591247536687710, guid: 1851b34ffd1fd0d499c95d4b25279e93, type: 3}
   mountainPreviewTurrets:
-  - {fileID: 3076097380530608750, guid: 6656b18a87c20cb4fab28d252a50338c, type: 3}
-  - {fileID: 3649422415846563407, guid: ef12f9a06df353f49b59abc0b6eecbb4, type: 3}
-  - {fileID: 7053591247536687710, guid: 1851b34ffd1fd0d499c95d4b25279e93, type: 3}
+  - {fileID: 3076097380530608750, guid: 04ed8be0b707e134eafb3bc900874fb8, type: 3}
+  - {fileID: 3649422415846563407, guid: 5e1b0d61d82b55d4cba78fe702f9a4c7, type: 3}
+  - {fileID: 7053591247536687710, guid: bbfe52ffed2ab9949850156d219333e8, type: 3}
   forestTurrets:
   - {fileID: 3940805691244041483, guid: e69e376b469e24544b61925d35ac3da4, type: 3}
   - {fileID: 3995092328936062685, guid: f019ee0380dea2a47afdf03c677a83a6, type: 3}
   - {fileID: 672762153369891017, guid: 2b09ddba6da8a1b42baec33b62e78a1e, type: 3}
   forestPreviewTurrets:
-  - {fileID: 672762153369891017, guid: 05e16edd2929fae4da9f906f302450bf, type: 3}
-  - {fileID: 3940805691244041483, guid: a1a15c97f2c08dd46a595d5d1aa56c93, type: 3}
-  - {fileID: 672762153369891017, guid: 2b09ddba6da8a1b42baec33b62e78a1e, type: 3}
+  - {fileID: 3940805691244041483, guid: ac6ee5655ab75dc4abd89bd7bb30f892, type: 3}
+  - {fileID: 3995092328936062685, guid: 2d08844afb556ec4d9342eadcd6e4f9d, type: 3}
+  - {fileID: 672762153369891017, guid: 0e8cbbf9be4218247a43965c6c921d70, type: 3}
   swampTurrets:
   - {fileID: 8476073457476039546, guid: 7c5b668bfd6dfa34586662251fd814d2, type: 3}
   - {fileID: 7946498073699439795, guid: c7a86dd394fad3940923d3ac6f78ced0, type: 3}
   - {fileID: 4849936137909261494, guid: f601f0ed54ca4d042b452b95c982f858, type: 3}
   swampPreviewTurrets:
-  - {fileID: 8476073457476039546, guid: 7c5b668bfd6dfa34586662251fd814d2, type: 3}
-  - {fileID: 7946498073699439795, guid: c7a86dd394fad3940923d3ac6f78ced0, type: 3}
-  - {fileID: 4849936137909261494, guid: f601f0ed54ca4d042b452b95c982f858, type: 3}
+  - {fileID: 8476073457476039546, guid: 630c43164580e4048b9eaa61959f7538, type: 3}
+  - {fileID: 7946498073699439795, guid: a4e1f4a57ac52624db20661c59a024ec, type: 3}
+  - {fileID: 4849936137909261494, guid: 858ff30890d621e4d9251447b3df14eb, type: 3}
   grid: {fileID: 646463327}
 --- !u!4 &541232430
 Transform:
