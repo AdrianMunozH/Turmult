@@ -26,7 +26,6 @@ namespace Singleplayer.Field
         //Wird gebraucht für das Tweening beim Einnehmen der Zelle
         //Wird in Buildstate.cs auf true gesetzt
         [HideInInspector]public bool recentlyBuild;
-        [HideInInspector] public GameObject acquiredField;
         public HCell[] neighb;
         public Resource resource;
         public GameObject resPrefab;
@@ -232,13 +231,7 @@ namespace Singleplayer.Field
                     hexagon.transform.eulerAngles.z + rotation.Value.z);
 
             hexagon.transform.SetParent(transform, true);
-            if (acquiredField != null)
-            {
-                var acquire = hexagon.gameObject.transform.Find("Cylinder");
-                acquiredField = acquire.gameObject;
-                acquiredField.SetActive(true);
-            }
-
+            
             StartCoroutine(CheckNeighb());
         }
 
@@ -290,11 +283,7 @@ namespace Singleplayer.Field
                 }
             }
 
-            //Setzt "Eingenommen Shader" und aktiviert ihn
-            //TODO Material je nach Spieler anpassen
-            var acquire = hexagon.gameObject.transform.Find("Cylinder");
-            acquiredField = acquire.gameObject;
-            acquiredField.SetActive(true);
+           
             if (type == CellType.Hidden)
             {
                 hexagon.SetActive(false);
