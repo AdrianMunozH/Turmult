@@ -330,7 +330,7 @@ namespace Singleplayer.Field
                     minionPool.Add(0);
                 }
 
-                if (minionPool.Count <= random)
+                if (minionPool.Count > random)
                 {
                     //Erst einmal nur Typ 1 Minions in Standard waves!
                     spawningList.Add(minionPool[random]);
@@ -339,7 +339,6 @@ namespace Singleplayer.Field
                 {
                     spawningList.Add(0);
                 }
-                spawningList.Add(0);
             }
             
             spawningList.AddRange(sentEnemiesPrefabId);
