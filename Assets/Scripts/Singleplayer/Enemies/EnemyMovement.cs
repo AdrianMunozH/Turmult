@@ -121,6 +121,7 @@ namespace Singleplayer.Enemies
                 Die(true);
 
             }
+            if(!isTurret) healthbar.GetComponent<UnityEngine.UI.Image>().fillAmount = (life / _totalLife);
             // kann später gelöscht werden ist nur zum debugen
 
             // //StartCoroutine("DeactivateText");
