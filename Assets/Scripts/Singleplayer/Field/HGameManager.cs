@@ -201,13 +201,13 @@ namespace Singleplayer.Field
                                     switch (ui.CurrentRessource)
                                     {
                                         case 0:
-                                            ui.SelectType("Mountain");
+                                            ui.OpenTowerBuildMode();
                                             break;
                                         case 1:
-                                            ui.SelectType("Forest");
+                                            ui.OpenTowerBuildMode(1);
                                             break;
                                         case 2:
-                                            ui.SelectType("Swamp");
+                                            ui.OpenTowerBuildMode(2);
                                             break;
                                     }
                                 }
