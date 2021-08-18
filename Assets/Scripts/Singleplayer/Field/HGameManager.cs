@@ -251,14 +251,26 @@ namespace Singleplayer.Field
             {
                 moveFactor = 4f;
                 lifefactor += 7.5f; 
+            }else if (_currentWave > 20)
+            {
+                moveFactor = 2.5f;
+                lifefactor += 6.5f;
             }else if (_currentWave > 16)
             {
                 moveFactor = 2f;
                 lifefactor += 5f;
+            }else if (_currentWave > 12)
+            {
+                moveFactor = 1.8f;
+                lifefactor += 3f;
             }else if (_currentWave > 8)
             {
                 moveFactor = 1.8f;
-                lifefactor += 2.5f;
+                lifefactor += 2f;
+            }else if (_currentWave > 4)
+            {
+                moveFactor = 1.2f;
+                lifefactor += 1.5f;
             }
             
             if (_isAttacking)
