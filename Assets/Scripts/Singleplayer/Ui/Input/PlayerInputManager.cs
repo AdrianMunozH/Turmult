@@ -10,6 +10,9 @@ namespace Singleplayer.Ui.Input
         [SerializeField]
         public UI ui;
 
+        //Speichert den letzten State vor dem Battlestate für Ui aktualisierung
+        private ModiState _lastState;
+
         [SerializeField] private MenuController menuController;
 
 

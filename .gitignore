@@ -66,6 +66,7 @@ Thumbs.db
 /sysinfo.txt
 /iosbuild/
 /Build_Linux/
+/Build_Network/
 /testbuild/
 /Assets/ExampleAssets/
 /Assets/"TextMesh Pro"/
@@ -109,3 +110,4 @@ Corridor/Library/ShaderCache/
 Corridor/Library/metadata/
 
 /models/
+*.7z

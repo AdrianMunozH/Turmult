@@ -5,8 +5,10 @@ using System.Linq;
 using Singleplayer.Player;
 using Singleplayer.Enemies;
 using Singleplayer.Turrets;
+using Singleplayer.Ui;
 using Singleplayer.Ui.Input;
 using TMPro;
+using Ui.Lobby;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
@@ -29,6 +31,7 @@ namespace Singleplayer.Field
         private TextMeshProUGUI _timebarLabel;
         public GameObject gameOver;
         public GameObject won;
+        public UI ui;
         
         //Todo: Lifes eigentlich an den Player auslagern
         [Header("Lifes")] 
@@ -183,7 +186,21 @@ namespace Singleplayer.Field
                         IncomeManager.Instance.Interest();
                         IncomeManager.Instance.IncreasePlayerGold(IncomeFromSentMinions);
                         PlayerInputManager.Instance.BuildAndAcquireBlocked = false;
-                        PlayerInputManager.Instance.AcquireModeOn();
+            
+                        //Setzt den passenden mode
+                        switch (ui.currentState.name)
+                        {
+                            case "Build":
+                                PlayerInputManager.Instance.BuildStateOn();
+                                break;
+                            case "Acquire":
+                                PlayerInputManager.Instance.AcquireModeOn();
+                                break;
+                            default:
+                                PlayerInputManager.Instance.AcquireModeOn();
+                                break;
+                        }
+                            
                         _timer = buildingPhaseTimer;
                         _timebarLabel.text = (_currentWave).ToString();
                     }

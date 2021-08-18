@@ -16231,7 +16231,8 @@ MonoBehaviour:
   timeBar: {fileID: 1571026801}
   lifeBar: {fileID: 328944216}
   gameOver: {fileID: 703961776}
-  won: {fileID: 0}
+  won: {fileID: 772264045}
+  ui: {fileID: 1100171618}
   totalLifes: 20
   sentEnemiesPrefabId: 
   IncomeFromSentMinions: 0

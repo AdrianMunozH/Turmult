@@ -31,6 +31,8 @@ namespace Singleplayer.Ui
         private BuildManager buildManager;
 
         private Vector3 menuPos;
+        public ModiState currentState;
+        
 
         //wenn towerMode false, dann ist man im minionMode
         public bool towerMode;
@@ -104,6 +106,7 @@ namespace Singleplayer.Ui
             DeselectType();
             // setzt den state
             PlayerInputManager.Instance.AcquireModeOn();
+            currentState = new AcquireState();
             
             acquireMode.SetActive(true);
             scrollViewTower.SetActive(false);
@@ -201,6 +204,7 @@ namespace Singleplayer.Ui
             if (towerMode)
             {
                 PlayerInputManager.Instance.BuildStateOn();
+                currentState = new BuildState();
                 DeselectType();
                 buildMode.SetActive(true);
                 bgImage.gameObject.SetActive(true);
