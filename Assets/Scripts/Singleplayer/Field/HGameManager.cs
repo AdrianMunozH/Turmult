@@ -32,6 +32,7 @@ namespace Singleplayer.Field
         public GameObject gameOver;
         public GameObject won;
         public UI ui;
+
         
         //Todo: Lifes eigentlich an den Player auslagern
         [Header("Lifes")] 
@@ -186,21 +187,37 @@ namespace Singleplayer.Field
                         IncomeManager.Instance.Interest();
                         IncomeManager.Instance.IncreasePlayerGold(IncomeFromSentMinions);
                         PlayerInputManager.Instance.BuildAndAcquireBlocked = false;
-            
-                        //Setzt den passenden mode
-                        switch (ui.currentState.name)
+                        
+                        switch (PlayerInputManager.Instance.GetLastState().name)
                         {
-                            case "Build":
-                                PlayerInputManager.Instance.BuildStateOn();
-                                break;
                             case "Acquire":
                                 PlayerInputManager.Instance.AcquireModeOn();
+                                ui.SetAcquireMode();
                                 break;
-                            default:
-                                PlayerInputManager.Instance.AcquireModeOn();
+                            case "Build":
+                                PlayerInputManager.Instance.BuildStateOn();
+                                if (ui.towerMode)
+                                {
+                                    switch (ui.CurrentRessource)
+                                    {
+                                        case 0:
+                                            ui.SelectType("Mountain");
+                                            break;
+                                        case 1:
+                                            ui.SelectType("Forest");
+                                            break;
+                                        case 2:
+                                            ui.SelectType("Swamp");
+                                            break;
+                                    }
+                                }
+                                else
+                                {
+                                    ui.OpenMinionBuildMode();
+                                }
                                 break;
                         }
-                            
+                        
                         _timer = buildingPhaseTimer;
                         _timebarLabel.text = (_currentWave).ToString();
                     }

@@ -10,7 +10,6 @@ namespace Singleplayer.Ui.Input
         [SerializeField]
         public UI ui;
 
-        //Speichert den letzten State vor dem Battlestate für Ui aktualisierung
         private ModiState _lastState;
 
         [SerializeField] private MenuController menuController;
@@ -42,6 +41,7 @@ namespace Singleplayer.Ui.Input
             Debug.Log("state b4: " + State.name + BuildAndAcquireBlocked );
             if (State.name.Equals("Build") || !BuildAndAcquireBlocked)
             {
+                _lastState = GetState();
                 SetState(new AcquireState());
             }
         }
@@ -53,6 +53,7 @@ namespace Singleplayer.Ui.Input
             Debug.Log("state b4: " + State.name + BuildAndAcquireBlocked );
             if (State.name.Equals("Acquire")|| !BuildAndAcquireBlocked)
             {
+                _lastState = GetState();
                 SetState(new BuildState());
             }
         }
@@ -63,6 +64,7 @@ namespace Singleplayer.Ui.Input
             
             Debug.Log("state b4: " + State.name);
             BuildAndAcquireBlocked = true;
+            _lastState = GetState();
             SetState(new BattleState());
         }
         
@@ -83,7 +85,6 @@ namespace Singleplayer.Ui.Input
                 ui.SetAcquireMode();
             } else if (UnityEngine.Input.GetKeyDown("2"))
             {
-                
                 ui.SelectType("Mountain");
             } else if (UnityEngine.Input.GetKeyDown("3"))
             {
@@ -117,12 +118,14 @@ namespace Singleplayer.Ui.Input
                     Time.timeScale = 1;
                     menuController.OpenMainMenu();
                 }
-                    
-                
-                
             }
 
             
+        }
+
+        public ModiState GetLastState()
+        {
+            return _lastState;
         }
     }
     
