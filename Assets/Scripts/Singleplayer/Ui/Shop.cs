@@ -39,6 +39,7 @@ namespace Singleplayer.Ui
                     
             }
         }
+        
 
         private void SetTurretToBuild(Resource.ResourceType ressourceType, int turretIndex)
         {

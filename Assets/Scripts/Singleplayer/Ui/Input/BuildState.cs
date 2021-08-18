@@ -40,10 +40,31 @@ namespace Singleplayer.Ui.Input
         {
             if(cell.HasBuilding || cell.Celltype != HCell.CellType.Acquired || cell.resource.GetResource() != Resource.ResourceType.Neutral) return;
             
-            if (IncomeManager.Instance.PurchaseTurret(20, resource, turrentIndex))
+            switch (turrentIndex)
             {
-                cell.BuildTurret();
+                case 0:
+                    if (IncomeManager.Instance.PurchaseTurret(20, resource, turrentIndex))
+                    {
+                        cell.BuildTurret();
+                        Debug.Log(turrentIndex.ToString());
+                    }
+                    break;
+                case 1:
+                    if (IncomeManager.Instance.PurchaseTurret(50, resource, turrentIndex))
+                    {
+                        cell.BuildTurret();
+                        Debug.Log(turrentIndex.ToString());
+                    }
+                    break;
+                case 2:
+                    if (IncomeManager.Instance.PurchaseTurret(100, resource, turrentIndex))
+                    {
+                        cell.BuildTurret();
+                        Debug.Log(turrentIndex.ToString());
+                    }
+                    break;
             }
+            
                 
             
             

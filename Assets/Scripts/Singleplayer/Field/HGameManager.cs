@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using JetBrains.Annotations;
 using Singleplayer.Player;
 using Singleplayer.Enemies;
 using Singleplayer.Turrets;
@@ -12,6 +14,8 @@ using Ui.Lobby;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 using Image = UnityEngine.UI.Image;
 using Random = UnityEngine.Random;
 
@@ -44,6 +48,12 @@ namespace Singleplayer.Field
         public int IncomeFromSentMinions = 0;
 
         private int _overAllMinions = 0;
+
+        [SerializeField] private GameObject enemyList;
+
+        [SerializeField] private GameObject[] enemyUiElements;
+
+        [SerializeField] private GameObject[] unlockEnemys;
         //SentEnemiesPrefab befüllen mit den normalen Waveminions + den gesendeten
         //IncomeFromSentMinoins erhöhen
         //Minions in EnemySpawn an richtiger Stelle hinterlegen
@@ -346,6 +356,9 @@ namespace Singleplayer.Field
         {
             _spawnCounter = 0;
             _overAllMinions = 0;
+            foreach (Transform child in enemyList.transform) {
+                Destroy(child.gameObject);
+            }
 
             spawningList = new List<int>();
             spawningList.Clear();
@@ -521,8 +534,59 @@ namespace Singleplayer.Field
 
         public void SendMinion(int value)
         {
-            sentEnemiesPrefabId.Add(value);
-            IncomeFromSentMinions += 1;
+            if (IncomeManager.Instance.GoldPurchase(20))
+            {
+                sentEnemiesPrefabId.Add(value);
+                IncomeFromSentMinions += 1;
+                GameObject enemySymbol;
+                switch (value)
+                {
+                    case 1:
+                        enemySymbol = Instantiate(enemyUiElements[value-1], transform.position, Quaternion.identity);
+                        enemySymbol.transform.SetParent(enemyList.transform);
+                        break;
+                    case 2:
+                        enemySymbol = Instantiate(enemyUiElements[value-1], transform.position, Quaternion.identity);
+                        enemySymbol.transform.SetParent(enemyList.transform);
+                        break;
+                    case 3:
+                        enemySymbol = Instantiate(enemyUiElements[value-1], transform.position, Quaternion.identity);
+                        enemySymbol.transform.SetParent(enemyList.transform);
+                        break;
+                    case 4:
+                        enemySymbol = Instantiate(enemyUiElements[value-1], transform.position, Quaternion.identity);
+                        enemySymbol.transform.SetParent(enemyList.transform);
+                        break;
+                    case 5:
+                        enemySymbol = Instantiate(enemyUiElements[value-1], transform.position, Quaternion.identity);
+                        enemySymbol.transform.SetParent(enemyList.transform);
+                        break;
+                    case 6:
+                        enemySymbol = Instantiate(enemyUiElements[value-1], transform.position, Quaternion.identity);
+                        enemySymbol.transform.SetParent(enemyList.transform);
+                        break;
+                }
+            }
+        }
+
+        [UsedImplicitly]
+        public void UnlockMinions(Button button)
+        {
+            switch (button.name)
+            {
+                case "LockedMountain":
+                    if (IncomeManager.Instance.ResourcePurchase(1, Resource.ResourceType.Berg))
+                        button.gameObject.SetActive(false);
+                    break;
+                case "LockedForest":
+                    if (IncomeManager.Instance.ResourcePurchase(1, Resource.ResourceType.Wald))
+                        button.gameObject.SetActive(false);
+                    break;
+                case "LockedSwamp":
+                    if(IncomeManager.Instance.ResourcePurchase(1, Resource.ResourceType.Sumpf))
+                        button.gameObject.SetActive(false);
+                    break;
+            }
         }
         
         

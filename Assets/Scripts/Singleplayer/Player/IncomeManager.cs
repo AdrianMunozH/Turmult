@@ -59,8 +59,8 @@ namespace Singleplayer.Player
             }
 
             return false;
-
         }
+        
 
         public bool UnlockTurret(int ressourceCost, Resource.ResourceType ressource, int turretIndex)
         {
