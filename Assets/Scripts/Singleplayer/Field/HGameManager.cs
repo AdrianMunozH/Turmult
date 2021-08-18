@@ -239,25 +239,26 @@ namespace Singleplayer.Field
         {
             yield return new WaitForSeconds(timeBetweenMinionSpawn * _spawnCounter);
             // es muss gecheckt werden ob die weglänge grö0er als 0 ist
-            float lifefactor = 1 + (_currentWave / 2);
+            float lifefactor = 1 + (_currentWave / 4);
 
             float moveFactor = 1;
-            if (_currentWave > 8)
+            if (_currentWave > 34)
             {
-                moveFactor = 1.8f;
-                lifefactor += 5f;
-            }else if (_currentWave > 16)
-            {
-                moveFactor = 2f;
-                lifefactor += 25f;
+                moveFactor = 8f;
+                lifefactor += 12.5f;
+
             }else if (_currentWave > 24)
             {
                 moveFactor = 4f;
-                lifefactor += 50f;
-            }else if (_currentWave > 30)
+                lifefactor += 7.5f; 
+            }else if (_currentWave > 16)
             {
-                moveFactor = 8f;
-                lifefactor += 150f;
+                moveFactor = 2f;
+                lifefactor += 5f;
+            }else if (_currentWave > 8)
+            {
+                moveFactor = 1.8f;
+                lifefactor += 2.5f;
             }
             
             if (_isAttacking)
@@ -282,9 +283,6 @@ namespace Singleplayer.Field
             transition.gameObject.SetActive(false);
         }
         
-
-
-
         private void OnCooldown()
         {
             cooldown = true;
