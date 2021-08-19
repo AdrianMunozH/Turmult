@@ -368,7 +368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetEnemy: {fileID: 0}
-  slow: 0.1
+  slow: 0.2
   ticks: 2
 --- !u!114 &162631562872123629
 MonoBehaviour:
@@ -399,11 +399,11 @@ MonoBehaviour:
   path: []
   pathIndex: 0
   enemySpawn: {fileID: 0}
+  healthbar: {fileID: 0}
   life: 100
   isSlowed: 0
   moveSpeed: 0
   defaultSpeed: 0
-  _text: {fileID: 0}
   isAttacking: 0
   isTurret: 1
   dmgOnBase: 0

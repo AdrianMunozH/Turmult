@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Ui.Lobby
+namespace Ui.Menu
 {
     public class MainMenuUI : MonoBehaviour
     {
@@ -15,6 +15,8 @@ namespace Ui.Lobby
         [SerializeField] Animator transition;
 
         [SerializeField] private AudioSource audio;
+
+        [SerializeField] private GameObject[] tipps;
 
         private void Start()
         {
@@ -41,6 +43,8 @@ namespace Ui.Lobby
         {
             transition.gameObject.SetActive(true);
             StartCoroutine(StartFade(audio, 4f, 0f));
+            yield return new WaitForSeconds(1f);
+            tipps[Random.Range(0,4)].SetActive(true);
 
             yield return new WaitForSeconds(5f);
             

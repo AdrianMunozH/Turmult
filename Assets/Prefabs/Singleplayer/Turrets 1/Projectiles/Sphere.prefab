@@ -131,7 +131,7 @@ MonoBehaviour:
   targetEnemy: {fileID: 0}
   ticks: 15
   tick: 0
-  damagePerTick: 5
+  damagePerTick: 2
 --- !u!1 &4735126729356647653
 GameObject:
   m_ObjectHideFlags: 0

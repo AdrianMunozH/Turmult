@@ -113,9 +113,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetEnemy: {fileID: 0}
-  ticks: 0
-  tick: 15
-  damagePerTick: 2
+  ticks: 15
+  tick: 0
+  damagePerTick: 3
 --- !u!114 &-9117790165855070613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetEnemy: {fileID: 0}
-  damage: 20
+  damage: 15
 --- !u!1 &8136367174094012293
 GameObject:
   m_ObjectHideFlags: 0

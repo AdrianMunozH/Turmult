@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   degreesPerSecond: 0
-  amplitude: 0.2
+  amplitude: 0.1
   frequency: 0.5
 --- !u!1 &3649422415846563407
 GameObject:
@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   degreesPerSecond: 0
-  amplitude: 0.4
+  amplitude: 0.1
   frequency: 0.4
 --- !u!114 &7922777984969456461
 MonoBehaviour:
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   degreesPerSecond: 0
-  amplitude: 0.6
+  amplitude: 0.2
   frequency: 0.5
 --- !u!1001 &3212328606857234371
 PrefabInstance:

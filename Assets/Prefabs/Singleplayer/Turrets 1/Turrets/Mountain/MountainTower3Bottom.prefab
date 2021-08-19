@@ -289,7 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 581e71ceec534886ae4348cbbc111900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 6
+  range: 5
   fireRate: 3
   turnSpeed: 20
   Coordinates:

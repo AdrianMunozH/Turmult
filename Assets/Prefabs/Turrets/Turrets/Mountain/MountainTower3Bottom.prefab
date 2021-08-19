@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   degreesPerSecond: 0
-  amplitude: 0.6
+  amplitude: 0.5
   frequency: 0.2
 --- !u!1 &7053591247536687710
 GameObject:

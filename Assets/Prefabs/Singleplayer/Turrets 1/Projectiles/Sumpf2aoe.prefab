@@ -4815,7 +4815,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetEnemy: {fileID: 0}
-  damage: 20
+  damage: 15
   damageTargetOnce: 0
   AOE: {fileID: 4051179001817115906}
 --- !u!114 &-6214429428226929669
@@ -4850,5 +4850,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetEnemy: {fileID: 0}
-  slow: 0.8
-  ticks: 10
+  slow: 0.6
+  ticks: 6

@@ -106,6 +106,10 @@ namespace Singleplayer.Field
             _timebarLabel = _timebar.GetComponentInChildren<TextMeshProUGUI>();
             _timebarLabel.text = "1";
             _currentLifes = totalLifes;
+            _currentWave = 0;
+            
+            
+            
 
             if (instance != null)
             {
@@ -255,32 +259,32 @@ namespace Singleplayer.Field
             if (_currentWave > 34)
             {
                 moveFactor = 8f;
-                lifefactor += 12.5f;
+                lifefactor += 12.5f; //12.5
 
             }else if (_currentWave > 24)
             {
                 moveFactor = 4f;
-                lifefactor += 7.5f; 
+                lifefactor += 7.5f;  //7.5
             }else if (_currentWave > 20)
             {
                 moveFactor = 2.5f;
-                lifefactor += 6.5f;
+                lifefactor += 5f; // 6.5
             }else if (_currentWave > 16)
             {
                 moveFactor = 2f;
-                lifefactor += 5f;
+                lifefactor += 3f; // 5
             }else if (_currentWave > 12)
             {
                 moveFactor = 1.8f;
-                lifefactor += 3f;
+                lifefactor += 2f; // 3
             }else if (_currentWave > 8)
             {
                 moveFactor = 1.8f;
-                lifefactor += 2f;
+                lifefactor += 1.5f; // 2
             }else if (_currentWave > 4)
             {
                 moveFactor = 1.2f;
-                lifefactor += 1.5f;
+                lifefactor += 1.2f; //1.5
             }
             
             if (_isAttacking)
@@ -374,25 +378,25 @@ namespace Singleplayer.Field
                     minionPool.Add(6);
                 }else if (_currentWave > 25)
                 {
-                    minionPool.Add(5);
+                    minionPool.Add(1);
                 }else if (_currentWave > 20)
                 {
                     minionPool.Add(4);
 
                 }else if (_currentWave > 15)
                 {
-                    minionPool.Add(3);
+                    minionPool.Add(2);
 
                 }else if (_currentWave > 10)
                 {
-                    minionPool.Add(2);
+                    minionPool.Add(3);
                 }else if (_currentWave > 5)
                 {
                     minionPool.Add(1);
                 }
                 else
                 {
-                    minionPool.Add(0);
+                    minionPool.Add(5);
                 }
 
                 if (minionPool.Count > random)
@@ -534,6 +538,8 @@ namespace Singleplayer.Field
 
         public void SendMinion(int value)
         {
+            if (PlayerInputManager.Instance.BuildAndAcquireBlocked)
+                return;
             if (IncomeManager.Instance.GoldPurchase(20))
             {
                 sentEnemiesPrefabId.Add(value);
@@ -542,15 +548,15 @@ namespace Singleplayer.Field
                 switch (value)
                 {
                     case 1:
-                        enemySymbol = Instantiate(enemyUiElements[value-1], transform.position, Quaternion.identity);
+                        enemySymbol = Instantiate(enemyUiElements[value-1], transform.localPosition, Quaternion.identity);
                         enemySymbol.transform.SetParent(enemyList.transform);
                         break;
                     case 2:
-                        enemySymbol = Instantiate(enemyUiElements[value-1], transform.position, Quaternion.identity);
+                        enemySymbol = Instantiate(enemyUiElements[value-1], transform.localPosition, Quaternion.identity);
                         enemySymbol.transform.SetParent(enemyList.transform);
                         break;
                     case 3:
-                        enemySymbol = Instantiate(enemyUiElements[value-1], transform.position, Quaternion.identity);
+                        enemySymbol = Instantiate(enemyUiElements[value-1], transform.localPosition, Quaternion.identity);
                         enemySymbol.transform.SetParent(enemyList.transform);
                         break;
                     case 4:

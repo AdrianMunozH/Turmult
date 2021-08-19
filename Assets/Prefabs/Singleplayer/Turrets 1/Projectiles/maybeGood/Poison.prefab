@@ -14086,7 +14086,7 @@ MonoBehaviour:
   targetEnemy: {fileID: 0}
   ticks: 15
   tick: 0
-  damagePerTick: 2
+  damagePerTick: 1.7
 --- !u!82 &122581604413810565
 AudioSource:
   m_ObjectHideFlags: 0

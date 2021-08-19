@@ -23412,7 +23412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetEnemy: {fileID: 0}
-  damage: 55
+  damage: 50
 --- !u!114 &-6881197049545249202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23427,5 +23427,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetEnemy: {fileID: 0}
   slow: 1
-  ticks: 3
-  tick: 0
+  ticks: 2

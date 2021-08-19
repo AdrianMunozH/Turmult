@@ -74,6 +74,7 @@ namespace Singleplayer.Ui.Input
             // cell hasbuilding true setzten
         }
         
+        
         // update methode quasi
         public override void Input()
         {

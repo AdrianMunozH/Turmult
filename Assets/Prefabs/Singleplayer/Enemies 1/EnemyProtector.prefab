@@ -215,11 +215,10 @@ MonoBehaviour:
   pathIndex: 0
   enemySpawn: {fileID: 0}
   healthbar: {fileID: 2221584544583208145}
-  life: 200
+  life: 180
   isSlowed: 0
   moveSpeed: 0
   defaultSpeed: 10
-  _text: {fileID: 0}
   isAttacking: 0
   isTurret: 0
   dmgOnBase: 2

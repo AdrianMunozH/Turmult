@@ -905,10 +905,9 @@ MonoBehaviour:
   isSlowed: 0
   moveSpeed: 0
   defaultSpeed: 9
-  _text: {fileID: 0}
   isAttacking: 0
   isTurret: 0
-  dmgOnBase: 1
+  dmgOnBase: 3
   goldValue: 10
 --- !u!114 &1065892763887585259
 MonoBehaviour:
