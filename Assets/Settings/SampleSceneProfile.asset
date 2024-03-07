@@ -33,7 +33,7 @@ MonoBehaviour:
     min: 0
   tint:
     m_OverrideState: 0
-    m_Value: {r: 0.7232704, g: 0.9180905, b: 1, a: 1}
+    m_Value: {r: 0, g: 0.2109344, b: 0.9622642, a: 1}
     hdr: 0
     showAlpha: 0
     showEyeDropper: 1
@@ -141,8 +141,8 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 1
   gaussianStart:
-    m_OverrideState: 1
-    m_Value: 29.5
+    m_OverrideState: 0
+    m_Value: 248
     min: 0
   gaussianEnd:
     m_OverrideState: 0
