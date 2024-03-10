@@ -12,7 +12,7 @@ Fertige Anwendung:
 
 | Adrian                                        | Gruppenmitglied 1 | Gruppenmitglied 2 |
 | --------------------------------------------- | ----------------- | ----------------- |
-| Generierung der Karte mit verstellbare Größe  | Modelle           | Multiplayer       |
+| Generierung der Karte mit verstellbarer Größe  | Modelle           | Multiplayer       |
 | Kürzester Weg Algorithmus für Gegnereinheiten | UI                | Kamera            |
 | Modulares Turm und Effektsystem               | Animation         | Target Finding    |
 |                                               | Musik             |                   |
